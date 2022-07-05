@@ -29,8 +29,7 @@ function App() {
     <div className="App">
         <div><Navbar /></div>
         <div id = "clearDiv"  className = "img"><img src={pic}   alt={"waterfall"}/></div>
-      <Hello/>
-
+        <Hello/>
         <ArticleList articles={articles}></ArticleList>
         <DemoList demos={demos}/>
 

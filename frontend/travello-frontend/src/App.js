@@ -16,7 +16,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./home/Home";
 import About from "./About";
-import Login from "./login/Login"
+import Login from "./login/Login";
+import Registration from "./Registration/Registration";
+
 
 // function App() {
 //   //   const [articles, setArticles] = useState([])
@@ -76,6 +78,7 @@ export default function App() {
 
         </Route>
           <Route path="/Login" element={<Login />} />
+          <Route path="Registration" element={<Registration />} />
       </Routes>
     </BrowserRouter>
   );

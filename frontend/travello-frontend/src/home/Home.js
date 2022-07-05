@@ -10,6 +10,7 @@ import Explore_slider from '../Components/explore_slider';
 import pic from "../images/homepage.jpg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import APIService from "../APIService";
+import Search_bar from "../Components/Search_bar";
 
 function Home() {
     const [articles, setArticles] = useState([])
@@ -32,11 +33,12 @@ function Home() {
     <div className="App">
         {/*<div><Navbar /></div>*/}
         <div id = "clearDiv"  className = "img"><img src={pic}   alt={"waterfall"}/></div>
+
+        <Search_bar/>
         <div><Explore_slider/></div>
         <Hello/>
 
 
-      <Hello/>
 
 
         <ArticleList articles={articles}></ArticleList>

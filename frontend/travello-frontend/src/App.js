@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react'
 import ArticleList from './Components/ArticleList';
 import DemoList from "./Components/DemoList";
 import Hello from "./Components/Hello";
+import Search_bar from "./Components/Search_bar";
 import Navbar from "./Components/Navbar.js";
 import Explore_slider from './Components/explore_slider';
 import pic from "./images/homepage.jpg";

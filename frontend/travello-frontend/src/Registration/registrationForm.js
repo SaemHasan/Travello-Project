@@ -62,6 +62,27 @@ function RegistrationForm() {
                 <Button onClick={()=>handleSubmit()} type="submit" class="btn">Register</Button>
                 {/*<div><p>{firstName}</p></div>*/}
             </div>
+            <p>
+        fisrtname: {firstName}
+
+
+      </p>
+      <p>
+
+        Lastname: {lastName}
+      </p>
+            <p>
+
+        email: {email}
+      </p>
+            <p>
+
+        pass: {password}
+      </p>
+            <p>
+
+        confirm_pass: {confirmPassword}
+      </p>
         </div>
 
     )

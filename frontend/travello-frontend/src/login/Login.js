@@ -39,7 +39,7 @@ export default function Login() {
         <p>&nbsp;&nbsp;</p>
           <div className="side-by-side">
               <p>Don't have an account ?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-              <Link to="/About">Register</Link>
+              <Link to="/Registration">Register</Link>
           </div>
           <p>&nbsp;&nbsp;</p>
 

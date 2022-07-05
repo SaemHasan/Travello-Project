@@ -1,0 +1,20 @@
+@media all and (min-width: 480px) {
+  .Login {
+    padding: 60px 0;
+  }
+
+  .Login form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+}
+
+  .btn_login {
+    /*padding: 30px 0;*/
+    height: 50px;
+    width: 320px;
+  }
+.side-by-side {
+  display: flex;
+  flex-direction: row;
+}

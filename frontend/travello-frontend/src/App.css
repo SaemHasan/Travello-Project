@@ -24,6 +24,17 @@
   color: white;
 }
 
+.img {
+  background-color: #ffffff;
+  width: 100%;
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .App-link {
   color: #61dafb;
 }

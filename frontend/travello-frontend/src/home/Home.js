@@ -29,7 +29,6 @@ function Home() {
 
   return (
     <div className="App">
-        {/*<div><Navbar /></div>*/}
         <div id = "clearDiv"  className = "img"><img src={pic}   alt={"waterfall"}/></div>
 
         <SearchBar/>

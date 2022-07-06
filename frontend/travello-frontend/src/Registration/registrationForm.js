@@ -1,13 +1,13 @@
-import React, {useState,setState} from 'react';
+import React, {useState} from 'react';
 import './style.css'
 import Button from "react-bootstrap/Button";
 function RegistrationForm() {
 
-    const [firstName, setFirstName] = useState(null);
-    const [lastName, setLastName] = useState(null);
-    const [email, setEmail] = useState(null);
-    const [password,setPassword] = useState(null);
-    const [confirmPassword,setConfirmPassword] = useState(null);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password,setPassword] = useState("");
+    const [confirmPassword,setConfirmPassword] = useState("");
 
     const handleInputChange = (e) => {
         const {id , value} = e.target;
@@ -29,9 +29,16 @@ function RegistrationForm() {
 
     }
 
+    function validateForm() {
+        if (firstName.length > 0 && lastName.length>0 && email.length>0 && password.length>0 && confirmPassword.length>0)
+            return 1;
+        else
+            return 0;
+  }
+
+
     const handleSubmit  = () => {
         console.log(firstName,lastName,email,password,confirmPassword);
-
     }
 
     return(
@@ -59,8 +66,8 @@ function RegistrationForm() {
                 </div>
             </div>
             <div class="footer">
-                <Button onClick={()=>handleSubmit()} type="submit" class="btn">Register</Button>
-                {/*<div><p>{firstName}</p></div>*/}
+                <Button  onClick={()=>handleSubmit()} block="true" type="submit" class="btn" disabled={!validateForm()}>Register</Button>
+
             </div>
             <p>
         fisrtname: {firstName}

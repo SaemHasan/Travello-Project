@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { Link } from '@mui/material';
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -39,7 +41,7 @@ export default function Login() {
         <p>&nbsp;&nbsp;</p>
           <div className="side-by-side">
               <p>Don't have an account ?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-              <Link to="/Registration">Register</Link>
+              <Link href="/Registration">Register</Link>
           </div>
           <p>&nbsp;&nbsp;</p>
 

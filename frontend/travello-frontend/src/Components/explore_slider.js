@@ -21,7 +21,7 @@ export class Explore_slider extends Component {
       </div>
     ));
   return (
-    <div >
+    <div id = "explore">
          <div>
             <div  style={{marginBottom: "20px"}} >
             <div class="col-sm-12 btn btn-info">

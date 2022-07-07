@@ -21,8 +21,10 @@ conda activate django-env
 5. install react
  >   https://linuxhint.com/install-reactjs-on-ubuntu-20-04/
 6. install bootstrap
->    npm i bootstrap
->    npm install react-bootstrap bootstrap 
+```bash    
+   npm i bootstrap
+   npm install react-bootstrap bootstrap 
+   ```
 7. install django cors headers
 >    pip install django-cors-headers
 8. install axios

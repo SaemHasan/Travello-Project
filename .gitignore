@@ -130,3 +130,6 @@ dmypy.json
 
 #custom files
 runTravelloProject.md
+.DS_Store
+frontend/.DS_Store
+*/.DS_Store

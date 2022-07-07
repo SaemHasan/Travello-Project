@@ -40,6 +40,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'api',
+    'hotel',
+    'spot',
+    'activity',
+    'food',
+    'user',
 ]
 
 MIDDLEWARE = [

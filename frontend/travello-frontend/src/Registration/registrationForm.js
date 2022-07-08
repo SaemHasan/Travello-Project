@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import './style.css'
 import Button from "react-bootstrap/Button";
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+
 
 function RegistrationForm() {
 

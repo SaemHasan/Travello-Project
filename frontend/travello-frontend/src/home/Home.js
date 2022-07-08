@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react'
 import ArticleList from '../Components/ArticleList';
 import DemoList from "../Components/DemoList";
 import Hello from "../Components/Hello";
-import explore_slider, {Sliders} from "../Components/auto_slider/Sliders";
+import Sliders from "../Components/auto_slider/Sliders";
 import pic from "../images/homepage.jpg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import APIService from "../APIService";

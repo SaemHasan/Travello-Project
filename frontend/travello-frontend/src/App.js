@@ -9,6 +9,7 @@ import Home from "./home/Home";
 import About from "./About";
 import Login from "./login/Login";
 import Registration from "./Registration/Registration";
+import Explore from "./Explore/Explore";
 
 
 // function App() {
@@ -65,11 +66,13 @@ export default function App() {
 
             {/*<Route path="Home" element={<Home />} />*/}
           <Route index element={<Home />} />
-            <Route path="About" element={<About />} />
+          <Route path="About" element={<About />} />
+          <Route path="Explore" element={<Explore />} />
 
         </Route>
           <Route path="/Login" element={<Login />} />
           <Route path="Registration" element={<Registration />} />
+
       </Routes>
     </BrowserRouter>
   );

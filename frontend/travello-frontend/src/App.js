@@ -1,14 +1,5 @@
 import './App.css';
-import {useState, useEffect} from 'react'
-import ArticleList from './Components/ArticleList';
-import DemoList from "./Components/DemoList";
-import Hello from "./Components/Hello";
-import Search_bar from "./Components/Search_bar";
-import Navbar from "./Components/Navbar.js";
-import Sliders from './Components/auto_slider/Sliders';
-import pic from "./images/homepage.jpg";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import APIService from "./APIService";
 
 
 import ReactDOM from "react-dom";

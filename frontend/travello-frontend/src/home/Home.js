@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react'
 import ArticleList from '../Components/ArticleList';
 import DemoList from "../Components/DemoList";
 import Hello from "../Components/Hello";
-import ExploreSlider from '../Components/explore_slider';
+import explore_slider, {Sliders} from "../Components/auto_slider/Sliders";
 import pic from "../images/homepage.jpg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import APIService from "../APIService";
@@ -30,21 +30,19 @@ function Home() {
   return (
     <div className="App">
         <div id = "clearDiv"  className = "img"><img src={pic}   alt={"waterfall"}/></div>
-
         <SearchBar/>
-        <div><ExploreSlider/></div>
+        <div><h3> Top five places </h3></div>
+        <div><Sliders/></div>
+        <div><h3> Top five spots </h3></div>
+        <div><Sliders/></div>
+        <div><h3> Top five foods </h3></div>
+        <div><Sliders/></div>
+        <div><h3> Top five activities </h3></div>
+        <div><Sliders/></div>
         <Hello/>
-
-
-
-
         <ArticleList articles={articles}></ArticleList>
         <DemoList demos={demos}/>
-
-
     </div>
-
-
   );
 }
 

@@ -2,22 +2,16 @@ import React, { Component } from 'react'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import '../explore_slider.css';
+import './Sliders.css';
+import {sliderData} from "./slider-data";
 
-export class Explore_slider extends Component {
+export class Sliders extends Component {
     render() {
-        var images = [
-            { img: 'assets/w5.png' },
-            { img: 'assets/w4.png' },
-            { img: 'assets/w3.png' },
-            { img: 'assets/w4.png' },
-            { img: 'assets/w4.png' },
-            { img: 'assets/w4.png' },
-          ];
     var imgSlides = () =>
-    images.map(num => (
+    sliderData.map((slide, index) => (
       <div className="imgpad">
-          <img className="imgdetails" src= {num.img} width="100%" alt={"explore img"}/>
+          {/*<img className="imgdetails" src= {num.img} width="100%" alt={"explore img"}/>*/}
+          <img src={slide.image} alt="slide" className="imgdetails" />
       </div>
     ));
   return (
@@ -25,7 +19,7 @@ export class Explore_slider extends Component {
          <div>
             <div  style={{marginBottom: "20px"}} >
             <div class="col-sm-12 btn btn-info">
-            Explore
+            Explore your favourites
             </div>
             </div>
             </div>
@@ -33,12 +27,12 @@ export class Explore_slider extends Component {
       <Slider
     dots={true}
         slidesToShow={2}
-        slidesToScroll={2}
-        autoplay={false}
+        slidesToScroll={1}
+        autoplay={true}
         arrows={true}
         autoplaySpeed={3000}>{imgSlides()}</Slider></div>
     </div>
   );
 }
 }
-export default Explore_slider;
+export default Sliders;

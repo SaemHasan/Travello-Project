@@ -5,7 +5,7 @@ import DemoList from "./Components/DemoList";
 import Hello from "./Components/Hello";
 import Search_bar from "./Components/Search_bar";
 import Navbar from "./Components/Navbar.js";
-import Explore_slider from './Components/explore_slider';
+import Sliders from './Components/auto_slider/Sliders';
 import pic from "./images/homepage.jpg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import APIService from "./APIService";
@@ -41,7 +41,7 @@ import Registration from "./Registration/Registration";
 //   //   <div className="App">
 //   //       <div><Navbar /></div>
 //   //       <div id = "clearDiv"  className = "img"><img src={pic}   alt={"waterfall"}/></div>
-//   //       <div><Explore_slider/></div>
+//   //       <div><Sliders/></div>
 //   //       <Hello/>
 //   //
 //   //

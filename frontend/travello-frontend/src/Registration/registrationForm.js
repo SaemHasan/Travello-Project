@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import './style.css'
 import Button from "react-bootstrap/Button";
+import Sliders from "../Components/auto_slider/Sliders";
+import {Link} from "@mui/material";
 
 
 function RegistrationForm() {
@@ -12,6 +14,10 @@ function RegistrationForm() {
     const [password,setPassword] = useState("");
     const [confirmPassword,setConfirmPassword] = useState("");
     const [otherInterests, setotherInterests] = useState("");
+
+    const [reg_success, set_reg_success] = useState(false);
+
+
 
     const [userinfo, setUserInfo] = useState({
     interests: [],
@@ -79,6 +85,7 @@ function RegistrationForm() {
 
     const handleSubmit  = () => {
         console.log(firstName,lastName,email,city,password,confirmPassword,userinfo.interests);
+        set_reg_success(true)
     }
 
     return(
@@ -110,6 +117,11 @@ function RegistrationForm() {
                     <input className="form__input" type="password" id="confirmPassword" value={confirmPassword} onChange = {(e) => handleInputChange(e)} placeholder="Confirm Password"/>
                 </div>
 
+                <div className="footer">
+                    <Button onClick={() => handleSubmit()} block="true" type="submit" class="btn"
+                            disabled={!validateForm()}>Register</Button>
+
+                    {reg_success == true &&
                 <div className="container-fluid top ">
         <div className="container mt-5  pb-5 pt-5">
           <h3 className="form-head-contact-h3 ">
@@ -263,20 +275,25 @@ function RegistrationForm() {
                 onChange={handleChange}
               ></textarea>
             </div>
-          </form>
-        </div>
-      </div>
-                <div className="otherInterests">
+                              <div className="otherInterests">
                 <label className="form__label" htmlFor="otherInterests">Other interests </label>
                 <input className="form__input" type="text" value={otherInterests} onChange={(e) => handleInputChange(e)}
                        id="otherInterests" placeholder="Interests"/>
             </div>
+              <p>&nbsp;&nbsp;</p>
+              <a className="nav-link" href="#explore"><Button> <Link href = "/Explore" style={{ color:"white"}}> Explore Now!</Link></Button></a>
+          </form>
+        </div>
+      </div>
+                    }
+                </div>
+
+
+
             </div>
 
-            <div class="footer">
-                <Button  onClick={()=>handleSubmit()} block="true" type="submit" class="btn" disabled={!validateForm()}>Register</Button>
 
-            </div>
+
             <p>
         fisrtname: {firstName}
 

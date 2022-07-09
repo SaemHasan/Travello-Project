@@ -25,8 +25,31 @@ const FilterPanel = ({
       />
     </div>
     <div className='input-group'>
-      <p className='label'>Cuisine</p>
-        <div>
+        <div className='first'><p className='label_cuisine'>Place filters</p></div>
+        <div className='input-group_2'>
+      {cuisines.map((cuisine) => (
+        <CheckboxProton
+          key={cuisine.id}
+          cuisine={cuisine}
+          changeChecked={changeChecked}
+        />
+      ))}
+        </div></div>
+      <div className='input-group'>
+      <div className='first'><p className='label_cuisine'>Food filters</p></div>
+        <div className='input-group_2'>
+      {cuisines.map((cuisine) => (
+        <CheckboxProton
+          key={cuisines.id}
+          cuisine={cuisine}
+          changeChecked={changeChecked}
+        />
+      ))}
+            </div>
+    </div>
+      <div className='input-group'>
+      <div className='first'><p className='label_cuisine'>Activity filters</p></div>
+        <div className='input-group_2'>
       {cuisines.map((cuisine) => (
         <CheckboxProton
           key={cuisine.id}

@@ -70,6 +70,7 @@ export default function App() {
           <Route path="Explore" element={<Explore />} />
 
         </Route>
+
           <Route path="/Login" element={<Login />} />
           <Route path="Registration" element={<Registration />} />
 

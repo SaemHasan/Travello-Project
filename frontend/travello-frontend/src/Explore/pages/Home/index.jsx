@@ -17,6 +17,18 @@ const Home = () => {
     { id: 3, checked: false, label: 'Italian' },
   ]);
 
+  const [foods, setFoods] = useState([
+    { id: 1, checked: false, label: 'Bengali' },
+    { id: 2, checked: false, label: 'Chinese' },
+    { id: 3, checked: false, label: 'Italian' },
+  ]);
+
+  const [activity, setActivity] = useState([
+    { id: 1, checked: false, label: 'Trekking' },
+    { id: 2, checked: false, label: 'Boat riding' },
+    { id: 3, checked: false, label: 'Kayaking' },
+  ]);
+
   const [list, setList] = useState(dataList);
   const [resultsFound, setResultsFound] = useState(true);
   const [searchInput, setSearchInput] = useState('');

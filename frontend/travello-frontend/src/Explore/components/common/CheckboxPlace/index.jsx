@@ -24,9 +24,9 @@ const useStyles = makeStyles({
   },
 });
 
-const CheckboxProton = ({ changeChecked, cuisine }) => {
+const CheckboxPlace = ({ changeChecked, place }) => {
   const classes = useStyles();
-  const { checked, label, id } = cuisine;
+  const { checked, label, id } = place;
   return (
     <div>
       <FormControlLabel
@@ -52,4 +52,4 @@ const CheckboxProton = ({ changeChecked, cuisine }) => {
   );
 };
 
-export default CheckboxProton;
+export default CheckboxPlace;

@@ -11,10 +11,10 @@ const Home = () => {
   const [selectedRating, setSelectedRating] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState([1000, 5000]);
 
-  const [cuisines, setCuisines] = useState([
-    { id: 1, checked: false, label: 'American' },
-    { id: 2, checked: false, label: 'Chinese' },
-    { id: 3, checked: false, label: 'Italian' },
+  const [places, setPlaces] = useState([
+    { id: 1, checked: false, label: 'Mountain' },
+    { id: 2, checked: false, label: 'Waterfall' },
+    { id: 3, checked: false, label: 'Forest' },
   ]);
 
   const [foods, setFoods] = useState([
@@ -23,7 +23,7 @@ const Home = () => {
     { id: 3, checked: false, label: 'Italian' },
   ]);
 
-  const [activity, setActivity] = useState([
+  const [activities, setActivity] = useState([
     { id: 1, checked: false, label: 'Trekking' },
     { id: 2, checked: false, label: 'Boat riding' },
     { id: 3, checked: false, label: 'Kayaking' },
@@ -39,12 +39,31 @@ const Home = () => {
   const handleSelectRating = (event, value) =>
     !value ? null : setSelectedRating(value);
 
-  const handleChangeChecked = (id) => {
-    const cusinesStateList = cuisines;
-    const changeCheckedCuisines = cusinesStateList.map((item) =>
+  //for place
+  const handleChangeCheckedPlace = (id) => {
+    const placesStateList = places;
+    const changeCheckedPlaces = placesStateList.map((item) =>
       item.id === id ? { ...item, checked: !item.checked } : item
     );
-    setCuisines(changeCheckedCuisines);
+    setPlaces(changeCheckedPlaces);
+  };
+
+  //for food
+  const handleChangeCheckedFood = (id) => {
+    const foodsStateList = foods;
+    const changeCheckedFoods = foodsStateList.map((item) =>
+      item.id === id ? { ...item, checked: !item.checked } : item
+    );
+    setFoods(changeCheckedFoods);
+  };
+
+  //for activity
+  const handleChangeCheckedActivity = (id) => {
+    const activitiesStateList = activities;
+    const changeCheckedActivities = activitiesStateList.map((item) =>
+      item.id === id ? { ...item, checked: !item.checked } : item
+    );
+    setActivity(changeCheckedActivities);
   };
 
   const handleChangePrice = (event, value) => {
@@ -68,14 +87,37 @@ const Home = () => {
       );
     }
 
-    // Cuisine Filter
-    const cuisinesChecked = cuisines
+    // Checkbox filter
+    //for place
+    const placesChecked = places
       .filter((item) => item.checked)
       .map((item) => item.label.toLowerCase());
 
-    if (cuisinesChecked.length) {
+    if (placesChecked.length) {
       updatedList = updatedList.filter((item) =>
-        cuisinesChecked.includes(item.cuisine)
+        placesChecked.includes(item.place)
+      );
+    }
+
+    //for food
+    const foodsChecked = foods
+      .filter((item) => item.checked)
+      .map((item) => item.label.toLowerCase());
+
+    if (foodsChecked.length) {
+      updatedList = updatedList.filter((item) =>
+        foodsChecked.includes(item.food)
+      );
+    }
+
+    //for activity
+    const activitiesChecked = activities
+      .filter((item) => item.checked)
+      .map((item) => item.label.toLowerCase());
+
+    if (activitiesChecked.length) {
+      updatedList = updatedList.filter((item) =>
+        activitiesChecked.includes(item.activity)
       );
     }
 
@@ -103,7 +145,7 @@ const Home = () => {
 
   useEffect(() => {
     applyFilters();
-  }, [selectedRating, selectedCategory, cuisines, searchInput, selectedPrice]);
+  }, [selectedRating, selectedCategory, places, activities, foods, searchInput, selectedPrice]);
 
   return (
     <div className='home'>
@@ -121,8 +163,12 @@ const Home = () => {
             selectedRating={selectedRating}
             selectedPrice={selectedPrice}
             selectRating={handleSelectRating}
-            cuisines={cuisines}
-            changeChecked={handleChangeChecked}
+            places={places}
+            foods={foods}
+            activities={activities}
+            changeCheckedPlace={handleChangeCheckedPlace}
+            changeCheckedFood={handleChangeCheckedFood}
+            changeCheckedActivity={handleChangeCheckedActivity}
             changePrice={handleChangePrice}
           />
         </div>

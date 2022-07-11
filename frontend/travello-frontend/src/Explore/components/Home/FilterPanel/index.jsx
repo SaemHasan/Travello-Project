@@ -1,6 +1,8 @@
 import React from 'react';
 import { categoryList, ratingList } from '../../../constants';
-import CheckboxProton from '../../common/CheckboxProton';
+import CheckboxPlace from '../../common/CheckboxPlace';
+import CheckboxFood from "../../common/CheckboxFood";
+import CheckboxActivity from "../../common/CheckboxActivity";
 import FilterListToggle from '../../common/FilterListToggle';
 import SliderProton from '../../common/SliderProton';
 import './styles.css';
@@ -11,8 +13,12 @@ const FilterPanel = ({
   selectedRating,
   selectedPrice,
   selectRating,
-  cuisines,
-  changeChecked,
+  places,
+  foods,
+  activities,
+  changeCheckedPlace,
+  changeCheckedFood,
+  changeCheckedActivity,
   changePrice,
 }) => (
   <div>
@@ -27,22 +33,22 @@ const FilterPanel = ({
     <div className='input-group'>
         <div className='first'><p className='label_cuisine'>Place filters</p></div>
         <div className='input-group_2'>
-      {cuisines.map((cuisine) => (
-        <CheckboxProton
-          key={cuisine.id}
-          cuisine={cuisine}
-          changeChecked={changeChecked}
+      {places.map((place) => (
+        <CheckboxPlace
+          key={place.id}
+          place={place}
+          changeChecked={changeCheckedPlace}
         />
       ))}
         </div></div>
       <div className='input-group'>
       <div className='first'><p className='label_cuisine'>Food filters</p></div>
         <div className='input-group_2'>
-      {cuisines.map((cuisine) => (
-        <CheckboxProton
-          key={cuisines.id}
-          cuisine={cuisine}
-          changeChecked={changeChecked}
+      {foods.map((food) => (
+        <CheckboxFood
+          key={food.id}
+          food={food}
+          changeChecked={changeCheckedFood}
         />
       ))}
             </div>
@@ -50,11 +56,11 @@ const FilterPanel = ({
       <div className='input-group'>
       <div className='first'><p className='label_cuisine'>Activity filters</p></div>
         <div className='input-group_2'>
-      {cuisines.map((cuisine) => (
-        <CheckboxProton
-          key={cuisine.id}
-          cuisine={cuisine}
-          changeChecked={changeChecked}
+      {activities.map((activity) => (
+        <CheckboxActivity
+          key={activity.id}
+          activity={activity}
+          changeChecked={changeCheckedActivity}
         />
       ))}
             </div>

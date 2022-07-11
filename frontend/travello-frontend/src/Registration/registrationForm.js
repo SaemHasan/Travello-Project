@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import './style.css'
 import Button from "react-bootstrap/Button";
-import Sliders from "../Components/auto_slider/Sliders";
 import {Link} from "@mui/material";
 
 
@@ -121,7 +120,7 @@ function RegistrationForm() {
                     <Button onClick={() => handleSubmit()} block="true" type="submit" class="btn"
                             disabled={!validateForm()}>Register</Button>
 
-                    {reg_success == true &&
+                    {reg_success === true &&
                 <div className="container-fluid top ">
         <div className="container mt-5  pb-5 pt-5">
           <h3 className="form-head-contact-h3 ">

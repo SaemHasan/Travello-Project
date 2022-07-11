@@ -14,8 +14,58 @@ const ListItem = ({
   ]);
 
     return(
-        <div className='listItem-wrap'>
-            <img src={coverSrc} alt=''/>
+        <div className='listItem-wrap' >
+
+
+            <ul>
+                <li>
+                    <img src={coverSrc} alt="adventure"/>
+      <span className="large">
+          <div className="div-color">
+
+              <img src={coverSrc} className="large-image" alt="adventure" />
+              <div>
+                            <h>This is image descripti onasdsfheu hgfsgere uigieugh biegr heauhge rhgerhge rhgghe riguhe riguherig uherig</h>
+          <p>This is image description</p>
+          <h>This is image description</h>
+          <h>This is image description</h>
+          <h>This is image description</h>
+          <h>This is image description</h>
+          <h>This is image description</h>
+                        <h>This is image description</h>
+          <h>This is image description</h>
+          <h>This is image description</h>
+          <h>This is image description</h>
+          <h>This is image description</h>
+          <h>This is image description</h>
+          <h >This is image description</h>
+
+              </div>
+
+
+          </div>
+
+      </span>
+                </li>
+
+
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            {/*<img src={coverSrc} alt=''/>*/}
             <header>
                 <h4>{title}</h4>
                 <span>🌟{rating}</span>

@@ -1,18 +1,22 @@
 import React from "react";
 import '../App.css';
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import ArticleList from '../Components/ArticleList';
 import DemoList from "../Components/DemoList";
 import Hello from "../Components/Hello";
 import Sliders from "../Components/auto_slider/Sliders";
-import pic from "../images/homepage.jpg";
+// import pic from "../images/homepage.jpg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import APIService from "../APIService";
 import SearchBar from "../Components/Search_bar";
 
 function Home() {
-    const [articles, setArticles] = useState([])
-    const [demos, setDemos] = useState([])
+    const [articles, setArticles] = useState([]);
+    const [demos, setDemos] = useState([]);
+    const vidRef=useRef();
+
+    useEffect(() => { vidRef.current.play(); },[]);
+
 
     useEffect(() => {
         APIService.GetArticles()
@@ -29,7 +33,8 @@ function Home() {
 
   return (
     <div className="App">
-        <div id = "clearDiv"  className = "img"><img src={pic}   alt={"waterfall"}/></div>
+        {/*<div id = "clearDiv"  className = "img"><img src={pic}   alt={"waterfall"}/></div>*/}
+        <div><video src="tourism.mp4" ref={ vidRef } muted autoPlay loop/></div>
         <SearchBar/>
         <div><h3> Top five places </h3></div>
         <div><Sliders/></div>

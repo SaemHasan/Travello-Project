@@ -1,12 +1,12 @@
 import '../App.css';
 import Header from './header';
-import Login_body from "./Login_body";
+import LoginBody from "./LoginBody";
 
 function Login() {
   return (
     <div className="body">
       <Header/>
-      <Login_body/>
+      <LoginBody/>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import Home from './pages/Home';
-// import './Explore.css';
+// import './Comparison.css';
 
 const Explore = () => <Home />;
 

@@ -10,7 +10,7 @@ import About from "./About";
 import Login from "./login/Login";
 import Registration from "./Registration/Registration";
 import Explore from "./Explore/Explore";
-
+import Comparison from "./Comparison/Comparison";
 
 // function App() {
 //   //   const [articles, setArticles] = useState([])
@@ -68,6 +68,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="About" element={<About />} />
           <Route path="Explore" element={<Explore />} />
+          <Route path="Comparison" element={<Comparison />} />
 
         </Route>
 

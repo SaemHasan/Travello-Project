@@ -25,7 +25,7 @@ export class Sliders extends Component {
             </div>
         <div style={{marginBottom: "40px"}}>
       <Slider
-    dots={true}
+        dots={true}
         slidesToShow={2}
         slidesToScroll={1}
         autoplay={true}

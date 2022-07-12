@@ -280,7 +280,7 @@ function RegistrationForm() {
                        id="otherInterests" placeholder="Interests"/>
             </div>
               <p>&nbsp;&nbsp;</p>
-              <a className="nav-link" href="#explore"><Button> <Link href = "/Explore" style={{ color:"white"}}> Explore Now!</Link></Button></a>
+              <a className="nav-link" href="#explore"><Button> <Link href = "/Explore" style={{ color:"white"}}> Comparison Now!</Link></Button></a>
           </form>
         </div>
       </div>

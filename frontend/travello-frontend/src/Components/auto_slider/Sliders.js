@@ -23,7 +23,7 @@ export class Sliders extends Component {
             </div>
             </div>
             </div>
-        <div style={{marginBottom: "40px"}}>
+        <div style={{marginBottom: "40px", marginLeft:"40px"}}>
       <Slider
         dots={true}
         slidesToShow={2}

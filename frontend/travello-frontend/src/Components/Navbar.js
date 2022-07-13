@@ -14,16 +14,16 @@ const Navbar = () => {
   <div className="collapse navbar-collapse" id="navbarNavDropdown" style={{ display: "flex", justifyContent: 'flex-end'}}>
     <ul className="navbar-nav">
       <li className="nav-item active">
-        <a className="nav-link" href="#"><Button><Link href = "/" style={{ color:"white"}}> Home </Link></Button></a>
+        <a className="nav-link" href="/"><Button><Link href = "/" style={{ color:"white"}}> Home </Link></Button></a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#explore"><Button> <Link href = "/Explore" style={{ color:"white"}}> Explore </Link></Button></a>
+        <a className="nav-link" href="/Explore"><Button> <Link href = "/Explore" style={{ color:"white"}}> Explore </Link></Button></a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#"><Button><Link href ="/Login" style={{ color:"white"}}> Login </Link>  </Button></a>
+        <a className="nav-link" href="/Login"><Button><Link href ="/Login" style={{ color:"white"}}> Login </Link>  </Button></a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#"><Button><Link href ="/Registration" style={{ color:"white"}}> Register </Link> </Button></a>
+        <a className="nav-link" href="/Registration"><Button><Link href ="/Registration" style={{ color:"white"}}> Register </Link> </Button></a>
       </li>
       {/*<li className="nav-item dropdown">
         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

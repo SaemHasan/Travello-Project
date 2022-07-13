@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 const Search_bar = () => {
 
     const getInitialState = () => {
-    const value = "Place";
+    const value="";
     return value;
   };
 
@@ -44,6 +44,9 @@ const Search_bar = () => {
 
                <div>
                   <select value={value} onChange={handleChange_dropdown} class="dropbtn">
+                    <option disabled={true} value="">
+                      Select Category
+                    </option>
                     <option value="Place">Place</option>
                     <option value="Food">Food</option>
                     <option value="Activity">Activity</option>

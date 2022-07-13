@@ -235,6 +235,6 @@ export const activityFilterList = [
 
 export const varList = [
   {PlaceName : "Sylhet",
-   ComparisonType : "place",
+   ComparisonType : "activity",
    bestTitle : ""},
 ];

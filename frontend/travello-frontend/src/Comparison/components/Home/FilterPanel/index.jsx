@@ -27,7 +27,7 @@ const FilterPanel = ({
     {/*  />*/}
     {/*</div>*/}
     <div className='input-group'>
-        <div className='first'><p className='label_cuisine'>Search hotels by filters</p></div>
+        <div className='first'><p className='label_cuisine'>Search by filters</p></div>
         <div className='input-group_2'>
       {places.map((place) => (
         <CheckboxPlace

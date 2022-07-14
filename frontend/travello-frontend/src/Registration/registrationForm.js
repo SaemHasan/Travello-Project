@@ -1,30 +1,37 @@
-import React, {useState} from 'react';
-import './style.css'
+import React, { useState } from "react";
+import "./style.css";
 import Button from "react-bootstrap/Button";
-import {Link} from "@mui/material";
+import { Link } from "@mui/material";
 import APIService from "../APIService";
 
-
 function RegistrationForm() {
-    const [username, setUsername] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [city, setCity] = useState("");
-    const [password,setPassword] = useState("");
-    const [confirmPassword,setConfirmPassword] = useState("");
-    const [otherInterests, setotherInterests] = useState("");
+  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [otherInterests, setotherInterests] = useState("");
 
-    const [reg_success, set_reg_success] = useState(false);
+  const [reg_success, set_reg_success] = useState(false);
 
+  const interests = [
+    "Mountain",
+    "Beach",
+    "Lake",
+    "Forest",
+    "Hill",
+    "Desert",
+    "Waterfall",
+  ];
 
-
-    const [userinfo, setUserInfo] = useState({
+  const [userinfo, setUserInfo] = useState({
     interests: [],
     response: [],
   });
 
-    const handleChange = (e) => {
+  const handleChange = (e) => {
     // Destructuring
     const { value, checked } = e.target;
     const { interests } = userinfo;
@@ -48,276 +55,373 @@ function RegistrationForm() {
     }
   };
 
-
-    const handleInputChange = (e) => {
-        const {id , value} = e.target;
-        if(id === "username"){
-            setUsername(value);
-        }
-        if(id === "firstName"){
-            setFirstName(value);
-        }
-        if(id === "lastName"){
-            setLastName(value);
-        }
-        if(id === "email"){
-            setEmail(value);
-        }
-        if(id === "city"){
-            setCity(value);
-        }
-        if(id === "password"){
-            setPassword(value);
-        }
-        if(id === "confirmPassword"){
-            setConfirmPassword(value);
-        }
-        if(id === "otherInterests"){
-            setotherInterests(value);
-        }
-
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    if (id === "username") {
+      setUsername(value);
     }
+    if (id === "firstName") {
+      setFirstName(value);
+    }
+    if (id === "lastName") {
+      setLastName(value);
+    }
+    if (id === "email") {
+      setEmail(value);
+    }
+    if (id === "city") {
+      setCity(value);
+    }
+    if (id === "password") {
+      setPassword(value);
+    }
+    if (id === "confirmPassword") {
+      setConfirmPassword(value);
+    }
+    if (id === "otherInterests") {
+      setotherInterests(value);
+    }
+  };
 
-    function validateForm() {
-        if (username.length > 0 && firstName.length > 0 && lastName.length>0 && email.length>0 && password.length>0 && confirmPassword.length>0 && city.length>0)
-            return 1;
-        else
-            return 0;
+  function validateForm() {
+    if (
+      username.length > 0 &&
+      firstName.length > 0 &&
+      lastName.length > 0 &&
+      email.length > 0 &&
+      password.length > 0 &&
+      confirmPassword.length > 0 &&
+      city.length > 0
+    )
+      return 1;
+    else return 0;
   }
 
+  const handleSubmit = () => {
+    console.log(
+      username,
+      firstName,
+      lastName,
+      email,
+      city,
+      password,
+      confirmPassword,
+      userinfo.interests
+    );
+    set_reg_success(true);
+  };
 
-    const handleSubmit  = () => {
-        console.log(username, firstName,lastName,email,city,password,confirmPassword,userinfo.interests);
-        set_reg_success(true)
-    }
+  const RegisterBtn = () => {
+    APIService.RegisterUser({
+      username: username,
+      password: password,
+      email: email,
+      first_name: firstName,
+      last_name: lastName,
+    })
+      .then(() => set_reg_success(true))
+      .catch((err) => console.log(err));
+  };
 
-    const RegisterBtn = () => {
-        APIService.RegisterUser({'username': username, 'password': password, 'email': email, 'first_name': firstName, 'last_name': lastName})
-            .then( () => set_reg_success(true))
-            .catch(err => console.log(err))
-    }
+  return (
+    <div className="form">
+      <div className="form-body">
+        <div className="username">
+          <label className="form__label" htmlFor="username">
+            Username{" "}
+          </label>
+          <input
+            className="form__input"
+            type="username"
+            value={username}
+            onChange={(e) => handleInputChange(e)}
+            id="username"
+            placeholder="Username"
+          />
+        </div>
+        <div className="firstname">
+          <label className="form__label" for="firstName">
+            First Name{" "}
+          </label>
+          <input
+            className="form__input"
+            type="text"
+            value={firstName}
+            onChange={(e) => handleInputChange(e)}
+            id="firstName"
+            placeholder="First Name"
+          />
+        </div>
+        <div className="lastname">
+          <label className="form__label" for="lastName">
+            Last Name{" "}
+          </label>
+          <input
+            type="text"
+            name=""
+            id="lastName"
+            value={lastName}
+            className="form__input"
+            onChange={(e) => handleInputChange(e)}
+            placeholder="LastName"
+          />
+        </div>
+        <div className="email">
+          <label className="form__label" for="email">
+            Email{" "}
+          </label>
+          <input
+            type="email"
+            id="email"
+            className="form__input"
+            value={email}
+            onChange={(e) => handleInputChange(e)}
+            placeholder="Email"
+          />
+        </div>
+        <div className="city">
+          <label className="form__label" htmlFor="city">
+            City{" "}
+          </label>
+          <input
+            className="form__input"
+            type="text"
+            value={city}
+            onChange={(e) => handleInputChange(e)}
+            id="city"
+            placeholder="City"
+          />
+        </div>
+        <div className="password">
+          <label className="form__label" for="password">
+            Password{" "}
+          </label>
+          <input
+            className="form__input"
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => handleInputChange(e)}
+            placeholder="Password"
+          />
+        </div>
+        <div className="confirm-password">
+          <label className="form__label" for="confirmPassword">
+            Confirm Password{" "}
+          </label>
+          <input
+            className="form__input"
+            type="password"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => handleInputChange(e)}
+            placeholder="Confirm Password"
+          />
+        </div>
 
-    return(
-        <div className="form">
-            <div className="form-body">
-                <div className="username">
-                    <label className="form__label" htmlFor="username">Username </label>
-                    <input className="form__input" type="username" value={username} onChange={(e) => handleInputChange(e)}
-                           id="username" placeholder="Username"/>
-                </div>
-                <div className="firstname">
-                    <label className="form__label" for="firstName">First Name </label>
-                    <input className="form__input" type="text" value={firstName} onChange = {(e) => handleInputChange(e)} id="firstName" placeholder="First Name"/>
-                </div>
-                <div className="lastname">
-                    <label className="form__label" for="lastName">Last Name </label>
-                    <input  type="text" name="" id="lastName" value={lastName}  className="form__input" onChange = {(e) => handleInputChange(e)} placeholder="LastName"/>
-                </div>
-                <div className="email">
-                    <label className="form__label" for="email">Email </label>
-                    <input  type="email" id="email" className="form__input" value={email} onChange = {(e) => handleInputChange(e)} placeholder="Email"/>
-                </div>
-                <div className="city">
-                    <label className="form__label" htmlFor="city">City </label>
-                    <input className="form__input" type="text" value={city} onChange={(e) => handleInputChange(e)}
-                           id="city" placeholder="City"/>
-                </div>
-                <div className="password">
-                    <label className="form__label" for="password">Password </label>
-                    <input className="form__input" type="password"  id="password" value={password} onChange = {(e) => handleInputChange(e)} placeholder="Password"/>
-                </div>
-                <div className="confirm-password">
-                    <label className="form__label" for="confirmPassword">Confirm Password </label>
-                    <input className="form__input" type="password" id="confirmPassword" value={confirmPassword} onChange = {(e) => handleInputChange(e)} placeholder="Confirm Password"/>
-                </div>
+        <div className="footer">
+          <Button
+            onClick={RegisterBtn}
+            block="true"
+            type="submit"
+            class="btn"
+            disabled={!validateForm()}
+          >
+            Register
+          </Button>
 
-                <div className="footer">
-                    <Button onClick={RegisterBtn} block="true" type="submit" class="btn"
-                            disabled={!validateForm()}>Register</Button>
-
-     {reg_success === true &&
-        <div className="container-fluid top ">
-            {/*for log in*/}
-            <div className="success">
+          {reg_success === true && (
+            <div className="container-fluid top ">
+              {/*for log in*/}
+              <div className="success">
                 <h3>Registration Successful</h3>
                 <Link href="/login">Login</Link>
-            </div>
-            {/*done*/}
-
-          <div className="container mt-5  pb-5 pt-5">
-          <h3 className="form-head-contact-h3 ">
-            Your interests {" "}
-          </h3>
-
-          <form>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-check m-3">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="interests"
-                    value="Mountains"
-                    id="flexCheckDefault1"
-                    onChange={handleChange}
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckDefault"
-                  >
-                      Mountains
-                  </label>
-                </div>
-                <div className="form-check m-3">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="interests"
-                    value="Sea"
-                    id="flexCheckDefault2"
-                    onChange={handleChange}
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckDefault"
-                  >
-                      Sea
-                  </label>
-                </div>
-                <div className="form-check m-3">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="interests"
-                    value="Waterfalls"
-                    id="flexCheckDefault3"
-                    onChange={handleChange}
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckDefault"
-                  >
-                      Waterfalls
-                  </label>
-                </div>
-                <div className="form-check m-3">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="interests"
-                    value="Forests"
-                    id="flexCheckDefault4"
-                    onChange={handleChange}
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckDefault"
-                  >
-                      Forests
-                  </label>
-                </div>
               </div>
-              <div className="col-md-6">
-                <div className="form-check m-3">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="interests"
-                    value="Caves"
-                    id="flexCheckDefault5"
-                    onChange={handleChange}
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckDefault"
-                  >
-                      Caves
-                  </label>
-                </div>
-                <div className="form-check m-3">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="interests"
-                    value="National Parks"
-                    id="flexCheckDefault6"
-                    onChange={handleChange}
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckDefault"
-                  >
-                      National Parks
-                  </label>
-                </div>
-                <div className="form-check m-3">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="interests"
-                    value="Wildlife attractions"
-                    id="flexCheckDefault7"
-                    onChange={handleChange}
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckDefault"
-                  >
-                      Wildlife attractions
-                  </label>
-                </div>
-                <div className="form-check m-3">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="interests"
-                    value="Islands"
-                    id="flexCheckDefault8"
-                    onChange={handleChange}
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckDefault"
-                  >
-                      Islands
-                  </label>
-                </div>
+              {/*done*/}
+
+              <div className="container mt-5  pb-5 pt-5">
+                <h3 className="form-head-contact-h3 ">Your interests </h3>
+
+                <form>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="form-check m-3">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name="interests"
+                          value="Mountains"
+                          id="flexCheckDefault1"
+                          onChange={handleChange}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="flexCheckDefault"
+                        >
+                          Mountains
+                        </label>
+                      </div>
+
+                      <div className="form-check m-3">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name="interests"
+                          value="Sea"
+                          id="flexCheckDefault2"
+                          onChange={handleChange}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="flexCheckDefault"
+                        >
+                          Sea
+                        </label>
+                      </div>
+                      <div className="form-check m-3">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name="interests"
+                          value="Waterfalls"
+                          id="flexCheckDefault3"
+                          onChange={handleChange}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="flexCheckDefault"
+                        >
+                          Waterfalls
+                        </label>
+                      </div>
+                      <div className="form-check m-3">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name="interests"
+                          value="Forests"
+                          id="flexCheckDefault4"
+                          onChange={handleChange}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="flexCheckDefault"
+                        >
+                          Forests
+                        </label>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-check m-3">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name="interests"
+                          value="Caves"
+                          id="flexCheckDefault5"
+                          onChange={handleChange}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="flexCheckDefault"
+                        >
+                          Caves
+                        </label>
+                      </div>
+                      <div className="form-check m-3">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name="interests"
+                          value="National Parks"
+                          id="flexCheckDefault6"
+                          onChange={handleChange}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="flexCheckDefault"
+                        >
+                          National Parks
+                        </label>
+                      </div>
+                      <div className="form-check m-3">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name="interests"
+                          value="Wildlife attractions"
+                          id="flexCheckDefault7"
+                          onChange={handleChange}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="flexCheckDefault"
+                        >
+                          Wildlife attractions
+                        </label>
+                      </div>
+                      <div className="form-check m-3">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name="interests"
+                          value="Islands"
+                          id="flexCheckDefault8"
+                          onChange={handleChange}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="flexCheckDefault"
+                        >
+                          Islands
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-floating mt-3 mb-3 text-center">
+                    <textarea
+                      className="form-control text"
+                      name="response"
+                      value={userinfo.response}
+                      placeholder="You're proficient in the following languages : "
+                      id="floatingTextarea2"
+                      style={{ height: "150px" }}
+                      onChange={handleChange}
+                    ></textarea>
+                  </div>
+                  <div className="otherInterests">
+                    <label className="form__label" htmlFor="otherInterests">
+                      Other interests{" "}
+                    </label>
+                    <input
+                      className="form__input"
+                      type="text"
+                      value={otherInterests}
+                      onChange={(e) => handleInputChange(e)}
+                      id="otherInterests"
+                      placeholder="Interests"
+                    />
+                  </div>
+                  <p>&nbsp;&nbsp;</p>
+                  <a className="nav-link" href="#explore">
+                    <Button>
+                      {" "}
+                      <Link href="/Explore" style={{ color: "white" }}>
+                        {" "}
+                        Comparison Now!
+                      </Link>
+                    </Button>
+                  </a>
+                </form>
               </div>
             </div>
-
-            <div className="form-floating mt-3 mb-3 text-center">
-              <textarea
-                className="form-control text"
-                name="response"
-                value={userinfo.response}
-                placeholder="You're proficient in the following languages : "
-                id="floatingTextarea2"
-                style={{ height: "150px" }}
-                onChange={handleChange}
-              ></textarea>
-            </div>
-                              <div className="otherInterests">
-                <label className="form__label" htmlFor="otherInterests">Other interests </label>
-                <input className="form__input" type="text" value={otherInterests} onChange={(e) => handleInputChange(e)}
-                       id="otherInterests" placeholder="Interests"/>
-            </div>
-              <p>&nbsp;&nbsp;</p>
-              <a className="nav-link" href="#explore"><Button> <Link href = "/Explore" style={{ color:"white"}}> Comparison Now!</Link></Button></a>
-          </form>
+          )}
         </div>
       </div>
-                    }
-                </div>
-
-
-
-            </div>
-
-
 
       {/*      <p>*/}
       {/*  fisrtname: {firstName}*/}
-
 
       {/*</p>*/}
       {/*<p>*/}
@@ -348,9 +452,8 @@ function RegistrationForm() {
 
       {/*  other interest: {otherInterests}*/}
       {/*</p>*/}
-        </div>
-
-    )
+    </div>
+  );
 }
 
 export default RegistrationForm;

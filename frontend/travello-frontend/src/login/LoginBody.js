@@ -3,42 +3,58 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
 // import { Link } from 'react-router-dom';
-import { Link } from '@mui/material';
+import { Link } from "@mui/material";
 import APIService from "../APIService";
-// import { useHistory } from "react-router-dom";
-// import { useCookies } from "react-cookie";
-
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export default function LoginBody() {
   // const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("")
-  const [username, setUsername] = useState("")
-  const [loggedIn, setLoggedIn] = useState(false)
-  // const [token, setToken] = useCookies(["mytoken"])
-  // let history = useHistory(); // log in thakle page e redirect korar jonno
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
+  // const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
+  // const [token, setToken, removeToken] = useCookies(["mytoken"]);
+  let navigate = useNavigate(); // log in thakle page e redirect korar jonno
 
   function validateForm() {
     return username.length > 0 && password.length > 0;
   }
 
-  const handleSubmit = (event) =>{
-    console.log("handleSubmit")
+  const handleSubmit = (event) => {
+    console.log("handleSubmit");
     event.preventDefault();
-  }
+  };
+
+  const handleLogin = (resp) => {
+    console.log("handleLogin");
+    console.log(resp.status);
+    if (resp.token) {
+      // alert("Login Successful");
+      setLoggedIn(true);
+      navigate("/");
+    } else {
+      alert("Invalid username or password");
+    }
+  };
 
   const loginBtn = () => {
     APIService.LoginUser({ username, password })
-        .then(resp => {console.log(resp); setLoggedIn(true);})
-        .catch(err => console.log(err))
-  }
+      .then((resp) => handleLogin(resp))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="Login">
-      <Form onSubmit={(e)=>handleSubmit(e)}>
+      <Form onSubmit={(e) => handleSubmit(e)}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
-          <Form.Control autoFocus type="text" value={username}
-            onChange={(e) => setUsername(e.target.value)} />
+          <Form.Control
+            autoFocus
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </Form.Group>
         <Form.Group size="lg" controlId="password">
           <Form.Label>Password</Form.Label>
@@ -49,25 +65,32 @@ export default function LoginBody() {
           />
         </Form.Group>
         <p>&nbsp;&nbsp;</p>
-          <div className="side-by-side">
-              <p>Don't have an account ?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-              <Link href="/Registration">Register</Link>
-          </div>
-          <p>&nbsp;&nbsp;</p>
+        <div className="side-by-side">
+          <p>
+            Don't have an account
+            ?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </p>
+          <Link href="/Registration">Register</Link>
+        </div>
+        <p>&nbsp;&nbsp;</p>
 
-        <Button onClick={loginBtn} className="btn_login" block="true"  type="submit" disabled={!validateForm()}>
+        <Button
+          onClick={loginBtn}
+          className="btn_login"
+          block="true"
+          type="submit"
+          disabled={!validateForm()}
+        >
           Login
         </Button>
-
-
       </Form>
 
-      { loggedIn === true &&
-      <div className="Login">
-        <p>Login Successful</p>
-        <Link href="/">Go to Home</Link>
-      </div>
-      }
+      {loggedIn === true && (
+        <div className="Login">
+          <p>Login Successful</p>
+          <Link href="/">Go to Home</Link>
+        </div>
+      )}
 
       {/*<p>*/}
       {/*  email: {email}*/}
@@ -100,5 +123,4 @@ export default function LoginBody() {
   //       <button onClick={loginBtn} className="btn btn-primary" disabled={!validateForm()}>Login</button>
   //     </div>
   // )
-
 }

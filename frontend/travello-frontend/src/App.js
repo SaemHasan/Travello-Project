@@ -1,9 +1,9 @@
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Layout from "./Layout";
 import Home from "./home/Home";
 import About from "./About";
@@ -63,18 +63,15 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-
-            {/*<Route path="Home" element={<Home />} />*/}
+          {/*<Route path="Home" element={<Home />} />*/}
           <Route index element={<Home />} />
           <Route path="About" element={<About />} />
           <Route path="Explore" element={<Explore />} />
           <Route path="Comparison" element={<Comparison />} />
-
         </Route>
 
-          <Route path="/Login" element={<Login />} />
-          <Route path="Registration" element={<Registration />} />
-
+        <Route path="/Login" element={<Login />} />
+        <Route path="Registration" element={<Registration />} />
       </Routes>
     </BrowserRouter>
   );

@@ -4,31 +4,41 @@ import Button from "react-bootstrap/Button";
 import "./Login.css";
 // import { Link } from 'react-router-dom';
 import { Link } from '@mui/material';
+import APIService from "../APIService";
+// import { useHistory } from "react-router-dom";
+// import { useCookies } from "react-cookie";
 
 
 export default function LoginBody() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("")
+  const [username, setUsername] = useState("")
+  const [loggedIn, setLoggedIn] = useState(false)
+  // const [token, setToken] = useCookies(["mytoken"])
+  // let history = useHistory(); // log in thakle page e redirect korar jonno
 
   function validateForm() {
-    return email.length > 0 && password.length > 0;
+    return username.length > 0 && password.length > 0;
   }
 
-  function handleSubmit(event) {
+  const handleSubmit = (event) =>{
+    console.log("handleSubmit")
     event.preventDefault();
+  }
+
+  const loginBtn = () => {
+    APIService.LoginUser({ username, password })
+        .then(resp => {console.log(resp); setLoggedIn(true);})
+        .catch(err => console.log(err))
   }
 
   return (
     <div className="Login">
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={(e)=>handleSubmit(e)}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
-          <Form.Control
-            autoFocus
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <Form.Control autoFocus type="text" value={username}
+            onChange={(e) => setUsername(e.target.value)} />
         </Form.Group>
         <Form.Group size="lg" controlId="password">
           <Form.Label>Password</Form.Label>
@@ -45,20 +55,50 @@ export default function LoginBody() {
           </div>
           <p>&nbsp;&nbsp;</p>
 
-        <Button className="btn_login" block="true"  type="submit" disabled={!validateForm()}>
+        <Button onClick={loginBtn} className="btn_login" block="true"  type="submit" disabled={!validateForm()}>
           Login
         </Button>
 
 
       </Form>
-      <p>
-        email: {email}
 
-      </p>
-      <p>
+      { loggedIn === true &&
+      <div className="Login">
+        <p>Login Successful</p>
+        <Link href="/">Go to Home</Link>
+      </div>
+      }
 
-        password: {password}
-      </p>
+      {/*<p>*/}
+      {/*  email: {email}*/}
+
+      {/*</p>*/}
+      {/*<p>*/}
+
+      {/*  password: {password}*/}
+      {/*</p>*/}
     </div>
   );
+
+  // return(
+  //     <div className= "Login">
+  //       <br/>
+  //       <br/>
+  //
+  //       <div className="mb-3">
+  //         <label htmlFor= "username" className="form-label">Username</label>
+  //         <input type="text" className="form-control" id="username" placeholder="Please Enter Username"
+  //                value={username} onChange={(e) => setUsername(e.target.value)}/>
+  //       </div>
+  //
+  //       <div className="mb-3">
+  //         <label htmlFor="password" className="form-label"> Password</label>
+  //           <input type="password" className="form-control" id="password" placeholder="Please Enter Password"
+  //                value={password} onChange={ e=> setPassword(e.target.value)} />
+  //       </div>
+  //
+  //       <button onClick={loginBtn} className="btn btn-primary" disabled={!validateForm()}>Login</button>
+  //     </div>
+  // )
+
 }

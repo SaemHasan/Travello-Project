@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import './style.css'
 import Button from "react-bootstrap/Button";
 import {Link} from "@mui/material";
+import APIService from "../APIService";
 
 
 function RegistrationForm() {
-
+    const [username, setUsername] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -50,6 +51,9 @@ function RegistrationForm() {
 
     const handleInputChange = (e) => {
         const {id , value} = e.target;
+        if(id === "username"){
+            setUsername(value);
+        }
         if(id === "firstName"){
             setFirstName(value);
         }
@@ -75,7 +79,7 @@ function RegistrationForm() {
     }
 
     function validateForm() {
-        if (firstName.length > 0 && lastName.length>0 && email.length>0 && password.length>0 && confirmPassword.length>0 && city.length>0)
+        if (username.length > 0 && firstName.length > 0 && lastName.length>0 && email.length>0 && password.length>0 && confirmPassword.length>0 && city.length>0)
             return 1;
         else
             return 0;
@@ -83,14 +87,25 @@ function RegistrationForm() {
 
 
     const handleSubmit  = () => {
-        console.log(firstName,lastName,email,city,password,confirmPassword,userinfo.interests);
+        console.log(username, firstName,lastName,email,city,password,confirmPassword,userinfo.interests);
         set_reg_success(true)
+    }
+
+    const RegisterBtn = () => {
+        APIService.RegisterUser({'username': username, 'password': password, 'email': email, 'first_name': firstName, 'last_name': lastName})
+            .then( () => set_reg_success(true))
+            .catch(err => console.log(err))
     }
 
     return(
         <div className="form">
             <div className="form-body">
                 <div className="username">
+                    <label className="form__label" htmlFor="username">Username </label>
+                    <input className="form__input" type="username" value={username} onChange={(e) => handleInputChange(e)}
+                           id="username" placeholder="Username"/>
+                </div>
+                <div className="firstname">
                     <label className="form__label" for="firstName">First Name </label>
                     <input className="form__input" type="text" value={firstName} onChange = {(e) => handleInputChange(e)} id="firstName" placeholder="First Name"/>
                 </div>
@@ -117,12 +132,19 @@ function RegistrationForm() {
                 </div>
 
                 <div className="footer">
-                    <Button onClick={() => handleSubmit()} block="true" type="submit" class="btn"
+                    <Button onClick={RegisterBtn} block="true" type="submit" class="btn"
                             disabled={!validateForm()}>Register</Button>
 
-                    {reg_success === true &&
-                <div className="container-fluid top ">
-        <div className="container mt-5  pb-5 pt-5">
+     {reg_success === true &&
+        <div className="container-fluid top ">
+            {/*for log in*/}
+            <div className="success">
+                <h3>Registration Successful</h3>
+                <Link href="/login">Login</Link>
+            </div>
+            {/*done*/}
+
+          <div className="container mt-5  pb-5 pt-5">
           <h3 className="form-head-contact-h3 ">
             Your interests {" "}
           </h3>
@@ -136,7 +158,7 @@ function RegistrationForm() {
                     type="checkbox"
                     name="interests"
                     value="Mountains"
-                    id="flexCheckDefault"
+                    id="flexCheckDefault1"
                     onChange={handleChange}
                   />
                   <label
@@ -152,7 +174,7 @@ function RegistrationForm() {
                     type="checkbox"
                     name="interests"
                     value="Sea"
-                    id="flexCheckDefault"
+                    id="flexCheckDefault2"
                     onChange={handleChange}
                   />
                   <label
@@ -168,7 +190,7 @@ function RegistrationForm() {
                     type="checkbox"
                     name="interests"
                     value="Waterfalls"
-                    id="flexCheckDefault"
+                    id="flexCheckDefault3"
                     onChange={handleChange}
                   />
                   <label
@@ -184,7 +206,7 @@ function RegistrationForm() {
                     type="checkbox"
                     name="interests"
                     value="Forests"
-                    id="flexCheckDefault"
+                    id="flexCheckDefault4"
                     onChange={handleChange}
                   />
                   <label
@@ -202,7 +224,7 @@ function RegistrationForm() {
                     type="checkbox"
                     name="interests"
                     value="Caves"
-                    id="flexCheckDefault"
+                    id="flexCheckDefault5"
                     onChange={handleChange}
                   />
                   <label
@@ -218,7 +240,7 @@ function RegistrationForm() {
                     type="checkbox"
                     name="interests"
                     value="National Parks"
-                    id="flexCheckDefault"
+                    id="flexCheckDefault6"
                     onChange={handleChange}
                   />
                   <label
@@ -234,7 +256,7 @@ function RegistrationForm() {
                     type="checkbox"
                     name="interests"
                     value="Wildlife attractions"
-                    id="flexCheckDefault"
+                    id="flexCheckDefault7"
                     onChange={handleChange}
                   />
                   <label
@@ -250,7 +272,7 @@ function RegistrationForm() {
                     type="checkbox"
                     name="interests"
                     value="Islands"
-                    id="flexCheckDefault"
+                    id="flexCheckDefault8"
                     onChange={handleChange}
                   />
                   <label
@@ -293,39 +315,39 @@ function RegistrationForm() {
 
 
 
-            <p>
-        fisrtname: {firstName}
+      {/*      <p>*/}
+      {/*  fisrtname: {firstName}*/}
 
 
-      </p>
-      <p>
+      {/*</p>*/}
+      {/*<p>*/}
 
-        Lastname: {lastName}
-      </p>
-            <p>
+      {/*  Lastname: {lastName}*/}
+      {/*</p>*/}
+      {/*      <p>*/}
 
-        email: {email}
-      </p>
-             <p>
+      {/*  email: {email}*/}
+      {/*</p>*/}
+      {/*       <p>*/}
 
-        city: {city}
-      </p>
-            <p>
+      {/*  city: {city}*/}
+      {/*</p>*/}
+      {/*      <p>*/}
 
-        pass: {password}
-      </p>
-            <p>
+      {/*  pass: {password}*/}
+      {/*</p>*/}
+      {/*      <p>*/}
 
-        confirm_pass: {confirmPassword}
-      </p>
-            <p>
+      {/*  confirm_pass: {confirmPassword}*/}
+      {/*</p>*/}
+      {/*      <p>*/}
 
-        interest: {userinfo.interests[0]}
-      </p>
-            <p>
+      {/*  interest: {userinfo.interests[0]}*/}
+      {/*</p>*/}
+      {/*      <p>*/}
 
-        other interest: {otherInterests}
-      </p>
+      {/*  other interest: {otherInterests}*/}
+      {/*</p>*/}
         </div>
 
     )

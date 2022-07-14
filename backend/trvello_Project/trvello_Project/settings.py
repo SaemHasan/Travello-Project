@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'api',
     'spot',
@@ -97,7 +98,7 @@ DATABASES = {
         'NAME': 'travello',
         'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST' : '127.0.0.1'
+        'HOST': '127.0.0.1'
     }
 }
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Place(models.Model):
@@ -60,7 +61,7 @@ class Spot_Type(models.Model):
 
 class User_Spot(models.Model):
     user_spot_id = models.BigAutoField(primary_key=True)
-    user_id = models.ForeignKey('user.UserProfile', on_delete=models.CASCADE, default=None)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     spot_id = models.ForeignKey(Spot, on_delete=models.CASCADE, default=None)
 
     def __str__(self):

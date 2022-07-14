@@ -12,17 +12,13 @@ export class Sliders extends Component {
       <div className="imgpad">
           {/*<img className="imgdetails" src= {num.img} width="100%" alt={"explore img"}/>*/}
           <img src={slide.image} alt="slide" className="imgdetails" />
+          <h2>{slide.heading}</h2>
+          {/*<h4>{slide.desc}</h4>*/}
       </div>
     ));
   return (
     <div id = "explore">
-         <div>
-            <div  style={{marginBottom: "20px"}} >
-            <div class="col-sm-12 btn btn-info">
-            Explore your favourites
-            </div>
-            </div>
-            </div>
+
         <div style={{marginBottom: "40px", marginLeft:"40px"}}>
       <Slider
         dots={true}

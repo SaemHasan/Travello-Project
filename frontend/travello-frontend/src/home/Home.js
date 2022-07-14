@@ -35,14 +35,42 @@ function Home() {
     <div className="App">
         {/*<div id = "clearDiv"  className = "img"><img src={pic}   alt={"waterfall"}/></div>*/}
         <div><video src="tourism.mp4" ref={ vidRef } muted autoPlay loop/></div>
-        <SearchBar/>
+        <div><SearchBar/></div>
         <div><h3> Top five places </h3></div>
+        <div>
+            <div style={{marginBottom: "20px"}}>
+                <div className="col-sm-12 btn btn-info">
+                    Explore your favourites places
+                </div>
+            </div>
+        </div>
         <div><Sliders/></div>
         <div><h3> Top five spots </h3></div>
+        <div>
+            <div style={{marginBottom: "20px"}}>
+                <div className="col-sm-12 btn btn-info">
+                    Explore your favourites spots
+                </div>
+            </div>
+        </div>
         <div><Sliders/></div>
         <div><h3> Top five foods </h3></div>
+        <div>
+            <div style={{marginBottom: "20px"}}>
+                <div className="col-sm-12 btn btn-info">
+                    Explore your favourites foods
+                </div>
+            </div>
+        </div>
         <div><Sliders/></div>
         <div><h3> Top five activities </h3></div>
+        <div>
+            <div style={{marginBottom: "20px"}}>
+                <div className="col-sm-12 btn btn-info">
+                    Explore your favourites activities
+                </div>
+            </div>
+        </div>
         <div><Sliders/></div>
         <Hello/>
         <ArticleList articles={articles}></ArticleList>

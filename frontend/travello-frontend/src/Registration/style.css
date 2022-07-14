@@ -39,4 +39,22 @@ rbody{
 
 .footer{
     text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.success{
+    margin-top: 30px;
+}
+
+.otherInterests{
+    align-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.otherInterests__label{
+    align-content: center;
+    margin-top: 30px;
+    padding-right: 80px;
 }

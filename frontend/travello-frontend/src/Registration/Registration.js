@@ -1,12 +1,16 @@
 import '../App.css';
 import Header from './header';
-import RegistrationForm from './registrationForm'
-import "./style.css"
+import RegistrationForm from './registrationForm';
+import CheckboxInterests from "./CheckboxInterests";
+import "./style.css";
+import Navbar from "./Navbar";
 
 function Registration() {
   return (
     <div className="body">
-      <Header/>
+      {/*<Header/>*/}
+      <Navbar/>
+      {/*<div><CheckboxInterests/></div>*/}
       <RegistrationForm/>
     </div>
   );

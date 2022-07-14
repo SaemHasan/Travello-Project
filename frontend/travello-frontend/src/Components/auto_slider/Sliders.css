@@ -27,3 +27,23 @@
     padding-right: 300px !important;
     background-color: blue;
   }
+
+.content {
+  position: absolute;
+  top: 23rem;
+  left: 5rem;
+  opacity: 0;
+  width: 50%;
+  color: #fff;
+  padding: 3rem;
+  background: rgba(0, 0, 0, 0.3);
+  animation: slide-up 1s ease 0.5s;
+  animation-fill-mode: forwards;
+  visibility: hidden;
+}
+
+.hr {
+  height: 2px;
+  background: white;
+  width: 50%;
+}

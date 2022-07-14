@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "./style.css";
 import Button from "react-bootstrap/Button";
-import { Link } from "@mui/material";
+import {Link} from "@mui/material";
+import {CheckboxData} from "./CheckboxData";
 import APIService from "../APIService";
+import {toppings} from "./utils/toppings";
+
 
 function RegistrationForm() {
   const [username, setUsername] = useState("");
@@ -17,13 +20,13 @@ function RegistrationForm() {
   const [reg_success, set_reg_success] = useState(false);
 
   const interests = [
-    "Mountain",
-    "Beach",
-    "Lake",
-    "Forest",
-    "Hill",
-    "Desert",
-    "Waterfall",
+    {name : "Mountain",},
+    {name : "Beach" ,},
+    {name : "Lake",},
+    {name : "Forest",},
+    {name : "Hill",},
+    {name : "Desert",},
+    {name : "Waterfall",},
   ];
 
   const [userinfo, setUserInfo] = useState({
@@ -235,163 +238,46 @@ function RegistrationForm() {
               {/*for log in*/}
               <div className="success">
                 <h3>Registration Successful</h3>
-                <Link href="/login">Login</Link>
+                {/*<Link href="/login">Login</Link>*/}
               </div>
               {/*done*/}
 
               <div className="container mt-5  pb-5 pt-5">
                 <h3 className="form-head-contact-h3 ">Your interests </h3>
 
-                <form>
-                  <div className="row">
-                    <div className="col-md-6">
-                      <div className="form-check m-3">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          name="interests"
-                          value="Mountains"
-                          id="flexCheckDefault1"
-                          onChange={handleChange}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="flexCheckDefault"
-                        >
-                          Mountains
-                        </label>
-                      </div>
+          {interests.map(({ name }, index) => {
+              return(
+                  <li key={index}>
+              <div className="toppings-list-item">
+                <div className="left-section">
+                  <input
+                    type="checkbox"
+                    id={`custom-checkbox-${index}`}
+                    name={name}
+                    value={name}
+                    onChange={handleChange}
+                  />
+                  <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+                </div>
+                {/*<div className="right-section">{getFormattedPrice(price)}</div>*/}
+              </div>
+            </li>
+              );
+          })}
 
-                      <div className="form-check m-3">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          name="interests"
-                          value="Sea"
-                          id="flexCheckDefault2"
-                          onChange={handleChange}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="flexCheckDefault"
-                        >
-                          Sea
-                        </label>
-                      </div>
-                      <div className="form-check m-3">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          name="interests"
-                          value="Waterfalls"
-                          id="flexCheckDefault3"
-                          onChange={handleChange}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="flexCheckDefault"
-                        >
-                          Waterfalls
-                        </label>
-                      </div>
-                      <div className="form-check m-3">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          name="interests"
-                          value="Forests"
-                          id="flexCheckDefault4"
-                          onChange={handleChange}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="flexCheckDefault"
-                        >
-                          Forests
-                        </label>
-                      </div>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="form-check m-3">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          name="interests"
-                          value="Caves"
-                          id="flexCheckDefault5"
-                          onChange={handleChange}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="flexCheckDefault"
-                        >
-                          Caves
-                        </label>
-                      </div>
-                      <div className="form-check m-3">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          name="interests"
-                          value="National Parks"
-                          id="flexCheckDefault6"
-                          onChange={handleChange}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="flexCheckDefault"
-                        >
-                          National Parks
-                        </label>
-                      </div>
-                      <div className="form-check m-3">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          name="interests"
-                          value="Wildlife attractions"
-                          id="flexCheckDefault7"
-                          onChange={handleChange}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="flexCheckDefault"
-                        >
-                          Wildlife attractions
-                        </label>
-                      </div>
-                      <div className="form-check m-3">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          name="interests"
-                          value="Islands"
-                          id="flexCheckDefault8"
-                          onChange={handleChange}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="flexCheckDefault"
-                        >
-                          Islands
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="form-floating mt-3 mb-3 text-center">
-                    <textarea
-                      className="form-control text"
-                      name="response"
-                      value={userinfo.response}
-                      placeholder="You're proficient in the following languages : "
-                      id="floatingTextarea2"
-                      style={{ height: "150px" }}
-                      onChange={handleChange}
-                    ></textarea>
-                  </div>
+                {/*<div className="form-floating mt-3 mb-3 text-center">*/}
+                {/*    <textarea*/}
+                {/*      className="form-control text"*/}
+                {/*      name="response"*/}
+                {/*      value={userinfo.response}*/}
+                {/*      placeholder="You're proficient in the following languages : "*/}
+                {/*      id="floatingTextarea2"*/}
+                {/*      style={{ height: "150px" }}*/}
+                {/*      onChange={handleChange}*/}
+                {/*    ></textarea>*/}
+                {/*  </div>*/}
                   <div className="otherInterests">
-                    <label className="form__label" htmlFor="otherInterests">
+                    <label className="otherInterests__label" htmlFor="otherInterests">
                       Other interests{" "}
                     </label>
                     <input
@@ -404,55 +290,19 @@ function RegistrationForm() {
                     />
                   </div>
                   <p>&nbsp;&nbsp;</p>
-                  <a className="nav-link" href="#explore">
                     <Button>
                       {" "}
-                      <Link href="/Explore" style={{ color: "white" }}>
+                      <Link href="/" style={{ color: "white" }}>
                         {" "}
-                        Comparison Now!
+                        Submit
                       </Link>
                     </Button>
-                  </a>
-                </form>
-              </div>
+                 </div>
             </div>
           )}
         </div>
       </div>
-
-      {/*      <p>*/}
-      {/*  fisrtname: {firstName}*/}
-
-      {/*</p>*/}
-      {/*<p>*/}
-
-      {/*  Lastname: {lastName}*/}
-      {/*</p>*/}
-      {/*      <p>*/}
-
-      {/*  email: {email}*/}
-      {/*</p>*/}
-      {/*       <p>*/}
-
-      {/*  city: {city}*/}
-      {/*</p>*/}
-      {/*      <p>*/}
-
-      {/*  pass: {password}*/}
-      {/*</p>*/}
-      {/*      <p>*/}
-
-      {/*  confirm_pass: {confirmPassword}*/}
-      {/*</p>*/}
-      {/*      <p>*/}
-
-      {/*  interest: {userinfo.interests[0]}*/}
-      {/*</p>*/}
-      {/*      <p>*/}
-
-      {/*  other interest: {otherInterests}*/}
-      {/*</p>*/}
-    </div>
+</div>
   );
 }
 

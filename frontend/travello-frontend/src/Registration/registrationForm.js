@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import "./style.css";
 import Button from "react-bootstrap/Button";
-import {Link} from "@mui/material";
-import {CheckboxData} from "./CheckboxData";
+import { Link } from "@mui/material";
+import { CheckboxData } from "./CheckboxData";
 import APIService from "../APIService";
-import {toppings} from "./utils/toppings";
-
+import { toppings } from "./utils/toppings";
 
 function RegistrationForm() {
   const [username, setUsername] = useState("");
@@ -15,18 +14,20 @@ function RegistrationForm() {
   const [city, setCity] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [otherInterests, setotherInterests] = useState("");
+  const [otherInterests, setOtherInterests] = useState("");
+  const [userID, setUserID] = useState("");
+  // const [user, setUser] = useState({});
 
   const [reg_success, set_reg_success] = useState(false);
 
   const interests = [
-    {name : "Mountain",},
-    {name : "Beach" ,},
-    {name : "Lake",},
-    {name : "Forest",},
-    {name : "Hill",},
-    {name : "Desert",},
-    {name : "Waterfall",},
+    { name: "Mountain" },
+    { name: "Beach" },
+    { name: "Lake" },
+    { name: "Forest" },
+    { name: "Hill" },
+    { name: "Desert" },
+    { name: "Waterfall" },
   ];
 
   const [userinfo, setUserInfo] = useState({
@@ -82,7 +83,7 @@ function RegistrationForm() {
       setConfirmPassword(value);
     }
     if (id === "otherInterests") {
-      setotherInterests(value);
+      setOtherInterests(value);
     }
   };
 
@@ -114,6 +115,19 @@ function RegistrationForm() {
     set_reg_success(true);
   };
 
+  const handleRegister = (resp) => {
+    console.log(resp);
+    // console.log(resp.id);
+    if (resp.id) {
+      setUserID(resp.id);
+      set_reg_success(true);
+      console.log("User registered successfully");
+    } else {
+      alert("Registration failed");
+      set_reg_success(false);
+    }
+  };
+
   const RegisterBtn = () => {
     APIService.RegisterUser({
       username: username,
@@ -122,8 +136,26 @@ function RegistrationForm() {
       first_name: firstName,
       last_name: lastName,
     })
-      .then(() => set_reg_success(true))
+      .then((resp) => handleRegister(resp))
       .catch((err) => console.log(err));
+  };
+
+  const submitBtn = () => {
+    console.log(userinfo.interests);
+    console.log(userinfo.response);
+    console.log(otherInterests);
+    console.log(userID);
+
+    if (userinfo.interests.length > 0) {
+      userinfo.interests.forEach((interest) => {
+        APIService.insertUserInterests({
+          user: userID,
+          interest: interest,
+        })
+          .then((resp) => console.log(resp))
+          .catch((err) => console.log(err));
+      });
+    }
   };
 
   return (
@@ -245,25 +277,27 @@ function RegistrationForm() {
               <div className="container mt-5  pb-5 pt-5">
                 <h3 className="form-head-contact-h3 ">Your interests </h3>
 
-          {interests.map(({ name }, index) => {
-              return(
-                  <li key={index}>
-              <div className="toppings-list-item">
-                <div className="left-section">
-                  <input
-                    type="checkbox"
-                    id={`custom-checkbox-${index}`}
-                    name={name}
-                    value={name}
-                    onChange={handleChange}
-                  />
-                  <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
-                </div>
-                {/*<div className="right-section">{getFormattedPrice(price)}</div>*/}
-              </div>
-            </li>
-              );
-          })}
+                {interests.map(({ name }, index) => {
+                  return (
+                    <li key={index}>
+                      <div className="toppings-list-item">
+                        <div className="left-section">
+                          <input
+                            type="checkbox"
+                            id={`custom-checkbox-${index}`}
+                            name={name}
+                            value={name}
+                            onChange={handleChange}
+                          />
+                          <label htmlFor={`custom-checkbox-${index}`}>
+                            {name}
+                          </label>
+                        </div>
+                        {/*<div className="right-section">{getFormattedPrice(price)}</div>*/}
+                      </div>
+                    </li>
+                  );
+                })}
 
                 {/*<div className="form-floating mt-3 mb-3 text-center">*/}
                 {/*    <textarea*/}
@@ -276,33 +310,37 @@ function RegistrationForm() {
                 {/*      onChange={handleChange}*/}
                 {/*    ></textarea>*/}
                 {/*  </div>*/}
-                  <div className="otherInterests">
-                    <label className="otherInterests__label" htmlFor="otherInterests">
-                      Other interests{" "}
-                    </label>
-                    <input
-                      className="form__input"
-                      type="text"
-                      value={otherInterests}
-                      onChange={(e) => handleInputChange(e)}
-                      id="otherInterests"
-                      placeholder="Interests"
-                    />
-                  </div>
-                  <p>&nbsp;&nbsp;</p>
-                    <Button>
-                      {" "}
-                      <Link href="/" style={{ color: "white" }}>
-                        {" "}
-                        Submit
-                      </Link>
-                    </Button>
-                 </div>
+                <div className="otherInterests">
+                  <label
+                    className="otherInterests__label"
+                    htmlFor="otherInterests"
+                  >
+                    Other interests{" "}
+                  </label>
+                  <input
+                    className="form__input"
+                    type="text"
+                    value={otherInterests}
+                    onChange={(e) => handleInputChange(e)}
+                    id="otherInterests"
+                    placeholder="Interests"
+                  />
+                </div>
+                <p>&nbsp;&nbsp;</p>
+                <Button onClick={() => submitBtn()}>
+                  {/*{" "}*/}
+                  {/*<Link href="/" style={{ color: "white" }}>*/}
+                  {/*  {" "}*/}
+                  {/*  Submit*/}
+                  {/*</Link>*/}
+                  Submit
+                </Button>
+              </div>
             </div>
           )}
         </div>
       </div>
-</div>
+    </div>
   );
 }
 

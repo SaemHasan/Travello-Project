@@ -18,11 +18,11 @@ class PlaceRatingInfo(models.Model):
     rating_id = models.BigAutoField(primary_key=True)
     factor = models.FloatField(default=1)
     start_time = models.DateTimeField(null=True)
+    end_time = models.DateTimeField(null=True)
     place_id = models.ForeignKey('Place', on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         return self.rating_id
-
 
 class Spot(models.Model):
     spot_id = models.BigAutoField(primary_key=True)
@@ -36,10 +36,10 @@ class Spot(models.Model):
     cordinate_longitude = models.DecimalField(max_digits=10, decimal_places=8, null=True)
     rating = models.IntegerField(default=0)
 
-    place_id = models.ForeignKey(Place, on_delete=models.CASCADE, default=None)
+    place_id = models.ForeignKey(Place, related_name='spots', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.spot_id
+        return self.name
 
 
 class Type(models.Model):

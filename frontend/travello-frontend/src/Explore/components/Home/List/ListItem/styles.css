@@ -1,12 +1,13 @@
-.listItem-wrap img {
+.listItem-wrap-explore img {
   width: 100%;
   border-radius: 15px;
   height: 200px;
   object-fit: cover;
+    z-index: 1;
 
 }
 
-.listItem-wrap header {
+.listItem-wrap-explore header {
   display: flex;
   justify-content: space-between;
   margin: 1rem 0 1rem 0;
@@ -14,20 +15,20 @@
 
 }
 
-.listItem-wrap header span {
+.listItem-wrap-explore header span {
   font-size: 0.7rem;
   background-color: #97ffff;
   padding: 0.5rem;
   border-radius: 10px;
 }
-.listItem-wrap footer {
+.listItem-wrap-explore footer {
   font-size: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-    height: 100px;
+
 }
-.listItem-wrap footer p:first-child span {
+.listItem-wrap-explore footer p:first-child span {
   color: rgba(0, 0, 0, 0.26);
   font-weight: 600;
 }
@@ -41,28 +42,30 @@
       position: relative;
     }
 
-    .large {
+    .large-explore {
   position: absolute;
   left: -9999px;
 }
 
-    li:hover .large {
+    li:hover .large-explore {
   left: -40px;
   top: 0px;
         width:400px;
         height:100px;
 }
 
-    .large-image {
+    .large-image-explore {
   border-radius: 4px;
    box-shadow: 1px 1px 3px 3px rgba(127, 127, 127, 0.15);;
 }
 
-    .div-color {
+    .div-color-explore {
         background-color: #EBEBEB;
+        position: relative;
+        z-index: 1000;
     }
 
-    .div-text {
+    .div-text-explore {
             box-sizing: border-box;
     padding-left: 1000px;
     }

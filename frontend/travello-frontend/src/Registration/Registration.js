@@ -8,7 +8,7 @@ function Registration() {
   return (
     <div className="body">
       <Header/>
-      <div><CheckboxInterests/></div>
+      {/*<div><CheckboxInterests/></div>*/}
       <RegistrationForm/>
     </div>
   );

@@ -64,9 +64,9 @@ const Search_bar = () => {
 
 
       </div>
-                            <p>{`You selected ${value}`}</p>
-                   <h3>Your Enter Value is: {keyword_text} </h3>
-                   <h3>Your Enter Value is: {location_text} </h3>
+                   {/*         <p>{`You selected ${value}`}</p>*/}
+                   {/*<h3>Your Enter Value is: {keyword_text} </h3>*/}
+                   {/*<h3>Your Enter Value is: {location_text} </h3>*/}
     </div>
   );
 }

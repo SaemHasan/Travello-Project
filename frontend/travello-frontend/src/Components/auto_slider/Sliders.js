@@ -13,6 +13,15 @@ export class Sliders extends Component {
           {/*<img className="imgdetails" src= {num.img} width="100%" alt={"explore img"}/>*/}
           <img src={slide.image} alt="slide" className="imgdetails" />
           <h2>{slide.heading}</h2>
+
+
+
+
+
+
+
+
+
           {/*<h4>{slide.desc}</h4>*/}
       </div>
     ));

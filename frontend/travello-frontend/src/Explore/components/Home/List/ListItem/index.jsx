@@ -14,31 +14,29 @@ const ListItem = ({
   ]);
 
     return(
-        <div className='listItem-wrap' >
+        <div className='listItem-wrap-explore' >
 
 
             <ul>
                 <li>
                     <img src={coverSrc} alt="adventure"/>
-      <span className="large">
-          <div className="div-color">
+      <span className="large-explore">
+          <div className="div-color-explore">
 
-              <img src={coverSrc} className="large-image" alt="adventure" />
+              <img src={coverSrc} className="large-image-explore" alt="adventure" />
               <div>
-                            <h>This is image descripti onasdsfheu hgfsgere uigieugh biegr heauhge rhgerhge rhgghe riguhe riguherig uherig</h>
-          <p>This is image description</p>
-          <h>This is image description</h>
-          <h>This is image description</h>
-          <h>This is image description</h>
-          <h>This is image description</h>
-          <h>This is image description</h>
-                        <h>This is image description</h>
-          <h>This is image description</h>
-          <h>This is image description</h>
-          <h>This is image description</h>
-          <h>This is image description</h>
-          <h>This is image description</h>
-          <h >This is image description</h>
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
+                        <h4>This is image description</h4>
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
 
               </div>
 

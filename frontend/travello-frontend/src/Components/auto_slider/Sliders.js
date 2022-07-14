@@ -11,8 +11,50 @@ export class Sliders extends Component {
     sliderData.map((slide, index) => (
       <div className="imgpad">
           {/*<img className="imgdetails" src= {num.img} width="100%" alt={"explore img"}/>*/}
+
+
+
+                      <ul>
+                <li>
           <img src={slide.image} alt="slide" className="imgdetails" />
           <h2>{slide.heading}</h2>
+      <span className="large-slide">
+          <div className="div-color-slide">
+
+              <img src={slide.image} alt="slide" className="large-image-slide" />
+              <div>
+
+
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
+          <h4>This is image description</h4>
+
+
+              </div>
+
+
+          </div>
+
+      </span>
+                </li>
+
+
+  </ul>
+
+
+
+
+
+
+
+
+
           {/*<h4>{slide.desc}</h4>*/}
       </div>
     ));

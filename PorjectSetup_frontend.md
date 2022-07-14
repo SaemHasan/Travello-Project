@@ -7,3 +7,7 @@
    > npm install react-bootstrap bootstrap
 4. install react cookie
     > npm install react-cookie
+5. necessary commands
+```bash
+   
+```

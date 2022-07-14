@@ -48,7 +48,7 @@ export default function LoginBody() {
     <div className="Login">
       <Form onSubmit={(e) => handleSubmit(e)}>
         <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Username</Form.Label>
           <Form.Control
             autoFocus
             type="text"

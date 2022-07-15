@@ -46,7 +46,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="#">
+      <div className="navbar-brand" href="#">
         <b>
           <i>
             <Link href="/" underline="hover" style={{ color: "black" }}>
@@ -54,7 +54,7 @@ const Navbar = () => {
             </Link>
           </i>
         </b>
-      </a>
+      </div>
       <button
         className="navbar-toggler"
         type="button"
@@ -105,9 +105,17 @@ const Navbar = () => {
           )}
           {loggedIn === true && (
             <li className="nav-item">
-              <a className="nav-link">
+              <div className="nav-link">
                 <Button onClick={LogoutBtn}>Logout</Button>
-              </a>
+              </div>
+            </li>
+          )}
+
+          {loggedIn === true && user.username && (
+            <li className="nav-item">
+              <div className="nav-link">
+                <Button>{user.username}</Button>
+              </div>
             </li>
           )}
 

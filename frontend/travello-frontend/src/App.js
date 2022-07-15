@@ -1,8 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import { createRoot } from "react-dom/client";
 
 import Layout from "./Layout";
 import Home from "./home/Home";
@@ -11,6 +10,7 @@ import Login from "./login/Login";
 import Registration from "./Registration/Registration";
 import Explore from "./Explore/Explore";
 import Comparison from "./Comparison/Comparison";
+import React from "react";
 
 // function App() {
 //   //   const [articles, setArticles] = useState([])
@@ -77,4 +77,12 @@ export default function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+// ReactDOM.render(<App />, document.getElementById("root"));
+
+// const container = document.getElementById("root");
+// const root = createRoot(container); // createRoot(container!) if you use TypeScript
+// root.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>
+// );

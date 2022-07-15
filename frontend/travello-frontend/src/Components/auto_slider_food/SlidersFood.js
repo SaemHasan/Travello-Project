@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import './Sliders.css';
 import {sliderData} from "./slider-data";
 
-export class Sliders extends Component {
+export class SlidersFood extends Component {
     render() {
     var imgSlides = () =>
     sliderData.map((slide, index) => (
@@ -24,16 +24,16 @@ export class Sliders extends Component {
               <img src={slide.image} alt="slide" className="large-image-slide" />
               <div>
 
-
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
+                <p>{slide.desc}</p>
+          {/*<h4>This is image description</h4>*/}
+          {/*<h4>This is image description</h4>*/}
+          {/*<h4>This is image description</h4>*/}
+          {/*<h4>This is image description</h4>*/}
+          {/*<h4>This is image description</h4>*/}
+          {/*<h4>This is image description</h4>*/}
+          {/*<h4>This is image description</h4>*/}
+          {/*<h4>This is image description</h4>*/}
+          {/*<h4>This is image description</h4>*/}
 
 
               </div>
@@ -73,4 +73,4 @@ export class Sliders extends Component {
   );
 }
 }
-export default Sliders;
+export default SlidersFood;

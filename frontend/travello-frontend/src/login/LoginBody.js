@@ -33,10 +33,10 @@ export default function LoginBody() {
   const handleLogin = (resp) => {
     console.log("handleLogin");
     console.log(resp);
-    console.log(resp.status);
     if (resp.token) {
       // alert("Login Successful");
       setToken(resp.token);
+      localStorage.setItem("token", JSON.stringify(resp.token));
       setLoggedIn(true);
       navigate("/");
     } else {

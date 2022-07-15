@@ -9,13 +9,15 @@ const Navbar = () => {
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"));
+    console.log(token);
     if (token) {
+      console.log("token found");
       setToken(token);
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
     }
-  }, []);
+  }, [token]);
 
   const LogoutBtn = () => {
     console.log("LogoutBtn");
@@ -71,7 +73,7 @@ const Navbar = () => {
               </Button>
             </a>
           </li>
-          {loggedIn === true ? (
+          {loggedIn === false && (
             <li className="nav-item">
               <a className="nav-link" href="/Login">
                 <Button>
@@ -82,7 +84,8 @@ const Navbar = () => {
                 </Button>
               </a>
             </li>
-          ) : (
+          )}
+          {loggedIn === true && (
             <li className="nav-item">
               <a className="nav-link">
                 <Button onClick={LogoutBtn}>Logout</Button>
@@ -90,16 +93,18 @@ const Navbar = () => {
             </li>
           )}
 
-          <li className="nav-item">
-            <a className="nav-link" href="/Registration">
-              <Button>
-                <Link href="/Registration" style={{ color: "white" }}>
-                  {" "}
-                  Register{" "}
-                </Link>{" "}
-              </Button>
-            </a>
-          </li>
+          {loggedIn === false && (
+            <li className="nav-item">
+              <a className="nav-link" href="/Registration">
+                <Button>
+                  <Link href="/Registration" style={{ color: "white" }}>
+                    {" "}
+                    Register{" "}
+                  </Link>{" "}
+                </Button>
+              </a>
+            </li>
+          )}
           {/*<li className="nav-item dropdown">
         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dropdown link

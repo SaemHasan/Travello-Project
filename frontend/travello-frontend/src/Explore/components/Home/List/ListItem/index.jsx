@@ -25,18 +25,9 @@ const ListItem = ({
 
               <img src={coverSrc} className="large-image-explore" alt="adventure" />
               <div>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-                        <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
+          <p className="heading-des"> Sylhet is a region with stunning natural beauty. Situated in the northeast of Bangladesh, this ancient township is rich in forest, minerals, and fisheries and is rich in natural beauty.</p>
+                  <p className="heading-des"> It’s known for its Sufi shrines, like the ornate tomb and mosque of 14th-century saint Hazrat Shah Jalal, now a major pilgrimage site near Dargah Gate. The tiny Museum of Rajas contains belongings of the local folk poet Hasan Raja.</p>
+
 
               </div>
 

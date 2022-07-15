@@ -9,7 +9,7 @@ export class SlidersPlace extends Component {
     render() {
     var imgSlides = () =>
     sliderData.map((slide, index) => (
-      <div className="imgpad">
+      <div className="imgpad" key={slide.id}>
           {/*<img className="imgdetails" src= {num.img} width="100%" alt={"explore img"}/>*/}
 
 

@@ -2,10 +2,28 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 // import { Link } from 'react-router-dom';
 import { Link } from "@mui/material";
+import APIService from "../APIService";
 
 const Navbar = () => {
   const [token, setToken] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    if (token) {
+      APIService.getUserObject(token)
+        .then(async (user) => {
+          console.log("setting user");
+          await setUser(user);
+          console.log("finished setting user");
+          console.log(user);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"));

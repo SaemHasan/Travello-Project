@@ -55,7 +55,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <div>
+      <div style={{ marginLeft: "-50px" }}>
         <SlidersPlace />
       </div>
       {/*<div>*/}
@@ -68,7 +68,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <div>
+      <div style={{ marginLeft: "-50px" }}>
         <SlidersSpot />
       </div>
       {/*<div>*/}
@@ -81,7 +81,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <div>
+      <div style={{ marginLeft: "-50px" }}>
         <SlidersFood />
       </div>
       {/*<div>*/}
@@ -94,7 +94,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <div>
+      <div style={{ marginLeft: "-50px" }}>
         <SlidersActivity />
       </div>
       {/*<Hello/>*/}

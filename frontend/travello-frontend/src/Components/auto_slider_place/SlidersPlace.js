@@ -22,9 +22,9 @@ export class SlidersPlace extends Component {
           <div className="div-color-slide">
 
               <img src={slide.image} alt="slide" className="large-image-slide" />
-              <div>
+              <div className="div-description">
 
-            <p>{slide.desc}</p>
+            <p><b>{slide.desc}</b></p>
           {/*<h4>This is image description</h4>*/}
           {/*<h4>This is image description</h4>*/}
           {/*<h4>This is image description</h4>*/}

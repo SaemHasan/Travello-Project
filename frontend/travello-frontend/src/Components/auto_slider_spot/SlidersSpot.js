@@ -22,8 +22,8 @@ export class SlidersSpot extends Component {
           <div className="div-color-slide">
 
               <img src={slide.image} alt="slide" className="large-image-slide" />
-              <div>
-            <p>{slide.desc}</p>
+              <div className="div-description">
+            <p><b>{slide.desc}</b></p>
 
           {/*<h4>This is image description</h4>*/}
           {/*<h4>This is image description</h4>*/}

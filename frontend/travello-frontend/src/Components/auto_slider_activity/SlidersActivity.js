@@ -16,7 +16,7 @@ export class SlidersActivity extends Component {
 
                       <ul>
                 <li>
-          <img src={slide.image} alt="slide" className="imgdetails" />
+          <img src={slide.image} alt="slide" className="imgdetails"  />
           <h2>{slide.heading}</h2>
       <span className="large-slide">
           <div className="div-color-slide">

@@ -1,5 +1,5 @@
-from .models import Place, Spot, Type, PlaceRatingInfo
-from .serializers import PlaceSerializer, SpotSerializer, TypeSerializer, PlaceRatingInfoSerializer
+from .models import Place, Spot, SpotType_Table, PlaceRatingInfo
+from .serializers import PlaceSerializer, SpotSerializer, SpotTypeSerializer, PlaceRatingInfoSerializer
 from rest_framework import viewsets
 
 
@@ -13,8 +13,8 @@ class SpotViewSet(viewsets.ModelViewSet):
     serializer_class = SpotSerializer
 
 class TypeViewSet(viewsets.ModelViewSet):
-    queryset = Type.objects.all()
-    serializer_class = TypeSerializer
+    queryset = SpotType_Table.objects.all()
+    serializer_class = SpotTypeSerializer
 
 class PlaceRatingInfoViewSet(viewsets.ModelViewSet):
     queryset = PlaceRatingInfo.objects.all()

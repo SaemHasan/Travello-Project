@@ -43,10 +43,10 @@ class Spot(models.Model):
         return self.name
 
 
-class Type(models.Model):
+class SpotType_Table(models.Model):
     type_id = models.BigAutoField(primary_key=True)
     type_name = models.CharField(max_length=100)
-    category = models.CharField(max_length=100)
+    # category = models.CharField(max_length=100)
 
     def __str__(self):
         return self.type_id
@@ -54,7 +54,7 @@ class Type(models.Model):
 class Spot_Type(models.Model):
     spot_type_id = models.BigAutoField(primary_key=True)
     spot_id = models.ForeignKey(Spot, on_delete=models.CASCADE, default=None)
-    type_id = models.ForeignKey(Type, on_delete=models.CASCADE, default=None)
+    type_id = models.ForeignKey(SpotType_Table, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         return self.spot_id.name + " " + self.type_id.type_name

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Place, PlaceRatingInfo, Spot, Type, Spot_Type, User_Spot, Spot_Food, Spot_Activity
+from .models import Place, PlaceRatingInfo, Spot, SpotType_Table, Spot_Type, User_Spot, Spot_Food, Spot_Activity
 
 
 class PlaceRatingInfoSerializer(serializers.ModelSerializer):
@@ -12,10 +12,10 @@ class SpotSerializer(serializers.ModelSerializer):
         model = Spot
         fields = ['spot_id' ,'name', 'short_description', 'address_line', 'district', 'thana', 'upzila', 'cordinate_lattitude', 'cordinate_longitude', 'rating']
 
-class TypeSerializer(serializers.ModelSerializer):
+class SpotTypeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Type
-        fields = ['type_id', 'type_name', 'category']
+        model = SpotType_Table
+        fields = ['type_id', 'type_name']
 
 class PlaceSerializer(serializers.ModelSerializer):
     spots = SpotSerializer(many=True)

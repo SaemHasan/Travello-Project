@@ -38,7 +38,7 @@ class UserProfile_Interests(models.Model):
 class User_Type(models.Model):
     user_type_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    type_id = models.ForeignKey('spot.Type', on_delete=models.CASCADE)
+    type_id = models.ForeignKey('spot.SpotType_Table', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user_id.username + " " + self.type_id.type_name

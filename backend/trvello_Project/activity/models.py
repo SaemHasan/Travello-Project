@@ -2,13 +2,21 @@ from django.db import models
 
 # Create your models here.
 
+class ActivityType_Table(models.Model):
+    type_id = models.BigAutoField(primary_key=True)
+    type_name = models.CharField(max_length=100)
+    # category = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.type_id
+
 class Activity(models.Model):
     activity_id = models.AutoField(primary_key=True)
     activity_name = models.CharField(max_length=100)
     type = models.CharField(max_length=100, null=True)
     description = models.CharField(max_length=100, null=True)
 
-    type_id = models.ForeignKey('spot.Type', on_delete=models.CASCADE, null=True)
+    type_id = models.ForeignKey(ActivityType_Table, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.activity_name

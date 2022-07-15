@@ -9,10 +9,18 @@ class Food(models.Model):
     def __str__(self):
         return self.food_name
 
+class FoodType_Table(models.Model):
+    type_id = models.BigAutoField(primary_key=True)
+    type_name = models.CharField(max_length=100)
+    # category = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.type_id
+
 class Food_Type(models.Model):
     food_type_id = models.AutoField(primary_key=True)
     food_id = models.ForeignKey(Food, on_delete=models.CASCADE)
-    type_id = models.ForeignKey('spot.Type', on_delete=models.CASCADE)
+    type_id = models.ForeignKey(FoodType_Table, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.food_id.food_name + " " + self.type_id.type_name

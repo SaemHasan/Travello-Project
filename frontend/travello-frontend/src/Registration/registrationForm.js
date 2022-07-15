@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./style.css";
 import Button from "react-bootstrap/Button";
 import { Link } from "@mui/material";
-import { CheckboxData } from "./CheckboxData";
 import APIService from "../APIService";
-import { toppings } from "./utils/toppings";
 import { useNavigate } from "react-router-dom";
+
+
 
 function RegistrationForm() {
   const [username, setUsername] = useState("");

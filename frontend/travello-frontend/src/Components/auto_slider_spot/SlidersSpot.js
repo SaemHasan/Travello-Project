@@ -23,17 +23,17 @@ export class SlidersSpot extends Component {
 
               <img src={slide.image} alt="slide" className="large-image-slide" />
               <div>
+            <p>{slide.desc}</p>
 
-
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
-          <h4>This is image description</h4>
+          {/*<h4>This is image description</h4>*/}
+          {/*<h4>This is image description</h4>*/}
+          {/*<h4>This is image description</h4>*/}
+          {/*<h4>This is image description</h4>*/}
+          {/*<h4>This is image description</h4>*/}
+          {/*<h4>This is image description</h4>*/}
+          {/*<h4>This is image description</h4>*/}
+          {/*<h4>This is image description</h4>*/}
+          {/*<h4>This is image description</h4>*/}
 
 
               </div>

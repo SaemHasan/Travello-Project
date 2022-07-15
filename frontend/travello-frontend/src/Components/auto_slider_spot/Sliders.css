@@ -80,7 +80,7 @@
 }
 
     li:hover .large-slide {
-  left: -100px;
+  left: 0px;
   top: 0px;
         width:800px;
         height:1100px;
@@ -100,6 +100,7 @@
         position: relative;
         z-index: 1000;
         width: 700px !important;
+        height:700px;
 
     }
 

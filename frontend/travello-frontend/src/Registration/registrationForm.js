@@ -180,7 +180,7 @@ function RegistrationForm() {
           />
         </div>
         <div className="firstname">
-          <label className="form__label" for="firstName">
+          <label className="form__label" htmlFor="firstName">
             First Name{" "}
           </label>
           <input
@@ -193,7 +193,7 @@ function RegistrationForm() {
           />
         </div>
         <div className="lastname">
-          <label className="form__label" for="lastName">
+          <label className="form__label" htmlFor="lastName">
             Last Name{" "}
           </label>
           <input
@@ -207,7 +207,7 @@ function RegistrationForm() {
           />
         </div>
         <div className="email">
-          <label className="form__label" for="email">
+          <label className="form__label" htmlFor="email">
             Email{" "}
           </label>
           <input
@@ -233,7 +233,7 @@ function RegistrationForm() {
           />
         </div>
         <div className="password">
-          <label className="form__label" for="password">
+          <label className="form__label" htmlFor="password">
             Password{" "}
           </label>
           <input
@@ -246,7 +246,7 @@ function RegistrationForm() {
           />
         </div>
         <div className="confirm-password">
-          <label className="form__label" for="confirmPassword">
+          <label className="form__label" htmlFor="confirmPassword">
             Confirm Password{" "}
           </label>
           <input
@@ -264,7 +264,7 @@ function RegistrationForm() {
             onClick={RegisterBtn}
             block="true"
             type="submit"
-            class="btn"
+            className="btn"
             disabled={!validateForm()}
           >
             Register

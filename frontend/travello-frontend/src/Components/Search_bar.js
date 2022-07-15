@@ -43,7 +43,7 @@ const Search_bar = () => {
                 />
 
                <div>
-                  <select value={value} onChange={handleChange_dropdown} class="dropbtn">
+                  <select value={value} onChange={handleChange_dropdown} className="dropbtn">
                     <option disabled={true} value="">
                       Select Category
                     </option>
@@ -57,7 +57,7 @@ const Search_bar = () => {
                 <div>
                     <p>&nbsp;&nbsp;&nbsp;</p>
                                     <a href="https://react.school" target="_blank">
-                  <Button class="srcbtn"> Search </Button>
+                  <Button className="srcbtn"> Search </Button>
                 </a>
 
                 </div>

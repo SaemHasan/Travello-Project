@@ -15,7 +15,7 @@ export class SlidersFood extends Component {
 
 
                       <ul>
-                <li>
+                <li key={slide}>
           <img src={slide.image} alt="slide" className="imgdetails" />
           <h2>{slide.heading}</h2>
       <span className="large-slide">

@@ -5,6 +5,7 @@ import { Link } from "@mui/material";
 import { CheckboxData } from "./CheckboxData";
 import APIService from "../APIService";
 import { toppings } from "./utils/toppings";
+import { useNavigate } from "react-router-dom";
 
 function RegistrationForm() {
   const [username, setUsername] = useState("");
@@ -19,6 +20,8 @@ function RegistrationForm() {
   // const [user, setUser] = useState({});
 
   const [reg_success, set_reg_success] = useState(false);
+
+  let navigate = useNavigate();
 
   const interests = [
     { name: "Mountain" },
@@ -156,6 +159,8 @@ function RegistrationForm() {
           .catch((err) => console.log(err));
       });
     }
+    alert("Interests saved successfully");
+    navigate("/");
   };
 
   return (

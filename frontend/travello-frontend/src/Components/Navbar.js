@@ -2,10 +2,28 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 // import { Link } from 'react-router-dom';
 import { Link } from "@mui/material";
+import APIService from "../APIService";
 
 const Navbar = () => {
   const [token, setToken] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    if (token) {
+      APIService.getUserObject(token)
+        .then(async (user) => {
+          console.log("setting user");
+          await setUser(user);
+          console.log("finished setting user");
+          console.log(user);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"));
@@ -28,7 +46,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="#">
+      <div className="navbar-brand" href="#">
         <b>
           <i>
             <Link href="/" underline="hover" style={{ color: "black" }}>
@@ -36,7 +54,7 @@ const Navbar = () => {
             </Link>
           </i>
         </b>
-      </a>
+      </div>
       <button
         className="navbar-toggler"
         type="button"
@@ -87,9 +105,17 @@ const Navbar = () => {
           )}
           {loggedIn === true && (
             <li className="nav-item">
-              <a className="nav-link">
+              <div className="nav-link">
                 <Button onClick={LogoutBtn}>Logout</Button>
-              </a>
+              </div>
+            </li>
+          )}
+
+          {loggedIn === true && user.username && (
+            <li className="nav-item">
+              <div className="nav-link">
+                <Button>{user.username}</Button>
+              </div>
             </li>
           )}
 

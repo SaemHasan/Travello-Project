@@ -4,7 +4,7 @@
 .img_2
 {
     height: 300px !important;
-    width: 1134px;
+    width: 300px;
 }
 
 .imgdetails
@@ -75,15 +75,15 @@
 
     .large-slide {
   position: absolute;
-  left: -9999px;
+
 
 }
 
     li:hover .large-slide {
   left: -100px;
   top: 0px;
-        width:800px;
-        height:1100px;
+        width:600px;
+        height:600px;
 
 }
 
@@ -91,15 +91,15 @@
   border-radius: 4px;
    box-shadow: 1px 1px 3px 3px rgba(127, 127, 127, 0.15);
             height: 250px !important;
-    width: 700px !important;
+    width: 600px !important;
 
 }
 
     .div-color-slide {
-        background-color: #EBEBEB;
+        background-color: #FFFFA7;
         position: relative;
         z-index: 1000;
-        width: 700px !important;
+        width: 500px !important;
 
     }
 
@@ -107,6 +107,14 @@
             box-sizing: border-box;
     padding-left: 1000px;
 
+
+
+    }
+
+    .div-description
+    {
+        margin-right: 30px;
+        margin-left: 30px;
     }
 
 

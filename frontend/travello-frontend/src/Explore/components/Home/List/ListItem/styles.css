@@ -27,6 +27,7 @@
   align-items: center;
   justify-content: space-between;
 
+
 }
 .listItem-wrap-explore footer p:first-child span {
   color: rgba(0, 0, 0, 0.26);
@@ -60,7 +61,7 @@
 }
 
     .div-color-explore {
-        background-color: #EBEBEB;
+        background-color: #FFFFA7;
         position: relative;
         z-index: 1000;
     }
@@ -68,4 +69,13 @@
     .div-text-explore {
             box-sizing: border-box;
     padding-left: 1000px;
+    }
+
+    .heading-des
+    {
+        margin-left: 20px;
+        margin-right: 20px;
+
+
+
     }

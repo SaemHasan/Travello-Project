@@ -34,3 +34,5 @@ class UserProfile_Interests_Serializer(serializers.ModelSerializer):
         user_interest.interest = validated_data['interest']
         user_interest.save()
         return user_interest
+
+

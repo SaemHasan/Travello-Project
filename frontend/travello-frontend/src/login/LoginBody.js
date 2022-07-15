@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
@@ -14,7 +14,7 @@ export default function LoginBody() {
   const [username, setUsername] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   // const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
-  // const [token, setToken, removeToken] = useCookies(["mytoken"]);
+  const [token, setToken] = useState("");
   let navigate = useNavigate(); // log in thakle page e redirect korar jonno
 
   function validateForm() {
@@ -26,11 +26,17 @@ export default function LoginBody() {
     event.preventDefault();
   };
 
+  useEffect(() => {
+    localStorage.setItem("token", JSON.stringify(token));
+  }, [token]);
+
   const handleLogin = (resp) => {
     console.log("handleLogin");
+    console.log(resp);
     console.log(resp.status);
     if (resp.token) {
       // alert("Login Successful");
+      setToken(resp.token);
       setLoggedIn(true);
       navigate("/");
     } else {

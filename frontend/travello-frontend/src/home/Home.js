@@ -13,6 +13,7 @@ import SearchBar from "../Components/Search_bar";
 function Home() {
   // const [articles, setArticles] = useState([]);
   // const [demos, setDemos] = useState([]);
+
   const vidRef = useRef();
 
   useEffect(() => {
@@ -40,9 +41,9 @@ function Home() {
       <div>
         <SearchBar />
       </div>
-      <div>
-        <h3> Top five places </h3>
-      </div>
+      {/*<div>*/}
+      {/*  <h3> Top five places </h3>*/}
+      {/*</div>*/}
       <div>
         <div style={{ marginBottom: "20px" }}>
           <div className="col-sm-12 btn btn-info">
@@ -53,9 +54,9 @@ function Home() {
       <div>
         <Sliders />
       </div>
-      <div>
-        <h3> Top five spots </h3>
-      </div>
+      {/*<div>*/}
+      {/*  <h3> Top five spots </h3>*/}
+      {/*</div>*/}
       <div>
         <div style={{ marginBottom: "20px" }}>
           <div className="col-sm-12 btn btn-info">
@@ -66,9 +67,9 @@ function Home() {
       <div>
         <Sliders />
       </div>
-      <div>
-        <h3> Top five foods </h3>
-      </div>
+      {/*<div>*/}
+      {/*  <h3> Top five foods </h3>*/}
+      {/*</div>*/}
       <div>
         <div style={{ marginBottom: "20px" }}>
           <div className="col-sm-12 btn btn-info">
@@ -79,9 +80,9 @@ function Home() {
       <div>
         <Sliders />
       </div>
-      <div>
-        <h3> Top five activities </h3>
-      </div>
+      {/*<div>*/}
+      {/*  <h3> Top five activities </h3>*/}
+      {/*</div>*/}
       <div>
         <div style={{ marginBottom: "20px" }}>
           <div className="col-sm-12 btn btn-info">

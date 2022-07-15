@@ -140,3 +140,5 @@ frontend/.DS_Store
 .idea/Travello-Project.iml
 .idea/Travello-Project.iml
 *.iml
+misc.xml
+*/migrations/

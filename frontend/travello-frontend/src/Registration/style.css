@@ -58,3 +58,43 @@ rbody{
     margin-top: 30px;
     padding-right: 80px;
 }
+
+.topping {
+  margin-top: 0.3rem;
+  vertical-align: text-bottom;
+}
+
+.result {
+  margin-top: 1rem;
+}
+
+.toppings-list,
+.total {
+  width: 30%;
+  margin: 0 auto;
+}
+
+.toppings-list {
+  list-style: none;
+  padding: 0;
+}
+
+.toppings-list li {
+  margin-bottom: 0.5rem;
+}
+
+.toppings-list-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.toppings-list li:last-child {
+  border-top: 1px solid #ccc;
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.toppings-list-item label {
+  vertical-align: text-bottom;
+  margin-left: 1rem;
+}

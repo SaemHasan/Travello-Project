@@ -35,16 +35,14 @@ const Home = () => {
   ]);
 
   const [list, setList] = useState(dataList);
-  const [placeList, setplaceList] = useState(list);
-  const [spotList, setspotList] = useState(list);
   const [resultsFound, setResultsFound] = useState(true);
   const [searchInput, setSearchInput] = useState('');
 
   const handleSelectCategory = (event, value) =>
-    !value ? null : setSelectedCategory(value);
+    !value ? setSelectedCategory(null) : setSelectedCategory(value);
 
   const handleSelectRating = (event, value) =>
-    !value ? null : setSelectedRating(value);
+    !value ? setSelectedRating(null): setSelectedRating(value);
 
   //for place
   const handleChangeCheckedPlace = (id) => {
@@ -95,22 +93,6 @@ const Home = () => {
   //return p1 * p2;   // The function returns the product of p1 and p2
   }
 
-  const makeNewList = (value) => {
-   let updatedList = dataList;
-    updatedList = list.filter(
-        (item) => item.category === "place"
-      );
-    setplaceList(updatedList);
-    // updatedList = list.filter(
-    //     (item) => item.category === "spot"
-    //   );
-    // setspotList(updatedList);
-    // for (var i = 0; i < arrayLength; i++) {
-    //   if (value[i].category === "place")
-    //     placeList;
-    //   //Do something
-    // }
-  }
 
   const applyFilters = () => {
     let updatedList = dataList;

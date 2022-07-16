@@ -35,6 +35,8 @@ const Home = () => {
   ]);
 
   const [list, setList] = useState(dataList);
+  const [placeList, setplaceList] = useState(list);
+  const [spotList, setspotList] = useState(list);
   const [resultsFound, setResultsFound] = useState(true);
   const [searchInput, setSearchInput] = useState('');
 
@@ -74,6 +76,41 @@ const Home = () => {
   const handleChangePrice = (event, value) => {
     setSelectedPrice(value);
   };
+
+  function makeplaceList(list) {
+    let updatedList = [];
+    updatedList = list.filter(
+        (item) => item.category === "place"
+      );
+    return updatedList;
+  //return p1 * p2;   // The function returns the product of p1 and p2
+  }
+
+  function makespotList(list) {
+    let updatedList = [];
+    updatedList = list.filter(
+        (item) => item.category === "spot"
+      );
+    return updatedList;
+  //return p1 * p2;   // The function returns the product of p1 and p2
+  }
+
+  const makeNewList = (value) => {
+   let updatedList = dataList;
+    updatedList = list.filter(
+        (item) => item.category === "place"
+      );
+    setplaceList(updatedList);
+    // updatedList = list.filter(
+    //     (item) => item.category === "spot"
+    //   );
+    // setspotList(updatedList);
+    // for (var i = 0; i < arrayLength; i++) {
+    //   if (value[i].category === "place")
+    //     placeList;
+    //   //Do something
+    // }
+  }
 
   const applyFilters = () => {
     let updatedList = dataList;
@@ -179,7 +216,14 @@ const Home = () => {
         </div>
         {/* List & Empty View */}
         <div className='home_list-wrap'>
-          {resultsFound ? <List list={list} /> : <EmptyView />}
+          {/*<h2>places</h2>*/}
+          {/*{resultsFound ? <List list={makeNewList} /> : <EmptyView />}*/}
+          {/*<h2>bbbb</h2>*/}
+          {/*{placeList(list)}*/}
+          <h2>Places</h2>
+          {resultsFound ? <List list={makeplaceList(list)} /> : <EmptyView />}
+          <h2>Spot</h2>
+          {resultsFound ? <List list={makespotList(list)} /> : <EmptyView />}
         </div>
       </div>
     </div>

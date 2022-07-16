@@ -4,9 +4,10 @@ import './styles.css';
 
 
 const ListItem = ({
-  item: { coverSrc, title, price, deliveryFee, serviceTime, rating },
+  item: { coverSrc, title, price, deliveryFee, serviceTime, rating, category },
 }) =>{
 
+    const isPlace = true;
     const [places, setPlaces] = useState([
     { id: 1, checked: false, label: 'Mountain' },
     { id: 2, checked: false, label: 'Waterfall' },
@@ -14,6 +15,7 @@ const ListItem = ({
   ]);
 
     return(
+        // {{category} === "place" && (
         <div className='listItem-wrap-explore' >
 
 
@@ -59,14 +61,14 @@ const ListItem = ({
                 <h4>{title}</h4>
                 <span>🌟{rating}</span>
             </header>
-            <footer>
-                <p>
-                    <b>{serviceTime}</b> <span> Delivery Fee ${deliveryFee}</span>
-                </p>
-                <p>
-                    <b>${price}</b>
-                </p>
-            </footer>
+            {/*<footer>*/}
+            {/*    <p>*/}
+            {/*        <b>{serviceTime}</b> <span> Delivery Fee ${deliveryFee}</span>*/}
+            {/*    </p>*/}
+            {/*    <p>*/}
+            {/*        <b>${price}</b>*/}
+            {/*    </p>*/}
+            {/*</footer>*/}
         </div>
     );
 };

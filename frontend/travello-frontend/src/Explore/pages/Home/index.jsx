@@ -15,18 +15,23 @@ const Home = () => {
     { id: 1, checked: false, label: 'Mountain' },
     { id: 2, checked: false, label: 'Waterfall' },
     { id: 3, checked: false, label: 'Forest' },
+    { id: 4, checked: false, label: 'Lake' },
+    { id: 5, checked: false, label: 'Tea Garden' },
+    { id: 6, checked: false, label: 'Beach' },
   ]);
 
   const [foods, setFoods] = useState([
     { id: 1, checked: false, label: 'Bengali' },
     { id: 2, checked: false, label: 'Chinese' },
     { id: 3, checked: false, label: 'Italian' },
+    { id: 4, checked: false, label: 'Upojati Food' },
   ]);
 
   const [activities, setActivity] = useState([
     { id: 1, checked: false, label: 'Trekking' },
     { id: 2, checked: false, label: 'Boat riding' },
     { id: 3, checked: false, label: 'Kayaking' },
+    { id: 4, checked: false, label: 'Water Bike' },
   ]);
 
   const [list, setList] = useState(dataList);

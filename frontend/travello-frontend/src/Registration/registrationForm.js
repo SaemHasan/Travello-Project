@@ -160,7 +160,7 @@ function RegistrationForm() {
       });
     }
     alert("Interests saved successfully");
-    navigate("/");
+    navigate("/login");
   };
 
   return (

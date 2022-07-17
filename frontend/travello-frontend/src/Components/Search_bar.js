@@ -18,8 +18,8 @@ const Search_bar = () => {
     setValue(e.target.value);
   };
   return (
-    <div className="main">
-      <h1>Search here!</h1>
+    <div className="divSearchBar">
+        <h1><b>Search here!</b></h1>
       <div className="search">
 
             <div className="side-by-side">

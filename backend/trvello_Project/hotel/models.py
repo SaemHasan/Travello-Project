@@ -49,6 +49,7 @@ class HotelRatingInfo(models.Model):
     rating_id = models.BigAutoField(primary_key=True)
     factor = models.FloatField(default=1)
     start_time = models.DateTimeField(null=True)
+    end_time = models.DateTimeField(null=True)
     hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE, default=None)
 
     def __str__(self):

@@ -24,7 +24,7 @@ class Hotel(models.Model):
     spot_id = models.ForeignKey('spot.Spot', on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return self.hotel_id
+        return self.name
 
 
 class Hotel_Attribute(models.Model):
@@ -33,7 +33,7 @@ class Hotel_Attribute(models.Model):
     attribute_value = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return self.attribute_id
+        return self.attribute_name
 
 
 class Hotel_Attribute_Table(models.Model):
@@ -43,7 +43,7 @@ class Hotel_Attribute_Table(models.Model):
     value = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return self.hotel_attribute_id
+        return self.hotel_id.name + " " + self.attribute_id.attribute_name
 
 
 class HotelRatingInfo(models.Model):
@@ -54,7 +54,7 @@ class HotelRatingInfo(models.Model):
     hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return self.rating_id
+        return self.hotel_id.name + " " + str(self.rating_id)
 
 
 class Room(models.Model):
@@ -65,7 +65,7 @@ class Room(models.Model):
     image = models.ImageField(upload_to='./hotel/images', null=True, blank=True)
 
     def __str__(self):
-        return self.room_id
+        return self.room_type + " " + str(self.room_no)
 
 
 class RoomPriceInfo(models.Model):
@@ -76,7 +76,7 @@ class RoomPriceInfo(models.Model):
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return self.price_id
+        return self.room_id.room_type + " " + str(self.room_id.room_no)
 
 
 class Room_Attribute(models.Model):
@@ -85,7 +85,7 @@ class Room_Attribute(models.Model):
     attribute_value = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return self.attribute_id
+        return self.attribute_name
 
 
 class Room_Attribute_Table(models.Model):
@@ -95,5 +95,5 @@ class Room_Attribute_Table(models.Model):
     value = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return self.room_attribute_id
+        return self.room_id.room_type + " " + self.attribute_id.attribute_name
 

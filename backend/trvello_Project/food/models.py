@@ -19,7 +19,7 @@ class FoodType_Table(models.Model):
     # category = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.type_id
+        return self.type_name
 
 
 class Food_Type(models.Model):

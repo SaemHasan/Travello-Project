@@ -10,7 +10,7 @@ class ActivityType_Table(models.Model):
     # category = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.type_id
+        return self.type_name
 
 
 class Activity(models.Model):
@@ -51,7 +51,7 @@ class Activity_Agency(models.Model):
     rating = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.activity_agency_id
+        return self.activity_id.activity_name + " " + self.agency_id.agency_name
 
 
 class ActivityPriceInfo(models.Model):
@@ -62,7 +62,7 @@ class ActivityPriceInfo(models.Model):
     activity_agency_id = models.ForeignKey(Activity_Agency, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return self.price_id
+        return self.activity_agency_id.activity_id.activity_name + " " + self.activity_agency_id.agency_id.agency_name
 
 
 class ActivityRatingInfo(models.Model):
@@ -73,4 +73,4 @@ class ActivityRatingInfo(models.Model):
     activity_agency_id = models.ForeignKey(Activity_Agency, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return self.rating_id
+        return self.activity_agency_id.activity_id.activity_name + " " + self.activity_agency_id.agency_id.agency_name

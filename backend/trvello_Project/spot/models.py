@@ -14,7 +14,7 @@ class Place(models.Model):
     image = models.ImageField(upload_to='./spot/images', null=True, blank=True)
 
     def __str__(self):
-        return self.place_id
+        return self.name
 
 
 class PlaceRatingInfo(models.Model):
@@ -25,7 +25,7 @@ class PlaceRatingInfo(models.Model):
     place_id = models.ForeignKey('Place', on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return self.rating_id
+        return self.place_id.name + " " + str(self.rating_id)
 
 
 class Spot(models.Model):
@@ -55,7 +55,7 @@ class SpotRatingInfo(models.Model):
     spot_id = models.ForeignKey(Spot, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return self.rating_id
+        return self.spot_id.name + " " + str(self.rating_id)
 
 
 class SpotType_Table(models.Model):
@@ -65,7 +65,7 @@ class SpotType_Table(models.Model):
     # category = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.type_id
+        return self.type_name
 
 
 class Spot_Type(models.Model):

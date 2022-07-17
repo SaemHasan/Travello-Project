@@ -21,10 +21,11 @@ class UserSerializer(serializers.ModelSerializer):
         Token.objects.create(user=user)
         return user
 
+
 class UserProfile_Interests_Serializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile_Interests
-        fields = ['interest_id', 'user', 'interest']
+        fields = '__all__'
 
     def create(self, validated_data):
         print(validated_data)
@@ -36,3 +37,7 @@ class UserProfile_Interests_Serializer(serializers.ModelSerializer):
         return user_interest
 
 
+class User_Type_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = User_Type
+        fields = '__all__'

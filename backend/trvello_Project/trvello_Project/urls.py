@@ -22,5 +22,8 @@ urlpatterns = [
     path('', include('api.urls')),
     path('', include('spot.urls')),
     path('', include('user.urls')),
+    path('', include('activity.urls')),
+    path('', include('food.urls')),
+    path('', include('hotel.urls')),
     path('auth/', obtain_auth_token),
 ]

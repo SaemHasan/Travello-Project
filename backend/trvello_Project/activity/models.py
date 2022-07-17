@@ -1,25 +1,30 @@
 from django.db import models
 
+
 # Create your models here.
 
 class ActivityType_Table(models.Model):
     type_id = models.BigAutoField(primary_key=True)
     type_name = models.CharField(max_length=100)
+
     # category = models.CharField(max_length=100)
 
     def __str__(self):
         return self.type_id
+
 
 class Activity(models.Model):
     activity_id = models.AutoField(primary_key=True)
     activity_name = models.CharField(max_length=100)
     type = models.CharField(max_length=100, null=True)
     description = models.CharField(max_length=100, null=True)
+    image = models.ImageField(upload_to='./activity/images', null=True, blank=True)
 
     type_id = models.ForeignKey(ActivityType_Table, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.activity_name
+
 
 class Agency(models.Model):
     agency_id = models.AutoField(primary_key=True)
@@ -33,9 +38,11 @@ class Agency(models.Model):
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     email = models.EmailField(max_length=50, null=True, blank=True)
     website = models.URLField(max_length=100, null=True, blank=True)
+    image = models.ImageField(upload_to='./activity/images', null=True, blank=True)
 
     def __str__(self):
         return self.agency_name
+
 
 class Activity_Agency(models.Model):
     activity_agency_id = models.AutoField(primary_key=True)
@@ -45,6 +52,7 @@ class Activity_Agency(models.Model):
 
     def __str__(self):
         return self.activity_agency_id
+
 
 class ActivityPriceInfo(models.Model):
     price_id = models.AutoField(primary_key=True)
@@ -56,14 +64,13 @@ class ActivityPriceInfo(models.Model):
     def __str__(self):
         return self.price_id
 
+
 class ActivityRatingInfo(models.Model):
     rating_id = models.AutoField(primary_key=True)
     factor = models.FloatField(default=1)
     start_time = models.DateTimeField(null=True)
+    end_time = models.DateTimeField(null=True)
     activity_agency_id = models.ForeignKey(Activity_Agency, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         return self.rating_id
-
-
-

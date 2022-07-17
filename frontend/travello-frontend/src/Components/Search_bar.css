@@ -24,6 +24,7 @@ ul li {
 .side-by-side {
   display: flex;
   flex-direction: row;
+    background-color: #FFFFFF;
 }
 
 
@@ -80,4 +81,17 @@ ul li {
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
+}
+
+.divSearchBar{
+    background: url("../images/home_img.jpg");
+    background-repeat: no-repeat;
+    background-size: 1600px 700px;
+    margin-bottom: 20px;
+    display: flex;
+    height: 40vh;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 2px;
 }

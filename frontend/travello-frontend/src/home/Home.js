@@ -18,11 +18,11 @@ function Home() {
   // const [articles, setArticles] = useState([]);
   // const [demos, setDemos] = useState([]);
 
-  const vidRef = useRef();
-
-  useEffect(() => {
-    vidRef.current.play();
-  }, []);
+  // const vidRef = useRef();
+  //
+  // useEffect(() => {
+  //   vidRef.current.play();
+  // }, []);
 
   //   useEffect(() => {
   //       APIService.GetArticles()
@@ -39,9 +39,9 @@ function Home() {
   return (
     <div className="App">
       {/*<div id = "clearDiv"  className = "img"><img src={pic}   alt={"waterfall"}/></div>*/}
-      <div>
-        <video src="tourism.mp4" ref={vidRef} muted autoPlay loop />
-      </div>
+      {/*<div>*/}
+      {/*  <video src="tourism.mp4" ref={vidRef} muted autoPlay loop />*/}
+      {/*</div>*/}
       <div>
         <SearchBar />
       </div>
@@ -49,9 +49,9 @@ function Home() {
       {/*  <h3> Top five places </h3>*/}
       {/*</div>*/}
       <div>
-        <div style={{ marginBottom: "20px" }}>
+        <div style={{ marginBottom: "20px", height: "40px"}}>
           <div className="col-sm-12 btn btn-info">
-            Explore your favourites places
+              <b>Explore your favourites places</b>
           </div>
         </div>
       </div>
@@ -62,9 +62,9 @@ function Home() {
       {/*  <h3> Top five spots </h3>*/}
       {/*</div>*/}
       <div>
-        <div style={{ marginBottom: "20px" }}>
+        <div style={{ marginBottom: "20px", height: "40px" }}>
           <div className="col-sm-12 btn btn-info">
-            Explore your favourites spots
+              <b>Explore your favourites spots</b>
           </div>
         </div>
       </div>
@@ -75,9 +75,9 @@ function Home() {
       {/*  <h3> Top five foods </h3>*/}
       {/*</div>*/}
       <div>
-        <div style={{ marginBottom: "20px" }}>
+        <div style={{ marginBottom: "20px", height: "40px" }}>
           <div className="col-sm-12 btn btn-info">
-            Explore your favourites foods
+              <b>Explore your favourites foods</b>
           </div>
         </div>
       </div>
@@ -88,9 +88,9 @@ function Home() {
       {/*  <h3> Top five activities </h3>*/}
       {/*</div>*/}
       <div>
-        <div style={{ marginBottom: "20px" }}>
+        <div style={{ marginBottom: "20px", height: "40px" }}>
           <div className="col-sm-12 btn btn-info">
-            Explore your favourites activities
+              <b>Explore your favourites activities</b>
           </div>
         </div>
       </div>

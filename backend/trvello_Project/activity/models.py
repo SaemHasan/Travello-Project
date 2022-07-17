@@ -60,6 +60,7 @@ class ActivityRatingInfo(models.Model):
     rating_id = models.AutoField(primary_key=True)
     factor = models.FloatField(default=1)
     start_time = models.DateTimeField(null=True)
+    end_time = models.DateTimeField(null=True)
     activity_agency_id = models.ForeignKey(Activity_Agency, on_delete=models.CASCADE, default=None)
 
     def __str__(self):

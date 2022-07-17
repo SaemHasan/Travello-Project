@@ -11,6 +11,7 @@ class Place(models.Model):
     cordinate_lattitude = models.DecimalField(max_digits=10, decimal_places=8, null=True)
     cordinate_longitude = models.DecimalField(max_digits=10, decimal_places=8, null=True)
     rating = models.IntegerField(default=0)
+    image = models.ImageField(upload_to='./spot/images', null=True, blank=True)
 
     def __str__(self):
         return self.place_id
@@ -38,6 +39,7 @@ class Spot(models.Model):
     cordinate_lattitude = models.DecimalField(max_digits=10, decimal_places=8, null=True)
     cordinate_longitude = models.DecimalField(max_digits=10, decimal_places=8, null=True)
     rating = models.IntegerField(default=0)
+    image = models.ImageField(upload_to='./spot/images', null=True, blank=True)
 
     place_id = models.ForeignKey(Place, related_name='spots', on_delete=models.CASCADE)
 

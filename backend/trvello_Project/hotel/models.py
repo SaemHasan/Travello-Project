@@ -19,6 +19,7 @@ class Hotel(models.Model):
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     email = models.EmailField(max_length=50, null=True, blank=True)
     website = models.URLField(max_length=100, null=True, blank=True)
+    image = models.ImageField(upload_to='./hotel/images', null=True, blank=True)
 
     spot_id = models.ForeignKey('spot.Spot', on_delete=models.CASCADE, default=None)
 
@@ -61,6 +62,7 @@ class Room(models.Model):
     hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE, default=None)
     room_no = models.IntegerField(default=0)
     room_type = models.CharField(max_length=100, null=True)
+    image = models.ImageField(upload_to='./hotel/images', null=True, blank=True)
 
     def __str__(self):
         return self.room_id

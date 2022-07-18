@@ -22,7 +22,7 @@ class SpotTypeSerializer(serializers.ModelSerializer):
 
 
 class PlaceSerializer(serializers.ModelSerializer):
-    spots = SpotSerializer(many=True)
+    # spots = SpotSerializer(many=True)
 
     class Meta:
         model = Place

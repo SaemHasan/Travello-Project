@@ -143,3 +143,5 @@ frontend/.DS_Store
 misc.xml
 */migrations/
 */migrations/0001_initial.py
+*.xml
+*.xml

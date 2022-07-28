@@ -92,7 +92,7 @@ class Spot_Food(models.Model):
     food_id = models.ForeignKey('food.Food', on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return self.spot_id.name + " " + self.food_id.name
+        return self.spot_id.name + " " + self.food_id.food_name
 
 
 class Spot_Activity(models.Model):

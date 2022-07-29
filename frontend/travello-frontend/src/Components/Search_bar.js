@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Search_bar.css"
 import TextField from "@mui/material/TextField";
 import Button from 'react-bootstrap/Button';
+import HomeAPIService from "../home/HomeAPIService";
 
 const Search_bar = () => {
 
@@ -15,8 +16,22 @@ const Search_bar = () => {
   const [location_text, setLocation] = useState("");
 
   const handleChange_dropdown = (e) => {
-    setValue(e.target.value);
+        // console.log("search dropdown: ",e.target.value);
+        setValue(e.target.value);
   };
+
+  const handleSearchBtn = async () => {
+      console.log("search type: ", value);
+      console.log("search keyword: ", keyword_text);
+      console.log("search location: ", location_text);
+
+      if (value === "Place") {
+          const resp = await HomeAPIService.searchPlace(keyword_text, location_text);
+          console.log("search place: ", resp);
+      }
+
+  };
+
   return (
     <div className="divSearchBar">
         <h1><b>Search here!</b></h1>
@@ -56,9 +71,9 @@ const Search_bar = () => {
             </div>
                 <div>
                     <p>&nbsp;&nbsp;&nbsp;</p>
-                                    <a href="https://react.school" target="_blank">
-                  <Button className="srcbtn"> Search </Button>
-                </a>
+                    <a href="#">
+                        <Button className="srcbtn" onClick={handleSearchBtn}> Search </Button>
+                    </a>
 
                 </div>
 

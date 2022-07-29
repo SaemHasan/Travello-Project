@@ -42,4 +42,16 @@ export default class HomeAPIService{
       body: JSON.stringify({ number: number }),
     }).then((resp) => resp.json());
   }
+
+  static searchPlace(keyword, location) {
+    return fetch(`http://127.0.0.1:8000/api/places/getSearchResult/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ keyword: keyword, location: location }),
+    }).then((resp) => resp.json());
+  }
+
 }

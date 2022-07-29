@@ -22,6 +22,23 @@ class PlaceViewSet(viewsets.ModelViewSet):
         return Response(PlaceSerializer(places, many=True).data)
 
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getSearchResult(self, request):
+        keyword = request.data['keyword']
+        location = request.data['location']
+        places = Place.objects.all()
+        result = []
+        if(keyword != ''):
+            places1 = places.filter(short_description__icontains=keyword)
+            print(places1)
+            result = places1
+        if(location != ''):
+            places2 = places.filter(short_description__icontains=location)
+            print(places2)
+            result |= places2
+        # print(result)
+        return Response(PlaceSerializer(result, many=True).data)
+
 class SpotViewSet(viewsets.ModelViewSet):
     queryset = Spot.objects.all()
     serializer_class = SpotSerializer

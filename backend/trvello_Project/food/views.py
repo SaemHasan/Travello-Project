@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 from .models import Food, Restaurant, Food_Restaurant, FoodPriceInfo, \
     FoodRatingInfo, FoodType_Table, Food_Type
@@ -12,6 +14,14 @@ from .serializers import FoodSerializer, RestaurantSerializer, Food_RestaurantSe
 class FoodViewSet(viewsets.ModelViewSet):
     queryset = Food.objects.all()
     serializer_class = FoodSerializer
+
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getTopFoods(self, request):
+        number = int(request.data['number'])
+        foods = Food.objects.all()[:number]
+        print(foods)
+        return Response(FoodSerializer(foods, many=True).data)
 
 
 class RestaurantViewSet(viewsets.ModelViewSet):

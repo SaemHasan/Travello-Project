@@ -3,13 +3,27 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import './Sliders.css';
-import {sliderData} from "./slider-data";
+// import {sliderData} from "./slider-data";
+import HomeAPIService from "../../home/HomeAPIService";
 
 export class SlidersSpot extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { spots : []};
+    }
+
+    async componentDidMount() {
+        const response = await HomeAPIService.getTopSpots(5);
+        this.setState({ spots: response });
+        // console.log("spots",this.state.spots);
+    }
+
     render() {
-    var imgSlides = () =>
-    sliderData.map((slide, index) => (
-      <div className="imgpad" key={slide.id}>
+    // console.log(this.state.spots);
+    // console.log(sliderData);
+    let imgSlides = () =>
+        this.state.spots.map((slide, index) => (
+      <div className="imgpad" key={slide.spot_id}>
           {/*<img className="imgdetails" src= {num.img} width="100%" alt={"explore img"}/>*/}
 
 
@@ -17,13 +31,13 @@ export class SlidersSpot extends Component {
                       <ul>
                 <li>
           <img src={slide.image} alt="slide" className="imgdetails" />
-          <h2>{slide.heading}</h2>
+          <h2>{slide.name}</h2>
       <span className="large-slide">
           <div className="div-color-slide">
 
               <img src={slide.image} alt="slide" className="large-image-slide" />
               <div className="div-description">
-            <p><b>{slide.desc}</b></p>
+            <p><b>{slide.short_description}</b></p>
 
           {/*<h4>This is image description</h4>*/}
           {/*<h4>This is image description</h4>*/}

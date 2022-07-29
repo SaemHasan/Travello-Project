@@ -1,3 +1,6 @@
+from rest_framework.decorators import action
+from rest_framework.response import Response
+
 from .models import Place, Spot, SpotType_Table, PlaceRatingInfo, Spot_Type, \
     User_Spot, Spot_Food, Spot_Activity, SpotRatingInfo
 from .serializers import PlaceSerializer, SpotSerializer, SpotTypeSerializer, PlaceRatingInfoSerializer, \
@@ -11,10 +14,25 @@ class PlaceViewSet(viewsets.ModelViewSet):
     # print(queryset)
     serializer_class = PlaceSerializer
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getTopPlaces(self, request):
+        number = int(request.data['number'])
+        places = Place.objects.order_by('-rating')[:number]
+        print(places)
+        return Response(PlaceSerializer(places, many=True).data)
+
 
 class SpotViewSet(viewsets.ModelViewSet):
     queryset = Spot.objects.all()
     serializer_class = SpotSerializer
+
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getTopSpots(self, request):
+        number = int(request.data['number'])
+        spots = Spot.objects.order_by('-rating')[:number]
+        print(spots)
+        return Response(SpotSerializer(spots, many=True).data)
 
 
 class SpotTypeTableViewSet(viewsets.ModelViewSet):

@@ -9,7 +9,7 @@ export class SlidersActivity extends Component {
     render() {
     var imgSlides = () =>
     sliderData.map((slide, index) => (
-      <div className="imgpad" key={slide.id}>
+      <div className="imgpad" key={slide.activity_id}>
           {/*<img className="imgdetails" src= {num.img} width="100%" alt={"explore img"}/>*/}
 
 
@@ -17,14 +17,14 @@ export class SlidersActivity extends Component {
                       <ul>
                 <li>
           <img src={slide.image} alt="slide" className="imgdetails"  />
-          <h2>{slide.heading}</h2>
+          <h2>{slide.activity_name}</h2>
       <span className="large-slide">
           <div className="div-color-slide">
 
               <img src={slide.image} alt="slide" className="large-image-slide" />
               <div className="div-description">
 
-                <p><b>{slide.desc}</b></p>
+                <p><b>{slide.description}</b></p>
           {/*<h4>This is image description</h4>*/}
           {/*<h4>This is image description</h4>*/}
           {/*<h4>This is image description</h4>*/}

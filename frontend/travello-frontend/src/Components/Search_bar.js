@@ -7,7 +7,7 @@ import HomeAPIService from "../home/HomeAPIService";
 const Search_bar = () => {
 
     const getInitialState = () => {
-    const value="";
+    const value = "";
     return value;
   };
 

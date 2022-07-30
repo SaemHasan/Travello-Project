@@ -9,13 +9,23 @@ import HomeAPIService from "../../home/HomeAPIService";
 export class SlidersSpot extends Component {
     constructor(props) {
         super(props);
-        this.state = { spots : []};
+        this.state = { spots : [],
+        frontend_img_path: "assets/spot/",
+        };
     }
 
     async componentDidMount() {
         const response = await HomeAPIService.getTopSpots(5);
+        response.map((num, index) => {
+        num.image = this.updateImgPath(num.image);
+        })
         this.setState({ spots: response });
         // console.log("spots",this.state.spots);
+    }
+
+    updateImgPath(imgPath){
+        const myArray = imgPath.split("/");
+        return myArray[myArray.length-1];
     }
 
     render() {
@@ -30,12 +40,12 @@ export class SlidersSpot extends Component {
 
                       <ul>
                 <li>
-          <img src={slide.image} alt="slide" className="imgdetails" />
+          <img src={this.state.frontend_img_path+slide.image} alt="slide" className="imgdetails" />
           <h2>{slide.name}</h2>
       <span className="large-slide">
           <div className="div-color-slide">
 
-              <img src={slide.image} alt="slide" className="large-image-slide" />
+              <img src={this.state.frontend_img_path+slide.image} alt="slide" className="large-image-slide" />
               <div className="div-description">
             <p><b>{slide.short_description}</b></p>
 

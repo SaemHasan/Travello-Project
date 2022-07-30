@@ -1,3 +1,4 @@
+from django.views.generic import ListView
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -38,6 +39,13 @@ class PlaceViewSet(viewsets.ModelViewSet):
             result |= places2
         # print(result)
         return Response(PlaceSerializer(result, many=True).data)
+
+    # @action(detail=False, methods=['post', 'get', 'put'])
+    # def getPlaceImageByID(self, request):
+    #     place_id = request.data['id']
+    #     place = Place.objects.get(place_id=place_id)
+    #     image = place.image
+    #     return Response(image)
 
 class SpotViewSet(viewsets.ModelViewSet):
     queryset = Spot.objects.all()

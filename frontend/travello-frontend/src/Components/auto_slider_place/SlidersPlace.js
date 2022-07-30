@@ -9,14 +9,24 @@ export class SlidersPlace extends Component {
     constructor(props) {
         super(props);
         this.state = { places : [],
-            api_path : "http://127.0.0.1:8000/api/",
+            api_path : "http://127.0.0.1:8000",
             absoulute_path: "../../../backend/trvello_Project",
+            frontend_img_path: "assets/place/",
         };
   }
 
   async componentDidMount() {
     const response = await HomeAPIService.getTopPlaces(5);
+    response.map((num, index) => {
+        num.image = this.updateImgPath(num.image);
+    })
     this.setState({ places: response });
+    // console.log(this.state.places);
+  }
+
+  updateImgPath(imgPath){
+        const myArray = imgPath.split("/");
+        return myArray[myArray.length-1];
   }
 
      render() {
@@ -29,12 +39,12 @@ export class SlidersPlace extends Component {
 
                     <ul>
                         <li>
-                            <img src={slide.image} alt="slide" className="imgdetails"/>
+                            <img src={this.state.frontend_img_path+slide.image} alt="slide" className="imgdetails"/>
                             <h2>{slide.name}</h2>
                             <span className="large-slide">
           <div className="div-color-slide">
 
-              <img src={slide.image} alt="slide" className="large-image-slide"/>
+              <img src={this.state.frontend_img_path+slide.image} alt="slide" className="large-image-slide"/>
               <div className="div-description">
 
             <p><b>{slide.short_description}</b></p>

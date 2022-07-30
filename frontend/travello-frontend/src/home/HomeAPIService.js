@@ -10,6 +10,7 @@ export default class HomeAPIService{
     }).then((resp) => resp.json());
   }
 
+
   static getTopSpots(number) {
     return fetch(`http://127.0.0.1:8000/api/spots/getTopSpots/`, {
       method: "POST",

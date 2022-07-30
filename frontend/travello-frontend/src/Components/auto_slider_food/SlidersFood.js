@@ -10,13 +10,23 @@ export class SlidersFood extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { foods : []};
+        this.state = { foods : [],
+        frontend_img_path: "assets/food/",
+        };
     }
 
     async componentDidMount() {
         const response = await HomeAPIService.getTopFoods(5);
+        response.map((num, index) => {
+        num.image = this.updateImgPath(num.image);
+        })
         this.setState({ foods: response });
         // console.log("spots",this.state.spots);
+    }
+
+    updateImgPath(imgPath){
+        const myArray = imgPath.split("/");
+        return myArray[myArray.length-1];
     }
 
     render() {
@@ -29,12 +39,12 @@ export class SlidersFood extends Component {
 
                       <ul>
                 <li>
-          <img src={slide.image} alt="slide" className="imgdetails" />
+          <img src={this.state.frontend_img_path+slide.image} alt="slide" className="imgdetails" />
           <h2>{slide.food_name}</h2>
       <span className="large-slide">
           <div className="div-color-slide">
 
-              <img src={slide.image} alt="slide" className="large-image-slide" />
+              <img src={this.state.frontend_img_path+slide.image} alt="slide" className="large-image-slide" />
               <div className="div-description">
 
                 <p><b>{slide.short_description}</b></p>

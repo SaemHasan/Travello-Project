@@ -116,7 +116,7 @@ export const dataList = [
     activity: 'trekking',
     rating: 5,
     price: 3500,
-    coverSrc: '/images/spots/sakahaphong_rangamati.jpg',
+    coverSrc: '/images/spots/sakahaphong_bandorban.jpg',
   },
   {
     id: 7,

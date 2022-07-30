@@ -15,7 +15,7 @@ function OnePlaceDesc() {
   return (
     <div>
         {/*<img src={imgsrc} alt="slide" className="imgdetails" />*/}
-        <div><img src={imgsrc} alt="place_image" width={"100%"}/></div>
+        <div><img src={imgsrc} alt="place_image" width={"100%"} height={"300px"}/></div>
         <div className="row">
             <div className="column" style={{backgroundColor:"#bbb"}}>
                 <img className="my_image" src={hotelimg} height={"50"} alt={"hotel"} />

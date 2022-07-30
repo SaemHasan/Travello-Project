@@ -13,6 +13,7 @@ import Comparison from "./Comparison/Comparison";
 import OnePlace from "./OnePlace/OnePlace";
 import SearchResult from "./searchResult/SearchResult";
 import React from "react";
+import UserProfile from "./UserProfile/UserProfile";
 
 // function App() {
 //   //   const [articles, setArticles] = useState([])
@@ -72,6 +73,7 @@ export default function App() {
           <Route path="Comparison" element={<Comparison />} />
           <Route path="OnePlace" element={<OnePlace />} />
           <Route path="search" element={<SearchResult />} />
+          <Route path="user" element={<UserProfile />} />
         </Route>
 
         <Route path="/Login" element={<Login />} />

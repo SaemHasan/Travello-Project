@@ -12,6 +12,7 @@ function OnePlaceDesc() {
 
   useEffect(() => {
     const p = JSON.parse(localStorage.getItem("place"));
+
     if (p !== null) {
       const frontend_img_path = "/assets/place/";
       console.log("p is not null");
@@ -51,7 +52,12 @@ function OnePlaceDesc() {
     <div>
       {/*<img src={imgsrc} alt="slide" className="imgdetails" />*/}
       <div>
-        <img src={imgsrc} alt="place_image" width={"100%"} />
+        <img
+          className="img-fluid mainImage"
+          src={imgsrc}
+          alt="Responsive image"
+          width={"100%"}
+        />
       </div>
       <div className="row">
         <div className="column" style={{ backgroundColor: "#bbb" }}>

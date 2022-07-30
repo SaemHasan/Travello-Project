@@ -3,11 +3,13 @@ import Button from "react-bootstrap/Button";
 // import { Link } from 'react-router-dom';
 import { Link } from "@mui/material";
 import APIService from "../APIService";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [token, setToken] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+  let navigate = useNavigate();
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"));
@@ -42,6 +44,13 @@ const Navbar = () => {
     localStorage.removeItem("token");
     setToken("");
     setLoggedIn(false);
+    navigate("/");
+  };
+
+  const handleUserBtn = () => {
+    console.log("handleUserBtn");
+    console.log(user);
+    navigate("/user");
   };
 
   return (
@@ -114,7 +123,7 @@ const Navbar = () => {
           {loggedIn === true && user.username && (
             <li className="nav-item">
               <div className="nav-link">
-                <Button>{user.username}</Button>
+                <Button onClick={handleUserBtn}>{user.username}</Button>
               </div>
             </li>
           )}

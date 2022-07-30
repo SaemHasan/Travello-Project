@@ -37,34 +37,23 @@ function SearchDesc(props) {
     return (
       <div>
         <h1 className="text-success">Search Result : </h1>
-        <div>
+        <div className="card-group">
           {result.map((item) => {
             return (
-              <div key={item.id} className="list-group-item">
-                <Link
-                  onClick={(e) => handleClick(item)}
-                  underline="hover"
-                  style={{ color: "black" }}
-                  href="/oneplace"
-                >
-                  <h2 className="list-group-item-heading ">{item.name}</h2>
-                </Link>
-                <p className="list-group-item-text">{item.short_description}</p>
+              <div className="card" style={{ width: "18rem" }}>
+                {/*<img className="card-img-top" src="..." alt="Card image cap" />*/}
+                <div className="card-body">
+                  <Link
+                    onClick={(e) => handleClick(item)}
+                    underline="hover"
+                    style={{ color: "black" }}
+                    href="/oneplace"
+                  >
+                    <h5 className="card-title">{item.name}</h5>
+                  </Link>
+                  <p className="card-text"> {item.short_description}</p>
+                </div>
               </div>
-              // <div className="card" style={{ width: "18rem" }}>
-              //   <img className="card-img-top" src="..." alt="Card image cap" />
-              //   <div className="card-body">
-              //     <Link
-              //       onClick={(e) => handleClick(item)}
-              //       underline="hover"
-              //       style={{ color: "black" }}
-              //       href="/oneplace"
-              //     >
-              //       <h5 className="card-title">{item.name}</h5>
-              //     </Link>
-              //     <p className="card-text"> {item.short_description}</p>
-              //   </div>
-              // </div>
             );
           })}
         </div>

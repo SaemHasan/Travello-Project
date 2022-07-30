@@ -10,6 +10,7 @@ import Login from "./login/Login";
 import Registration from "./Registration/Registration";
 import Explore from "./Explore/Explore";
 import Comparison from "./Comparison/Comparison";
+import OnePlace from "./OnePlace/OnePlace";
 import React from "react";
 
 // function App() {
@@ -68,6 +69,7 @@ export default function App() {
           <Route path="About" element={<About />} />
           <Route path="Explore" element={<Explore />} />
           <Route path="Comparison" element={<Comparison />} />
+          <Route path="OnePlace" element={<OnePlace />} />
         </Route>
 
         <Route path="/Login" element={<Login />} />

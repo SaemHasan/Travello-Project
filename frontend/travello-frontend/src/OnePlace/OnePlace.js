@@ -1,14 +1,10 @@
-import '../App.css';
+import "../App.css";
 import OnePlaceDesc from "./OnePlaceDesc";
 
 function OnePlace() {
-
   return (
     <div className="body">
-      <OnePlaceDesc/>
-      {/*<Header/>*/}
-      {/*<Navbar/>*/}
-      {/*<RegistrationForm/>*/}
+      <OnePlaceDesc />
     </div>
   );
 }

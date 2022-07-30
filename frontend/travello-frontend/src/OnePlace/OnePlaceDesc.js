@@ -19,6 +19,7 @@ function OnePlaceDesc() {
       setName(p.name);
       setDescription(p.short_description);
       setImgsrc(frontend_img_path + p.image);
+      // OnePlaceAPI.updateImgPath(p.image);
     }
 
     const spot = JSON.parse(localStorage.getItem("spot"));

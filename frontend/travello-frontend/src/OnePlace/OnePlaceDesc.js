@@ -6,21 +6,42 @@ import OnePlaceAPI from "./OnePlaceAPI";
 
 function OnePlaceDesc() {
   const [onePlace, setOnePlace] = useState([]);
-  const frontend_img_path = "/assets/place/";
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [imgsrc, setImgsrc] = useState("");
 
   useEffect(() => {
     const p = JSON.parse(localStorage.getItem("place"));
-    console.log(p);
     if (p !== null) {
+      const frontend_img_path = "/assets/place/";
       console.log("p is not null");
       setOnePlace(p);
-      // console.log(p.image);
+      setName(p.name);
+      setDescription(p.short_description);
+      setImgsrc(frontend_img_path + p.image);
+    }
+
+    const spot = JSON.parse(localStorage.getItem("spot"));
+    if (spot !== null) {
+      const frontend_img_path = "/assets/spot/";
+      console.log("spot is not null");
+      setOnePlace(spot);
+      setName(spot.name);
+      setDescription(spot.short_description);
+      setImgsrc(frontend_img_path + spot.image);
+    }
+
+    const food = JSON.parse(localStorage.getItem("food"));
+    if (food !== null) {
+      const frontend_img_path = "/assets/food/";
+      console.log("food is not null");
+      setOnePlace(food);
+      setName(food.food_name);
+      setDescription(food.short_description);
+      setImgsrc(frontend_img_path + food.image);
     }
   }, []);
 
-  // let placename = OnePlaceData[0].heading;
-  // let imgsrc = OnePlaceData[0].image;
-  // let desc = OnePlaceData[0].desc;
   let hotelimg = OnePlaceData[1].image;
   let foodimg = OnePlaceData[2].image;
   let activityimg = OnePlaceData[3].image;
@@ -29,11 +50,7 @@ function OnePlaceDesc() {
     <div>
       {/*<img src={imgsrc} alt="slide" className="imgdetails" />*/}
       <div>
-        <img
-          src={frontend_img_path + onePlace.image}
-          alt="place_image"
-          width={"100%"}
-        />
+        <img src={imgsrc} alt="place_image" width={"100%"} />
       </div>
       <div className="row">
         <div className="column" style={{ backgroundColor: "#bbb" }}>
@@ -67,12 +84,12 @@ function OnePlaceDesc() {
       >
         <h2>
           <b>
-            <u>{onePlace.name}</u>
+            <u>{name}</u>
           </b>
         </h2>
       </div>
       <div>
-        <p style={{ marginLeft: "10px" }}>{onePlace.short_description}</p>
+        <p style={{ marginLeft: "10px" }}>{description}</p>
       </div>
     </div>
   );

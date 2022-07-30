@@ -34,6 +34,8 @@ export class SlidersPlace extends Component {
   handleClick(place) {
     console.log("clicked");
     localStorage.setItem("place", JSON.stringify(place));
+    localStorage.removeItem("spot");
+    localStorage.removeItem("food");
     // console.log(place);
   }
 

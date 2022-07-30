@@ -19,6 +19,7 @@ export class SlidersFood extends Component {
       num.image = this.updateImgPath(num.image);
     });
     this.setState({ foods: response });
+    console.log(response);
     // console.log("spots",this.state.spots);
   }
 

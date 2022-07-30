@@ -1,5 +1,7 @@
+// import APIService from "../../APIService";
+// import React, {useEffect, useState} from 'react'
 
-export const sliderData = [
+export const DummysliderData = [
   {
     id: 1,
     image: "assets/place/sylhet.jpg",

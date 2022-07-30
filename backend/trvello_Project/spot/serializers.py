@@ -21,12 +21,13 @@ class SpotTypeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class PlaceSerializer(serializers.ModelSerializer):
-    # spots = SpotSerializer(many=True)
-
+class PlaceSerializer(serializers.HyperlinkedModelSerializer):
+    image = serializers.ImageField(
+        max_length=None, allow_empty_file=True, allow_null=True, use_url=True, required=False, default=None)
     class Meta:
         model = Place
-        fields = '__all__'
+        fields = ['place_id', 'name', 'short_description', 'image', 'district', 'cordinate_lattitude', 'cordinate_longitude', 'rating']
+        # fields = '__all__'
 
 
 class SpotType_TableSerializer(serializers.ModelSerializer):

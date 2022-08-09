@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 
-export default function DemoModal() {
+export default function AddModal() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -15,10 +15,16 @@ export default function DemoModal() {
         Launch demo modal
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
+
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -38,6 +44,7 @@ export default function DemoModal() {
             </Form.Group>
           </Form>
         </Modal.Body>
+
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close

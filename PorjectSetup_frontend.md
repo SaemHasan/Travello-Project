@@ -38,4 +38,5 @@ npm install react-bootstrap bootstrap
 6. React Modal
 ```bash
 npm install --save react-modal
+npm install formik --save
 ```

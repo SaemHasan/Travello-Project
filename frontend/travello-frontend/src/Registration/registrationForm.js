@@ -5,8 +5,6 @@ import { Link } from "@mui/material";
 import APIService from "../APIService";
 import { useNavigate } from "react-router-dom";
 
-
-
 function RegistrationForm() {
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -332,14 +330,7 @@ function RegistrationForm() {
                   />
                 </div>
                 <p>&nbsp;&nbsp;</p>
-                <Button onClick={() => submitBtn()}>
-                  {/*{" "}*/}
-                  {/*<Link href="/" style={{ color: "white" }}>*/}
-                  {/*  {" "}*/}
-                  {/*  Submit*/}
-                  {/*</Link>*/}
-                  Submit
-                </Button>
+                <Button onClick={() => submitBtn()}>Submit</Button>
               </div>
             </div>
           )}

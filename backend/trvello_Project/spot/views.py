@@ -3,10 +3,10 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from .models import Place, Spot, SpotType_Table, PlaceRatingInfo, Spot_Type, \
-    User_Spot, Spot_Food, Spot_Activity, SpotRatingInfo
+    User_Spot, Spot_Food, Spot_Activity, SpotRatingInfo, Review
 from .serializers import PlaceSerializer, SpotSerializer, SpotTypeSerializer, PlaceRatingInfoSerializer, \
     SpotType_TableSerializer, User_SpotSerializer, Spot_FoodSerializer, Spot_ActivitySerializer, \
-    SpotRatingInfoSerializer
+    SpotRatingInfoSerializer, ReviewSerializer
 from rest_framework import viewsets
 
 
@@ -92,3 +92,16 @@ class Spot_ActivityViewSet(viewsets.ModelViewSet):
 class SpotRatingInfoViewSet(viewsets.ModelViewSet):
     queryset = SpotRatingInfo.objects.all()
     serializer_class = SpotRatingInfoSerializer
+
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+    # @action(detail=False, methods=['post', 'get', 'put'])
+    # def getReview(self, request):
+    #     print("dhjs  djhsf")
+    #     place_id = int(request.data['place_id'])
+    #     place = Place.objects.get(place_id=place_id)
+    #     reviews = Review.objects.filter(place=place)
+    #     print(reviews)
+    #     return Response(ReviewSerializer(reviews, many=True).data)

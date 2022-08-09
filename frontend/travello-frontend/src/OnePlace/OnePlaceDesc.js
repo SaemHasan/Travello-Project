@@ -12,35 +12,33 @@ function OnePlaceDesc() {
 
   useEffect(() => {
     const p = JSON.parse(localStorage.getItem("place"));
+    const api_path = "http://127.0.0.1:8000";
 
     if (p !== null) {
-      const frontend_img_path = "/assets/place/";
       console.log("p is not null");
       setOnePlace(p);
       setName(p.name);
       setDescription(p.short_description);
-      setImgsrc(frontend_img_path + p.image);
+      setImgsrc(api_path + p.image);
       // OnePlaceAPI.updateImgPath(p.image);
     }
 
     const spot = JSON.parse(localStorage.getItem("spot"));
     if (spot !== null) {
-      const frontend_img_path = "/assets/spot/";
       console.log("spot is not null");
       setOnePlace(spot);
       setName(spot.name);
       setDescription(spot.short_description);
-      setImgsrc(frontend_img_path + spot.image);
+      setImgsrc(api_path + spot.image);
     }
 
     const food = JSON.parse(localStorage.getItem("food"));
     if (food !== null) {
-      const frontend_img_path = "/assets/food/";
       console.log("food is not null");
       setOnePlace(food);
       setName(food.food_name);
       setDescription(food.short_description);
-      setImgsrc(frontend_img_path + food.image);
+      setImgsrc(api_path + food.image);
     }
   }, []);
 

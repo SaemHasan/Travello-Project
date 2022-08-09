@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Place, PlaceRatingInfo, Spot, SpotType_Table, Spot_Type, User_Spot, Spot_Food, Spot_Activity, \
-    SpotRatingInfo
+    SpotRatingInfo, Review
 
 
 class PlaceRatingInfoSerializer(serializers.ModelSerializer):
@@ -57,4 +57,10 @@ class Spot_ActivitySerializer(serializers.ModelSerializer):
 class SpotRatingInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = SpotRatingInfo
+        fields = '__all__'
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
         fields = '__all__'

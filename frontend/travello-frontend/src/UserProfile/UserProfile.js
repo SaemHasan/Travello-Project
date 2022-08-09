@@ -2,6 +2,7 @@ import UserInfo from "./UserInfo";
 import { useEffect, useState } from "react";
 import APIService from "../APIService";
 import UserInterests from "./UserInterests";
+import DemoModal from "./demoModal";
 
 function UserProfile() {
   const [user, setUser] = useState({});
@@ -24,6 +25,7 @@ function UserProfile() {
       {/*<h1>User</h1>*/}
       <UserInfo user={user} image={user_image} />
       <UserInterests />
+      <DemoModal />
     </div>
   );
 }

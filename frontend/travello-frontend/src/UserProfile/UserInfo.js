@@ -1,11 +1,11 @@
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 
 function UserInfo(props) {
   return (
     <div>
       <div className="row">
         <div className="card center" style={{ width: "24rem" }}>
-          <img className="card-img-top" src={props.image} />
+          <img className="card-img-top" src={props.image} alt="user image" />
           <div className="card-body">
             <h5 className="card-title">Username : {props.user.username}</h5>
             <p className="card-text">Email : {props.user.email}</p>
@@ -14,12 +14,6 @@ function UserInfo(props) {
           </div>
         </div>
       </div>
-
-      {/*<div className="row">*/}
-      {/*  <div className="center">*/}
-      {/*    <Button>Change Password</Button>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
     </div>
   );
 }

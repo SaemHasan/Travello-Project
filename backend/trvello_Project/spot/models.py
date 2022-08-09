@@ -102,3 +102,13 @@ class Spot_Activity(models.Model):
 
     def __str__(self):
         return self.spot_id.name + " " + self.activity_id.name
+
+
+class Review(models.Model):
+    review_id = models.BigAutoField(primary_key=True)
+    desc = models.CharField(max_length=1000, null=True)
+    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.review_id)

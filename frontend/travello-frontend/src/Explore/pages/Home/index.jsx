@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import EmptyView from '../../components/common/EmptyView';
-import FilterPanel from '../../components/Home/FilterPanel';
-import List from '../../components/Home/List';
-import SearchBar from '../../components/Home/SearchBar';
-import { dataList } from '../../constants';
-import './styles.css';
+import React, { useEffect, useState } from "react";
+import EmptyView from "../../components/common/EmptyView";
+import FilterPanel from "../../components/Home/FilterPanel";
+import List from "../../components/Home/List";
+import SearchBar from "../../components/Home/SearchBar";
+import { dataList } from "../../constants";
+import "./styles.css";
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -12,37 +12,37 @@ const Home = () => {
   const [selectedPrice, setSelectedPrice] = useState([1000, 5000]);
 
   const [places, setPlaces] = useState([
-    { id: 1, checked: false, label: 'Mountain' },
-    { id: 2, checked: false, label: 'Waterfall' },
-    { id: 3, checked: false, label: 'Forest' },
-    { id: 4, checked: false, label: 'Lake' },
-    { id: 5, checked: false, label: 'Tea Garden' },
-    { id: 6, checked: false, label: 'Beach' },
+    { id: 1, checked: false, label: "Mountain" },
+    { id: 2, checked: false, label: "Waterfall" },
+    { id: 3, checked: false, label: "Forest" },
+    { id: 4, checked: false, label: "Lake" },
+    { id: 5, checked: false, label: "Tea Garden" },
+    { id: 6, checked: false, label: "Beach" },
   ]);
 
   const [foods, setFoods] = useState([
-    { id: 1, checked: false, label: 'Bengali' },
-    { id: 2, checked: false, label: 'Chinese' },
-    { id: 3, checked: false, label: 'Italian' },
-    { id: 4, checked: false, label: 'Upojati Food' },
+    { id: 1, checked: false, label: "Bengali" },
+    { id: 2, checked: false, label: "Chinese" },
+    { id: 3, checked: false, label: "Italian" },
+    { id: 4, checked: false, label: "Upojati Food" },
   ]);
 
   const [activities, setActivity] = useState([
-    { id: 1, checked: false, label: 'Trekking' },
-    { id: 2, checked: false, label: 'Boat riding' },
-    { id: 3, checked: false, label: 'Kayaking' },
-    { id: 4, checked: false, label: 'Water Bike' },
+    { id: 1, checked: false, label: "Trekking" },
+    { id: 2, checked: false, label: "Boat riding" },
+    { id: 3, checked: false, label: "Kayaking" },
+    { id: 4, checked: false, label: "Water Bike" },
   ]);
 
   const [list, setList] = useState(dataList);
   const [resultsFound, setResultsFound] = useState(true);
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState("");
 
   const handleSelectCategory = (event, value) =>
     !value ? setSelectedCategory(null) : setSelectedCategory(value);
 
   const handleSelectRating = (event, value) =>
-    !value ? setSelectedRating(null): setSelectedRating(value);
+    !value ? setSelectedRating(null) : setSelectedRating(value);
 
   //for place
   const handleChangeCheckedPlace = (id) => {
@@ -77,22 +77,17 @@ const Home = () => {
 
   function makeplaceList(list) {
     let updatedList = [];
-    updatedList = list.filter(
-        (item) => item.category === "place"
-      );
+    updatedList = list.filter((item) => item.category === "place");
     return updatedList;
-  //return p1 * p2;   // The function returns the product of p1 and p2
+    //return p1 * p2;   // The function returns the product of p1 and p2
   }
 
   function makespotList(list) {
     let updatedList = [];
-    updatedList = list.filter(
-        (item) => item.category === "spot"
-      );
+    updatedList = list.filter((item) => item.category === "spot");
     return updatedList;
-  //return p1 * p2;   // The function returns the product of p1 and p2
+    //return p1 * p2;   // The function returns the product of p1 and p2
   }
-
 
   const applyFilters = () => {
     let updatedList = dataList;
@@ -169,18 +164,26 @@ const Home = () => {
 
   useEffect(() => {
     applyFilters();
-  }, [selectedRating, selectedCategory, places, activities, foods, searchInput, selectedPrice]);
+  }, [
+    selectedRating,
+    selectedCategory,
+    places,
+    activities,
+    foods,
+    searchInput,
+    selectedPrice,
+  ]);
 
   return (
-    <div className='home'>
+    <div className="home">
       {/* Search Bar */}
       <SearchBar
         value={searchInput}
         changeInput={(e) => setSearchInput(e.target.value)}
       />
-      <div className='home_panelList-wrap'>
+      <div className="home_panelList-wrap">
         {/* Filter Panel */}
-        <div className='home_panel-wrap'>
+        <div className="home_panel-wrap">
           <FilterPanel
             selectedCategory={selectedCategory}
             selectCategory={handleSelectCategory}
@@ -197,31 +200,32 @@ const Home = () => {
           />
         </div>
         {/* List & Empty View */}
-        <div className='home_list-wrap'>
-          {/*<h2>places</h2>*/}
-          {/*{resultsFound ? <List list={makeNewList} /> : <EmptyView />}*/}
-          {/*<h2>bbbb</h2>*/}
-          {/*{placeList(list)}*/}
-
-          {makeplaceList(list).length===0 ? <p></p>:<h1 style={{color:"blue", marginBottom:"30px"}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-
-            Places</h1>}
+        <div className="home_list-wrap">
+          {makeplaceList(list).length === 0 ? (
+            <p></p>
+          ) : (
+            <h1
+              className="center"
+              style={{ color: "blue", marginBottom: "30px" }}
+            >
+              Places
+            </h1>
+          )}
           {resultsFound ? <List list={makeplaceList(list)} /> : <EmptyView />}
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          {makespotList(list).length===0 ? <p></p>:<h1 style={{color:"blue", marginBottom:"30px"}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            Spots</h1>}
-
-
-
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          {makespotList(list).length === 0 ? (
+            <p></p>
+          ) : (
+            <h1
+              className="center"
+              style={{ color: "blue", marginBottom: "30px" }}
+            >
+              Spots
+            </h1>
+          )}
           {resultsFound ? <List list={makespotList(list)} /> : <EmptyView />}
         </div>
       </div>

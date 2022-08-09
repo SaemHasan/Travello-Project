@@ -74,6 +74,7 @@ export default function App() {
           <Route path="OnePlace" element={<OnePlace />} />
           <Route path="search" element={<SearchResult />} />
           <Route path="user" element={<UserProfile />} />
+          {/*<Route path="login" element={< />} />*/}
         </Route>
 
         <Route path="/Login" element={<Login />} />

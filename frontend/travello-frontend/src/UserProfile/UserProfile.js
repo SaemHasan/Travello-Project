@@ -25,7 +25,7 @@ function UserProfile() {
       {/*<h1>User</h1>*/}
       <UserInfo user={user} image={user_image} />
       <UserInterests />
-      {/*<DemoModal />*/}
+      <DemoModal />
     </div>
   );
 }

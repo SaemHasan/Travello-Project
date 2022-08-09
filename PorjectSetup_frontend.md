@@ -34,3 +34,8 @@ npm install react-bootstrap bootstrap
     npm install @material-ui/lab --legacy-peer-deps
     npm install @mui/icons-material --legacy-peer-deps
 ```
+
+6. React Modal
+```bash
+npm install --save react-modal
+```

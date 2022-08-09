@@ -1,60 +1,118 @@
-import Button from "react-bootstrap/Button";
+// import React from "react";
+// import ReactModal from "react-modal";
+// import "./demoModal.css";
+//
+// class DemoModal extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       showModal: false,
+//       showModal2: false,
+//     };
+//
+//     this.handleOpenModal = this.handleOpenModal.bind(this);
+//     this.handleOpenModal2 = this.handleOpenModal2.bind(this);
+//     this.handleCloseModal = this.handleCloseModal.bind(this);
+//     this.handleCloseModal2 = this.handleCloseModal2.bind(this);
+//   }
+//
+//   handleOpenModal() {
+//     this.setState({ showModal: true });
+//   }
+//
+//   handleOpenModal2() {
+//     this.setState({ showModal2: true });
+//   }
+//
+//   handleCloseModal() {
+//     this.setState({ showModal: false });
+//   }
+//
+//   handleCloseModal2() {
+//     this.setState({ showModal2: false });
+//   }
+//
+//   render() {
+//     return (
+//       <div>
+//         <button onClick={this.handleOpenModal}>Trigger #1 Modal</button>
+//         <button onClick={this.handleOpenModal2}>Trigger #2 Modal</button>
+//         <ReactModal
+//           isOpen={this.state.showModal}
+//           contentLabel="Modal #1 Global Style Override Example"
+//           onRequestClose={this.handleCloseModal}
+//           className="Modal"
+//           overlayClassName="Overlay"
+//         >
+//           <p>Modal text!</p>
+//           <button onClick={this.handleCloseModal}>Close Modal</button>
+//         </ReactModal>
+//         <ReactModal
+//           isOpen={this.state.showModal2}
+//           contentLabel="Modal #2 Global Style Override Example"
+//           onRequestClose={this.handleCloseModal2}
+//           className="Modal"
+//           overlayClassName="Overlay"
+//         >
+//           <p>Modal #2 text!</p>
+//           <button onClick={this.handleCloseModal2}>Close Modal</button>
+//         </ReactModal>
+//       </div>
+//     );
+//   }
+// }
+//
+// export default DemoModal;
 
-function DemoModal() {
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
+
+export default function DemoModal() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
-    <div>
-      {/*-- Button trigger modal --*/}
-      <Button
-        type="button"
-        className="btn btn-primary"
-        data-toggle="modal"
-        data-target="#exampleModalCenter"
-      >
+    <>
+      <Button variant="primary" onClick={handleShow}>
         Launch demo modal
       </Button>
 
-      {/*-- Modal --*/}
-      <div
-        className="modal fade"
-        id="exampleModalCenter"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLongTitle">
-                Modal title
-              </h5>
-              <Button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </Button>
-            </div>
-            <div className="modal-body">...</div>
-            <div className="modal-footer">
-              <Button
-                type="button"
-                className="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Close
-              </Button>
-              <Button type="button" className="btn btn-primary">
-                Save changes
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="name@example.com"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+              <Form.Label>Example textarea</Form.Label>
+              <Form.Control as="textarea" rows={3} />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 }
-
-export default DemoModal;

@@ -10,23 +10,27 @@ import { Link } from "@mui/material";
 export class SlidersFood extends Component {
   constructor(props) {
     super(props);
-    this.state = { foods: [], frontend_img_path: "assets/food/" };
+    this.state = {
+      foods: [],
+      api_path: "http://127.0.0.1:8000",
+      frontend_img_path: "assets/food/",
+    };
   }
 
   async componentDidMount() {
     const response = await HomeAPIService.getTopFoods(5);
-    response.map((num, index) => {
-      num.image = this.updateImgPath(num.image);
-    });
+    // response.map((num, index) => {
+    //   num.image = this.updateImgPath(num.image);
+    // });
     this.setState({ foods: response });
     console.log(response);
     // console.log("spots",this.state.spots);
   }
 
-  updateImgPath(imgPath) {
-    const myArray = imgPath.split("/");
-    return myArray[myArray.length - 1];
-  }
+  // updateImgPath(imgPath) {
+  //   const myArray = imgPath.split("/");
+  //   return myArray[myArray.length - 1];
+  // }
 
   handleClick(food) {
     console.log("food clicked");
@@ -50,7 +54,7 @@ export class SlidersFood extends Component {
                 href="/oneplace"
               >
                 <img
-                  src={this.state.frontend_img_path + slide.image}
+                  src={this.state.api_path + slide.image}
                   alt="slide"
                   className="imgdetails"
                 />
@@ -58,7 +62,7 @@ export class SlidersFood extends Component {
                 <span className="large-slide">
                   <div className="div-color-slide">
                     <img
-                      src={this.state.frontend_img_path + slide.image}
+                      src={this.state.api_path + slide.image}
                       alt="slide"
                       className="large-image-slide"
                     />

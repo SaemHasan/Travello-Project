@@ -19,17 +19,17 @@ export class SlidersPlace extends Component {
 
   async componentDidMount() {
     const response = await HomeAPIService.getTopPlaces(5);
-    response.map((num, index) => {
-      num.image = this.updateImgPath(num.image);
-    });
+    // response.map((num, index) => {
+    //   num.image = this.updateImgPath(num.image);
+    // });
     this.setState({ places: response });
     // console.log(this.state.places);
   }
 
-  updateImgPath(imgPath) {
-    const myArray = imgPath.split("/");
-    return myArray[myArray.length - 1];
-  }
+  // updateImgPath(imgPath) {
+  //   const myArray = imgPath.split("/");
+  //   return myArray[myArray.length - 1];
+  // }
 
   handleClick(place) {
     console.log("clicked");
@@ -55,7 +55,7 @@ export class SlidersPlace extends Component {
                 style={{ color: "black" }}
               >
                 <img
-                  src={this.state.frontend_img_path + slide.image}
+                  src={this.state.api_path + slide.image}
                   alt="slide"
                   className="imgdetails"
                 />
@@ -63,7 +63,7 @@ export class SlidersPlace extends Component {
                 <span className="large-slide">
                   <div className="div-color-slide">
                     <img
-                      src={this.state.frontend_img_path + slide.image}
+                      src={this.state.api_path + slide.image}
                       alt="slide"
                       className="large-image-slide"
                     />

@@ -20,4 +20,9 @@ export const typeArray = [
     title: "Add Food Price Info",
     description: "Admin can add details of a food price info to the database.",
   },
+  {
+    type: "Food Rating Info",
+    title: "Add Food Rating Info",
+    description: "Admin can add details of a food rating info to the database.",
+  },
 ];

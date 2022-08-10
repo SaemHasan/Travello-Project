@@ -75,8 +75,8 @@ class FoodRatingInfo(models.Model):
     rating_id = models.AutoField(primary_key=True)
     food_restaurant_id = models.ForeignKey(Food_Restaurant, on_delete=models.CASCADE)
     factor = models.FloatField(null=True, default=0)
-    start_date = models.DateField(null=True)
-    end_date = models.DateField(null=True)
+    start_date = models.DateTimeField(null=True)
+    end_date = models.DateTimeField(null=True)
 
     def __str__(self):
         return self.food_restaurant_id.food_id.food_name + " " + self.food_restaurant_id.restaurant_id.restaurant_name

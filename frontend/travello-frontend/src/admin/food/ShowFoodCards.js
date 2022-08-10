@@ -8,6 +8,7 @@ import { typeArray } from "./AddFoodTypeData";
 import AddRestaurantModal from "./AddRestaurantModal";
 import AddFoodRestaurantModal from "./AddFoodRestaurantModal";
 import AddFoodPriceModal from "./AddFoodPriceInfoModal";
+import AddFoodRatingModal from "./AddFoodRatingInfoModal";
 
 function FoodGridShow() {
   const [type, setType] = useState([]);
@@ -15,6 +16,7 @@ function FoodGridShow() {
   const [restaurantClick, setRestaurantClick] = useState(false);
   const [foodRestaurantClick, setFoodRestaurantClick] = useState(false);
   const [foodPriceInfoClick, setFoodPriceInfoClick] = useState(false);
+  const [foodRatingInfoClick, setFoodRatingInfoClick] = useState(false);
 
   const handleClick = async (type) => {
     // console.log(type);
@@ -32,6 +34,9 @@ function FoodGridShow() {
     if (type.type === "Food Price Info") {
       await setFoodPriceInfoClick(true);
     }
+    if (type.type === "Food Rating Info") {
+      await setFoodRatingInfoClick(true);
+    }
   };
 
   const handleClose = (type) => {
@@ -47,6 +52,9 @@ function FoodGridShow() {
     }
     if (type.type === "Food Price Info") {
       setFoodPriceInfoClick(false);
+    }
+    if (type.type === "Food Rating Info") {
+      setFoodRatingInfoClick(false);
     }
   };
 
@@ -109,6 +117,13 @@ function FoodGridShow() {
             type={type}
             handleClose={handleClose}
             show={foodPriceInfoClick}
+          />
+        )}
+        {foodRatingInfoClick && (
+          <AddFoodRatingModal
+            type={type}
+            handleClose={handleClose}
+            show={foodRatingInfoClick}
           />
         )}
       </div>

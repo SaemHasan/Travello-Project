@@ -12,6 +12,16 @@ from rest_framework import viewsets
 
 #from activity.models import Activity
 
+
+#import sys
+#sys.path.append("..")
+#from ..food.models import Food_Type
+
+#sys.path.append('/backend/trvello_Project')
+#from food.models import Food_Type
+
+
+
 class PlaceViewSet(viewsets.ModelViewSet):
     queryset = Place.objects.all()
     # print(queryset)
@@ -95,12 +105,18 @@ class Spot_FoodViewSet(viewsets.ModelViewSet):
     def getAllFood(self, request):
         spot_id = int(request.data['spot_id'])
         #activity = Spot_Activity.objects.get(spot_id = spot_id)
-        food_id = Spot_Food.objects.all().filter(spot_id = spot_id)
+        food = Spot_Food.objects.all().filter(spot_id = spot_id)
         #activity = Activity.activity_name
+        print(type(food))
+        for i in food:
+            #food_type = Food_Type.Food_Type.get_food()
+            print(i.food_id.food_name)
+            print(i.food_id.short_description)
+        #print(spots)
 
 
-        print(food_id)
-        return Response(Spot_FoodSerializer(food_id, many=True).data)
+        print(food)
+        return Response(Spot_FoodSerializer(food, many=True).data)
 
 
 class Spot_ActivityViewSet(viewsets.ModelViewSet):
@@ -111,12 +127,15 @@ class Spot_ActivityViewSet(viewsets.ModelViewSet):
     def getAllActivity(self, request):
         spot_id = int(request.data['spot_id'])
         #activity = Spot_Activity.objects.get(spot_id = spot_id)
-        activity_id = Spot_Activity.objects.all().filter(spot_id = spot_id)
+        activity = Spot_Activity.objects.all().filter(spot_id = spot_id)
         #activity = Activity.activity_name
-
-
-        print(activity_id)
-        return Response(Spot_ActivitySerializer(activity_id, many=True).data)
+        #print(activity)
+        for i in activity:
+            print(i.activity_id.activity_name)
+            print(i.activity_id.type)
+            print(i.activity_id.description)
+        #print(spots)
+        return Response(Spot_ActivitySerializer(activity, many=True).data)
 
 
 class SpotRatingInfoViewSet(viewsets.ModelViewSet):

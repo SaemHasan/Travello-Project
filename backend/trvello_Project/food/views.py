@@ -52,3 +52,7 @@ class FoodType_TableViewSet(viewsets.ModelViewSet):
 class Food_TypeViewSet(viewsets.ModelViewSet):
     queryset = Food_Type.objects.all()
     serializer_class = Food_TypeSerializer
+
+    def get_food(self):
+        return Food_Type.objects.all()
+

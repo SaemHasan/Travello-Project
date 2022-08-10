@@ -6,13 +6,15 @@ import { useState } from "react";
 import { typeArray } from "./AddSpotTypeData";
 import AddSpotModal from "./AddSpotModal";
 import AddPlaceModal from "./AddPlaceModal";
-import AddPlaceRatingModal from "./PlaceRatingInfoModal";
+import AddPlaceRatingModal from "./AddPlaceRatingInfoModal";
+import AddSpotRatingModal from "./AddSpotRatingModal";
 
 function SpotGridShow() {
   const [type, setType] = useState([]);
   const [placeClick, setPlaceClick] = useState(false);
   const [spotClick, setSpotClick] = useState(false);
   const [placeRatingClick, setPlaceRatingClick] = useState(false);
+  const [spotRatingClick, setSpotRatingClick] = useState(false);
 
   const handleClick = async (type) => {
     // console.log(type);
@@ -27,6 +29,9 @@ function SpotGridShow() {
     if (type.type === "Place RatingInfo") {
       await setPlaceRatingClick(true);
     }
+    if (type.type === "Spot RatingInfo") {
+      await setSpotRatingClick(true);
+    }
   };
 
   const handleClose = (type) => {
@@ -39,6 +44,9 @@ function SpotGridShow() {
     }
     if (type.type === "Place RatingInfo") {
       setPlaceRatingClick(false);
+    }
+    if (type.type === "Spot RatingInfo") {
+      setSpotRatingClick(false);
     }
   };
 
@@ -95,6 +103,13 @@ function SpotGridShow() {
             type={type}
             handleClose={handleClose}
             show={placeRatingClick}
+          />
+        )}
+        {spotRatingClick && (
+          <AddSpotRatingModal
+            type={type}
+            handleClose={handleClose}
+            show={spotRatingClick}
           />
         )}
       </div>

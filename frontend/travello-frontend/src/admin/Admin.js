@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import APIService from "../APIService";
 import AddModal from "./AddModal";
 import AdminInfo from "./AdminProfile";
-import AddActivityModal from "./AddActivityModal";
+import AddActivityModal from "./activity/AddActivityModal";
 import GridShow from "./AddCard";
 
 function Admin() {
@@ -25,8 +25,6 @@ function Admin() {
     <div className="container">
       <h1>Admin Page</h1>
       <AdminInfo user={user} image={user_image} />
-      <AddModal />
-      <AddActivityModal />
       <GridShow />
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import AdminAPI from "./AdminAPI";
+import AdminAPI from "../AdminAPI";
 
 export default function AddActivityModal(props) {
   const [show, setShow] = useState(false);
@@ -22,24 +22,9 @@ export default function AddActivityModal(props) {
       }
     }
   };
+
   const handleSave = () => {
-    console.log(
-      activityName,
-      activityDescription,
-      activityImage,
-      activityType,
-      typeID
-      // activityTypes,
-      // getActivityTypeObj(typeID)
-    );
     const type = getActivityTypeObj(typeID);
-    const body = {
-      activity_name: activityName,
-      description: activityDescription,
-      image: activityImage,
-      type: activityType,
-      type_id: type.type_id,
-    };
 
     const uploadData = new FormData();
     uploadData.append("activity_name", activityName);
@@ -61,6 +46,7 @@ export default function AddActivityModal(props) {
     setActivityType("");
     setTypeID("");
     setShow(false);
+    props.handleClose(props.type);
   };
 
   const handleClose = () => {
@@ -70,8 +56,14 @@ export default function AddActivityModal(props) {
     setActivityType("");
     setTypeID("");
     setShow(false);
+    props.handleClose(props.type);
   };
   const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    setShow(props.show);
+    // console.log("show: ", props.show);
+  }, [props.show]);
 
   useEffect(() => {
     AdminAPI.getActivityTypes()
@@ -85,9 +77,9 @@ export default function AddActivityModal(props) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Add Activity
-      </Button>
+      {/*<Button variant="primary" onClick={handleShow}>*/}
+      {/*  Add Activity*/}
+      {/*</Button>*/}
 
       <Modal
         show={show}

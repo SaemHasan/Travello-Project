@@ -10,7 +10,6 @@ from .serializers import PlaceSerializer, SpotSerializer, SpotTypeSerializer, Pl
 from rest_framework import viewsets
 
 
-
 class PlaceViewSet(viewsets.ModelViewSet):
     queryset = Place.objects.all()
     # print(queryset)
@@ -99,6 +98,7 @@ class Spot_ActivityViewSet(viewsets.ModelViewSet):
 class SpotRatingInfoViewSet(viewsets.ModelViewSet):
     queryset = SpotRatingInfo.objects.all()
     serializer_class = SpotRatingInfoSerializer
+
 
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()

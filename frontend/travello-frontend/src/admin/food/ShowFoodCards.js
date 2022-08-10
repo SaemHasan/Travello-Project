@@ -5,19 +5,23 @@ import { Link } from "@mui/material";
 import { useState } from "react";
 import AddFoodModal from "./AddFoodModal";
 import { typeArray } from "./AddFoodTypeData";
+import AddRestaurantModal from "./AddRestaurantModal";
 
 function FoodGridShow() {
   const [type, setType] = useState([]);
   const [foodClick, setFoodClick] = useState(false);
+  const [restaurantClick, setRestaurantClick] = useState(false);
 
   const handleClick = async (type) => {
     // console.log(type);
     setType(type);
     if (type.type === "Food") {
-      // console.log("activity");
       await setFoodClick(true);
     }
-    // console.log("activity click : ", activityClick);
+
+    if (type.type === "Restaurant") {
+      await setRestaurantClick(true);
+    }
   };
 
   const handleClose = (type) => {
@@ -25,7 +29,9 @@ function FoodGridShow() {
     if (type.type === "Food") {
       setFoodClick(false);
     }
-    // console.log("activity click in close : ", activityClick);
+    if (type.type === "Restaurant") {
+      setRestaurantClick(false);
+    }
   };
 
   return (
@@ -65,6 +71,14 @@ function FoodGridShow() {
             type={type}
             handleClose={handleClose}
             show={foodClick}
+          />
+        )}
+
+        {restaurantClick && (
+          <AddRestaurantModal
+            type={type}
+            handleClose={handleClose}
+            show={restaurantClick}
           />
         )}
       </div>

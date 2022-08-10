@@ -207,6 +207,13 @@ export default class AdminAPI {
     }).then((resp) => resp.json());
   }
 
+  static addRestaurantToDB(body) {
+    return fetch("http://127.0.0.1:8000/api/restaurants/", {
+      method: "POST",
+      body: body,
+    }).then((resp) => resp.json());
+  }
+
   static getAllFoods() {
     return fetch("http://127.0.0.1:8000/api/foods/", {
       method: "GET",

@@ -59,4 +59,12 @@ export default class AdminAPI {
       body: body,
     }).then((resp) => resp.json());
   }
+
+  // food related api calls
+  static addFoodToDB(body) {
+    return fetch("http://127.0.0.1:8000/api/foods/", {
+      method: "POST",
+      body: body,
+    }).then((resp) => resp.json());
+  }
 }

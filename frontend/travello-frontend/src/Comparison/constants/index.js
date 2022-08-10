@@ -188,7 +188,7 @@ export const foodFilterList = [
   ];
 
 export const activityFilterList = [
-    { id: 1, checked: false, label: 'Adventure' },
+    { id: 1, checked: false, label: 'Adventurous' },
     { id: 2, checked: false, label: 'Recreational' },
   ];
 

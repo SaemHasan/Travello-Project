@@ -3,15 +3,19 @@ import EmptyView from '../../components/common/EmptyView';
 import FilterPanel from '../../components/Home/FilterPanel';
 import List from '../../components/Home/List';
 import SearchBar from '../../components/Home/SearchBar';
-import { dataList, placeFilterList,foodFilterList,activityFilterList,varList } from '../../constants';
+import {placeFilterList,foodFilterList,activityFilterList,varList } from '../../constants';
 import './styles.css';
 import ComparisonAPI from "../../ComparisonAPI";
 
 const Home = () => {
       var activity_id_list = []
       const [is_activity, set_is_activity] = useState(true);
+      const [dataList, set_dataList] = useState([]);
       //let dataList = []
       let response = []
+const [list, setList] = useState([]);
+  const [resultsFound, setResultsFound] = useState(true);
+  const [searchInput, setSearchInput] = useState('');
 
       useEffect(() => {
       async function fetchData() {
@@ -20,7 +24,7 @@ const Home = () => {
               //applyFilters();
               // You can await here
 
-                response = await ComparisonAPI.getAllActivity(2);
+                response = await ComparisonAPI.getAllActivity(6);
 
                 console.log(response)
 
@@ -30,16 +34,15 @@ const Home = () => {
                 //set_place_list(response)
                   //console.log(response)
 
-                for (var i=0; i < dataList.length; i++) {
+
+                while (dataList.length!=0) {
                   //console.log(response[i])
                   //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
                   dataList.pop()
-
-
-
                 }
 
                 //dataList.append(response)
+
 
 
                 {response.map((r) => (
@@ -53,6 +56,11 @@ const Home = () => {
 
 
              console.log(dataList)
+            //setList(dataList)
+            setResultsFound(true)
+
+
+
 
 
                // console.log(activity_id_list.length)
@@ -120,9 +128,7 @@ const Home = () => {
   //   { id: 3, checked: false, label: 'Kayaking' },
   // ]);
 
-  const [list, setList] = useState(dataList);
-  const [resultsFound, setResultsFound] = useState(true);
-  const [searchInput, setSearchInput] = useState('');
+
 
   // const handleSelectCategory = (event, value) =>
   //   !value ? null : setSelectedCategory(value);

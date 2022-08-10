@@ -24,7 +24,7 @@ export default function AddActivityRatingModal(props) {
     uploadData.append("start_time", start_time);
     uploadData.append("end_time", end_time);
     uploadData.append("activity_agency_id", selectedActivityAgency);
-    console.log("uploadData: ", factor, "selected: ", selectedActivityAgency);
+    // console.log("uploadData: ", factor, "selected: ", selectedActivityAgency);
     AdminAPI.addActivityRatingInfoToDB(uploadData).then((res) => {
       console.log(res);
     });
@@ -49,10 +49,10 @@ export default function AddActivityRatingModal(props) {
   useEffect(() => {
     async function fetchData() {
       const res = await AdminAPI.getAll_Activity_Agency();
-      console.log(res);
+      // console.log(res);
       await setActivityAgency(res.map((item) => item.activity_agency_id));
 
-      console.log("activity_agency: ", activity_agency);
+      // console.log("activity_agency: ", activity_agency);
 
       let actArray = [];
       let agenArray = [];
@@ -69,8 +69,8 @@ export default function AddActivityRatingModal(props) {
 
       await setActivity(actArray);
       await setAgency(agenArray);
-      console.log("activity: ", activity);
-      console.log("agency: ", agency);
+      // console.log("activity: ", activity);
+      // console.log("agency: ", agency);
     }
 
     fetchData().then(() => {

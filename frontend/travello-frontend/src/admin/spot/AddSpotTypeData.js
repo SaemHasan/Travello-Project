@@ -22,4 +22,9 @@ export const typeArray = [
     title: "Add Spot Rating Info",
     description: "Admin Can add details of a spot rating info to the database.",
   },
+  {
+    type: "Spot Type Table",
+    title: "Add Spot Type",
+    description: "Admin Can add details of a spot type to the database.",
+  },
 ];

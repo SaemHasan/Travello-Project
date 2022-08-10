@@ -153,6 +153,13 @@ export default class AdminAPI {
     }).then((resp) => resp.json());
   }
 
+  static addSpotTypeTableToDB(body) {
+    return fetch("http://127.0.0.1:8000/api/spot_type_tables/", {
+      method: "POST",
+      body: body,
+    }).then((resp) => resp.json());
+  }
+
   // hotel related api calls
   static addHotelToDB(body) {
     return fetch("http://127.0.0.1:8000/api/hotels/", {

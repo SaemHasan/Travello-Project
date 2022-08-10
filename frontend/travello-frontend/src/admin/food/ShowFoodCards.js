@@ -6,11 +6,15 @@ import { useState } from "react";
 import AddFoodModal from "./AddFoodModal";
 import { typeArray } from "./AddFoodTypeData";
 import AddRestaurantModal from "./AddRestaurantModal";
+import AddFoodRestaurantModal from "./AddFoodRestaurantModal";
+import AddFoodPriceModal from "./AddFoodPriceInfoModal";
 
 function FoodGridShow() {
   const [type, setType] = useState([]);
   const [foodClick, setFoodClick] = useState(false);
   const [restaurantClick, setRestaurantClick] = useState(false);
+  const [foodRestaurantClick, setFoodRestaurantClick] = useState(false);
+  const [foodPriceInfoClick, setFoodPriceInfoClick] = useState(false);
 
   const handleClick = async (type) => {
     // console.log(type);
@@ -22,6 +26,12 @@ function FoodGridShow() {
     if (type.type === "Restaurant") {
       await setRestaurantClick(true);
     }
+    if (type.type === "Food Restaurant") {
+      await setFoodRestaurantClick(true);
+    }
+    if (type.type === "Food Price Info") {
+      await setFoodPriceInfoClick(true);
+    }
   };
 
   const handleClose = (type) => {
@@ -31,6 +41,12 @@ function FoodGridShow() {
     }
     if (type.type === "Restaurant") {
       setRestaurantClick(false);
+    }
+    if (type.type === "Food Restaurant") {
+      setFoodRestaurantClick(false);
+    }
+    if (type.type === "Food Price Info") {
+      setFoodPriceInfoClick(false);
     }
   };
 
@@ -79,6 +95,20 @@ function FoodGridShow() {
             type={type}
             handleClose={handleClose}
             show={restaurantClick}
+          />
+        )}
+        {foodRestaurantClick && (
+          <AddFoodRestaurantModal
+            type={type}
+            handleClose={handleClose}
+            show={foodRestaurantClick}
+          />
+        )}
+        {foodPriceInfoClick && (
+          <AddFoodPriceModal
+            type={type}
+            handleClose={handleClose}
+            show={foodPriceInfoClick}
           />
         )}
       </div>

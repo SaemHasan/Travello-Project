@@ -223,4 +223,47 @@ export default class AdminAPI {
       },
     }).then((resp) => resp.json());
   }
+
+  static getFoodFromids(number) {
+    return fetch(`http://127.0.0.1:8000/api/foods/getFoodFromIds/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ id: number }),
+    }).then((resp) => resp.json());
+  }
+
+  static getRestaurantFromids(number) {
+    return fetch(
+      `http://127.0.0.1:8000/api/restaurants/getRestaurantFromIds/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: `Token ${token}`,
+        },
+        body: JSON.stringify({ id: number }),
+      }
+    ).then((resp) => resp.json());
+  }
+
+  // generic api method to post to db
+  static postToDB(body, type) {
+    return fetch("http://127.0.0.1:8000/api/" + type + "/", {
+      method: "POST",
+      body: body,
+    }).then((resp) => resp.json());
+  }
+  //generic api method to get from db
+  static getFromDB(type) {
+    return fetch("http://127.0.0.1:8000/api/" + type + "/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Authorization':`Token ${token['mytoken']}`
+      },
+    }).then((resp) => resp.json());
+  }
 }

@@ -7,12 +7,18 @@ import { typeArray } from "./AddActivityTypeData";
 import AddActivityModal from "./AddActivityModal";
 import AddActivityTypeModal from "./AddActivityTypeModal";
 import AddAgencyModal from "./AddAgencyModal";
+import AddActivityAgencyModal from "./AddActivity_AgencyModal";
+import AddActivityPriceModal from "./AddActivityPriceInfoModal";
+import AddActivityRatingModal from "./AddActivityRatingModal";
 
 function ActivityGridShow() {
   const [type, setType] = useState([]);
   const [activityClick, setActivityClick] = useState(false);
   const [activityTypeClick, setActivityTypeClick] = useState(false);
   const [agencyClick, setAgencyClick] = useState(false);
+  const [activityAgencyClick, setActivityAgencyClick] = useState(false);
+  const [activityPriceClick, setActivityPriceClick] = useState(false);
+  const [activityRatingCheck, setActivityRatingCheck] = useState(false);
 
   const handleClick = async (type) => {
     // console.log(type);
@@ -25,6 +31,16 @@ function ActivityGridShow() {
     }
     if (type.type === "Agency") {
       await setAgencyClick(true);
+    }
+
+    if (type.type === "Activity Agency") {
+      await setActivityAgencyClick(true);
+    }
+    if (type.type === "Activity Priceinfo") {
+      await setActivityPriceClick(true);
+    }
+    if (type.type === "Activity Ratinginfo") {
+      await setActivityRatingCheck(true);
     }
     // console.log("activity click : ", activityClick);
   };
@@ -39,6 +55,16 @@ function ActivityGridShow() {
     }
     if (type.type === "Agency") {
       setAgencyClick(false);
+    }
+    if (type.type === "Activity Agency") {
+      setActivityAgencyClick(false);
+    }
+    if (type.type === "Activity Priceinfo") {
+      setActivityPriceClick(false);
+    }
+
+    if (type.type === "Activity Ratinginfo") {
+      setActivityRatingCheck(false);
     }
     // console.log("activity click in close : ", activityClick);
   };
@@ -96,6 +122,30 @@ function ActivityGridShow() {
             type={type}
             handleClose={handleClose}
             show={agencyClick}
+          />
+        )}
+
+        {activityAgencyClick && (
+          <AddActivityAgencyModal
+            type={type}
+            handleClose={handleClose}
+            show={activityAgencyClick}
+          />
+        )}
+
+        {activityPriceClick && (
+          <AddActivityPriceModal
+            type={type}
+            handleClose={handleClose}
+            show={activityPriceClick}
+          />
+        )}
+
+        {activityRatingCheck && (
+          <AddActivityRatingModal
+            type={type}
+            handleClose={handleClose}
+            show={activityRatingCheck}
           />
         )}
       </div>

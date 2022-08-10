@@ -23,6 +23,15 @@ class FoodViewSet(viewsets.ModelViewSet):
         print(foods)
         return Response(FoodSerializer(foods, many=True).data)
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getFoodDetails(self, request):
+        food_id_list = request.data['food_id_list']
+        foods = Food.objects.all()
+        print("=====================================================")
+        #print(food_id_list)
+        print("=====================================================")
+        return Response(FoodSerializer(foods, many=True).data)
+
 
 class RestaurantViewSet(viewsets.ModelViewSet):
     queryset = Restaurant.objects.all()
@@ -52,3 +61,7 @@ class FoodType_TableViewSet(viewsets.ModelViewSet):
 class Food_TypeViewSet(viewsets.ModelViewSet):
     queryset = Food_Type.objects.all()
     serializer_class = Food_TypeSerializer
+
+    def get_food(self):
+        return Food_Type.objects.all()
+

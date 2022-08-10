@@ -61,10 +61,10 @@ const FilterPanel = ({
     {/*  ))}*/}
     {/*        </div>*/}
     {/*</div>*/}
-    <div className='input-group'>
-      <p className='label-range'>Price Range</p>
-      <SliderProton value={selectedPrice} changePrice={changePrice} />
-    </div>
+    {/*<div className='input-group'>*/}
+    {/*  <p className='label-range'>Price Range</p>*/}
+    {/*  <SliderProton value={selectedPrice} changePrice={changePrice} />*/}
+    {/*</div>*/}
     <div className='input-group'>
       <p className='label'>Star Rating</p>
       <FilterListToggle

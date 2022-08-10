@@ -3,17 +3,97 @@ import EmptyView from '../../components/common/EmptyView';
 import FilterPanel from '../../components/Home/FilterPanel';
 import List from '../../components/Home/List';
 import SearchBar from '../../components/Home/SearchBar';
-import { dataList,placeFilterList,foodFilterList,activityFilterList,varList } from '../../constants';
+import {placeFilterList,foodFilterList,activityFilterList,varList } from '../../constants';
 import './styles.css';
+import ComparisonAPI from "../../ComparisonAPI";
 
 const Home = () => {
+      var activity_id_list = []
+      const [is_activity, set_is_activity] = useState(true);
+      const [dataList, set_dataList] = useState([]);
+      //let dataList = []
+      let response = []
+const [list, setList] = useState([]);
+  const [resultsFound, setResultsFound] = useState(true);
+  const [searchInput, setSearchInput] = useState('');
+
+      useEffect(() => {
+      async function fetchData() {
+          if (is_activity) {
+              console.log("running");
+              //applyFilters();
+              // You can await here
+
+                response = await ComparisonAPI.getAllActivity(6);
+
+                console.log(response)
+
+
+
+
+                //set_place_list(response)
+                  //console.log(response)
+
+
+                while (dataList.length!=0) {
+                  //console.log(response[i])
+                  //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
+                  dataList.pop()
+                }
+
+                //dataList.append(response)
+
+
+
+                {response.map((r) => (
+                //console.log(r.activity_id)
+                    //activity_id_list.push(r.activity_id)
+                    dataList.push({id: Math.round(30 + Math.random() * (100 - 30)), title: r.title , activity: r.activity, coverSrc: '/images/places/ameri.jpg'})
+
+
+                ))}
+            //dataList.push({id: Math.round(30 + Math.random() * (100 - 30)), title: 'Jooyy Risotto',desc: "abcd    ed",serviceTime: '50-65min',deliveryFee: 8.5,category: 'spot',place: 'mountain',food: 'bengali', activity: 'adventure',rating: 2,price: 2200,coverSrc: '/images/spots/nacho-burger.jpg'})
+
+
+             console.log(dataList)
+            //setList(dataList)
+            setResultsFound(true)
+
+
+
+
+
+               // console.log(activity_id_list.length)
+
+                // ...
+            }
+          else
+          {
+              console.log("running");
+              // You can await here
+
+                const response = await ComparisonAPI.getAllFood(2);
+
+                //set_place_list(response)
+                  console.log(response)
+                // ...
+
+          }
+
+      }
+      fetchData();
+
+    }, []);
+
+
+
   let PlaceName = varList[0].PlaceName;
   let ComparisonType = varList[0].ComparisonType;
   let bestTitle = varList[0].bestTitle;
   let myList = null;
   // const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedRating, setSelectedRating] = useState(null);
-  const [selectedPrice, setSelectedPrice] = useState([1000, 5000]);
+
 
 
   if (ComparisonType === "place") {
@@ -48,9 +128,7 @@ const Home = () => {
   //   { id: 3, checked: false, label: 'Kayaking' },
   // ]);
 
-  const [list, setList] = useState(dataList);
-  const [resultsFound, setResultsFound] = useState(true);
-  const [searchInput, setSearchInput] = useState('');
+
 
   // const handleSelectCategory = (event, value) =>
   //   !value ? null : setSelectedCategory(value);
@@ -85,19 +163,19 @@ const Home = () => {
   //   setActivity(changeCheckedActivities);
   // };
 
-  const handleChangePrice = (event, value) => {
-    setSelectedPrice(value);
-  };
+
 
   const applyFilters = () => {
     let updatedList = dataList;
+    console.log(updatedList)
+    console.log(dataList)
 
     // Rating Filter
-    if (selectedRating) {
-      updatedList = updatedList.filter(
-        (item) => parseInt(item.rating) === parseInt(selectedRating)
-      );
-    }
+    // if (selectedRating) {
+    //   updatedList = updatedList.filter(
+    //     (item) => parseInt(item.rating) === parseInt(selectedRating)
+    //   );
+    // }
 
     // Category Filter
     // if (selectedCategory) {
@@ -113,10 +191,28 @@ const Home = () => {
       .map((item) => item.label.toLowerCase());
 
     //used for filtering and updating the list to show
-    if (filtersChecked.length) {
-      updatedList = updatedList.filter((item) =>
-        filtersChecked.includes(item.place)
-      );
+    if (ComparisonType === "activity") {
+      if (filtersChecked.length) {
+        updatedList = updatedList.filter((item) =>
+            filtersChecked.includes(item.activity)
+        );
+      }
+    }
+    else if (ComparisonType === "food")
+    {
+      if (filtersChecked.length) {
+        updatedList = updatedList.filter((item) =>
+            filtersChecked.includes(item.food)
+        );
+      }
+    }
+    else if (ComparisonType === "place")
+    {
+      if (filtersChecked.length) {
+        updatedList = updatedList.filter((item) =>
+            filtersChecked.includes(item.place)
+        );
+      }
     }
 
     //for food
@@ -151,12 +247,9 @@ const Home = () => {
     }
 
     // Price Filter
-    const minPrice = selectedPrice[0];
-    const maxPrice = selectedPrice[1];
 
-    updatedList = updatedList.filter(
-      (item) => item.price >= minPrice && item.price <= maxPrice
-    );
+
+
 
     setList(updatedList);
 
@@ -165,7 +258,7 @@ const Home = () => {
 
   useEffect(() => {
     applyFilters();
-  }, [selectedRating, filters, searchInput, selectedPrice]);
+  }, [selectedRating, filters, searchInput]);
 
   return (
     <div className='home'>
@@ -182,7 +275,7 @@ const Home = () => {
             // selectedCategory={selectedCategory}
             // selectCategory={handleSelectCategory}
             selectedRating={selectedRating}
-            selectedPrice={selectedPrice}
+
             selectRating={handleSelectRating}
             places={filters}
             // foods={foods}
@@ -190,7 +283,7 @@ const Home = () => {
             changeCheckedPlace={handleChangeCheckedFilter}
             // changeCheckedFood={handleChangeCheckedFood}
             // changeCheckedActivity={handleChangeCheckedActivity}
-            changePrice={handleChangePrice}
+
           />
         </div>
         {/* List & Empty View */}

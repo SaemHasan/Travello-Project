@@ -203,7 +203,7 @@ export const dataList = [
     deliveryFee: 1.5,
     category: 'place',
     place: 'waterfall',
-    food: 'upojati food',
+    food: ['upojati food','chinese'],
     activity: 'trekking',
     rating: 2,
     price: 4100,

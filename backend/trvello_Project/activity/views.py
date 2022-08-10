@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
+
 from .serializers import ActivitySerializer, AgencySerializer, ActivityType_TableSerializer, Activity_AgencySerializer, \
     ActivityPriceInfoSerializer, ActivityRatingInfoSerializer
 from .models import Activity, Agency, ActivityType_Table, Activity_Agency, ActivityPriceInfo, ActivityRatingInfo
@@ -21,6 +22,8 @@ class ActivityViewSet(viewsets.ModelViewSet):
         activities = Activity.objects.all()[:number]
         print(activities)
         return Response(ActivitySerializer(activities, many=True).data)
+
+
 
 
 class AgencyViewSet(viewsets.ModelViewSet):

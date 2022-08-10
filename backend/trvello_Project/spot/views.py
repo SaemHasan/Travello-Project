@@ -1,6 +1,8 @@
 from django.views.generic import ListView
 from rest_framework.decorators import action
 from rest_framework.response import Response
+import json
+
 
 from .models import Place, Spot, SpotType_Table, PlaceRatingInfo, Spot_Type, \
     User_Spot, Spot_Food, Spot_Activity, SpotRatingInfo, Review
@@ -8,6 +10,17 @@ from .serializers import PlaceSerializer, SpotSerializer, SpotTypeSerializer, Pl
     SpotType_TableSerializer, User_SpotSerializer, Spot_FoodSerializer, Spot_ActivitySerializer, \
     SpotRatingInfoSerializer, ReviewSerializer
 from rest_framework import viewsets
+
+#from activity.models import Activity
+
+
+#import sys
+#sys.path.append("..")
+#from ..food.models import Food_Type
+
+#sys.path.append('/backend/trvello_Project')
+#from food.models import Food_Type
+
 
 
 class PlaceViewSet(viewsets.ModelViewSet):
@@ -46,6 +59,13 @@ class PlaceViewSet(viewsets.ModelViewSet):
         place = Place.objects.get(place_id=place_id)
         return Response(PlaceSerializer(place).data)
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getAllPlaces(self, request):
+        #number = int(request.data['number'])
+        places = Place.objects.all()
+        print(places)
+        return Response(PlaceSerializer(places, many=True).data)
+
 
 class SpotViewSet(viewsets.ModelViewSet):
     queryset = Spot.objects.all()
@@ -63,6 +83,16 @@ class SpotViewSet(viewsets.ModelViewSet):
             print(i.activity_id.description)
         print(spots)
         return Response(SpotSerializer(spots, many=True).data)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getAllSpot(self, request):
+        place_id = int(request.data['place_id'])
+        # activity = Spot_Activity.objects.get(spot_id = spot_id)
+        place_id = Spot.objects.all().filter(place_id=place_id)
+        # activity = Activity.activity_name
+
+        print(place_id)
+        return Response(SpotSerializer(place_id, many=True).data)
 
 
 class SpotTypeTableViewSet(viewsets.ModelViewSet):
@@ -89,10 +119,49 @@ class Spot_FoodViewSet(viewsets.ModelViewSet):
     queryset = Spot_Food.objects.all()
     serializer_class = Spot_FoodSerializer
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getAllFood(self, request):
+        spot_id = int(request.data['spot_id'])
+        #activity = Spot_Activity.objects.get(spot_id = spot_id)
+        food = Spot_Food.objects.all().filter(spot_id = spot_id)
+        #activity = Activity.activity_name
+        print(type(food))
+        for i in food:
+            #food_type = Food_Type.Food_Type.get_food()
+            print(i.food_id.food_name)
+            print(i.food_id.short_description)
+        #print(spots)
+
+
+        print(food)
+        return Response(Spot_FoodSerializer(food, many=True).data)
+
 
 class Spot_ActivityViewSet(viewsets.ModelViewSet):
     queryset = Spot_Activity.objects.all()
     serializer_class = Spot_ActivitySerializer
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getAllActivity(self, request):
+        spot_id = int(request.data['spot_id'])
+        #activity = Spot_Activity.objects.get(spot_id = spot_id)
+        activity = Spot_Activity.objects.all().filter(spot_id = spot_id)
+        #activity = Activity.activity_name
+        #print(activity)
+        activity_list = []
+
+
+        for i in activity:
+            myList = {'id': i.activity_id.activity_id, 'title': i.activity_id.activity_name, 'activity': i.activity_id.type.lower()}
+            #print(i.activity_id.activity_name)
+            #print(i.activity_id.type)
+            #print(i.activity_id.description)
+            activity_list.append(myList)
+        print(activity_list)
+        print(activity)
+
+
+        return Response(activity_list)
 
 
 class SpotRatingInfoViewSet(viewsets.ModelViewSet):

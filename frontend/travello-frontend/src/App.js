@@ -14,6 +14,7 @@ import OnePlace from "./OnePlace/OnePlace";
 import SearchResult from "./searchResult/SearchResult";
 import React from "react";
 import UserProfile from "./UserProfile/UserProfile";
+import Admin from "./admin/Admin";
 
 // function App() {
 //   //   const [articles, setArticles] = useState([])
@@ -74,7 +75,7 @@ export default function App() {
           <Route path="OnePlace" element={<OnePlace />} />
           <Route path="search" element={<SearchResult />} />
           <Route path="user" element={<UserProfile />} />
-          {/*<Route path="login" element={< />} />*/}
+          <Route path="admin" element={<Admin />} />
         </Route>
 
         <Route path="/Login" element={<Login />} />

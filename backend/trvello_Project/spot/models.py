@@ -10,7 +10,7 @@ class Place(models.Model):
     district = models.CharField(max_length=50, null=True)
     cordinate_lattitude = models.DecimalField(max_digits=10, decimal_places=8, null=True)
     cordinate_longitude = models.DecimalField(max_digits=10, decimal_places=8, null=True)
-    rating = models.IntegerField(default=0)
+    rating = models.FloatField(default=0)
     image = models.ImageField(upload_to='./spot/images', null=True, blank=True)
 
     def __str__(self):
@@ -38,7 +38,7 @@ class Spot(models.Model):
     upzila = models.CharField(max_length=50, null=True)
     cordinate_lattitude = models.DecimalField(max_digits=10, decimal_places=8, null=True)
     cordinate_longitude = models.DecimalField(max_digits=10, decimal_places=8, null=True)
-    rating = models.IntegerField(default=0)
+    rating = models.FloatField(default=0)
     image = models.ImageField(upload_to='./spot/images', null=True, blank=True)
 
     place_id = models.ForeignKey(Place, related_name='spots', on_delete=models.CASCADE)
@@ -102,6 +102,8 @@ class Spot_Activity(models.Model):
 
     # def __str__(self):
     #     return self.spot_id.name + " " + self.activity_id.name
+    def __str__(self):
+        return self.spot_id.name + " " + self.activity_id.activity_name
 
 
 class Review(models.Model):

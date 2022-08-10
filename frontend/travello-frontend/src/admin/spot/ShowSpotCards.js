@@ -9,6 +9,7 @@ import AddPlaceModal from "./AddPlaceModal";
 import AddPlaceRatingModal from "./AddPlaceRatingInfoModal";
 import AddSpotRatingModal from "./AddSpotRatingModal";
 import AddSpotTypeTableModal from "./AddSpotTypeTableModal";
+import AddSpotTypeModal from "./AddSpotTypeModal";
 
 function SpotGridShow() {
   const [type, setType] = useState([]);
@@ -17,6 +18,7 @@ function SpotGridShow() {
   const [placeRatingClick, setPlaceRatingClick] = useState(false);
   const [spotRatingClick, setSpotRatingClick] = useState(false);
   const [spotTypeTableClick, setSpotTypeTableClick] = useState(false);
+  const [spotTypeClick, setSpotTypeClick] = useState(false);
 
   const handleClick = async (type) => {
     // console.log(type);
@@ -37,6 +39,9 @@ function SpotGridShow() {
     if (type.type === "Spot Type Table") {
       await setSpotTypeTableClick(true);
     }
+    if (type.type === "Spot Type") {
+      await setSpotTypeClick(true);
+    }
   };
 
   const handleClose = (type) => {
@@ -55,6 +60,9 @@ function SpotGridShow() {
     }
     if (type.type === "Spot Type Table") {
       setSpotTypeTableClick(false);
+    }
+    if (type.type === "Spot Type") {
+      setSpotTypeClick(false);
     }
   };
 
@@ -126,6 +134,14 @@ function SpotGridShow() {
             type={type}
             handleClose={handleClose}
             show={spotTypeTableClick}
+          />
+        )}
+
+        {spotTypeClick && (
+          <AddSpotTypeModal
+            type={type}
+            handleClose={handleClose}
+            show={spotTypeClick}
           />
         )}
       </div>

@@ -139,6 +139,16 @@ export default class AdminAPI {
     }).then((resp) => resp.json());
   }
 
+  static getSpotTypes() {
+    return fetch("http://127.0.0.1:8000/api/spot_type_tables/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Authorization':`Token ${token['mytoken']}`
+      },
+    }).then((resp) => resp.json());
+  }
+
   static addSpotToDB(body) {
     return fetch("http://127.0.0.1:8000/api/spots/", {
       method: "POST",
@@ -155,6 +165,13 @@ export default class AdminAPI {
 
   static addSpotTypeTableToDB(body) {
     return fetch("http://127.0.0.1:8000/api/spot_type_tables/", {
+      method: "POST",
+      body: body,
+    }).then((resp) => resp.json());
+  }
+
+  static addSpotTypeToDB(body) {
+    return fetch("http://127.0.0.1:8000/api/spot_types/", {
       method: "POST",
       body: body,
     }).then((resp) => resp.json());

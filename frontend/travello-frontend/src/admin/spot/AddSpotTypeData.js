@@ -27,4 +27,10 @@ export const typeArray = [
     title: "Add Spot Type",
     description: "Admin Can add details of a spot type to the database.",
   },
+  {
+    type: "Spot Type",
+    title: "Add Spot Type Relation",
+    description:
+      "Admin Can add details of a spot type relation to the database.",
+  },
 ];

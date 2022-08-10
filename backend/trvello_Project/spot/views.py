@@ -1,6 +1,7 @@
 from django.views.generic import ListView
 from rest_framework.decorators import action
 from rest_framework.response import Response
+import json
 
 
 from .models import Place, Spot, SpotType_Table, PlaceRatingInfo, Spot_Type, \
@@ -147,12 +148,20 @@ class Spot_ActivityViewSet(viewsets.ModelViewSet):
         activity = Spot_Activity.objects.all().filter(spot_id = spot_id)
         #activity = Activity.activity_name
         #print(activity)
+        activity_list = []
+
+
         for i in activity:
-            print(i.activity_id.activity_name)
-            print(i.activity_id.type)
-            print(i.activity_id.description)
-        #print(spots)
-        return Response(Spot_ActivitySerializer(activity, many=True).data)
+            myList = {'id': i.activity_id.activity_id, 'title': i.activity_id.activity_name, 'activity': i.activity_id.type.lower()}
+            #print(i.activity_id.activity_name)
+            #print(i.activity_id.type)
+            #print(i.activity_id.description)
+            activity_list.append(myList)
+        print(activity_list)
+        print(activity)
+
+
+        return Response(activity_list)
 
 
 class SpotRatingInfoViewSet(viewsets.ModelViewSet):

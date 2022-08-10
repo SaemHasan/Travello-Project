@@ -39,50 +39,9 @@ export const ratingList = [
   },
 ];
 
-export const dataList = [
-  {
-    id: 1,
-    title: 'lounge resort',
-    desc: "Located 550 metres from Back Beach, Căn hộ Melody Vũng Tàu offers a shared lounge, and air-conditioned accommodation with a terrace and free WiFi.",
+export let dataList = [
 
-    serviceTime: '45-60min',
-    deliveryFee: 3.44,
-    category: 'place',
-    place: 'mountain',
-    food: 'bengali',
-    activity: 'recreational',
-    rating: 5,
-    price: 2500,
-    coverSrc: '/images/places/ameri.jpg',
-  },
-  {
-    id: 2,
-    title: 'door urban',
-    desc: "abcd    ed",
-    serviceTime: '15-20min',
-    deliveryFee: 4.94,
-    category: 'place',
-    place: 'forest',
-    food: 'chinese',
-    activity: 'adventure',
-    rating: 4,
-    price: 1000,
-    coverSrc: '/images/places/italian.webp',
-  },
-  {
-    id: 3,
-    title: 'chow',
-    desc: "abcd    ed",
-    serviceTime: '30-22min',
-    deliveryFee: 4.94,
-    category: 'place',
-    place: 'waterfall',
-    food: 'italian',
-    activity: 'adventure',
-    rating: 3,
-    price: 2000,
-    coverSrc: '/images/places/china.jpg',
-  },
+
   {
     id: 4,
     title: 'wharf seafood',

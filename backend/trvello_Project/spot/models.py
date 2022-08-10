@@ -101,7 +101,7 @@ class Spot_Activity(models.Model):
     activity_id = models.ForeignKey('activity.Activity', on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return self.spot_id.name + " " + self.activity_id.name
+        return self.spot_id.name + " " + self.activity_id.activity_name
 
 
 class Review(models.Model):

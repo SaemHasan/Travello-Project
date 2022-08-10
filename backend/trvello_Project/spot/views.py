@@ -10,6 +10,7 @@ from .serializers import PlaceSerializer, SpotSerializer, SpotTypeSerializer, Pl
 from rest_framework import viewsets
 
 
+
 class PlaceViewSet(viewsets.ModelViewSet):
     queryset = Place.objects.all()
     # print(queryset)
@@ -55,6 +56,12 @@ class SpotViewSet(viewsets.ModelViewSet):
     def getTopSpots(self, request):
         number = int(request.data['number'])
         spots = Spot.objects.order_by('-rating')[:number]
+        activity = Spot_Activity.objects.all()
+        print(activity)
+        for i in activity:
+            print(i.activity_id.activity_name)
+            print(i.activity_id.type)
+            print(i.activity_id.description)
         print(spots)
         return Response(SpotSerializer(spots, many=True).data)
 

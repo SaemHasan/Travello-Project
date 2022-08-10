@@ -6,12 +6,12 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 // import AdminAPI from "../AdminAPI";
 
-export default function AddPlaceModal(props) {
+export default function AddModal(props) {
   const [show, setShow] = useState(false);
 
   const handleSave = () => {
     const uploadData = new FormData();
-    console.log("save data to db here");
+    // console.log("save data to db here");
     setShow(false);
     props.handleClose(props.type);
   };
@@ -29,7 +29,7 @@ export default function AddPlaceModal(props) {
   }, [props.show]);
 
   useEffect(() => {
-    console.log("do api call here");
+    // console.log("do api call here");
   }, []);
 
   return (

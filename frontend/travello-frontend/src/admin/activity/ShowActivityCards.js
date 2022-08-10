@@ -5,17 +5,26 @@ import { Link } from "@mui/material";
 import { useState } from "react";
 import { typeArray } from "./AddActivityTypeData";
 import AddActivityModal from "./AddActivityModal";
+import AddActivityTypeModal from "./AddActivityTypeModal";
+import AddAgencyModal from "./AddAgencyModal";
 
 function ActivityGridShow() {
   const [type, setType] = useState([]);
   const [activityClick, setActivityClick] = useState(false);
+  const [activityTypeClick, setActivityTypeClick] = useState(false);
+  const [agencyClick, setAgencyClick] = useState(false);
 
   const handleClick = async (type) => {
     // console.log(type);
     setType(type);
     if (type.type === "Activity") {
-      // console.log("activity");
       await setActivityClick(true);
+    }
+    if (type.type === "Activity Type") {
+      await setActivityTypeClick(true);
+    }
+    if (type.type === "Agency") {
+      await setAgencyClick(true);
     }
     // console.log("activity click : ", activityClick);
   };
@@ -24,6 +33,12 @@ function ActivityGridShow() {
     setType([]);
     if (type.type === "Activity") {
       setActivityClick(false);
+    }
+    if (type.type === "Activity Type") {
+      setActivityTypeClick(false);
+    }
+    if (type.type === "Agency") {
+      setAgencyClick(false);
     }
     // console.log("activity click in close : ", activityClick);
   };
@@ -65,6 +80,22 @@ function ActivityGridShow() {
             type={type}
             handleClose={handleClose}
             show={activityClick}
+          />
+        )}
+
+        {activityTypeClick && (
+          <AddActivityTypeModal
+            type={type}
+            handleClose={handleClose}
+            show={activityTypeClick}
+          />
+        )}
+
+        {agencyClick && (
+          <AddAgencyModal
+            type={type}
+            handleClose={handleClose}
+            show={agencyClick}
           />
         )}
       </div>

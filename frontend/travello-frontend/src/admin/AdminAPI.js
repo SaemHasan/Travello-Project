@@ -17,6 +17,20 @@ export default class AdminAPI {
     }).then((resp) => resp.json());
   }
 
+  static addActivityTypeToDB(body) {
+    return fetch("http://127.0.0.1:8000/api/activity_types/", {
+      method: "POST",
+      body: body,
+    }).then((resp) => resp.json());
+  }
+
+  static addAgencyToDB(body) {
+    return fetch("http://127.0.0.1:8000/api/agencies/", {
+      method: "POST",
+      body: body,
+    }).then((resp) => resp.json());
+  }
+
   // spot related api calls
   static addPlaceToDB(body) {
     return fetch("http://127.0.0.1:8000/api/places/", {

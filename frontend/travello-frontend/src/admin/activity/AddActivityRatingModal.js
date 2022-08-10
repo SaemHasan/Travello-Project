@@ -123,7 +123,7 @@ export default function AddActivityRatingModal(props) {
                 step="0.1"
                 min="0"
                 max="1"
-                placeholder="rating"
+                placeholder="factor"
                 onChange={(e) => setFactor(e.target.value)}
               />
             </Form.Group>

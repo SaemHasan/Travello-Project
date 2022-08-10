@@ -11,4 +11,10 @@ export const typeArray = [
     description: "Admin Can add details of a spot to the database.",
     image: "/assets/spot/sajek_rangamati.jpg",
   },
+  {
+    type: "Place RatingInfo",
+    title: "Add Place Rating Info",
+    description:
+      "Admin Can add details of a place rating info to the database.",
+  },
 ];

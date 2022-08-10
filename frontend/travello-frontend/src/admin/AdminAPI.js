@@ -112,6 +112,13 @@ export default class AdminAPI {
     }).then((resp) => resp.json());
   }
 
+  static addPlaceRatingInfoToDB(body) {
+    return fetch("http://127.0.0.1:8000/api/place_rating_infos/", {
+      method: "POST",
+      body: body,
+    }).then((resp) => resp.json());
+  }
+
   static getPlaces() {
     return fetch("http://127.0.0.1:8000/api/places/", {
       method: "GET",

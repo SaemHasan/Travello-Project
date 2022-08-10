@@ -21,3 +21,7 @@
   flex: 1;
   padding: 1rem;
 }
+.center_title {
+  /*align-content: center;*/
+  text-align: center;
+}

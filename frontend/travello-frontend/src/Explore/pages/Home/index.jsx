@@ -5,11 +5,37 @@ import List from "../../components/Home/List";
 import SearchBar from "../../components/Home/SearchBar";
 import { dataList } from "../../constants";
 import "./styles.css";
+import ComparisonAPI from "../../../Comparison/ComparisonAPI";
+import ExploreAPI from "../../ExploreAPI";
 
 const Home = () => {
+
+  //const [dataList, setdataList] = useState();
+  useEffect(() => {
+      async function fetchData() {
+
+              console.log("running");
+              // You can await here
+
+                const response = await ExploreAPI.getAllPlaces();
+                const spots = await ExploreAPI.getAllSpot(1);
+
+                //set_place_list(response)
+                  console.log(response)
+        console.log(spots)
+        //setdataList(dataList);
+                // ...
+
+
+      }
+      fetchData();
+
+    }, []);
+
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedRating, setSelectedRating] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState([1000, 5000]);
+
 
   const [places, setPlaces] = useState([
     { id: 1, checked: false, label: "Mountain" },
@@ -125,7 +151,7 @@ const Home = () => {
 
     if (foodsChecked.length) {
       updatedList = updatedList.filter((item) =>
-        foodsChecked.includes(item.food)
+        foodsChecked.includes(item.food[1])
       );
     }
 
@@ -205,8 +231,8 @@ const Home = () => {
             <p></p>
           ) : (
             <h1
-              className="center"
-              style={{ color: "blue", marginBottom: "30px" }}
+              className="center_title"
+              style={{ color: "blue", marginBottom: "30px", marginTop: "10px" }}
             >
               Places
             </h1>
@@ -220,8 +246,8 @@ const Home = () => {
             <p></p>
           ) : (
             <h1
-              className="center"
-              style={{ color: "blue", marginBottom: "30px" }}
+              className="center_title"
+              style={{ color: "blue", marginBottom: "30px", marginTop: "10px"}}
             >
               Spots
             </h1>

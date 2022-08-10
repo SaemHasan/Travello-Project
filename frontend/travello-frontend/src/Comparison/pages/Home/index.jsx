@@ -113,10 +113,28 @@ const Home = () => {
       .map((item) => item.label.toLowerCase());
 
     //used for filtering and updating the list to show
-    if (filtersChecked.length) {
-      updatedList = updatedList.filter((item) =>
-        filtersChecked.includes(item.place)
-      );
+    if (ComparisonType === "activity") {
+      if (filtersChecked.length) {
+        updatedList = updatedList.filter((item) =>
+            filtersChecked.includes(item.activity)
+        );
+      }
+    }
+    else if (ComparisonType === "food")
+    {
+      if (filtersChecked.length) {
+        updatedList = updatedList.filter((item) =>
+            filtersChecked.includes(item.food)
+        );
+      }
+    }
+    else if (ComparisonType === "place")
+    {
+      if (filtersChecked.length) {
+        updatedList = updatedList.filter((item) =>
+            filtersChecked.includes(item.place)
+        );
+      }
     }
 
     //for food

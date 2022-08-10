@@ -23,4 +23,10 @@ export const typeArray = [
     description: "Admin Can add details of a hotel to the database.",
     image: "/images/hotels/Grand Sylhet Hotel & Resort.jpg",
   },
+  {
+    type: "Food",
+    title: "Add Food",
+    description: "Admin Can add details of a food to the database.",
+    image: "/assets/food/pizza.jpg",
+  },
 ];

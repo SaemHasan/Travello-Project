@@ -4,6 +4,10 @@ import AddModal from "./AddModal";
 import AdminInfo from "./AdminProfile";
 import AddActivityModal from "./activity/AddActivityModal";
 import GridShow from "./AddCard";
+import ActivityGridShow from "./activity/ShowActivityCards";
+import FoodGridShow from "./food/ShowFoodCards";
+import HotelGridShow from "./hotel/ShowHotelCards";
+import SpotGridShow from "./spot/ShowSpotCards";
 
 function Admin() {
   const [user, setUser] = useState({});
@@ -25,7 +29,11 @@ function Admin() {
     <div className="container">
       <h1>Admin Page</h1>
       <AdminInfo user={user} image={user_image} />
-      <GridShow />
+      {/*<GridShow />*/}
+      <SpotGridShow />
+      <ActivityGridShow />
+      <FoodGridShow />
+      <HotelGridShow />
     </div>
   );
 }

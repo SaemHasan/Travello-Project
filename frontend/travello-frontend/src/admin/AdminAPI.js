@@ -177,6 +177,20 @@ export default class AdminAPI {
     }).then((resp) => resp.json());
   }
 
+  static addSpotFoodToDB(body) {
+    return fetch("http://127.0.0.1:8000/api/spot_foods/", {
+      method: "POST",
+      body: body,
+    }).then((resp) => resp.json());
+  }
+
+  static addSpotActivityToDB(body) {
+    return fetch("http://127.0.0.1:8000/api/spot_activities/", {
+      method: "POST",
+      body: body,
+    }).then((resp) => resp.json());
+  }
+
   // hotel related api calls
   static addHotelToDB(body) {
     return fetch("http://127.0.0.1:8000/api/hotels/", {
@@ -190,6 +204,16 @@ export default class AdminAPI {
     return fetch("http://127.0.0.1:8000/api/foods/", {
       method: "POST",
       body: body,
+    }).then((resp) => resp.json());
+  }
+
+  static getAllFoods() {
+    return fetch("http://127.0.0.1:8000/api/foods/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Authorization':`Token ${token['mytoken']}`
+      },
     }).then((resp) => resp.json());
   }
 }

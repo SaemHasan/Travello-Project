@@ -10,6 +10,8 @@ import AddPlaceRatingModal from "./AddPlaceRatingInfoModal";
 import AddSpotRatingModal from "./AddSpotRatingModal";
 import AddSpotTypeTableModal from "./AddSpotTypeTableModal";
 import AddSpotTypeModal from "./AddSpotTypeModal";
+import AddSpotFoodModal from "./AddSpotFoodModal";
+import AddSpotActivityModal from "./AddSpotActivityModal";
 
 function SpotGridShow() {
   const [type, setType] = useState([]);
@@ -19,6 +21,8 @@ function SpotGridShow() {
   const [spotRatingClick, setSpotRatingClick] = useState(false);
   const [spotTypeTableClick, setSpotTypeTableClick] = useState(false);
   const [spotTypeClick, setSpotTypeClick] = useState(false);
+  const [spotFoodClick, setSpotFoodClick] = useState(false);
+  const [spotActivityClick, setSpotActivityClick] = useState(false);
 
   const handleClick = async (type) => {
     // console.log(type);
@@ -42,6 +46,12 @@ function SpotGridShow() {
     if (type.type === "Spot Type") {
       await setSpotTypeClick(true);
     }
+    if (type.type === "Spot Food") {
+      await setSpotFoodClick(true);
+    }
+    if (type.type === "Spot Activity") {
+      await setSpotActivityClick(true);
+    }
   };
 
   const handleClose = (type) => {
@@ -63,6 +73,12 @@ function SpotGridShow() {
     }
     if (type.type === "Spot Type") {
       setSpotTypeClick(false);
+    }
+    if (type.type === "Spot Food") {
+      setSpotFoodClick(false);
+    }
+    if (type.type === "Spot Activity") {
+      setSpotActivityClick(false);
     }
   };
 
@@ -142,6 +158,22 @@ function SpotGridShow() {
             type={type}
             handleClose={handleClose}
             show={spotTypeClick}
+          />
+        )}
+
+        {spotFoodClick && (
+          <AddSpotFoodModal
+            type={type}
+            handleClose={handleClose}
+            show={spotFoodClick}
+          />
+        )}
+
+        {spotActivityClick && (
+          <AddSpotActivityModal
+            type={type}
+            handleClose={handleClose}
+            show={spotActivityClick}
           />
         )}
       </div>

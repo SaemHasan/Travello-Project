@@ -92,7 +92,9 @@ function HotelGridShow() {
           {typeArray.map((card, idx) => (
             <Col key={idx}>
               <Card>
-                <Card.Header>{card.type}</Card.Header>
+                <Card.Header>
+                  <Button variant="info">{card.type}</Button>
+                </Card.Header>
                 <Card.Img
                   variant="bottom"
                   src={card.image}

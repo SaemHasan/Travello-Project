@@ -17,7 +17,7 @@ npm install react-bootstrap bootstrap
    ``` 
 5. necessary commands
 ```bash
-  
+    npm install @mui/material @emotion/react @emotion/styled
     npm install @mui/material
     npm install @emotion/react
     npm install @emotion/styled

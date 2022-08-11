@@ -1,15 +1,7 @@
 import { useEffect, useState } from "react";
 import APIService from "../APIService";
-import AddModal from "./AddModal";
 import AdminInfo from "./AdminProfile";
-import AddActivityModal from "./activity/AddActivityModal";
-import GridShow from "./AddCard";
-import ActivityGridShow from "./activity/ShowActivityCards";
-import FoodGridShow from "./food/ShowFoodCards";
-import HotelGridShow from "./hotel/ShowHotelCards";
-import SpotGridShow from "./spot/ShowSpotCards";
-import ShowDetails from "./showDetails/ShowDetails";
-import { Button } from "react-bootstrap";
+import AddInfo from "./AddInfo";
 
 function Admin() {
   const [user, setUser] = useState({});
@@ -32,20 +24,7 @@ function Admin() {
       <h1>Admin Page</h1>
       <AdminInfo user={user} image={user_image} />
       {/*<GridShow />*/}
-      <SpotGridShow />
-      <ActivityGridShow />
-      <FoodGridShow />
-      <HotelGridShow />
-      <Button
-        variant="primary"
-        onClick={() => {
-          window.location.href = "/showDetails";
-        }}
-      >
-        {" "}
-        Click me{" "}
-      </Button>
-      {/*<ShowDetails type="places" />*/}
+      <AddInfo />
     </div>
   );
 }

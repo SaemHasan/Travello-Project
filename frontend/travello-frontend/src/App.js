@@ -15,53 +15,27 @@ import SearchResult from "./searchResult/SearchResult";
 import React from "react";
 import UserProfile from "./UserProfile/UserProfile";
 import Admin from "./admin/Admin";
-import ShowDetails from "./admin/showDetails/ShowDetails";
-
-// function App() {
-//   //   const [articles, setArticles] = useState([])
-//   //   const [demos, setDemos] = useState([])
-//   //
-//   //   useEffect(() => {
-//   //       APIService.GetArticles()
-//   //           .then(resp => setArticles(resp))
-//   //           .catch(error => console.log(error))
-//   // }, [])
-//   //
-//   //   useEffect(()=>{
-//   //       APIService.GetDemo()
-//   //           .then(resp => setDemos(resp))
-//   //           .catch(error => console.log(error))
-//   //   },[])
-//   //
-//   //
-//   // return (
-//   //   <div className="App">
-//   //       <div><Navbar /></div>
-//   //       <div id = "clearDiv"  className = "img"><img src={pic}   alt={"waterfall"}/></div>
-//   //       <div><Sliders/></div>
-//   //       <Hello/>
-//   //
-//   //
-//   //     <Hello/>
-//   //
-//   //
-//   //       <ArticleList articles={articles}></ArticleList>
-//   //       <DemoList demos={demos}/>
-//   //
-//   //
-//   //   </div>
-//         return (
-//      <div className="App">
-//          <Route exact path="/" component={Home} />
-//          <h1>abbd</h1>
-//
-//          {/*<Home />*/}
-//      </div>
-//
-//   );
-// }
-//
-// export default App;
+import ShowPlaces from "./admin/showDetails/spot/ShowPlaces";
+import ShowPlaceRatingInfo from "./admin/showDetails/spot/ShowPlaceRatingInfo";
+import ShowSpots from "./admin/showDetails/spot/ShowSpots";
+import ShowSpotRatingInfo from "./admin/showDetails/spot/ShowSpotRatingInfo";
+import ShowSpotTypeTable from "./admin/showDetails/spot/ShowSpotTypeTable";
+import ShowSpotTypeRelation from "./admin/showDetails/spot/ShowSpotType";
+import ShowSpotFood from "./admin/showDetails/spot/ShowSpotFood";
+import ShowSpotActivity from "./admin/showDetails/spot/ShowSpotActivity";
+import ShowActivity from "./admin/showDetails/activity/ShowActivity";
+import ShowActivityTypeTable from "./admin/showDetails/activity/ShowActivityType";
+import ShowAgency from "./admin/showDetails/activity/ShowAgency";
+import ShowActivityAgency from "./admin/showDetails/activity/ShowActivityAgency";
+import ShowActivityPriceInfo from "./admin/showDetails/activity/ShowActivityPriceInfo";
+import ShowActivityRatingInfo from "./admin/showDetails/activity/ShowActivityRatingInfo";
+import ShowFood from "./admin/showDetails/food/ShowFood";
+import ShowRestaurant from "./admin/showDetails/food/ShowRestaurant";
+import ShowFoodRestaurant from "./admin/showDetails/food/ShowFoodRestaurant";
+import ShowFoodPriceInfo from "./admin/showDetails/food/ShowFoodPriceInfo";
+import ShowFoodRatingInfo from "./admin/showDetails/food/ShowFoodRatingInfo";
+import ShowFoodTypeTable from "./admin/showDetails/food/ShowFoodType";
+import ShowFoodTypeRelation from "./admin/showDetails/food/ShowFoodTypeRelation";
 
 export default function App() {
   return (
@@ -76,8 +50,43 @@ export default function App() {
           <Route path="OnePlace" element={<OnePlace />} />
           <Route path="search" element={<SearchResult />} />
           <Route path="user" element={<UserProfile />} />
+
+          {/*for admin part*/}
           <Route path="admin" element={<Admin />} />
-          <Route path={"showDetails"} element={<ShowDetails />} />
+          <Route path="showplaces" element={<ShowPlaces />} />
+          <Route path="showplaceratinginfo" element={<ShowPlaceRatingInfo />} />
+          <Route path="showspots" element={<ShowSpots />} />
+          <Route path="showspotratinginfo" element={<ShowSpotRatingInfo />} />
+          <Route path="showspottypetable" element={<ShowSpotTypeTable />} />
+          <Route
+            path="showspottyperelation"
+            element={<ShowSpotTypeRelation />}
+          />
+          <Route path="showspotfood" element={<ShowSpotFood />} />
+          <Route path="showspotactivity" element={<ShowSpotActivity />} />
+          <Route path="showactivity" element={<ShowActivity />} />
+          <Route path="showactivitytype" element={<ShowActivityTypeTable />} />
+          <Route path="showagency" element={<ShowAgency />} />
+          <Route path="showactivityagency" element={<ShowActivityAgency />} />
+          <Route
+            path="showactivitypriceinfo"
+            element={<ShowActivityPriceInfo />}
+          />
+          <Route
+            path="showactivityratinginfo"
+            element={<ShowActivityRatingInfo />}
+          />
+          <Route path="showfood" element={<ShowFood />} />
+          <Route path="showRestaurant" element={<ShowRestaurant />} />
+          <Route path="showfoodrestaurant" element={<ShowFoodRestaurant />} />
+          <Route path="showfoodpriceinfo" element={<ShowFoodPriceInfo />} />
+          <Route path="showfoodratinginfo" element={<ShowFoodRatingInfo />} />
+          <Route path="showfoodtype" element={<ShowFoodTypeTable />} />
+          <Route
+            path="showfoodtyperelation"
+            element={<ShowFoodTypeRelation />}
+          />
+          {/*admin part finish*/}
         </Route>
 
         <Route path="/Login" element={<Login />} />
@@ -86,13 +95,3 @@ export default function App() {
     </BrowserRouter>
   );
 }
-
-// ReactDOM.render(<App />, document.getElementById("root"));
-
-// const container = document.getElementById("root");
-// const root = createRoot(container); // createRoot(container!) if you use TypeScript
-// root.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );

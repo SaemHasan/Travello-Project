@@ -78,8 +78,9 @@ const [list, setList] = useState([]);
               // You can await here
 
                 response = await ComparisonAPI.getAllFood(spot.spot_id);
+                const final_food_response = await ComparisonAPI.getFoodTypes(response);
 
-                console.log(response)
+                console.log(final_food_response)
 
 
 

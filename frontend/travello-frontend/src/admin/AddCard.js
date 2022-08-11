@@ -9,6 +9,7 @@ import { useState } from "react";
 import AddPlaceModal from "./spot/AddPlaceModal";
 import AddSpotModal from "./spot/AddSpotModal";
 import AddHotelModal from "./hotel/AddHotelModal";
+import AddFoodModal from "./food/AddFoodModal";
 
 function GridShow() {
   const [type, setType] = useState([]);
@@ -16,6 +17,7 @@ function GridShow() {
   const [placeClick, setPlaceClick] = useState(false);
   const [spotClick, setSpotClick] = useState(false);
   const [hotelClick, setHotelClick] = useState(false);
+  const [foodClick, setFoodClick] = useState(false);
 
   const handleClick = async (type) => {
     // console.log(type);
@@ -33,6 +35,9 @@ function GridShow() {
     if (type.type === "Hotel") {
       await setHotelClick(true);
     }
+    if (type.type === "Food") {
+      await setFoodClick(true);
+    }
     // console.log("activity click : ", activityClick);
   };
 
@@ -49,6 +54,9 @@ function GridShow() {
     }
     if (type.type === "Hotel") {
       setHotelClick(false);
+    }
+    if (type.type === "Food") {
+      setFoodClick(false);
     }
     // console.log("activity click in close : ", activityClick);
   };
@@ -113,6 +121,14 @@ function GridShow() {
             type={type}
             handleClose={handleClose}
             show={hotelClick}
+          />
+        )}
+
+        {foodClick && (
+          <AddFoodModal
+            type={type}
+            handleClose={handleClose}
+            show={foodClick}
           />
         )}
       </div>

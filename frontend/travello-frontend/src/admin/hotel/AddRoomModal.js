@@ -1,16 +1,31 @@
-// demo modal for add
-
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-// import AdminAPI from "../AdminAPI";
+import AdminAPI from "../AdminAPI";
 
-export default function AddModal(props) {
+export default function AddRoomModal(props) {
   const [show, setShow] = useState(false);
+  const [hotels, setHotels] = useState([]);
+  const [room_type, setRoom_type] = useState("");
+  const [image, setImage] = useState("");
+  const [room_no, setRoom_no] = useState("");
+  const [selectedhotel, setSelectedhotel] = useState("");
 
   const handleSave = () => {
     const uploadData = new FormData();
+    uploadData.append("hotel_id", selectedhotel);
+    uploadData.append("room_no", room_no);
+    uploadData.append("image", image, image.name);
+    uploadData.append("room_type", room_type);
+
+    AdminAPI.postToDB(uploadData, "rooms")
+      .then((res) => {
+        console.log("response : ", res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // console.log("save data to db here");
     setShow(false);
     props.handleClose(props.type);
@@ -29,7 +44,9 @@ export default function AddModal(props) {
   }, [props.show]);
 
   useEffect(() => {
-    // console.log("do api call here");
+    AdminAPI.getFromDB("hotels").then((res) => {
+      setHotels(res);
+    });
   }, []);
 
   return (
@@ -41,37 +58,38 @@ export default function AddModal(props) {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add Activity</Modal.Title>
+          <Modal.Title>Add Room</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+              <Form.Label>Select Hotel</Form.Label>
+              <Form.Select onChange={(e) => setSelectedhotel(e.target.value)}>
+                {hotels.map((type, idx) => (
+                  <option key={idx} value={type.hotel_id}>
+                    {type.name}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Activity Name</Form.Label>
+              <Form.Label>Room No</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="activity name"
-                autoFocus
-                // onChange={(e) => setActivityName(e.target.value)}
+                type="number"
+                placeholder="room no"
+                onChange={(e) => setRoom_no(e.target.value)}
               />
             </Form.Group>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                // onChange={(e) => setActivityDescription(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-              <Form.Label>Type</Form.Label>
+              <Form.Label>Room Type</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="activity type"
-                // onChange={(e) => setActivityType(e.target.value)}
+                placeholder="room type"
+                onChange={(e) => setRoom_type(e.target.value)}
               />
             </Form.Group>
 
@@ -80,22 +98,9 @@ export default function AddModal(props) {
               <Form.Control
                 type="File"
                 placeholder="image url"
-                // onChange={(e) => setActivityImage(e.target.files[0])}
+                onChange={(e) => setImage(e.target.files[0])}
               />
             </Form.Group>
-
-            {/*<Form.Group className="mb-3" controlId="exampleForm.ControlInput4">*/}
-            {/*  <Form.Label>Select Type</Form.Label>*/}
-            {/*  <Form.Select*/}
-            {/*  onChange={(e) => setTypeID(e.target.value)}*/}
-            {/*  >*/}
-            {/*    {activityTypes.map((type, idx) => (*/}
-            {/*      <option key={idx} value={type.type_id}>*/}
-            {/*        {type.type_name}*/}
-            {/*      </option>*/}
-            {/*    ))}*/}
-            {/*  </Form.Select>*/}
-            {/*</Form.Group>*/}
           </Form>
         </Modal.Body>
 

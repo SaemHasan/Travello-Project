@@ -34,7 +34,7 @@ class Agency(models.Model):
     district = models.CharField(max_length=50, null=True)
     cordinate_lattitude = models.DecimalField(max_digits=10, decimal_places=8, null=True)
     cordinate_longitude = models.DecimalField(max_digits=10, decimal_places=8, null=True)
-    rating = models.IntegerField(default=0)
+    rating = models.FloatField(default=0)
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     email = models.EmailField(max_length=50, null=True, blank=True)
     website = models.URLField(max_length=100, null=True, blank=True)
@@ -48,7 +48,7 @@ class Activity_Agency(models.Model):
     activity_agency_id = models.AutoField(primary_key=True)
     activity_id = models.ForeignKey(Activity, on_delete=models.CASCADE, default=None)
     agency_id = models.ForeignKey(Agency, on_delete=models.CASCADE, default=None)
-    rating = models.IntegerField(default=0)
+    rating = models.FloatField(default=0)
 
     def __str__(self):
         return self.activity_id.activity_name + " " + self.agency_id.agency_name

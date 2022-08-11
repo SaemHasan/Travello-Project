@@ -1,4 +1,5 @@
 // import React from 'react';
+
 import React, { useEffect, useState } from 'react';
 import './styles.css';
 import ComparisonAPI from "../../../../ComparisonAPI";
@@ -27,30 +28,27 @@ const ListItem = ({
           <div className="div-color-comp">
 
               <img src={api_path + coverSrc} className="large-image-comp" alt="adventure" />
+
+
               <div>
-          <p className="heading-des-comp"> Sylhet is a region with stunning natural beauty. Situated in the northeast of Bangladesh, this ancient township is rich in forest, minerals, and fisheries and is rich in natural beauty.</p>
-
-
-
+                <p className="heading-des-comp">
+                  {" "}
+                  Sylhet is a region with stunning natural beauty. Situated in
+                  the northeast of Bangladesh, this ancient township is rich in
+                  forest, minerals, and fisheries and is rich in natural beauty.
+                </p>
               </div>
+            </div>
+          </span>
+        </li>
+      </ul>
 
-
-          </div>
-
-      </span>
-                </li>
-
-
-  </ul>
-
-            <header>
-                <h4>{title}</h4>
-                <span>🌟{rating}</span>
-            </header>
-
-        </div>
-    );
+      <header>
+        <h4>{title}</h4>
+        <span>🌟{rating}</span>
+      </header>
+    </div>
+  );
 };
-
 
 export default ListItem;

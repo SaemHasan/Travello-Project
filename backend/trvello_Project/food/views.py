@@ -15,12 +15,11 @@ class FoodViewSet(viewsets.ModelViewSet):
     queryset = Food.objects.all()
     serializer_class = FoodSerializer
 
-
     @action(detail=False, methods=['post', 'get', 'put'])
     def getTopFoods(self, request):
         number = int(request.data['number'])
         foods = Food.objects.all()[:number]
-        print(foods)
+        # print(foods)
         return Response(FoodSerializer(foods, many=True).data)
 
     @action(detail=False, methods=['post', 'get', 'put'])
@@ -32,10 +31,24 @@ class FoodViewSet(viewsets.ModelViewSet):
         print("=====================================================")
         return Response(FoodSerializer(foods, many=True).data)
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getFoodFromIds(self, request):
+        ids = request.data['id']
+        foods = Food.objects.filter(food_id__in=ids)
+        foods_name = [food.food_name for food in foods]
+        return Response(foods_name)
+
 
 class RestaurantViewSet(viewsets.ModelViewSet):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getRestaurantFromIds(self, request):
+        ids = request.data['id']
+        restaurants = Restaurant.objects.filter(restaurant_id__in=ids)
+        restaurants_name = [restaurant.restaurant_name for restaurant in restaurants]
+        return Response(restaurants_name)
 
 
 class Food_RestaurantViewSet(viewsets.ModelViewSet):

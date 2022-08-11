@@ -23,12 +23,31 @@ class ActivityViewSet(viewsets.ModelViewSet):
         print(activities)
         return Response(ActivitySerializer(activities, many=True).data)
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getActivityFromid(self, request):
+        ids = request.data['id']
+        result = []
+        for id in ids:
+            activity = Activity.objects.get(activity_id=id)
+            result.append(activity.activity_name)
+        print(result)
+        return Response(result)
+
 
 
 
 class AgencyViewSet(viewsets.ModelViewSet):
     queryset = Agency.objects.all()
     serializer_class = AgencySerializer
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getAgencyFromid(self, request):
+        ids = request.data['id']
+        result = []
+        for id in ids:
+            agency = Agency.objects.get(agency_id=id)
+            result.append(agency.agency_name)
+        return Response(result)
 
 
 class ActivityType_TableViewSet(viewsets.ModelViewSet):

@@ -5,6 +5,8 @@ import { Link } from "@mui/material";
 import { useState } from "react";
 import AddHotelModal from "./AddHotelModal";
 import { typeArray } from "./AddHotelTypeData";
+import AddHotelAttributeModal from "./AddHotelAttributeModal";
+import AddHotelAttributeRelationModal from "./AddHotelAttributeRelationModal";
 
 function HotelGridShow() {
   const [type, setType] = useState([]);
@@ -106,6 +108,20 @@ function HotelGridShow() {
             type={type}
             handleClose={handleClose}
             show={hotelClick}
+          />
+        )}
+        {hotelAttributeClick && (
+          <AddHotelAttributeModal
+            type={type}
+            handleClose={handleClose}
+            show={hotelAttributeClick}
+          />
+        )}
+        {hotelAttributeRelationClick && (
+          <AddHotelAttributeRelationModal
+            type={type}
+            handleClose={handleClose}
+            show={hotelAttributeRelationClick}
           />
         )}
       </div>

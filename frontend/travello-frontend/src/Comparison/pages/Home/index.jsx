@@ -3,7 +3,6 @@ import EmptyView from '../../components/common/EmptyView';
 import FilterPanel from '../../components/Home/FilterPanel';
 import List from '../../components/Home/List';
 import SearchBar from '../../components/Home/SearchBar';
-import {varList } from '../../constants';
 import './styles.css';
 import ComparisonAPI from "../../ComparisonAPI";
 
@@ -213,9 +212,9 @@ const [list, setList] = useState([]);
 
 
 
-  let PlaceName = varList[0].PlaceName;
-  let ComparisonType = varList[0].ComparisonType;
-  let bestTitle = varList[0].bestTitle;
+  let PlaceName = JSON.parse(localStorage.getItem("spot")).name;
+  let ComparisonType = JSON.parse(localStorage.getItem("load_category"));
+  let bestTitle = "";
   let myList = null;
   // const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedRating, setSelectedRating] = useState(null);
@@ -288,8 +287,25 @@ const [list, setList] = useState([]);
   //   );
   //   setActivity(changeCheckedActivities);
   // };
-
-
+const getFoodStr = (size) => {
+    var str ="filtersChecked.includes(item.food["+0+"])"
+    for (let i = 1; i < size; i++) {
+        str = str +" || "+ "filtersChecked.includes(item.food["+i+"])"
+    }
+    //var str = "filtersChecked.includes(item.food[0]) || filtersChecked.includes(item.food[1])"
+    console.log(str)
+    return str
+}
+const getHotelStr = (size) => {
+    var str ="filtersChecked.includes(item.place["+0+"])"
+    for (let i = 1; i < size; i++) {
+        str = str +" || "+ "filtersChecked.includes(item.place["+i+"])"
+    }
+    //var str = "filtersChecked.includes(item.food[0]) || filtersChecked.includes(item.food[1])"
+    console.log(str)
+    console.log(size)
+    return str
+}
 
   const applyFilters = () => {
     let updatedList = dataList;
@@ -328,8 +344,9 @@ const [list, setList] = useState([]);
     {
       if (filtersChecked.length) {
 
+
               updatedList = updatedList.filter((item) =>
-             filtersChecked.includes(item.food[0]) || filtersChecked.includes(item.food[1])
+                  eval(getFoodStr(item.food.length))
         );
 
 
@@ -339,7 +356,8 @@ const [list, setList] = useState([]);
     {
       if (filtersChecked.length) {
         updatedList = updatedList.filter((item) =>
-            filtersChecked.includes(item.place)
+            eval(getHotelStr(item.place.length))
+            //filtersChecked.includes(item.place[0])
         );
       }
     }

@@ -67,7 +67,7 @@ class PlaceViewSet(viewsets.ModelViewSet):
 
         for i in places:
             myList = {'id': i.place_id, 'title': i.name,
-                      'category': "place", 'coverSrc': str(i.image), 'rating': i.rating}
+                      'category': "place", 'coverSrc': str(i.image), 'rating': i.rating, 'place_id':i.place_id}
             # print(i.activity_id.activity_name)
             # print(i.activity_id.type)
             # print(i.activity_id.description)
@@ -114,7 +114,7 @@ class SpotViewSet(viewsets.ModelViewSet):
 
         for i in spot:
             myList = {'id': i.spot_id, 'title': i.name,
-                      'category': "spot", 'coverSrc': str(i.image), 'rating': i.rating}
+                      'category': "spot", 'coverSrc': str(i.image), 'rating': i.rating, 'place_id': i.place_id.place_id}
             # print(i.activity_id.activity_name)
             # print(i.activity_id.type)
             # print(i.activity_id.description)
@@ -213,6 +213,22 @@ class Spot_ActivityViewSet(viewsets.ModelViewSet):
 
 
         return Response(activity_list)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getAllActivityExplore(self, request):
+        spot_id = int(request.data['spot_id'])
+        activity = Spot_Activity.objects.all().filter(spot_id = spot_id)
+        #activity = Activity.activity_name
+        #print(activity)
+        activity_list = []
+
+
+        for i in activity:
+            activity_list.append(i.activity_id.activity_name.lower())
+        print(activity_list)
+        print(activity)
+        return Response(activity_list)
+
 
 
 class SpotRatingInfoViewSet(viewsets.ModelViewSet):

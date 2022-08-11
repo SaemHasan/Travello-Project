@@ -32,14 +32,14 @@ const Home = () => {
                 const place_filter_list = await ExploreAPI.getSpotTypeNames();
 
                 //set_place_list(response)
-                  console.log("activity_name");
-                  console.log(place_filter_list);
-                  console.log(food_filter_response);
-                  console.log(activity_name);
-                  console.log(my_places);
+                  //console.log("activity_name");
+                  //console.log(place_filter_list);
+                  //console.log(food_filter_response);
+                  //console.log(activity_name);
+                  //console.log(my_places);
                   //console.log(spots);
-                  console.log("alll spot");
-                  console.log(allspots);
+                  //console.log("alll spot");
+                  //console.log(allspots);
                   while (dataList.length!=0) {
                   dataList.pop();
                 }
@@ -58,23 +58,14 @@ const Home = () => {
                     dataList.push({id: r.id, title: r.title,   category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc,})
 
                 ))};
-            console.log(dataList);
+
             {allspots.map((r) => (
 
                     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
-                    dataList.push({id: r.id, title: r.title,   category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc,})
+                    dataList.push({id: r.id, title: r.title,   category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc, place_id : r.place_id})
 
                 ))};
-
-            for (let i = 0; i < allspots.length; i++) {
-              let response = await ExploreAPI.getAllFood(i+1);
-              console.log(response);
-              let final_food_response = await ExploreAPI.getFoodTypes(response);
-              console.log(final_food_response);
-            }
-            setList(dataList);
-            setResultsFound(true);
-
+            //console.log(dataList);
             {activity_name.map((r) => (
 
                     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
@@ -95,6 +86,43 @@ const Home = () => {
                     places.push({id: r.id, checked: r.checked,   label: r.label,})
 
                 ))};
+
+            console.log(allspots.length);
+            for (let i = 0; i < allspots.length; i++) {
+              const response = await ExploreAPI.getAllFood(i+1);
+              //console.log(i);
+              let final_food_response = await ExploreAPI.getFoodTypes(response);
+              //console.log(final_food_response);
+              let templist = [];
+              {final_food_response.map((r) => (
+                //console.log(r.activity_id)
+                    //activity_id_list.push(r.activity_id)
+                    templist.push(r.food)
+                ))}
+              let uniqueArray=[]
+              for(let k=0; k < templist.length; k++){
+                  if(uniqueArray.indexOf(templist[k]) === -1) {
+                      uniqueArray.push(templist[k]);
+                  }
+              }
+              //console.log(templist);
+              for (let j =0; j < dataList.length; j++)
+              {
+                if (dataList[j].title === allspots[i].title)
+                {
+                  dataList[j].food = uniqueArray;
+                  console.log("rakin");
+                  break;
+                }
+              }
+              templist=[];
+              uniqueArray=[];
+            }
+            console.log(dataList);
+            setList(dataList);
+            setResultsFound(true);
+
+
 
 
       }
@@ -168,11 +196,28 @@ const Home = () => {
     //return p1 * p2;   // The function returns the product of p1 and p2
   }
 
+  const getFoodStr = (size1,size2) => {
+    var str ="";
+    for (let i = 0; i < size1; i++) {
+      for(let j = 0; j<size2; j++)
+        if (i === 0 && j === 0)
+        {
+          str = str + "foodsChecked.includes(item.food["+0+"]["+0+"])";
+        }
+        else {
+          str = str + " || " + "foodsChecked.includes(item.food[" + i + "][" + j + "])";
+        }
+    }
+    //var str = "filtersChecked.includes(item.food[0]) || filtersChecked.includes(item.food[1])"
+    console.log(str)
+    return str
+}
+
   const applyFilters = () => {
     let updatedList = dataList;
-    console.log("in filter");
-    console.log(dataList);
-    console.log(updatedList);
+    //console.log("in filter");
+    //console.log(dataList);
+    //console.log(updatedList);
 
     // Rating Filter
     if (selectedRating) {
@@ -201,14 +246,22 @@ const Home = () => {
     }
 
     //for food
+
+
     const foodsChecked = foods
       .filter((item) => item.checked)
       .map((item) => item.label.toLowerCase());
 
     if (foodsChecked.length) {
-      updatedList = updatedList.filter((item) =>
-        foodsChecked.includes(item.food)
-      );
+
+
+              updatedList = updatedList.filter((item) =>
+                  eval(getFoodStr(item.food.length,2))
+        );
+    // if (foodsChecked.length) {
+    //   updatedList = updatedList.filter((item) =>
+    //     foodsChecked.includes(item.food)
+    //   );
     }
 
     //for activity

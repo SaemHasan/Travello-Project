@@ -70,7 +70,7 @@ class Room(models.Model):
 
 class RoomPriceInfo(models.Model):
     price_id = models.BigAutoField(primary_key=True)
-    factor = models.FloatField(default=1)
+    price = models.FloatField(default=1)
     start_time = models.DateTimeField(null=True)
     end_time = models.DateTimeField(null=True)
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE, default=None)

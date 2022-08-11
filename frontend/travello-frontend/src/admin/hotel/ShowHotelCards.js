@@ -10,6 +10,8 @@ import AddHotelAttributeRelationModal from "./AddHotelAttributeRelationModal";
 import AddRoomModal from "./AddRoomModal";
 import AddRoomAttributeModal from "./AddRoomAttributeModal";
 import AddRoomAttributeRelationModal from "./AddRoomAttributeRelationModal";
+import AddRoomPriceInfoModal from "./AddRoomPriceInfoModal";
+import AddHotelRatingInfoModal from "./AddHotelRatingInfoModal";
 
 function HotelGridShow() {
   const [type, setType] = useState([]);
@@ -153,6 +155,20 @@ function HotelGridShow() {
             type={type}
             handleClose={handleClose}
             show={roomAttributeRelationClick}
+          />
+        )}
+        {roomPriceInfoClick && (
+          <AddRoomPriceInfoModal
+            type={type}
+            handleClose={handleClose}
+            show={roomPriceInfoClick}
+          />
+        )}
+        {hotelRatingInfoClick && (
+          <AddHotelRatingInfoModal
+            type={type}
+            handleClose={handleClose}
+            show={hotelRatingInfoClick}
           />
         )}
       </div>

@@ -15,55 +15,9 @@ import SearchResult from "./searchResult/SearchResult";
 import React from "react";
 import UserProfile from "./UserProfile/UserProfile";
 import Admin from "./admin/Admin";
-import ShowDetails from "./admin/showDetails/ShowDetails";
 import ShowPlaces from "./admin/showDetails/spot/ShowPlaces";
 import ShowPlaceRatingInfo from "./admin/showDetails/spot/ShowPlaceRatingInfo";
-
-// function App() {
-//   //   const [articles, setArticles] = useState([])
-//   //   const [demos, setDemos] = useState([])
-//   //
-//   //   useEffect(() => {
-//   //       APIService.GetArticles()
-//   //           .then(resp => setArticles(resp))
-//   //           .catch(error => console.log(error))
-//   // }, [])
-//   //
-//   //   useEffect(()=>{
-//   //       APIService.GetDemo()
-//   //           .then(resp => setDemos(resp))
-//   //           .catch(error => console.log(error))
-//   //   },[])
-//   //
-//   //
-//   // return (
-//   //   <div className="App">
-//   //       <div><Navbar /></div>
-//   //       <div id = "clearDiv"  className = "img"><img src={pic}   alt={"waterfall"}/></div>
-//   //       <div><Sliders/></div>
-//   //       <Hello/>
-//   //
-//   //
-//   //     <Hello/>
-//   //
-//   //
-//   //       <ArticleList articles={articles}></ArticleList>
-//   //       <DemoList demos={demos}/>
-//   //
-//   //
-//   //   </div>
-//         return (
-//      <div className="App">
-//          <Route exact path="/" component={Home} />
-//          <h1>abbd</h1>
-//
-//          {/*<Home />*/}
-//      </div>
-//
-//   );
-// }
-//
-// export default App;
+import ShowSpots from "./admin/showDetails/spot/ShowSpots";
 
 export default function App() {
   return (
@@ -81,6 +35,7 @@ export default function App() {
           <Route path="admin" element={<Admin />} />
           <Route path="showplaces" element={<ShowPlaces />} />
           <Route path="showplaceratinginfo" element={<ShowPlaceRatingInfo />} />
+          <Route path="showspots" element={<ShowSpots />} />
         </Route>
 
         <Route path="/Login" element={<Login />} />
@@ -89,13 +44,3 @@ export default function App() {
     </BrowserRouter>
   );
 }
-
-// ReactDOM.render(<App />, document.getElementById("root"));
-
-// const container = document.getElementById("root");
-// const root = createRoot(container); // createRoot(container!) if you use TypeScript
-// root.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );

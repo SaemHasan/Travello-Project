@@ -1,12 +1,19 @@
-import { Button, Card, CardActions, CardContent, Grid } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 
 import Typography from "@material-ui/core/Typography";
 import AdminAPI from "../../AdminAPI";
 
-export default function ShowPlaceRatingInfo() {
+export default function ShowSpots() {
   const [data, setData] = useState([]);
-  const type = "place_rating_infos";
+  const type = "spots";
   useEffect(() => {
     async function fetchData() {
       await AdminAPI.getFromDB(type).then(async (res) => {
@@ -19,26 +26,23 @@ export default function ShowPlaceRatingInfo() {
 
   return (
     <div>
-      <h1>Place Rating Info</h1>
+      <h1>Spots</h1>
       <Grid container spacing={3}>
         {data.map((item) => (
-          <Grid item xs={12} md={3} key={item.id}>
+          <Grid item xs={12} md={4} key={item.id}>
             <Card sx={{ maxWidth: 345 }}>
+              <CardMedia
+                component="img"
+                alt="Place"
+                height="140"
+                image={item.image}
+              />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Rating ID : {item.rating_id}
+                  {item.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Factor: {item.factor}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Start Time: {item.start_time}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  End Time: {item.end_time}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Place ID: {item.place_id}
+                  {item.short_description}
                 </Typography>
               </CardContent>
               <CardActions>

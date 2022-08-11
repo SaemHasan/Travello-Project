@@ -47,7 +47,8 @@ export default function ShowDetails(props) {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small">Learn More</Button>
+                <Button size="small">Update</Button>
+                <Button size="small">Delete</Button>
               </CardActions>
             </Card>
           </Grid>

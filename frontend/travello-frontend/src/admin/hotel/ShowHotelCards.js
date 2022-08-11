@@ -9,15 +9,39 @@ import { typeArray } from "./AddHotelTypeData";
 function HotelGridShow() {
   const [type, setType] = useState([]);
   const [hotelClick, setHotelClick] = useState(false);
+  const [hotelAttributeClick, setHotelAttributeClick] = useState(false);
+  const [hotelAttributeRelationClick, setHotelAttributeRelationClick] =
+    useState(false);
+  const [roomClick, setRoomClick] = useState(false);
+  const [roomAttributeClick, setRoomAttributeClick] = useState(false);
+  const [roomAttributeRelationClick, setRoomAttributeRelationClick] =
+    useState(false);
+  const [roomPriceInfoClick, setRoomPriceInfoClick] = useState(false);
 
   const handleClick = async (type) => {
     // console.log(type);
     setType(type);
     if (type.type === "Hotel") {
-      // console.log("activity");
       await setHotelClick(true);
     }
-    // console.log("activity click : ", activityClick);
+    if (type.type === "Hotel Attribute") {
+      await setHotelAttributeClick(true);
+    }
+    if (type.type === "Hotel Attribute Relation") {
+      await setHotelAttributeRelationClick(true);
+    }
+    if (type.type === "Room") {
+      await setRoomClick(true);
+    }
+    if (type.type === "Room Attribute") {
+      await setRoomAttributeClick(true);
+    }
+    if (type.type === "Room Attribute Relation") {
+      await setRoomAttributeRelationClick(true);
+    }
+    if (type.type === "Room Price Info") {
+      await setRoomPriceInfoClick(true);
+    }
   };
 
   const handleClose = (type) => {
@@ -25,7 +49,24 @@ function HotelGridShow() {
     if (type.type === "Hotel") {
       setHotelClick(false);
     }
-    // console.log("activity click in close : ", activityClick);
+    if (type.type === "Hotel Attribute") {
+      setHotelAttributeClick(false);
+    }
+    if (type.type === "Hotel Attribute Relation") {
+      setHotelAttributeRelationClick(false);
+    }
+    if (type.type === "Room") {
+      setRoomClick(false);
+    }
+    if (type.type === "Room Attribute") {
+      setRoomAttributeClick(false);
+    }
+    if (type.type === "Room Attribute Relation") {
+      setRoomAttributeRelationClick(false);
+    }
+    if (type.type === "Room Price Info") {
+      setRoomPriceInfoClick(false);
+    }
   };
 
   return (

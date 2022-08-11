@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import './styles.css';
 
-
+const api_path = "http://127.0.0.1:8000/media/";
 const ListItem = ({
   item: { coverSrc, title, price, deliveryFee, serviceTime, rating, category },
 }) =>{
@@ -21,11 +21,11 @@ const ListItem = ({
 
             <ul>
                 <li>
-                    <img src={coverSrc} alt="adventure"/>
+                    <img src={api_path + coverSrc} alt="adventure"/>
       <span className="large-explore">
           <div className="div-color-explore">
 
-              <img src={coverSrc} className="large-image-explore" alt="adventure" />
+              <img src={api_path + coverSrc} className="large-image-explore" alt="adventure" />
               <div>
           <p className="heading-des"> Sylhet is a region with stunning natural beauty. Situated in the northeast of Bangladesh, this ancient township is rich in forest, minerals, and fisheries and is rich in natural beauty.</p>
 

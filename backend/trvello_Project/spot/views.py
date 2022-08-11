@@ -63,8 +63,19 @@ class PlaceViewSet(viewsets.ModelViewSet):
     def getAllPlaces(self, request):
         #number = int(request.data['number'])
         places = Place.objects.all()
+        place_list = []
+
+        for i in places:
+            myList = {'id': i.place_id, 'title': i.name,
+                      'category': "place", 'coverSrc': str(i.image), 'rating': i.rating}
+            # print(i.activity_id.activity_name)
+            # print(i.activity_id.type)
+            # print(i.activity_id.description)
+            print(i.image)
+            place_list.append(myList)
+        print(place_list)
         print(places)
-        return Response(PlaceSerializer(places, many=True).data)
+        return Response(place_list)
 
 
 class SpotViewSet(viewsets.ModelViewSet):
@@ -99,10 +110,21 @@ class SpotViewSet(viewsets.ModelViewSet):
         #place_id = int(request.data['place_id'])
         # activity = Spot_Activity.objects.get(spot_id = spot_id)
         spot = Spot.objects.all()
-        # activity = Activity.activity_name
+        spot_list = []
 
+        for i in spot:
+            myList = {'id': i.spot_id, 'title': i.name,
+                      'category': "spot", 'coverSrc': str(i.image), 'rating': i.rating}
+            # print(i.activity_id.activity_name)
+            # print(i.activity_id.type)
+            # print(i.activity_id.description)
+            print(i.image)
+            spot_list.append(myList)
+        print(spot_list)
         print(spot)
-        return Response(SpotSerializer(spot, many=True).data)
+
+
+        return Response(spot_list)
 
 
 class SpotTypeTableViewSet(viewsets.ModelViewSet):

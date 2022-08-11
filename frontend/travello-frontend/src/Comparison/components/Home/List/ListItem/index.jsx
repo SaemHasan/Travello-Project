@@ -1,29 +1,35 @@
 // import React from 'react';
-import React, { useEffect, useState } from "react";
-import "./styles.css";
 
+import React, { useEffect, useState } from 'react';
+import './styles.css';
+import ComparisonAPI from "../../../../ComparisonAPI";
+
+const api_path = "http://127.0.0.1:8000/media/";
 const ListItem = ({
   item: { coverSrc, title, desc, price, deliveryFee, serviceTime, rating },
-}) => {
-  const [places, setPlaces] = useState([
-    { id: 1, checked: false, label: "Mountain" },
-    { id: 2, checked: false, label: "Waterfall" },
-    { id: 3, checked: false, label: "Forest" },
+}) =>{
+
+    console.log(api_path + coverSrc);
+    const [places, setPlaces] = useState([
+    { id: 1, checked: false, label: 'Mountain' },
+    { id: 2, checked: false, label: 'Waterfall' },
+    { id: 3, checked: false, label: 'Forest' },
   ]);
 
-  return (
-    // {{category} === "place" && (
-    <div className="listItem-wrap-comp">
-      <ul>
-        <li>
-          <img src={coverSrc} alt="adventure" />
-          <span className="large-comp">
-            <div className="div-color-comp">
-              <img
-                src={coverSrc}
-                className="large-image-comp"
-                alt="adventure"
-              />
+    return(
+        // {{category} === "place" && (
+        <div className='listItem-wrap-comp' >
+
+
+            <ul>
+                <li>
+                    <img src={api_path + coverSrc} alt="adventure"/>
+      <span className="large-comp">
+          <div className="div-color-comp">
+
+              <img src={api_path + coverSrc} className="large-image-comp" alt="adventure" />
+
+
               <div>
                 <p className="heading-des-comp">
                   {" "}

@@ -63,8 +63,19 @@ class PlaceViewSet(viewsets.ModelViewSet):
     def getAllPlaces(self, request):
         #number = int(request.data['number'])
         places = Place.objects.all()
+        place_list = []
+
+        for i in places:
+            myList = {'id': i.place_id, 'title': i.name,
+                      'category': "place", 'coverSrc': str(i.image), 'rating': i.rating}
+            # print(i.activity_id.activity_name)
+            # print(i.activity_id.type)
+            # print(i.activity_id.description)
+            print(i.image)
+            place_list.append(myList)
+        print(place_list)
         print(places)
-        return Response(PlaceSerializer(places, many=True).data)
+        return Response(place_list)
 
 
 class SpotViewSet(viewsets.ModelViewSet):
@@ -85,7 +96,7 @@ class SpotViewSet(viewsets.ModelViewSet):
         return Response(SpotSerializer(spots, many=True).data)
 
     @action(detail=False, methods=['post', 'get', 'put'])
-    def getAllSpot(self, request):
+    def getAllSpot(self, request):  #spots of a place
         place_id = int(request.data['place_id'])
         # activity = Spot_Activity.objects.get(spot_id = spot_id)
         place_id = Spot.objects.all().filter(place_id=place_id)
@@ -93,6 +104,27 @@ class SpotViewSet(viewsets.ModelViewSet):
 
         print(place_id)
         return Response(SpotSerializer(place_id, many=True).data)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getAllSpots(self, request): #all spots from database
+        #place_id = int(request.data['place_id'])
+        # activity = Spot_Activity.objects.get(spot_id = spot_id)
+        spot = Spot.objects.all()
+        spot_list = []
+
+        for i in spot:
+            myList = {'id': i.spot_id, 'title': i.name,
+                      'category': "spot", 'coverSrc': str(i.image), 'rating': i.rating}
+            # print(i.activity_id.activity_name)
+            # print(i.activity_id.type)
+            # print(i.activity_id.description)
+            print(i.image)
+            spot_list.append(myList)
+        print(spot_list)
+        print(spot)
+
+
+        return Response(spot_list)
 
 
 class SpotTypeTableViewSet(viewsets.ModelViewSet):
@@ -124,17 +156,15 @@ class Spot_FoodViewSet(viewsets.ModelViewSet):
         spot_id = int(request.data['spot_id'])
         #activity = Spot_Activity.objects.get(spot_id = spot_id)
         food = Spot_Food.objects.all().filter(spot_id = spot_id)
-        #activity = Activity.activity_name
+        food_id_list = []
         print(type(food))
         for i in food:
-            #food_type = Food_Type.Food_Type.get_food()
-            print(i.food_id.food_name)
-            print(i.food_id.short_description)
+            food_id_list.append(i.food_id.food_id)
         #print(spots)
 
 
         print(food)
-        return Response(Spot_FoodSerializer(food, many=True).data)
+        return Response(food_id_list)
 
 
 class Spot_ActivityViewSet(viewsets.ModelViewSet):
@@ -152,10 +182,11 @@ class Spot_ActivityViewSet(viewsets.ModelViewSet):
 
 
         for i in activity:
-            myList = {'id': i.activity_id.activity_id, 'title': i.activity_id.activity_name, 'activity': i.activity_id.type.lower()}
+            myList = {'id': i.activity_id.activity_id, 'title': i.activity_id.activity_name, 'activity': i.activity_id.type.lower(), 'coverSrc': str(i.activity_id.image)}
             #print(i.activity_id.activity_name)
             #print(i.activity_id.type)
             #print(i.activity_id.description)
+            print(i.activity_id.image)
             activity_list.append(myList)
         print(activity_list)
         print(activity)

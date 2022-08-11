@@ -70,11 +70,53 @@ class FoodType_TableViewSet(viewsets.ModelViewSet):
     queryset = FoodType_Table.objects.all()
     serializer_class = FoodType_TableSerializer
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getFoodFilters(self, request):
+        filters = FoodType_Table.objects.all()
+        filter_list = []
+        for f in filters:
+            myList = {'id': f.type_id, 'checked': False, 'label': f.type_name}
+            filter_list.append(myList)
+        return Response(filter_list)
+
 
 class Food_TypeViewSet(viewsets.ModelViewSet):
     queryset = Food_Type.objects.all()
     serializer_class = Food_TypeSerializer
 
-    def get_food(self):
-        return Food_Type.objects.all()
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getFoodTypes(self, request):
+        food_id = request.data['foods']
+        final_food_list = []
+        # activity = Spot_Activity.objects.get(spot_id = spot_id)
+        for f in range(len(food_id)):
+            print(food_id[f])
+            food = Food.objects.all().filter(food_id=food_id[f])
+            print(food)
+            for k in food:
+            #food2 = Food.objects.all().filter(food_id=food_id[1])
+            #food = food1.expand(food2)
+            #final_food_list = []
+            #print(type(food))
+                #for type_id in foo
+                food_type = Food_Type.objects.all().filter(food_id=food_id[f])
+                type_list = []
+                for t in food_type:
+                    print(t)
+                    type_list.append(t.type_id.type_name.lower())
+                    #print(food_type[1])
+                print(type_list)
+                myList = {'id': k.food_id, 'title': k.food_name, 'desc': k.short_description,
+                  'coverSrc': str(k.image), 'food':type_list}
+                final_food_list.append(myList)
+        #     # food_type = Food_Type.Food_Type.get_food()
+        #     #print(i.food_id.food_name)
+        #     #print(i.food_id.short_description)
+        #     print("In food type")
+        #     print(myList)
+        #     food_id_list.append(myList)
+        # # print(spots)
+
+        print(final_food_list)
+        return Response(final_food_list)
 

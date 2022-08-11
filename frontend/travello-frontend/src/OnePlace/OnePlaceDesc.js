@@ -3,12 +3,16 @@ import { OnePlaceData } from "./OnePlace-data";
 import React, { useEffect, useState } from "react";
 import "./OnePlaceDesc.css";
 import OnePlaceAPI from "./OnePlaceAPI";
+import {Link} from "@mui/material";
+
+
 
 function OnePlaceDesc() {
   const [onePlace, setOnePlace] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [imgsrc, setImgsrc] = useState("");
+
 
   useEffect(() => {
     const p = JSON.parse(localStorage.getItem("place"));
@@ -59,6 +63,14 @@ function OnePlaceDesc() {
       </div>
       <div className="row">
         <div className="column" style={{ backgroundColor: "#bbb" }}>
+          <Link href="/Comparison" onClick={() => localStorage.setItem("load_category", JSON.stringify("hotel"))} >
+            <img
+            className="my_image"
+            src={hotelimg}
+            height={"50"}
+            alt={"hotel"}
+          />
+                </Link>
           <img
             className="my_image"
             src={hotelimg}
@@ -69,17 +81,23 @@ function OnePlaceDesc() {
           {/*<p>Some text..</p>*/}
         </div>
         <div className="column" style={{ backgroundColor: "#bbb" }}>
-          <img className="my_image" src={foodimg} height={"50"} alt={"food"} />
+          <Link href="/Comparison" onClick={() => localStorage.setItem("load_category", JSON.stringify("food"))} >
+                <img className="my_image" src={foodimg} height={"50"} alt={"food"} />
+                </Link>
+
           {/*<h2>Column 2</h2>*/}
           {/*<p>Some text..</p>*/}
         </div>
         <div className="column" style={{ backgroundColor: "#bbb" }}>
+          <Link href="/Comparison" onClick={() => localStorage.setItem("load_category", JSON.stringify("activity"))}>
           <img
             className="my_image"
             src={activityimg}
             height={"50"}
             alt={"activity"}
           />
+          </Link>
+
           {/*<h2>Column 3</h2>*/}
           {/*<p>Some text..</p>*/}
         </div>

@@ -3,14 +3,16 @@ import EmptyView from '../../components/common/EmptyView';
 import FilterPanel from '../../components/Home/FilterPanel';
 import List from '../../components/Home/List';
 import SearchBar from '../../components/Home/SearchBar';
-import {placeFilterList,foodFilterList,activityFilterList,varList } from '../../constants';
+import {placeFilterList,varList } from '../../constants';
 import './styles.css';
 import ComparisonAPI from "../../ComparisonAPI";
 
 const Home = () => {
       var activity_id_list = []
-      const [is_activity, set_is_activity] = useState(true);
+      const [load_category, setLoadCategory] = useState("");
       const [dataList, set_dataList] = useState([]);
+      const [activityFilterList, set_activityFilterList] = useState([]);
+      const [foodFilterList, set_foodFilterList] = useState([]);
       //let dataList = []
       let response = []
 const [list, setList] = useState([]);
@@ -19,12 +21,137 @@ const [list, setList] = useState([]);
 
       useEffect(() => {
       async function fetchData() {
-          if (is_activity) {
+
+          const spot = JSON.parse(localStorage.getItem("spot"));
+          if (spot !== null) {
+            if (JSON.parse(localStorage.getItem("load_category"))=="activity") {
               console.log("running");
               //applyFilters();
               // You can await here
 
-                response = await ComparisonAPI.getAllActivity(6);
+                response = await ComparisonAPI.getAllActivity(spot.spot_id);
+                const activity_filter_response = await ComparisonAPI.getActivityFilters();
+
+
+                console.log(response)
+                console.log(activity_filter_response)
+
+
+
+
+                //set_place_list(response)
+                  //console.log(response)
+
+
+                while (dataList.length!=0) {
+                  //console.log(response[i])
+                  //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
+                  dataList.pop()
+                }
+                while (activityFilterList.length!=0) {
+                  //console.log(response[i])
+                  //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
+                  activityFilterList.pop()
+                }
+
+                //dataList.append(response)
+
+
+
+                {response.map((r) => (
+                //console.log(r.activity_id)
+                    //activity_id_list.push(r.activity_id)
+                    dataList.push({id: r.id, title: r.title , activity: r.activity, coverSrc: r.coverSrc})
+
+
+                ))}
+                {activity_filter_response.map((r) => (
+                //console.log(r.activity_id)
+                    //activity_id_list.push(r.activity_id)
+                    activityFilterList.push({id: r.id, checked: r.checked , label: r.label})
+
+
+                ))}
+            //dataList.push({id: Math.round(30 + Math.random() * (100 - 30)), title: 'Jooyy Risotto',desc: "abcd    ed",serviceTime: '50-65min',deliveryFee: 8.5,category: 'spot',place: 'mountain',food: 'bengali', activity: 'adventure',rating: 2,price: 2200,coverSrc: '/images/spots/nacho-burger.jpg'})
+
+
+             console.log(activity_filter_response)
+            //setList(dataList)
+            setResultsFound(true)
+
+
+
+
+
+               // console.log(activity_id_list.length)
+
+                // ...
+            }
+          else if (JSON.parse(localStorage.getItem("load_category"))=="food")
+          {
+
+              console.log("running food");
+              //applyFilters();
+              // You can await here
+
+                response = await ComparisonAPI.getAllFood(spot.spot_id);
+                const final_food_response = await ComparisonAPI.getFoodTypes(response);
+                const food_filter_response = await ComparisonAPI.getFoodFilters();
+
+                console.log(final_food_response)
+                console.log(food_filter_response)
+
+
+
+
+                //set_place_list(response)
+                  //console.log(response)
+
+
+                while (dataList.length!=0) {
+                  //console.log(response[i])
+                  //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
+                  dataList.pop()
+                }
+                while (foodFilterList.length!=0) {
+                  //console.log(response[i])
+                  //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
+                  foodFilterList.pop()
+                }
+
+                //dataList.append(response)
+
+
+
+                {final_food_response.map((r) => (
+                //console.log(r.activity_id)
+                    //activity_id_list.push(r.activity_id)
+                    dataList.push({id: r.id, title: r.title , food: r.food, coverSrc: r.coverSrc})
+
+
+                ))}
+              {food_filter_response.map((r) => (
+                //console.log(r.activity_id)
+                    //activity_id_list.push(r.activity_id)
+                    foodFilterList.push({id: r.id, checked: r.checked , label: r.label})
+
+
+                ))}
+            //dataList.push({id: Math.round(30 + Math.random() * (100 - 30)), title: 'Jooyy Risotto',desc: "abcd    ed",serviceTime: '50-65min',deliveryFee: 8.5,category: 'spot',place: 'mountain',food: 'bengali', activity: 'adventure',rating: 2,price: 2200,coverSrc: '/images/spots/nacho-burger.jpg'})
+
+
+             console.log(dataList)
+            //setList(dataList)
+            setResultsFound(true)
+          }
+
+          else if (JSON.parse(localStorage.getItem("load_category"))=="hotel")
+          {
+              console.log("running hotel");
+              //applyFilters();
+              // You can await here
+
+                response = await ComparisonAPI.getAllFood(spot.spot_id);
 
                 console.log(response)
 
@@ -46,9 +173,9 @@ const [list, setList] = useState([]);
 
 
                 {response.map((r) => (
-                //console.log(r.activity_id)
+                console.log(r.activity_id)
                     //activity_id_list.push(r.activity_id)
-                    dataList.push({id: Math.round(30 + Math.random() * (100 - 30)), title: r.title , activity: r.activity, coverSrc: '/images/places/ameri.jpg'})
+                    //dataList.push({id: Math.round(30 + Math.random() * (100 - 30)), title: r.title , activity: r.activity, coverSrc: '/images/places/ameri.jpg'})
 
 
                 ))}
@@ -58,27 +185,10 @@ const [list, setList] = useState([]);
              console.log(dataList)
             //setList(dataList)
             setResultsFound(true)
-
-
-
-
-
-               // console.log(activity_id_list.length)
-
-                // ...
-            }
-          else
-          {
-              console.log("running");
-              // You can await here
-
-                const response = await ComparisonAPI.getAllFood(2);
-
-                //set_place_list(response)
-                  console.log(response)
-                // ...
+          }
 
           }
+
 
       }
       fetchData();
@@ -201,9 +311,12 @@ const [list, setList] = useState([]);
     else if (ComparisonType === "food")
     {
       if (filtersChecked.length) {
-        updatedList = updatedList.filter((item) =>
-            filtersChecked.includes(item.food)
+
+              updatedList = updatedList.filter((item) =>
+             filtersChecked.includes(item.food[0]) || filtersChecked.includes(item.food[1])
         );
+
+
       }
     }
     else if (ComparisonType === "place")

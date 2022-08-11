@@ -54,6 +54,15 @@ class ActivityType_TableViewSet(viewsets.ModelViewSet):
     queryset = ActivityType_Table.objects.all()
     serializer_class = ActivityType_TableSerializer
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getActivityFilters(self, request):
+        filters = ActivityType_Table.objects.all()
+        filter_list = []
+        for f in filters:
+            myList = {'id':f.type_id, 'checked':False, 'label': f.type_name}
+            filter_list.append(myList)
+        return Response(filter_list)
+
 
 class Activity_AgencyViewSet(viewsets.ModelViewSet):
     queryset = Activity_Agency.objects.all()

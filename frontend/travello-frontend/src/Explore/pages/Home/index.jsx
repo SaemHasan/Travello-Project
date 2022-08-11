@@ -3,7 +3,7 @@ import EmptyView from "../../components/common/EmptyView";
 import FilterPanel from "../../components/Home/FilterPanel";
 import List from "../../components/Home/List";
 import SearchBar from "../../components/Home/SearchBar";
-import { dataList } from "../../constants";
+//import { dataList } from "../../constants";
 import "./styles.css";
 import ComparisonAPI from "../../../Comparison/ComparisonAPI";
 import ExploreAPI from "../../ExploreAPI";
@@ -11,20 +11,43 @@ import ExploreAPI from "../../ExploreAPI";
 const Home = () => {
 
   //const [dataList, setdataList] = useState();
+  const [dataList, set_dataList] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [list, setList] = useState(dataList);
   useEffect(() => {
       async function fetchData() {
 
               console.log("running");
+              //setSelectedCategory('place');
               // You can await here
 
-                const response = await ExploreAPI.getAllPlaces();
+                const places = await ExploreAPI.getAllPlaces();
                 const spots = await ExploreAPI.getAllSpot(1);
+                const allspots = await ExploreAPI.getAllSpots();
 
                 //set_place_list(response)
-                  console.log(response)
-        console.log(spots)
-        //setdataList(dataList);
-                // ...
+                  console.log(places);
+                  //console.log(spots);
+                  console.log("alll spot");
+                  console.log(allspots);
+                  while (dataList.length!=0) {
+                  dataList.pop()
+                }
+                 {places.map((r) => (
+
+                    //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
+                    dataList.push({id: r.id, title: r.title,   category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc,})
+
+                ))};
+            console.log(dataList);
+            {allspots.map((r) => (
+
+                    //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
+                    dataList.push({id: r.id, title: r.title,   category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc,})
+
+                ))};
+            setList(dataList);
+            setResultsFound(true);
 
 
       }
@@ -32,9 +55,9 @@ const Home = () => {
 
     }, []);
 
-  const [selectedCategory, setSelectedCategory] = useState(null);
+
   const [selectedRating, setSelectedRating] = useState(null);
-  const [selectedPrice, setSelectedPrice] = useState([1000, 5000]);
+  // const [selectedPrice, setSelectedPrice] = useState([1000, 5000]);
 
 
   const [places, setPlaces] = useState([
@@ -60,7 +83,7 @@ const Home = () => {
     { id: 4, checked: false, label: "Water Bike" },
   ]);
 
-  const [list, setList] = useState(dataList);
+
   const [resultsFound, setResultsFound] = useState(true);
   const [searchInput, setSearchInput] = useState("");
 
@@ -97,9 +120,9 @@ const Home = () => {
     setActivity(changeCheckedActivities);
   };
 
-  const handleChangePrice = (event, value) => {
-    setSelectedPrice(value);
-  };
+  // const handleChangePrice = (event, value) => {
+  //   setSelectedPrice(value);
+  // };
 
   function makeplaceList(list) {
     let updatedList = [];
@@ -117,6 +140,9 @@ const Home = () => {
 
   const applyFilters = () => {
     let updatedList = dataList;
+    console.log("in filter");
+    console.log(dataList);
+    console.log(updatedList);
 
     // Rating Filter
     if (selectedRating) {
@@ -151,7 +177,7 @@ const Home = () => {
 
     if (foodsChecked.length) {
       updatedList = updatedList.filter((item) =>
-        foodsChecked.includes(item.food[1])
+        foodsChecked.includes(item.food)
       );
     }
 
@@ -176,12 +202,12 @@ const Home = () => {
     }
 
     // Price Filter
-    const minPrice = selectedPrice[0];
-    const maxPrice = selectedPrice[1];
-
-    updatedList = updatedList.filter(
-      (item) => item.price >= minPrice && item.price <= maxPrice
-    );
+    // const minPrice = selectedPrice[0];
+    // const maxPrice = selectedPrice[1];
+    //
+    // updatedList = updatedList.filter(
+    //   (item) => item.price >= minPrice && item.price <= maxPrice
+    // );
 
     setList(updatedList);
 
@@ -197,7 +223,7 @@ const Home = () => {
     activities,
     foods,
     searchInput,
-    selectedPrice,
+    //selectedPrice,
   ]);
 
   return (
@@ -214,7 +240,7 @@ const Home = () => {
             selectedCategory={selectedCategory}
             selectCategory={handleSelectCategory}
             selectedRating={selectedRating}
-            selectedPrice={selectedPrice}
+            //selectedPrice={selectedPrice}
             selectRating={handleSelectRating}
             places={places}
             foods={foods}
@@ -222,7 +248,7 @@ const Home = () => {
             changeCheckedPlace={handleChangeCheckedPlace}
             changeCheckedFood={handleChangeCheckedFood}
             changeCheckedActivity={handleChangeCheckedActivity}
-            changePrice={handleChangePrice}
+            //changePrice={handleChangePrice}
           />
         </div>
         {/* List & Empty View */}

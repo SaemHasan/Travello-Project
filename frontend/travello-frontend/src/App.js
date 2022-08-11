@@ -17,6 +17,7 @@ import UserProfile from "./UserProfile/UserProfile";
 import Admin from "./admin/Admin";
 import ShowDetails from "./admin/showDetails/ShowDetails";
 import ShowPlaces from "./admin/showDetails/spot/ShowPlaces";
+import ShowPlaceRatingInfo from "./admin/showDetails/spot/ShowPlaceRatingInfo";
 
 // function App() {
 //   //   const [articles, setArticles] = useState([])
@@ -79,6 +80,7 @@ export default function App() {
           <Route path="user" element={<UserProfile />} />
           <Route path="admin" element={<Admin />} />
           <Route path="showplaces" element={<ShowPlaces />} />
+          <Route path="showplaceratinginfo" element={<ShowPlaceRatingInfo />} />
         </Route>
 
         <Route path="/Login" element={<Login />} />

@@ -1,54 +1,44 @@
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Grid,
-  Link,
-} from "@mui/material";
+import { Button, Card, CardActions, CardContent, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-import AdminAPI from "../AdminAPI";
-import Typography from "@material-ui/core/Typography";
 
-export default function ShowDetails(props) {
+import Typography from "@material-ui/core/Typography";
+import AdminAPI from "../../AdminAPI";
+
+export default function ShowActivityTypeTable() {
   const [data, setData] = useState([]);
-  const type = "places";
+  const type = "activity_types";
   useEffect(() => {
     async function fetchData() {
-      console.log("type from props: ", props.type);
-      await AdminAPI.getFromDB("places").then(async (res) => {
+      await AdminAPI.getFromDB(type).then(async (res) => {
         await setData(res);
       });
     }
-    fetchData().then(() => console.log("fetched data"));
+    fetchData().then(() => {});
     // console.log("data: ", data);
   }, []);
 
   return (
     <div>
-      <h1>Details</h1>
+      <h1>Activity Type Table</h1>
       <Grid container spacing={3}>
         {data.map((item) => (
-          <Grid item xs={12} md={4} key={item.id}>
+          <Grid item xs={12} md={3} key={item.id}>
             <Card sx={{ maxWidth: 345 }}>
-              <CardMedia
-                component="img"
-                alt="Place"
-                height="140"
-                image={item.image}
-              />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  {item.name}
+                  Type ID : {item.type_id}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {item.short_description}
+                  Type Name: {item.type_name}
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small">Update</Button>
-                <Button size="small">Delete</Button>
+                <Button size="small" variant="contained" color="success">
+                  Update
+                </Button>
+                <Button size="small" variant="contained" color="error">
+                  Delete
+                </Button>
               </CardActions>
             </Card>
           </Grid>

@@ -9,6 +9,7 @@ import AddActivityAgencyModal from "./AddActivity_AgencyModal";
 import AddActivityPriceModal from "./AddActivityPriceInfoModal";
 import AddActivityRatingModal from "./AddActivityRatingModal";
 import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 
 function ActivityGridShow() {
   const [type, setType] = useState([]);
@@ -18,6 +19,8 @@ function ActivityGridShow() {
   const [activityAgencyClick, setActivityAgencyClick] = useState(false);
   const [activityPriceClick, setActivityPriceClick] = useState(false);
   const [activityRatingCheck, setActivityRatingCheck] = useState(false);
+
+  let navigate = useNavigate();
 
   const handleClick = async (type) => {
     // console.log(type);
@@ -81,7 +84,12 @@ function ActivityGridShow() {
             <Grid item xs={2} sm={4} md={4} key={idx}>
               <Card>
                 <Card.Header>
-                  <Button variant="info">{card.type}</Button>
+                  <Button
+                    variant="info"
+                    onClick={() => navigate(card.navigate)}
+                  >
+                    {card.type}
+                  </Button>
                 </Card.Header>
                 <Card.Img
                   variant="bottom"

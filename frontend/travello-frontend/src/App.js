@@ -23,6 +23,8 @@ import ShowSpotTypeTable from "./admin/showDetails/spot/ShowSpotTypeTable";
 import ShowSpotTypeRelation from "./admin/showDetails/spot/ShowSpotType";
 import ShowSpotFood from "./admin/showDetails/spot/ShowSpotFood";
 import ShowSpotActivity from "./admin/showDetails/spot/ShowSpotActivity";
+import ShowActivity from "./admin/showDetails/activity/ShowActivity";
+import ShowActivityTypeTable from "./admin/showDetails/activity/ShowActivityType";
 
 export default function App() {
   return (
@@ -49,6 +51,8 @@ export default function App() {
           />
           <Route path="showspotfood" element={<ShowSpotFood />} />
           <Route path="showspotactivity" element={<ShowSpotActivity />} />
+          <Route path="showactivity" element={<ShowActivity />} />
+          <Route path="showactivitytype" element={<ShowActivityTypeTable />} />
         </Route>
 
         <Route path="/Login" element={<Login />} />

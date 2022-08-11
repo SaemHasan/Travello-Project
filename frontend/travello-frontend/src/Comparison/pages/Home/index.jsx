@@ -3,7 +3,6 @@ import EmptyView from '../../components/common/EmptyView';
 import FilterPanel from '../../components/Home/FilterPanel';
 import List from '../../components/Home/List';
 import SearchBar from '../../components/Home/SearchBar';
-import {varList } from '../../constants';
 import './styles.css';
 import ComparisonAPI from "../../ComparisonAPI";
 
@@ -213,9 +212,9 @@ const [list, setList] = useState([]);
 
 
 
-  let PlaceName = varList[0].PlaceName;
-  let ComparisonType = varList[0].ComparisonType;
-  let bestTitle = varList[0].bestTitle;
+  let PlaceName = JSON.parse(localStorage.getItem("spot")).name;
+  let ComparisonType = JSON.parse(localStorage.getItem("load_category"));
+  let bestTitle = "";
   let myList = null;
   // const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedRating, setSelectedRating] = useState(null);

@@ -8,6 +8,8 @@ import ActivityGridShow from "./activity/ShowActivityCards";
 import FoodGridShow from "./food/ShowFoodCards";
 import HotelGridShow from "./hotel/ShowHotelCards";
 import SpotGridShow from "./spot/ShowSpotCards";
+import ShowDetails from "./showDetails/ShowDetails";
+import { Button } from "react-bootstrap";
 
 function Admin() {
   const [user, setUser] = useState({});
@@ -34,6 +36,16 @@ function Admin() {
       <ActivityGridShow />
       <FoodGridShow />
       <HotelGridShow />
+      <Button
+        variant="primary"
+        onClick={() => {
+          window.location.href = "/showDetails";
+        }}
+      >
+        {" "}
+        Click me{" "}
+      </Button>
+      {/*<ShowDetails type="places" />*/}
     </div>
   );
 }

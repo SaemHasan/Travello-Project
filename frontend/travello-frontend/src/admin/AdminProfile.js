@@ -1,9 +1,13 @@
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 function AdminInfo(props) {
   return (
     <div>
       <div className="row">
         <div className="card center" style={{ width: "24rem" }}>
           <img className="card-img-top" src={props.image} alt="admin" />
+
+          {/*<AdminPanelSettingsIcon />*/}
+
           <div className="card-body">
             <h5 className="card-title">Username : {props.user.username}</h5>
             <p className="card-text">Email : {props.user.email}</p>

@@ -257,8 +257,8 @@ export default class AdminAPI {
     }).then((resp) => resp.json());
   }
   //generic api method to get from db
-  static getFromDB(type) {
-    return fetch("http://127.0.0.1:8000/api/" + type + "/", {
+  static async getFromDB(type) {
+    return await fetch("http://127.0.0.1:8000/api/" + type + "/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

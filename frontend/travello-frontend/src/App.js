@@ -29,6 +29,7 @@ import ShowAgency from "./admin/showDetails/activity/ShowAgency";
 import ShowActivityAgency from "./admin/showDetails/activity/ShowActivityAgency";
 import ShowActivityPriceInfo from "./admin/showDetails/activity/ShowActivityPriceInfo";
 import ShowActivityRatingInfo from "./admin/showDetails/activity/ShowActivityRatingInfo";
+import ShowFood from "./admin/showDetails/food/ShowFood";
 
 export default function App() {
   return (
@@ -43,6 +44,8 @@ export default function App() {
           <Route path="OnePlace" element={<OnePlace />} />
           <Route path="search" element={<SearchResult />} />
           <Route path="user" element={<UserProfile />} />
+
+          {/*for admin part*/}
           <Route path="admin" element={<Admin />} />
           <Route path="showplaces" element={<ShowPlaces />} />
           <Route path="showplaceratinginfo" element={<ShowPlaceRatingInfo />} />
@@ -67,6 +70,9 @@ export default function App() {
             path="showactivityratinginfo"
             element={<ShowActivityRatingInfo />}
           />
+          <Route path="showfood" element={<ShowFood />} />
+
+          {/*admin part finish*/}
         </Route>
 
         <Route path="/Login" element={<Login />} />

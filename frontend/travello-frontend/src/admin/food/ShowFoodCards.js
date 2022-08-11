@@ -10,6 +10,7 @@ import AddFoodRatingModal from "./AddFoodRatingInfoModal";
 import AddFoodTypeTableModal from "./AddFoodTypeTable";
 import AddFoodTypeModal from "./AddFoodTypeModal";
 import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 
 function FoodGridShow() {
   const [type, setType] = useState([]);
@@ -20,6 +21,7 @@ function FoodGridShow() {
   const [foodRatingInfoClick, setFoodRatingInfoClick] = useState(false);
   const [foodTypeTableClick, setFoodTypeTableClick] = useState(false);
   const [foodTypeClick, setFoodTypeClick] = useState(false);
+  let navigate = useNavigate();
 
   const handleClick = async (type) => {
     // console.log(type);
@@ -86,7 +88,12 @@ function FoodGridShow() {
             <Grid item xs={2} sm={4} md={4} key={idx}>
               <Card>
                 <Card.Header>
-                  <Button variant="info">{card.type}</Button>
+                  <Button
+                    variant="info"
+                    onClick={() => navigate(card.navigate)}
+                  >
+                    {card.type}
+                  </Button>
                 </Card.Header>
                 <Card.Img
                   variant="bottom"

@@ -28,6 +28,7 @@ import ShowActivityTypeTable from "./admin/showDetails/activity/ShowActivityType
 import ShowAgency from "./admin/showDetails/activity/ShowAgency";
 import ShowActivityAgency from "./admin/showDetails/activity/ShowActivityAgency";
 import ShowActivityPriceInfo from "./admin/showDetails/activity/ShowActivityPriceInfo";
+import ShowActivityRatingInfo from "./admin/showDetails/activity/ShowActivityRatingInfo";
 
 export default function App() {
   return (
@@ -61,6 +62,10 @@ export default function App() {
           <Route
             path="showactivitypriceinfo"
             element={<ShowActivityPriceInfo />}
+          />
+          <Route
+            path="showactivityratinginfo"
+            element={<ShowActivityRatingInfo />}
           />
         </Route>
 

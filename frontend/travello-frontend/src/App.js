@@ -26,6 +26,8 @@ import ShowSpotActivity from "./admin/showDetails/spot/ShowSpotActivity";
 import ShowActivity from "./admin/showDetails/activity/ShowActivity";
 import ShowActivityTypeTable from "./admin/showDetails/activity/ShowActivityType";
 import ShowAgency from "./admin/showDetails/activity/ShowAgency";
+import ShowActivityAgency from "./admin/showDetails/activity/ShowActivityAgency";
+import ShowActivityPriceInfo from "./admin/showDetails/activity/ShowActivityPriceInfo";
 
 export default function App() {
   return (
@@ -55,6 +57,11 @@ export default function App() {
           <Route path="showactivity" element={<ShowActivity />} />
           <Route path="showactivitytype" element={<ShowActivityTypeTable />} />
           <Route path="showagency" element={<ShowAgency />} />
+          <Route path="showactivityagency" element={<ShowActivityAgency />} />
+          <Route
+            path="showactivitypriceinfo"
+            element={<ShowActivityPriceInfo />}
+          />
         </Route>
 
         <Route path="/Login" element={<Login />} />

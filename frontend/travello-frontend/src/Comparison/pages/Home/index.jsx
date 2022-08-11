@@ -3,7 +3,7 @@ import EmptyView from '../../components/common/EmptyView';
 import FilterPanel from '../../components/Home/FilterPanel';
 import List from '../../components/Home/List';
 import SearchBar from '../../components/Home/SearchBar';
-import {placeFilterList,varList } from '../../constants';
+import {varList } from '../../constants';
 import './styles.css';
 import ComparisonAPI from "../../ComparisonAPI";
 
@@ -13,6 +13,7 @@ const Home = () => {
       const [dataList, set_dataList] = useState([]);
       const [activityFilterList, set_activityFilterList] = useState([]);
       const [foodFilterList, set_foodFilterList] = useState([]);
+      const [placeFilterList, set_placeFilterList] = useState([]);
       //let dataList = []
       let response = []
 const [list, setList] = useState([]);
@@ -61,7 +62,7 @@ const [list, setList] = useState([]);
                 {response.map((r) => (
                 //console.log(r.activity_id)
                     //activity_id_list.push(r.activity_id)
-                    dataList.push({id: r.id, title: r.title , activity: r.activity, coverSrc: r.coverSrc})
+                    dataList.push({id: r.id, title: r.title , activity: r.activity, coverSrc: r.coverSrc, desc:r.desc})
 
 
                 ))}
@@ -126,7 +127,7 @@ const [list, setList] = useState([]);
                 {final_food_response.map((r) => (
                 //console.log(r.activity_id)
                     //activity_id_list.push(r.activity_id)
-                    dataList.push({id: r.id, title: r.title , food: r.food, coverSrc: r.coverSrc})
+                    dataList.push({id: r.id, title: r.title , food: r.food, coverSrc: r.coverSrc,desc:r.desc})
 
 
                 ))}
@@ -145,15 +146,18 @@ const [list, setList] = useState([]);
             setResultsFound(true)
           }
 
-          else if (JSON.parse(localStorage.getItem("load_category"))=="hotel")
+          else if (JSON.parse(localStorage.getItem("load_category"))=="place")
           {
               console.log("running hotel");
               //applyFilters();
               // You can await here
 
-                response = await ComparisonAPI.getAllFood(spot.spot_id);
+                response = await ComparisonAPI.getAllHotels(spot.spot_id);
+                const hotel_filter_response = await ComparisonAPI.getHotelFilters();
+
 
                 console.log(response)
+                console.log(hotel_filter_response)
 
 
 
@@ -167,15 +171,27 @@ const [list, setList] = useState([]);
                   //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
                   dataList.pop()
                 }
+                while (placeFilterList.length!=0) {
+                  //console.log(response[i])
+                  //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
+                  placeFilterList.pop()
+                }
 
                 //dataList.append(response)
 
 
 
                 {response.map((r) => (
-                console.log(r.activity_id)
+                //console.log(r.activity_id)
                     //activity_id_list.push(r.activity_id)
-                    //dataList.push({id: Math.round(30 + Math.random() * (100 - 30)), title: r.title , activity: r.activity, coverSrc: '/images/places/ameri.jpg'})
+                    dataList.push({id: r.id, title: r.title , place: r.place, coverSrc: r.coverSrc,desc:r.desc})
+
+
+                ))}
+              {hotel_filter_response.map((r) => (
+                //console.log(r.activity_id)
+                    //activity_id_list.push(r.activity_id)
+                    placeFilterList.push({id: r.id, checked: r.checked , label: r.label})
 
 
                 ))}

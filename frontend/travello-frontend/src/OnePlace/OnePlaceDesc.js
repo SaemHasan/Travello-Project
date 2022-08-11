@@ -63,7 +63,7 @@ function OnePlaceDesc() {
       </div>
       <div className="row">
         <div className="column" style={{ backgroundColor: "#bbb" }}>
-          <Link href="/Comparison" onClick={() => localStorage.setItem("load_category", JSON.stringify("hotel"))} >
+          <Link href="/Comparison" onClick={() => localStorage.setItem("load_category", JSON.stringify("place"))} >
             <img
             className="my_image"
             src={hotelimg}

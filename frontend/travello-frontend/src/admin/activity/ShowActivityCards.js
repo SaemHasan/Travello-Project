@@ -10,6 +10,7 @@ import AddAgencyModal from "./AddAgencyModal";
 import AddActivityAgencyModal from "./AddActivity_AgencyModal";
 import AddActivityPriceModal from "./AddActivityPriceInfoModal";
 import AddActivityRatingModal from "./AddActivityRatingModal";
+import Button from "react-bootstrap/Button";
 
 function ActivityGridShow() {
   const [type, setType] = useState([]);
@@ -90,8 +91,10 @@ function ActivityGridShow() {
                   style={{ color: "black" }}
                 >
                   <Card.Body>
-                    <Card.Title>{card.title}</Card.Title>
-                    <Card.Subtitle>{card.description}</Card.Subtitle>
+                    <Card.Title>
+                      <Button variant="success">{card.title}</Button>
+                    </Card.Title>
+                    {/*<Card.Subtitle>{card.description}</Card.Subtitle>*/}
                   </Card.Body>
                 </Link>
               </Card>

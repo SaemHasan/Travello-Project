@@ -12,6 +12,7 @@ import AddRoomAttributeModal from "./AddRoomAttributeModal";
 import AddRoomAttributeRelationModal from "./AddRoomAttributeRelationModal";
 import AddRoomPriceInfoModal from "./AddRoomPriceInfoModal";
 import AddHotelRatingInfoModal from "./AddHotelRatingInfoModal";
+import Button from "react-bootstrap/Button";
 
 function HotelGridShow() {
   const [type, setType] = useState([]);
@@ -104,8 +105,10 @@ function HotelGridShow() {
                   style={{ color: "black" }}
                 >
                   <Card.Body>
-                    <Card.Title>{card.title}</Card.Title>
-                    <Card.Subtitle>{card.description}</Card.Subtitle>
+                    <Card.Title>
+                      <Button variant="success">{card.title}</Button>
+                    </Card.Title>
+                    {/*<Card.Subtitle>{card.description}</Card.Subtitle>*/}
                   </Card.Body>
                 </Link>
               </Card>

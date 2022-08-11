@@ -12,6 +12,7 @@ import AddSpotTypeTableModal from "./AddSpotTypeTableModal";
 import AddSpotTypeModal from "./AddSpotTypeModal";
 import AddSpotFoodModal from "./AddSpotFoodModal";
 import AddSpotActivityModal from "./AddSpotActivityModal";
+import Button from "react-bootstrap/Button";
 
 function SpotGridShow() {
   const [type, setType] = useState([]);
@@ -103,8 +104,10 @@ function SpotGridShow() {
                   style={{ color: "black" }}
                 >
                   <Card.Body>
-                    <Card.Title>{card.title}</Card.Title>
-                    <Card.Subtitle>{card.description}</Card.Subtitle>
+                    <Card.Title>
+                      <Button variant="success">{card.title}</Button>
+                    </Card.Title>
+                    {/*<Card.Subtitle>{card.description}</Card.Subtitle>*/}
                   </Card.Body>
                 </Link>
               </Card>

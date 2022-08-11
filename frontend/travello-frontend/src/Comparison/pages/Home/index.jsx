@@ -19,12 +19,15 @@ const [list, setList] = useState([]);
 
       useEffect(() => {
       async function fetchData() {
-          if (is_activity) {
+
+          const spot = JSON.parse(localStorage.getItem("spot"));
+          if (spot !== null) {
+            if (is_activity) {
               console.log("running");
               //applyFilters();
               // You can await here
 
-                response = await ComparisonAPI.getAllActivity(6);
+                response = await ComparisonAPI.getAllActivity(spot.spot_id);
 
                 console.log(response)
 
@@ -79,6 +82,9 @@ const [list, setList] = useState([]);
                 // ...
 
           }
+
+          }
+
 
       }
       fetchData();

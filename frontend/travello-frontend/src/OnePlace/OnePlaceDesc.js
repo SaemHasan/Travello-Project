@@ -3,6 +3,7 @@ import { OnePlaceData } from "./OnePlace-data";
 import React, { useEffect, useState } from "react";
 import "./OnePlaceDesc.css";
 import OnePlaceAPI from "./OnePlaceAPI";
+import {Link} from "@mui/material";
 
 function OnePlaceDesc() {
   const [onePlace, setOnePlace] = useState([]);
@@ -74,12 +75,15 @@ function OnePlaceDesc() {
           {/*<p>Some text..</p>*/}
         </div>
         <div className="column" style={{ backgroundColor: "#bbb" }}>
+          <Link href="/Comparison" style={{ color: "white" }}>
           <img
             className="my_image"
             src={activityimg}
             height={"50"}
             alt={"activity"}
           />
+          </Link>
+
           {/*<h2>Column 3</h2>*/}
           {/*<p>Some text..</p>*/}
         </div>

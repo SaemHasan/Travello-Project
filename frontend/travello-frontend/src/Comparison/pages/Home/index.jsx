@@ -51,7 +51,7 @@ const [list, setList] = useState([]);
                 {response.map((r) => (
                 //console.log(r.activity_id)
                     //activity_id_list.push(r.activity_id)
-                    dataList.push({id: Math.round(30 + Math.random() * (100 - 30)), title: r.title , activity: r.activity, coverSrc: '/images/places/ameri.jpg'})
+                    dataList.push({id: Math.round(30 + Math.random() * (100 - 30)), title: r.title , activity: r.activity, coverSrc: r.coverSrc})
 
 
                 ))}

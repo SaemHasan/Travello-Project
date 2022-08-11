@@ -19,10 +19,12 @@ const Home = () => {
 
                 const response = await ExploreAPI.getAllPlaces();
                 const spots = await ExploreAPI.getAllSpot(1);
+                const allspots = await ExploreAPI.getAllSpots();
 
                 //set_place_list(response)
                   console.log(response)
-        console.log(spots)
+        console.log(spots);
+        console.log(allspots);
         //setdataList(dataList);
                 // ...
 
@@ -151,7 +153,7 @@ const Home = () => {
 
     if (foodsChecked.length) {
       updatedList = updatedList.filter((item) =>
-        foodsChecked.includes(item.food[1])
+        foodsChecked.includes(item.food)
       );
     }
 

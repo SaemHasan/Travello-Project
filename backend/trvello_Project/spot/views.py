@@ -85,7 +85,7 @@ class SpotViewSet(viewsets.ModelViewSet):
         return Response(SpotSerializer(spots, many=True).data)
 
     @action(detail=False, methods=['post', 'get', 'put'])
-    def getAllSpot(self, request):
+    def getAllSpot(self, request):  #spots of a place
         place_id = int(request.data['place_id'])
         # activity = Spot_Activity.objects.get(spot_id = spot_id)
         place_id = Spot.objects.all().filter(place_id=place_id)
@@ -93,6 +93,16 @@ class SpotViewSet(viewsets.ModelViewSet):
 
         print(place_id)
         return Response(SpotSerializer(place_id, many=True).data)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getAllSpots(self, request): #all spots from database
+        #place_id = int(request.data['place_id'])
+        # activity = Spot_Activity.objects.get(spot_id = spot_id)
+        spot = Spot.objects.all()
+        # activity = Activity.activity_name
+
+        print(spot)
+        return Response(SpotSerializer(spot, many=True).data)
 
 
 class SpotTypeTableViewSet(viewsets.ModelViewSet):
@@ -152,10 +162,11 @@ class Spot_ActivityViewSet(viewsets.ModelViewSet):
 
 
         for i in activity:
-            myList = {'id': i.activity_id.activity_id, 'title': i.activity_id.activity_name, 'activity': i.activity_id.type.lower()}
+            myList = {'id': i.activity_id.activity_id, 'title': i.activity_id.activity_name, 'activity': i.activity_id.type.lower(), 'coverSrc': str(i.activity_id.image)}
             #print(i.activity_id.activity_name)
             #print(i.activity_id.type)
             #print(i.activity_id.description)
+            print(i.activity_id.image)
             activity_list.append(myList)
         print(activity_list)
         print(activity)

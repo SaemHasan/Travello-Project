@@ -31,6 +31,11 @@ import ShowActivityPriceInfo from "./admin/showDetails/activity/ShowActivityPric
 import ShowActivityRatingInfo from "./admin/showDetails/activity/ShowActivityRatingInfo";
 import ShowFood from "./admin/showDetails/food/ShowFood";
 import ShowRestaurant from "./admin/showDetails/food/ShowRestaurant";
+import ShowFoodRestaurant from "./admin/showDetails/food/ShowFoodRestaurant";
+import ShowFoodPriceInfo from "./admin/showDetails/food/ShowFoodPriceInfo";
+import ShowFoodRatingInfo from "./admin/showDetails/food/ShowFoodRatingInfo";
+import ShowFoodTypeTable from "./admin/showDetails/food/ShowFoodType";
+import ShowFoodTypeRelation from "./admin/showDetails/food/ShowFoodTypeRelation";
 
 export default function App() {
   return (
@@ -73,6 +78,14 @@ export default function App() {
           />
           <Route path="showfood" element={<ShowFood />} />
           <Route path="showRestaurant" element={<ShowRestaurant />} />
+          <Route path="showfoodrestaurant" element={<ShowFoodRestaurant />} />
+          <Route path="showfoodpriceinfo" element={<ShowFoodPriceInfo />} />
+          <Route path="showfoodratinginfo" element={<ShowFoodRatingInfo />} />
+          <Route path="showfoodtype" element={<ShowFoodTypeTable />} />
+          <Route
+            path="showfoodtyperelation"
+            element={<ShowFoodTypeRelation />}
+          />
           {/*admin part finish*/}
         </Route>
 

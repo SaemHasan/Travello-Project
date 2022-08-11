@@ -33,9 +33,7 @@ const ListItem = ({
               <div>
                 <p className="heading-des-comp">
                   {" "}
-                  Sylhet is a region with stunning natural beauty. Situated in
-                  the northeast of Bangladesh, this ancient township is rich in
-                  forest, minerals, and fisheries and is rich in natural beauty.
+                    {desc}
                 </p>
               </div>
             </div>

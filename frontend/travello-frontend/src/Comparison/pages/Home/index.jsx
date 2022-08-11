@@ -62,7 +62,7 @@ const [list, setList] = useState([]);
                 {response.map((r) => (
                 //console.log(r.activity_id)
                     //activity_id_list.push(r.activity_id)
-                    dataList.push({id: r.id, title: r.title , activity: r.activity, coverSrc: r.coverSrc})
+                    dataList.push({id: r.id, title: r.title , activity: r.activity, coverSrc: r.coverSrc, desc:r.desc})
 
 
                 ))}
@@ -127,7 +127,7 @@ const [list, setList] = useState([]);
                 {final_food_response.map((r) => (
                 //console.log(r.activity_id)
                     //activity_id_list.push(r.activity_id)
-                    dataList.push({id: r.id, title: r.title , food: r.food, coverSrc: r.coverSrc})
+                    dataList.push({id: r.id, title: r.title , food: r.food, coverSrc: r.coverSrc,desc:r.desc})
 
 
                 ))}
@@ -184,7 +184,7 @@ const [list, setList] = useState([]);
                 {response.map((r) => (
                 //console.log(r.activity_id)
                     //activity_id_list.push(r.activity_id)
-                    dataList.push({id: r.id, title: r.title , place: r.place, coverSrc: r.coverSrc})
+                    dataList.push({id: r.id, title: r.title , place: r.place, coverSrc: r.coverSrc,desc:r.desc})
 
 
                 ))}

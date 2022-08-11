@@ -182,7 +182,7 @@ class Spot_ActivityViewSet(viewsets.ModelViewSet):
 
 
         for i in activity:
-            myList = {'id': i.activity_id.activity_id, 'title': i.activity_id.activity_name, 'activity': i.activity_id.type.lower(), 'coverSrc': str(i.activity_id.image)}
+            myList = {'id': i.activity_id.activity_id, 'title': i.activity_id.activity_name, 'activity': i.activity_id.type.lower(), 'coverSrc': str(i.activity_id.image), 'desc':i.activity_id.description}
             #print(i.activity_id.activity_name)
             #print(i.activity_id.type)
             #print(i.activity_id.description)

@@ -44,7 +44,7 @@ class HotelViewSet(viewsets.ModelViewSet):
             print(hotel_atb)
             atb_list = []
             for atb in hotel_atb:
-                atb_list.append(atb.attribute_id.attribute_name)
+                atb_list.append(atb.attribute_id.attribute_name.lower())
             myList = {'id': h.hotel_id, 'title': h.name, 'desc': h.short_description,
                       'coverSrc': str(h.image), 'place': atb_list}
             hotel_list.append(myList)

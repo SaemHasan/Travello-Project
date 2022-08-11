@@ -288,8 +288,25 @@ const [list, setList] = useState([]);
   //   );
   //   setActivity(changeCheckedActivities);
   // };
-
-
+const getFoodStr = (size) => {
+    var str ="filtersChecked.includes(item.food["+0+"])"
+    for (let i = 1; i < size; i++) {
+        str = str +" || "+ "filtersChecked.includes(item.food["+i+"])"
+    }
+    //var str = "filtersChecked.includes(item.food[0]) || filtersChecked.includes(item.food[1])"
+    console.log(str)
+    return str
+}
+const getHotelStr = (size) => {
+    var str ="filtersChecked.includes(item.place["+0+"])"
+    for (let i = 1; i < size; i++) {
+        str = str +" || "+ "filtersChecked.includes(item.place["+i+"])"
+    }
+    //var str = "filtersChecked.includes(item.food[0]) || filtersChecked.includes(item.food[1])"
+    console.log(str)
+    console.log(size)
+    return str
+}
 
   const applyFilters = () => {
     let updatedList = dataList;
@@ -328,8 +345,9 @@ const [list, setList] = useState([]);
     {
       if (filtersChecked.length) {
 
+
               updatedList = updatedList.filter((item) =>
-             filtersChecked.includes(item.food[0]) || filtersChecked.includes(item.food[1])
+                  eval(getFoodStr(item.food.length))
         );
 
 
@@ -339,7 +357,8 @@ const [list, setList] = useState([]);
     {
       if (filtersChecked.length) {
         updatedList = updatedList.filter((item) =>
-            filtersChecked.includes(item.place)
+            eval(getHotelStr(item.place.length))
+            //filtersChecked.includes(item.place[0])
         );
       }
     }

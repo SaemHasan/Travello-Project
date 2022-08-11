@@ -86,6 +86,19 @@ export default class ExploreAPI {
       body: JSON.stringify({ foods: foods }),
     }).then((resp) => resp.json());
   }
+
+  static getAllActivityExplore(spot_id) {
+    return fetch(`http://127.0.0.1:8000/api/spot_activities/getAllActivityExplore/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ spot_id: spot_id }),
+    }).then((resp) => resp.json());
+  }
+
+
     // static getAllFood(spot_id) {
     // return fetch(`http://127.0.0.1:8000/api/spot_foods/getAllFood/`, {
     //   method: "POST",

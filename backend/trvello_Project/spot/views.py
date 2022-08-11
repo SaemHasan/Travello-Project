@@ -214,6 +214,22 @@ class Spot_ActivityViewSet(viewsets.ModelViewSet):
 
         return Response(activity_list)
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getAllActivityExplore(self, request):
+        spot_id = int(request.data['spot_id'])
+        activity = Spot_Activity.objects.all().filter(spot_id = spot_id)
+        #activity = Activity.activity_name
+        #print(activity)
+        activity_list = []
+
+
+        for i in activity:
+            activity_list.append(i.activity_id.activity_name.lower())
+        print(activity_list)
+        print(activity)
+        return Response(activity_list)
+
+
 
 class SpotRatingInfoViewSet(viewsets.ModelViewSet):
     queryset = SpotRatingInfo.objects.all()

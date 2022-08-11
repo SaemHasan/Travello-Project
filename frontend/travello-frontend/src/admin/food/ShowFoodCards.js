@@ -1,7 +1,7 @@
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { Link } from "@mui/material";
+import { Grid, Link } from "@mui/material";
 import { useState } from "react";
 import AddFoodModal from "./AddFoodModal";
 import { typeArray } from "./AddFoodTypeData";
@@ -79,9 +79,13 @@ function FoodGridShow() {
     <div>
       <div>
         <h1>Food</h1>
-        <Row xs={1} md={3} className="g-4">
+        <Grid
+          container
+          spacing={{ xs: 2, md: 3 }}
+          columns={{ xs: 4, sm: 8, md: 12 }}
+        >
           {typeArray.map((card, idx) => (
-            <Col key={idx}>
+            <Grid item xs={2} sm={4} md={4} key={idx}>
               <Card>
                 <Card.Header>
                   <Button variant="info">{card.type}</Button>
@@ -105,9 +109,9 @@ function FoodGridShow() {
                   </Card.Body>
                 </Link>
               </Card>
-            </Col>
+            </Grid>
           ))}
-        </Row>
+        </Grid>
       </div>
 
       <div>

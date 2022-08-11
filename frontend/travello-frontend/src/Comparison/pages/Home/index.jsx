@@ -280,9 +280,12 @@ const [list, setList] = useState([]);
     else if (ComparisonType === "food")
     {
       if (filtersChecked.length) {
-        updatedList = updatedList.filter((item) =>
-            filtersChecked.includes(item.food)
+
+              updatedList = updatedList.filter((item) =>
+             filtersChecked.includes(item.food[0]) || filtersChecked.includes(item.food[1])
         );
+
+
       }
     }
     else if (ComparisonType === "place")

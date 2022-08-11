@@ -1,6 +1,4 @@
 import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import { Grid, Link } from "@mui/material";
 import { useState } from "react";
 import { typeArray } from "./AddActivityTypeData";

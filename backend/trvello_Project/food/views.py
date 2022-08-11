@@ -62,6 +62,21 @@ class Food_TypeViewSet(viewsets.ModelViewSet):
     queryset = Food_Type.objects.all()
     serializer_class = Food_TypeSerializer
 
-    def get_food(self):
-        return Food_Type.objects.all()
+    def getFoodTypes(self, request):
+        food_id_list = int(request.data['foods'])
+        # activity = Spot_Activity.objects.get(spot_id = spot_id)
+        food = Food.objects.all().filter(food_id=food_id_list)
+        food_id_list = []
+        print(type(food))
+        for i in food:
+            myList = {'id': i.food_id.food_id, 'title': i.food_id.food_name, 'desc': i.food_id.short_description,
+                      'coverSrc': str(i.food_id.image)}
+            # food_type = Food_Type.Food_Type.get_food()
+            print(i.food_id.food_name)
+            print(i.food_id.short_description)
+            food_id_list.append(myList)
+        # print(spots)
+
+        print(food)
+        return Response(food_id_list)
 

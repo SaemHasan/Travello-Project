@@ -134,17 +134,15 @@ class Spot_FoodViewSet(viewsets.ModelViewSet):
         spot_id = int(request.data['spot_id'])
         #activity = Spot_Activity.objects.get(spot_id = spot_id)
         food = Spot_Food.objects.all().filter(spot_id = spot_id)
-        #activity = Activity.activity_name
+        food_id_list = []
         print(type(food))
         for i in food:
-            #food_type = Food_Type.Food_Type.get_food()
-            print(i.food_id.food_name)
-            print(i.food_id.short_description)
+            food_id_list.append(i.food_id.food_id)
         #print(spots)
 
 
         print(food)
-        return Response(Spot_FoodSerializer(food, many=True).data)
+        return Response(food_id_list)
 
 
 class Spot_ActivityViewSet(viewsets.ModelViewSet):

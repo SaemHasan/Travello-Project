@@ -8,6 +8,8 @@ import { typeArray } from "./AddHotelTypeData";
 import AddHotelAttributeModal from "./AddHotelAttributeModal";
 import AddHotelAttributeRelationModal from "./AddHotelAttributeRelationModal";
 import AddRoomModal from "./AddRoomModal";
+import AddRoomAttributeModal from "./AddRoomAttributeModal";
+import AddRoomAttributeRelationModal from "./AddRoomAttributeRelationModal";
 
 function HotelGridShow() {
   const [type, setType] = useState([]);
@@ -137,6 +139,20 @@ function HotelGridShow() {
             type={type}
             handleClose={handleClose}
             show={roomClick}
+          />
+        )}
+        {roomAttributeClick && (
+          <AddRoomAttributeModal
+            type={type}
+            handleClose={handleClose}
+            show={roomAttributeClick}
+          />
+        )}
+        {roomAttributeRelationClick && (
+          <AddRoomAttributeRelationModal
+            type={type}
+            handleClose={handleClose}
+            show={roomAttributeRelationClick}
           />
         )}
       </div>

@@ -7,22 +7,22 @@ import Modal from "react-bootstrap/Modal";
 import AdminAPI from "../AdminAPI";
 // import AdminAPI from "../AdminAPI";
 
-export default function AddHotelAttributeRelationModal(props) {
+export default function AddRoomAttributeRelationModal(props) {
   const [show, setShow] = useState(false);
 
-  const [hotels, setHotels] = useState([]);
+  const [rooms, setRooms] = useState([]);
   const [attributes, setAttributes] = useState([]);
-  const [selectedHotel, setSelectedHotel] = useState("");
+  const [selectedRoom, setSelectedRoom] = useState("");
   const [selectedAttribute, setSelectedAttribute] = useState("");
   const [value, setValue] = useState("");
 
   const handleSave = () => {
     const uploadData = new FormData();
-    uploadData.append("hotel_id", selectedHotel);
+    uploadData.append("room_id", selectedRoom);
     uploadData.append("attribute_id", selectedAttribute);
     uploadData.append("value", value);
     // console.log("save data to db here");
-    AdminAPI.postToDB(uploadData, "hotel_attribute_tables").then((res) => {
+    AdminAPI.postToDB(uploadData, "room_attribute_tables").then((res) => {
       console.log(res);
     });
     setShow(false);
@@ -42,13 +42,13 @@ export default function AddHotelAttributeRelationModal(props) {
   }, [props.show]);
 
   useEffect(() => {
-    AdminAPI.getFromDB("hotels").then(async (res) => {
-      await setHotels(res);
+    AdminAPI.getFromDB("rooms").then(async (res) => {
+      await setRooms(res);
     });
   }, []);
 
   useEffect(() => {
-    AdminAPI.getFromDB("hotel_attributes").then(async (res) => {
+    AdminAPI.getFromDB("room_attributes").then(async (res) => {
       await setAttributes(res);
     });
   }, []);
@@ -62,25 +62,25 @@ export default function AddHotelAttributeRelationModal(props) {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add Hotel Attribue Relation</Modal.Title>
+          <Modal.Title>Add Room Attribute Relation</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
-              <Form.Label>Select Spot</Form.Label>
-              <Form.Select onChange={(e) => setSelectedHotel(e.target.value)}>
-                <option value="">Select Spot</option>
-                {hotels.map((type, idx) => (
-                  <option key={idx} value={type.hotel_id}>
-                    {type.name}
+              <Form.Label>Select Room No</Form.Label>
+              <Form.Select onChange={(e) => setSelectedRoom(e.target.value)}>
+                <option value="">Select Room No</option>
+                {rooms.map((type, idx) => (
+                  <option key={idx} value={type.room_id}>
+                    {type.room_no}
                   </option>
                 ))}
               </Form.Select>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
-              <Form.Label>Select Attribute</Form.Label>
+              <Form.Label>Select Attribite</Form.Label>
               <Form.Select
                 onChange={(e) => setSelectedAttribute(e.target.value)}
               >

@@ -57,6 +57,15 @@ class FoodType_TableViewSet(viewsets.ModelViewSet):
     queryset = FoodType_Table.objects.all()
     serializer_class = FoodType_TableSerializer
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getFoodFilters(self, request):
+        filters = FoodType_Table.objects.all()
+        filter_list = []
+        for f in filters:
+            myList = {'id': f.type_id, 'checked': False, 'label': f.type_name}
+            filter_list.append(myList)
+        return Response(filter_list)
+
 
 class Food_TypeViewSet(viewsets.ModelViewSet):
     queryset = Food_Type.objects.all()

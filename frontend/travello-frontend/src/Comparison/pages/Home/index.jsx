@@ -3,7 +3,7 @@ import EmptyView from '../../components/common/EmptyView';
 import FilterPanel from '../../components/Home/FilterPanel';
 import List from '../../components/Home/List';
 import SearchBar from '../../components/Home/SearchBar';
-import {placeFilterList,foodFilterList,activityFilterList,varList } from '../../constants';
+import {placeFilterList,varList } from '../../constants';
 import './styles.css';
 import ComparisonAPI from "../../ComparisonAPI";
 
@@ -11,6 +11,8 @@ const Home = () => {
       var activity_id_list = []
       const [load_category, setLoadCategory] = useState("");
       const [dataList, set_dataList] = useState([]);
+      const [activityFilterList, set_activityFilterList] = useState([]);
+      const [foodFilterList, set_foodFilterList] = useState([]);
       //let dataList = []
       let response = []
 const [list, setList] = useState([]);
@@ -28,8 +30,11 @@ const [list, setList] = useState([]);
               // You can await here
 
                 response = await ComparisonAPI.getAllActivity(spot.spot_id);
+                const activity_filter_response = await ComparisonAPI.getActivityFilters();
+
 
                 console.log(response)
+                console.log(activity_filter_response)
 
 
 
@@ -43,6 +48,11 @@ const [list, setList] = useState([]);
                   //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
                   dataList.pop()
                 }
+                while (activityFilterList.length!=0) {
+                  //console.log(response[i])
+                  //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
+                  activityFilterList.pop()
+                }
 
                 //dataList.append(response)
 
@@ -55,10 +65,17 @@ const [list, setList] = useState([]);
 
 
                 ))}
+                {activity_filter_response.map((r) => (
+                //console.log(r.activity_id)
+                    //activity_id_list.push(r.activity_id)
+                    activityFilterList.push({id: r.id, checked: r.checked , label: r.label})
+
+
+                ))}
             //dataList.push({id: Math.round(30 + Math.random() * (100 - 30)), title: 'Jooyy Risotto',desc: "abcd    ed",serviceTime: '50-65min',deliveryFee: 8.5,category: 'spot',place: 'mountain',food: 'bengali', activity: 'adventure',rating: 2,price: 2200,coverSrc: '/images/spots/nacho-burger.jpg'})
 
 
-             console.log(dataList)
+             console.log(activity_filter_response)
             //setList(dataList)
             setResultsFound(true)
 
@@ -79,8 +96,10 @@ const [list, setList] = useState([]);
 
                 response = await ComparisonAPI.getAllFood(spot.spot_id);
                 const final_food_response = await ComparisonAPI.getFoodTypes(response);
+                const food_filter_response = await ComparisonAPI.getFoodFilters();
 
                 console.log(final_food_response)
+                console.log(food_filter_response)
 
 
 
@@ -94,6 +113,11 @@ const [list, setList] = useState([]);
                   //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
                   dataList.pop()
                 }
+                while (foodFilterList.length!=0) {
+                  //console.log(response[i])
+                  //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
+                  foodFilterList.pop()
+                }
 
                 //dataList.append(response)
 
@@ -103,6 +127,13 @@ const [list, setList] = useState([]);
                 //console.log(r.activity_id)
                     //activity_id_list.push(r.activity_id)
                     dataList.push({id: r.id, title: r.title , food: r.food, coverSrc: r.coverSrc})
+
+
+                ))}
+              {food_filter_response.map((r) => (
+                //console.log(r.activity_id)
+                    //activity_id_list.push(r.activity_id)
+                    foodFilterList.push({id: r.id, checked: r.checked , label: r.label})
 
 
                 ))}

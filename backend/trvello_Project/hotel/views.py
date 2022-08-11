@@ -16,21 +16,41 @@ class HotelViewSet(viewsets.ModelViewSet):
     serializer_class = HotelSerializer
 
 
+    # @action(detail=False, methods=['post', 'get', 'put'])
+    # def getAllHotels(self, request):
+    #     spot_id = int(request.data['spot_id'])
+    #     #activity = Spot_Activity.objects.get(spot_id = spot_id)
+    #     hotel = Hotel.objects.all().filter(spot_id_id = spot_id)
+    #
+    #     # for i in food:
+    #     #     food_id_list.append(i.food_id.food_id)
+    #     print("Hereeeee")
+    #
+    #
+    #     print(hotel)
+    #     #return Response(food_id_list)
+    #
+    #     return Response(HotelSerializer(hotel, many=True).data)
     @action(detail=False, methods=['post', 'get', 'put'])
     def getAllHotels(self, request):
+        hotel_list = []
         spot_id = int(request.data['spot_id'])
-        #activity = Spot_Activity.objects.get(spot_id = spot_id)
-        hotel = Hotel.objects.all().filter(spot_id_id = spot_id)
+        hotel = Hotel.objects.all().filter(spot_id=spot_id)
+        #final_food_list = []
+        # activity = Spot_Activity.objects.get(spot_id = spot_id)
+        for h in hotel:
+            #print(food_id[f])
+            hotel_atb = Hotel_Attribute_Table.objects.all().filter(hotel_id_id=h.hotel_id)
+            print(hotel_atb)
+            atb_list = []
+            for atb in hotel_atb:
+                atb_list.append(atb.attribute_id.attribute_name)
+            myList = {'id': h.hotel_id, 'title': h.name, 'desc': h.short_description,
+                      'coverSrc': str(h.image), 'place': atb_list}
+            hotel_list.append(myList)
 
-        # for i in food:
-        #     food_id_list.append(i.food_id.food_id)
-        print("Hereeeee")
-
-
-        print(hotel)
-        #return Response(food_id_list)
-
-        return Response(HotelSerializer(hotel, many=True).data)
+        print(hotel_list)
+        return Response(hotel_list)
 
 
 class Hotel_AttributeViewSet(viewsets.ModelViewSet):
@@ -44,7 +64,7 @@ class Hotel_AttributeViewSet(viewsets.ModelViewSet):
         for f in filters:
             myList = {'id':f.attribute_id, 'checked':False, 'label': f.attribute_name}
             filter_list.append(myList)
-        print(filter_list)
+        #print(filter_list)
         return Response(filter_list)
 
 

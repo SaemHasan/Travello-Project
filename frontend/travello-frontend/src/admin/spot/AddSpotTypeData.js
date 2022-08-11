@@ -30,7 +30,7 @@ export const typeArray = [
     type: "Spot Type Table",
     title: "Add Spot Type",
     description: "Admin can add details of a spot type to the database.",
-    navigate: "/showspottype",
+    navigate: "/showspottypetable",
   },
   {
     type: "Spot Type",

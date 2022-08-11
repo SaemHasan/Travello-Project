@@ -55,7 +55,7 @@ const Home = () => {
                  {my_places.map((r) => (
 
                     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
-                    dataList.push({id: r.id, title: r.title,   category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc,})
+                    dataList.push({id: r.id, title: r.title,   category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc,place_id:r.place_id})
 
                 ))};
 
@@ -87,6 +87,11 @@ const Home = () => {
 
                 ))};
 
+            for (let m =0; m < dataList.length; m++)
+            {
+              dataList[m].food = []
+
+            }
             console.log(allspots.length);
             for (let i = 0; i < allspots.length; i++) {
               const response = await ExploreAPI.getAllFood(i+1);
@@ -117,6 +122,22 @@ const Home = () => {
               }
               templist=[];
               uniqueArray=[];
+              for (let m =0; m < dataList.length; m++)
+              {
+                if (dataList[m].id === i+1)
+                {
+                  for (let n =0; n < dataList.length; n++)
+                  {
+                    if (dataList[m].place_id === dataList[n].place_id)
+                    {
+                      dataList[n].food = dataList[n].food.concat(dataList[m].food)
+                    }
+                  }
+                }
+
+              }
+
+
             }
             console.log(dataList);
             setList(dataList);

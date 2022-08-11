@@ -67,7 +67,7 @@ class PlaceViewSet(viewsets.ModelViewSet):
 
         for i in places:
             myList = {'id': i.place_id, 'title': i.name,
-                      'category': "place", 'coverSrc': str(i.image), 'rating': i.rating}
+                      'category': "place", 'coverSrc': str(i.image), 'rating': i.rating, 'place_id':i.place_id}
             # print(i.activity_id.activity_name)
             # print(i.activity_id.type)
             # print(i.activity_id.description)

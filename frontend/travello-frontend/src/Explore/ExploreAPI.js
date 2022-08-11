@@ -31,6 +31,39 @@ export default class ExploreAPI {
       body: JSON.stringify(),
     }).then((resp) => resp.json());
   }
+
+  static getActivitiesNames() {
+    return fetch(`http://127.0.0.1:8000/api/activities/getActivitiesNames/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify(),
+    }).then((resp) => resp.json());
+  }
+
+  static getFoodFilters() {
+    return fetch(`http://127.0.0.1:8000/api/food_type_tables/getFoodFilters/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify(),
+    }).then((resp) => resp.json());
+  }
+
+  static getSpotTypeNames() {
+    return fetch(`http://127.0.0.1:8000/api/spot_type_tables/getSpotTypeNames/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify(),
+    }).then((resp) => resp.json());
+  }
     // static getAllFood(spot_id) {
     // return fetch(`http://127.0.0.1:8000/api/spot_foods/getAllFood/`, {
     //   method: "POST",

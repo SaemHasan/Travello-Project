@@ -131,6 +131,26 @@ class SpotTypeTableViewSet(viewsets.ModelViewSet):
     queryset = SpotType_Table.objects.all()
     serializer_class = SpotType_TableSerializer
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getSpotTypeNames(self, request):
+        # number = int(request.data['number'])
+        spotTypes = SpotType_Table.objects.all()
+        print(spotTypes)
+        spot_type_name = []
+
+        for i in spotTypes:
+            spot_type_name.append(i.type_name)
+
+        print(spot_type_name)
+
+        id = 1
+        place_filter_list=[]
+        for i in spot_type_name:
+            myList = {'id': id, 'checked': False, 'label': i}
+            id = id + 1
+            place_filter_list.append(myList)
+        print(place_filter_list)
+        return Response(place_filter_list)
 
 class SpotTypeViewSet(viewsets.ModelViewSet):
     queryset = Spot_Type.objects.all()

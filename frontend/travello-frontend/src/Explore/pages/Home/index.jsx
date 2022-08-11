@@ -14,6 +14,9 @@ const Home = () => {
   const [dataList, set_dataList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [list, setList] = useState(dataList);
+  const [activities, setActivity] = useState([]);
+  const [foods, setFoods] = useState([]);
+  const [places, setPlaces] = useState([]);
   useEffect(() => {
       async function fetchData() {
 
@@ -21,19 +24,35 @@ const Home = () => {
               //setSelectedCategory('place');
               // You can await here
 
-                const places = await ExploreAPI.getAllPlaces();
+                const my_places = await ExploreAPI.getAllPlaces();
                 const spots = await ExploreAPI.getAllSpot(1);
                 const allspots = await ExploreAPI.getAllSpots();
+                const activity_name = await ExploreAPI.getActivitiesNames();
+                const food_filter_response = await ExploreAPI.getFoodFilters();
+                const place_filter_list = await ExploreAPI.getSpotTypeNames();
 
                 //set_place_list(response)
-                  console.log(places);
+                  console.log("activity_name");
+                  console.log(place_filter_list);
+                  console.log(food_filter_response);
+                  console.log(activity_name);
+                  console.log(my_places);
                   //console.log(spots);
                   console.log("alll spot");
                   console.log(allspots);
                   while (dataList.length!=0) {
-                  dataList.pop()
+                  dataList.pop();
                 }
-                 {places.map((r) => (
+                while (activities.length!=0) {
+                  activities.pop();
+                }
+                while (foods.length!=0) {
+                  foods.pop();
+                }
+                while (places.length!=0) {
+                  places.pop();
+                }
+                 {my_places.map((r) => (
 
                     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
                     dataList.push({id: r.id, title: r.title,   category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc,})
@@ -49,6 +68,27 @@ const Home = () => {
             setList(dataList);
             setResultsFound(true);
 
+            {activity_name.map((r) => (
+
+                    //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
+                    activities.push({id: r.id, checked: r.checked,   label: r.label,})
+
+                ))};
+
+            {food_filter_response.map((r) => (
+
+                    //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
+                    foods.push({id: r.id, checked: r.checked,   label: r.label,})
+
+                ))};
+
+            {place_filter_list.map((r) => (
+
+                    //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
+                    places.push({id: r.id, checked: r.checked,   label: r.label,})
+
+                ))};
+
 
       }
       fetchData();
@@ -60,28 +100,11 @@ const Home = () => {
   // const [selectedPrice, setSelectedPrice] = useState([1000, 5000]);
 
 
-  const [places, setPlaces] = useState([
-    { id: 1, checked: false, label: "Mountain" },
-    { id: 2, checked: false, label: "Waterfall" },
-    { id: 3, checked: false, label: "Forest" },
-    { id: 4, checked: false, label: "Lake" },
-    { id: 5, checked: false, label: "Tea Garden" },
-    { id: 6, checked: false, label: "Beach" },
-  ]);
 
-  const [foods, setFoods] = useState([
-    { id: 1, checked: false, label: "Bengali" },
-    { id: 2, checked: false, label: "Chinese" },
-    { id: 3, checked: false, label: "Italian" },
-    { id: 4, checked: false, label: "Upojati Food" },
-  ]);
 
-  const [activities, setActivity] = useState([
-    { id: 1, checked: false, label: "Trekking" },
-    { id: 2, checked: false, label: "Boat riding" },
-    { id: 3, checked: false, label: "Kayaking" },
-    { id: 4, checked: false, label: "Water Bike" },
-  ]);
+
+
+
 
 
   const [resultsFound, setResultsFound] = useState(true);

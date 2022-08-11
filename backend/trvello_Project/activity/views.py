@@ -33,6 +33,32 @@ class ActivityViewSet(viewsets.ModelViewSet):
         print(result)
         return Response(result)
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getActivitiesNames(self, request):
+        #number = int(request.data['number'])
+        activities = Activity.objects.all()
+        print(activities)
+        activities_name = []
+        unique_activity_name = []
+
+        for i in activities:
+            activities_name.append(i.activity_name)
+
+        for x in activities_name:
+            if x not in unique_activity_name:
+                unique_activity_name.append(x)
+        print(activities_name)
+        print(unique_activity_name)
+        activity_filter_list = []
+
+        id=1
+        for i in unique_activity_name:
+            myList = {'id': id, 'checked': False, 'label': i}
+            id = id + 1
+            activity_filter_list.append(myList)
+        print(activity_filter_list)
+        return Response(activity_filter_list)
+
 
 
 

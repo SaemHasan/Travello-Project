@@ -11,6 +11,7 @@ import AddSpotTypeModal from "./AddSpotTypeModal";
 import AddSpotFoodModal from "./AddSpotFoodModal";
 import AddSpotActivityModal from "./AddSpotActivityModal";
 import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 
 function SpotGridShow() {
   const [type, setType] = useState([]);
@@ -22,6 +23,8 @@ function SpotGridShow() {
   const [spotTypeClick, setSpotTypeClick] = useState(false);
   const [spotFoodClick, setSpotFoodClick] = useState(false);
   const [spotActivityClick, setSpotActivityClick] = useState(false);
+
+  let navigate = useNavigate();
 
   const handleClick = async (type) => {
     // console.log(type);
@@ -94,7 +97,12 @@ function SpotGridShow() {
             <Grid item xs={2} sm={4} md={4} key={idx}>
               <Card>
                 <Card.Header>
-                  <Button variant="info">{card.type}</Button>
+                  <Button
+                    variant="info"
+                    onClick={() => navigate(card.navigate)}
+                  >
+                    {card.type}
+                  </Button>
                 </Card.Header>
                 <Card.Img
                   variant="bottom"

@@ -16,6 +16,7 @@ import React from "react";
 import UserProfile from "./UserProfile/UserProfile";
 import Admin from "./admin/Admin";
 import ShowDetails from "./admin/showDetails/ShowDetails";
+import ShowPlaces from "./admin/showDetails/spot/ShowPlaces";
 
 // function App() {
 //   //   const [articles, setArticles] = useState([])
@@ -77,7 +78,7 @@ export default function App() {
           <Route path="search" element={<SearchResult />} />
           <Route path="user" element={<UserProfile />} />
           <Route path="admin" element={<Admin />} />
-          <Route path={"showDetails"} element={<ShowDetails />} />
+          <Route path="showplaces" element={<ShowPlaces />} />
         </Route>
 
         <Route path="/Login" element={<Login />} />

@@ -20,6 +20,7 @@ import ShowPlaceRatingInfo from "./admin/showDetails/spot/ShowPlaceRatingInfo";
 import ShowSpots from "./admin/showDetails/spot/ShowSpots";
 import ShowSpotRatingInfo from "./admin/showDetails/spot/ShowSpotRatingInfo";
 import ShowSpotTypeTable from "./admin/showDetails/spot/ShowSpotTypeTable";
+import ShowSpotTypeRelation from "./admin/showDetails/spot/ShowSpotType";
 
 export default function App() {
   return (
@@ -40,6 +41,10 @@ export default function App() {
           <Route path="showspots" element={<ShowSpots />} />
           <Route path="showspotratinginfo" element={<ShowSpotRatingInfo />} />
           <Route path="showspottypetable" element={<ShowSpotTypeTable />} />
+          <Route
+            path="showspottyperelation"
+            element={<ShowSpotTypeRelation />}
+          />
         </Route>
 
         <Route path="/Login" element={<Login />} />

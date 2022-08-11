@@ -65,6 +65,13 @@ const Home = () => {
                     dataList.push({id: r.id, title: r.title,   category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc,})
 
                 ))};
+
+            for (let i = 0; i < allspots.length; i++) {
+              let response = await ExploreAPI.getAllFood(i+1);
+              console.log(response);
+              let final_food_response = await ExploreAPI.getFoodTypes(response);
+              console.log(final_food_response);
+            }
             setList(dataList);
             setResultsFound(true);
 

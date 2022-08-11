@@ -67,4 +67,24 @@ export default class ComparisonAPI {
       body: JSON.stringify(),
     }).then((resp) => resp.json());
   }
+  static getHotelFilters() {
+    return fetch(`http://127.0.0.1:8000/api/hotel_attributes/getHotelFilters/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify(),
+    }).then((resp) => resp.json());
+  }
+  static getAllHotels(spot_id) {
+    return fetch(`http://127.0.0.1:8000/api/hotels/getAllHotels/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ spot_id: spot_id }),
+    }).then((resp) => resp.json());
+  }
 }

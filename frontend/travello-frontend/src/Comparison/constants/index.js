@@ -193,7 +193,7 @@ export const activityFilterList = [
   ];
 
 export const varList = [
-  {PlaceName : "Sylhet",
+  {PlaceName : JSON.parse(localStorage.getItem("spot")).name,
    ComparisonType : JSON.parse(localStorage.getItem("load_category")),
    bestTitle : ""},
 ];

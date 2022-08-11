@@ -37,4 +37,10 @@ export const typeArray = [
     title: "Add Room Price Info",
     description: "Admin can add details of a room price info to the database.",
   },
+  {
+    type: "Hotel Rating Info",
+    title: "Add Hotel Rating Info",
+    description:
+      "Admin can add details of a hotel rating info to the database.",
+  },
 ];

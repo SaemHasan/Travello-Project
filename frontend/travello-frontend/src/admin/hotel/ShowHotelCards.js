@@ -7,6 +7,7 @@ import AddHotelModal from "./AddHotelModal";
 import { typeArray } from "./AddHotelTypeData";
 import AddHotelAttributeModal from "./AddHotelAttributeModal";
 import AddHotelAttributeRelationModal from "./AddHotelAttributeRelationModal";
+import AddRoomModal from "./AddRoomModal";
 
 function HotelGridShow() {
   const [type, setType] = useState([]);
@@ -19,6 +20,7 @@ function HotelGridShow() {
   const [roomAttributeRelationClick, setRoomAttributeRelationClick] =
     useState(false);
   const [roomPriceInfoClick, setRoomPriceInfoClick] = useState(false);
+  const [hotelRatingInfoClick, setHotelRatingInfoClick] = useState(false);
 
   const handleClick = async (type) => {
     // console.log(type);
@@ -44,6 +46,9 @@ function HotelGridShow() {
     if (type.type === "Room Price Info") {
       await setRoomPriceInfoClick(true);
     }
+    if (type.type === "Hotel Rating Info") {
+      await setHotelRatingInfoClick(true);
+    }
   };
 
   const handleClose = (type) => {
@@ -68,6 +73,9 @@ function HotelGridShow() {
     }
     if (type.type === "Room Price Info") {
       setRoomPriceInfoClick(false);
+    }
+    if (type.type === "Hotel Rating Info") {
+      setHotelRatingInfoClick(false);
     }
   };
 
@@ -122,6 +130,13 @@ function HotelGridShow() {
             type={type}
             handleClose={handleClose}
             show={hotelAttributeRelationClick}
+          />
+        )}
+        {roomClick && (
+          <AddRoomModal
+            type={type}
+            handleClose={handleClose}
+            show={roomClick}
           />
         )}
       </div>

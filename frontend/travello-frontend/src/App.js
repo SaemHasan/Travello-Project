@@ -30,6 +30,7 @@ import ShowActivityAgency from "./admin/showDetails/activity/ShowActivityAgency"
 import ShowActivityPriceInfo from "./admin/showDetails/activity/ShowActivityPriceInfo";
 import ShowActivityRatingInfo from "./admin/showDetails/activity/ShowActivityRatingInfo";
 import ShowFood from "./admin/showDetails/food/ShowFood";
+import ShowRestaurant from "./admin/showDetails/food/ShowRestaurant";
 
 export default function App() {
   return (
@@ -71,7 +72,7 @@ export default function App() {
             element={<ShowActivityRatingInfo />}
           />
           <Route path="showfood" element={<ShowFood />} />
-
+          <Route path="showRestaurant" element={<ShowRestaurant />} />
           {/*admin part finish*/}
         </Route>
 

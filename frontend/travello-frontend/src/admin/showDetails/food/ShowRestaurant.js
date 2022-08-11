@@ -11,9 +11,9 @@ import { useEffect, useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import AdminAPI from "../../AdminAPI";
 
-export default function ShowFood() {
+export default function ShowRestaurant() {
   const [data, setData] = useState([]);
-  const type = "foods";
+  const type = "restaurants";
   useEffect(() => {
     async function fetchData() {
       await AdminAPI.getFromDB(type).then(async (res) => {
@@ -26,7 +26,7 @@ export default function ShowFood() {
 
   return (
     <div>
-      <h1>Food</h1>
+      <h1>Restaurant</h1>
       <Grid container spacing={3}>
         {data.map((item) => (
           <Grid item xs={12} md={4} key={item.id}>
@@ -39,10 +39,10 @@ export default function ShowFood() {
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  {item.food_name}
+                  {item.restaurant_name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {item.short_description}
+                  Phone Number : {item.phone_number}
                 </Typography>
               </CardContent>
               <CardActions>

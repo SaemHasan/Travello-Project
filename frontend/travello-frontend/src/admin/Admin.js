@@ -36,16 +36,6 @@ function Admin() {
       <ActivityGridShow />
       <FoodGridShow />
       <HotelGridShow />
-      <Button
-        variant="primary"
-        onClick={() => {
-          window.location.href = "/showDetails";
-        }}
-      >
-        {" "}
-        Click me{" "}
-      </Button>
-      {/*<ShowDetails type="places" />*/}
     </div>
   );
 }

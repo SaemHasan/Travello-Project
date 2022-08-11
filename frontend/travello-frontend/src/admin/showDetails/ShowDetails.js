@@ -1,18 +1,28 @@
-import { Grid, Link } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  Link,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import AdminAPI from "../AdminAPI";
+import Typography from "@material-ui/core/Typography";
 
 export default function ShowDetails(props) {
   const [data, setData] = useState([]);
-
+  const type = "places";
   useEffect(() => {
     async function fetchData() {
-      console.log(props.type);
-      const response = await AdminAPI.getFromDB(props.type);
-      await setData(response.data);
-      console.log("data : ", data);
+      console.log("type from props: ", props.type);
+      await AdminAPI.getFromDB("places").then(async (res) => {
+        await setData(res);
+      });
     }
     fetchData().then(() => console.log("fetched data"));
+    // console.log("data: ", data);
   }, []);
 
   return (
@@ -21,7 +31,25 @@ export default function ShowDetails(props) {
       <Grid container spacing={3}>
         {data.map((item) => (
           <Grid item xs={12} md={4} key={item.id}>
-            <item>item.name</item>
+            <Card sx={{ maxWidth: 345 }}>
+              <CardMedia
+                component="img"
+                alt="Place"
+                height="140"
+                image={item.image}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {item.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {item.short_description}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small">Learn More</Button>
+              </CardActions>
+            </Card>
           </Grid>
         ))}
       </Grid>

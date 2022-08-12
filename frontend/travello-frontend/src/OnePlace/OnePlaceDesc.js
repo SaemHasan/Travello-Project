@@ -7,7 +7,11 @@ import {Link} from "@mui/material";
 
 
 
+
+
+
 function OnePlaceDesc() {
+
   const [onePlace, setOnePlace] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -15,6 +19,7 @@ function OnePlaceDesc() {
 
 
   useEffect(() => {
+
     const p = JSON.parse(localStorage.getItem("place"));
     const api_path = "http://127.0.0.1:8000";
 
@@ -30,10 +35,53 @@ function OnePlaceDesc() {
     const spot = JSON.parse(localStorage.getItem("spot"));
     if (spot !== null) {
       console.log("spot is not null");
+      //console.log(spot);
       setOnePlace(spot);
       setName(spot.name);
       setDescription(spot.short_description);
       setImgsrc(api_path + spot.image);
+    }
+
+    const explore_place = JSON.parse(localStorage.getItem("explore_place"));
+    if (explore_place !== null) {
+      //console.log("explore_place is not null");
+      //console.log(exploreSpot);
+      //const spot = await OnePlaceAPI.getOneSpotbyID(exploreSpot);
+      let my_place = []
+      {explore_place.map((r) => (
+          my_place.push({id: r.place_id, name: r.name, short_description : r.short_description, image: r.image,})
+      ))};
+      //console.log(my_place);
+      //console.log(spot);
+      //console.log(my_place[0].id);
+      setOnePlace(my_place[0]);
+      setName(my_place[0].name);
+      setDescription(my_place[0].short_description);
+      setImgsrc(api_path + String(my_place[0].image));
+
+    } else {
+      console.log("null found");
+    }
+
+
+    const exploreSpot = JSON.parse(localStorage.getItem("explore_spot"));
+    if (exploreSpot !== null) {
+      //console.log("spot is not null");
+      //console.log(exploreSpot);
+      //const spot = await OnePlaceAPI.getOneSpotbyID(exploreSpot);
+      let my_spot = []
+      {exploreSpot.map((r) => (
+          my_spot.push({id: r.spot_id, name: r.name, short_description : r.short_description, image: r.image,})
+      ))};
+      //console.log(my_spot);
+      //console.log(spot);
+      setOnePlace(my_spot[0]);
+      setName(my_spot[0].name);
+      setDescription(my_spot[0].short_description);
+      setImgsrc(api_path + String(my_spot[0].image));
+
+    } else {
+      console.log("null found");
     }
 
     const food = JSON.parse(localStorage.getItem("food"));
@@ -51,6 +99,10 @@ function OnePlaceDesc() {
   let activityimg = OnePlaceData[3].image;
 
   return (
+
+
+
+
     <div>
       {/*<img src={imgsrc} alt="slide" className="imgdetails" />*/}
       <div>

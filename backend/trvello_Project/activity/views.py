@@ -20,7 +20,7 @@ class ActivityViewSet(viewsets.ModelViewSet):
     def getTopActivities(self, request):
         number = int(request.data['number'])
         activities = Activity.objects.all()[:number]
-        print(activities)
+        #print(activities)
         return Response(ActivitySerializer(activities, many=True).data)
 
     @action(detail=False, methods=['post', 'get', 'put'])
@@ -30,7 +30,7 @@ class ActivityViewSet(viewsets.ModelViewSet):
         for id in ids:
             activity = Activity.objects.get(activity_id=id)
             result.append(activity.activity_name)
-        print(result)
+        #print(result)
         return Response(result)
 
     @action(detail=False, methods=['post', 'get', 'put'])
@@ -47,8 +47,8 @@ class ActivityViewSet(viewsets.ModelViewSet):
         for x in activities_name:
             if x not in unique_activity_name:
                 unique_activity_name.append(x)
-        print(activities_name)
-        print(unique_activity_name)
+        #print(activities_name)
+        #print(unique_activity_name)
         activity_filter_list = []
 
         id=1
@@ -56,7 +56,7 @@ class ActivityViewSet(viewsets.ModelViewSet):
             myList = {'id': id, 'checked': False, 'label': i}
             id = id + 1
             activity_filter_list.append(myList)
-        print(activity_filter_list)
+        #print(activity_filter_list)
         return Response(activity_filter_list)
 
 

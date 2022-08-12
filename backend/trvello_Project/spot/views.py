@@ -35,6 +35,14 @@ class PlaceViewSet(viewsets.ModelViewSet):
         return Response(PlaceSerializer(places, many=True).data)
 
     @action(detail=False, methods=['post', 'get', 'put'])
+    def getOnePlacebyID(self, request):
+        place_id = int(request.data['place_id'])
+        place = Place.objects.all().filter(place_id=place_id)
+
+        print(place)
+        return Response(SpotSerializer(place, many=True).data)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
     def getSearchResult(self, request):
         keyword = request.data['keyword']
         location = request.data['location']
@@ -96,7 +104,15 @@ class SpotViewSet(viewsets.ModelViewSet):
         return Response(SpotSerializer(spots, many=True).data)
 
     @action(detail=False, methods=['post', 'get', 'put'])
-    def getAllSpot(self, request):  # spots of a place
+    def getOneSpotbyID(self, request):
+        spot_id = int(request.data['spot_id'])
+        spot = Spot.objects.all().filter(spot_id=spot_id)
+
+        print(spot)
+        return Response(SpotSerializer(spot, many=True).data)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getAllSpot(self, request):  #spots of a place
         place_id = int(request.data['place_id'])
         # activity = Spot_Activity.objects.get(spot_id = spot_id)
         place_id = Spot.objects.all().filter(place_id=place_id)

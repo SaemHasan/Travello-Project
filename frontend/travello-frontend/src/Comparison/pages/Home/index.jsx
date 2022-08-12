@@ -93,7 +93,7 @@ const [list, setList] = useState([]);
               console.log("running food");
               //applyFilters();
               // You can await here
-
+                console.log(spot.spot_id);
                 response = await ComparisonAPI.getAllFood(spot.spot_id);
                 const final_food_response = await ComparisonAPI.getFoodTypes(response);
                 const food_filter_response = await ComparisonAPI.getFoodFilters();

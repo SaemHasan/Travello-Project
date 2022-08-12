@@ -10,23 +10,60 @@ import { useEffect, useState } from "react";
 
 import Typography from "@material-ui/core/Typography";
 import AdminAPI from "../../AdminAPI";
+import AddFoodModal from "../../food/AddFoodModal";
+import AddPlaceModal from "../../spot/AddPlaceModal";
 
 export default function ShowPlaces() {
   const [data, setData] = useState([]);
   const type = "places";
+  async function fetchData() {
+    await AdminAPI.getFromDB(type).then(async (res) => {
+      await setData(res);
+    });
+  }
+
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
-    async function fetchData() {
-      await AdminAPI.getFromDB(type).then(async (res) => {
-        await setData(res);
-      });
-    }
     fetchData().then(() => {});
     // console.log("data: ", data);
   }, []);
 
+  const handleDelete = async (id) => {
+    await AdminAPI.deleteFromDB(type, id);
+    fetchData().then(() => {});
+  };
+
+  const handleAddModalShow = () => {
+    setShowModal(true);
+  };
+
+  const handleClose = (type) => {
+    setShowModal(false);
+    window.location.reload(false);
+  };
+
   return (
     <div>
-      <h1>Places</h1>
+      {/*<h1>Places</h1>*/}
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <h2>Places</h2>
+        </Grid>
+        <Grid item xs={6}>
+          <Button
+            size="large"
+            variant="contained"
+            color="primary"
+            onClick={handleAddModalShow}
+          >
+            Add Place
+          </Button>
+        </Grid>
+      </Grid>
+
+      {showModal && (
+        <AddPlaceModal type={type} handleClose={handleClose} show={showModal} />
+      )}
       <Grid container spacing={3}>
         {data.map((item) => (
           <Grid item xs={12} md={4} key={item.id}>
@@ -49,7 +86,12 @@ export default function ShowPlaces() {
                 <Button size="small" variant="contained" color="success">
                   Update
                 </Button>
-                <Button size="small" variant="contained" color="error">
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="error"
+                  onClick={() => handleDelete(item.place_id)}
+                >
                   Delete
                 </Button>
               </CardActions>

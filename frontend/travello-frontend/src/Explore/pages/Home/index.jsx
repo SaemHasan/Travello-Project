@@ -95,7 +95,10 @@ const Home = () => {
             for (let m =0; m < dataList.length; m++)
             {
               dataList[m].activity = []
-
+            }
+            for (let m =0; m < dataList.length; m++)
+            {
+              dataList[m].place = []
             }
             console.log(allspots.length);
             for (let i = 0; i < allspots.length; i++) {
@@ -163,13 +166,13 @@ const Home = () => {
                       uniqueArray.push(templist[k]);
                   }
               }
-              console.log(templist);
+              //console.log(templist);
               for (let j =0; j < dataList.length; j++)
               {
                 if (dataList[j].title === allspots[i].title)
                 {
                   dataList[j].activity = uniqueArray;
-                  console.log("rakin");
+                  //console.log("rakin");
                   break;
                 }
               }
@@ -189,9 +192,55 @@ const Home = () => {
                 }
 
               }
+            }
+
+            for (let i = 0; i < allspots.length; i++) {
+              const response = await ExploreAPI.getAllSpotTypeExplore(i+1);
+              console.log(response);
+
+              let templist = [];
+              {response.map((r) => (
+                //console.log(r.activity_id)
+                    //activity_id_list.push(r.activity_id)
+                    templist.push(r)
+                ))}
+              //console.log(templist)
+              let uniqueArray=[]
+              for(let k=0; k < templist.length; k++){
+                  if(uniqueArray.indexOf(templist[k]) === -1) {
+                      uniqueArray.push(templist[k]);
+                  }
+              }
+              //console.log(uniqueArray);
+              for (let j =0; j < dataList.length; j++)
+              {
+                if (dataList[j].title === allspots[i].title)
+                {
+                  dataList[j].place = uniqueArray;
+                  //console.log("rakin");
+                  break;
+                }
+              }
+              templist=[];
+              uniqueArray=[];
+              for (let m =0; m < dataList.length; m++)
+              {
+                if (dataList[m].id === i+1)
+                {
+                  for (let n =0; n < dataList.length; n++)
+                  {
+                    if (dataList[m].place_id === dataList[n].place_id && dataList[n].id !== i+1)
+                    {
+                      dataList[n].place = dataList[n].place.concat(dataList[m].place)
+                    }
+                  }
+                }
+
+              }
 
 
             }
+
 
 
 
@@ -275,6 +324,18 @@ const Home = () => {
     //return p1 * p2;   // The function returns the product of p1 and p2
   }
 
+  const getPlaceStr = (size) => {
+    var str ="placesChecked.includes(item.place["+0+"])";
+    for (let i = 1; i < size; i++) {
+
+          str = str + " || " + "placesChecked.includes(item.place[" + i + "])";
+
+    }
+    //var str = "filtersChecked.includes(item.food[0]) || filtersChecked.includes(item.food[1])"
+    console.log(str)
+    return str
+}
+
   const getFoodStr = (size1,size2) => {
     var str ="";
     for (let i = 0; i < size1; i++) {
@@ -332,9 +393,16 @@ const Home = () => {
 
     if (placesChecked.length) {
       updatedList = updatedList.filter((item) =>
-        placesChecked.includes(item.place)
+          eval(getPlaceStr(item.activity.length))
       );
     }
+
+    // if (placesChecked.length) {
+    //   updatedList = updatedList.filter((item) =>
+    //     placesChecked.includes(item.place)
+    //       eval(getActivityStr(item.activity.length))
+    //   );
+    // }
 
     //for food
 

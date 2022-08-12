@@ -156,6 +156,19 @@ class SpotTypeViewSet(viewsets.ModelViewSet):
     queryset = Spot_Type.objects.all()
     serializer_class = SpotTypeSerializer
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getAllSpotTypeExplore(self, request):
+        spot_id = int(request.data['spot_id'])
+        spot = Spot_Type.objects.all().filter(spot_id=spot_id)
+        # activity = Activity.activity_name
+        # print(activity)
+        spot_list = []
+
+        for i in spot:
+            spot_list.append(i.type_id.type_name.lower())
+        print(spot_list)
+        print(spot)
+        return Response(spot_list)
 
 class PlaceRatingInfoViewSet(viewsets.ModelViewSet):
     queryset = PlaceRatingInfo.objects.all()

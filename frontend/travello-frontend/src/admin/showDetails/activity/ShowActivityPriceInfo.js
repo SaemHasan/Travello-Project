@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 import Typography from "@material-ui/core/Typography";
 import AdminAPI from "../../AdminAPI";
-import AddAgencyModal from "../../activity/AddAgencyModal";
 import AddActivityPriceModal from "../../activity/AddActivityPriceInfoModal";
 
 export default function ShowActivityPriceInfo() {

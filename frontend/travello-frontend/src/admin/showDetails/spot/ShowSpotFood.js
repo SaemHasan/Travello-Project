@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 import Typography from "@material-ui/core/Typography";
 import AdminAPI from "../../AdminAPI";
-import AddFoodModal from "../../food/AddFoodModal";
 import AddSpotFoodModal from "../../spot/AddSpotFoodModal";
 
 export default function ShowSpotFood() {

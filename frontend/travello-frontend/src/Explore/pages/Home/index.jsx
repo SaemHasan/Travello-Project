@@ -42,16 +42,16 @@ const Home = () => {
                   //console.log(spots);
                   //console.log("alll spot");
                   //console.log(allspots);
-                  while (dataList.length!=0) {
+                  while (dataList.length !== 0) {
                   dataList.pop();
                 }
-                while (activities.length!=0) {
+                while (activities.length !== 0) {
                   activities.pop();
                 }
-                while (foods.length!=0) {
+                while (foods.length !== 0) {
                   foods.pop();
                 }
-                while (places.length!=0) {
+                while (places.length !== 0) {
                   places.pop();
                 }
                  {my_places.map((r) => (

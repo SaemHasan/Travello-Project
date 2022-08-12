@@ -37,7 +37,7 @@ class ActivityViewSet(viewsets.ModelViewSet):
     def getActivitiesNames(self, request):
         #number = int(request.data['number'])
         activities = Activity.objects.all()
-        print(activities)
+        #print(activities)
         activities_name = []
         unique_activity_name = []
 

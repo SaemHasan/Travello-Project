@@ -44,11 +44,11 @@ class PlaceViewSet(viewsets.ModelViewSet):
         result = []
         if (keyword != ''):
             places1 = places.filter(short_description__icontains=keyword)
-            print(places1)
+            #print(places1)
             result = places1
         if (location != ''):
             places2 = places.filter(short_description__icontains=location)
-            print(places2)
+            #print(places2)
             result |= places2
         # print(result)
         return Response(PlaceSerializer(result, many=True).data)
@@ -71,7 +71,7 @@ class PlaceViewSet(viewsets.ModelViewSet):
             myList = {'id': number, 'title': i.name,
                       'category': "place", 'coverSrc': str(i.image), 'rating': i.rating, 'place_id':i.place_id, 'desc' : i.short_description}
             number = number + 1
-            print(i.image)
+            #print(i.image)
             place_list.append(myList)
         #print(place_list)
         #print(places)
@@ -88,10 +88,10 @@ class SpotViewSet(viewsets.ModelViewSet):
         spots = Spot.objects.order_by('-rating')[:number]
         activity = Spot_Activity.objects.all()
         #print(activity)
-        for i in activity:
-            print(i.activity_id.activity_name)
-            print(i.activity_id.type)
-            print(i.activity_id.description)
+        # for i in activity:
+        #     print(i.activity_id.activity_name)
+        #     print(i.activity_id.type)
+        #     print(i.activity_id.description)
         #print(spots)
         return Response(SpotSerializer(spots, many=True).data)
 
@@ -219,7 +219,7 @@ class Spot_ActivityViewSet(viewsets.ModelViewSet):
             #print(i.activity_id.activity_name)
             #print(i.activity_id.type)
             #print(i.activity_id.description)
-            print(i.activity_id.image)
+            #print(i.activity_id.image)
             activity_list.append(myList)
         #print(activity_list)
         #print(activity)

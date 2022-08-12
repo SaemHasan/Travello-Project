@@ -43,12 +43,12 @@ const [list, setList] = useState([]);
                   //console.log(response)
 
 
-                while (dataList.length!=0) {
+                while (dataList.length !== 0) {
                   //console.log(response[i])
                   //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
                   dataList.pop()
                 }
-                while (activityFilterList.length!=0) {
+                while (activityFilterList.length !== 0) {
                   //console.log(response[i])
                   //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
                   activityFilterList.pop()
@@ -108,12 +108,12 @@ const [list, setList] = useState([]);
                   //console.log(response)
 
 
-                while (dataList.length!=0) {
+                while (dataList.length !== 0) {
                   //console.log(response[i])
                   //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
                   dataList.pop()
                 }
-                while (foodFilterList.length!=0) {
+                while (foodFilterList.length !== 0) {
                   //console.log(response[i])
                   //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
                   foodFilterList.pop()
@@ -165,12 +165,12 @@ const [list, setList] = useState([]);
                   //console.log(response)
 
 
-                while (dataList.length!=0) {
+                while (dataList.length !== 0) {
                   //console.log(response[i])
                   //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
                   dataList.pop()
                 }
-                while (placeFilterList.length!=0) {
+                while (placeFilterList.length !== 0) {
                   //console.log(response[i])
                   //myList = {'id': response[i].id, 'title': response[i].title, 'activity': response[i].activity}
                   placeFilterList.pop()

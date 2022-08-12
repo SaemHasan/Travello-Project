@@ -41,7 +41,7 @@ class HotelViewSet(viewsets.ModelViewSet):
         for h in hotel:
             #print(food_id[f])
             hotel_atb = Hotel_Attribute_Table.objects.all().filter(hotel_id_id=h.hotel_id)
-            print(hotel_atb)
+            #print(hotel_atb)
             atb_list = []
             for atb in hotel_atb:
                 atb_list.append(atb.attribute_id.attribute_name.lower())

@@ -276,4 +276,19 @@ export default class AdminAPI {
       },
     });
   }
+
+  static UpdateDB(body, type, id) {
+    return fetch(`http://127.0.0.1:8000/api/${type}/${id}/`, {
+      method: "PUT",
+      "Content-Type": "multipart/form-data",
+      // headers: {
+      // "Content-Type": "application/json",
+      // "Content-Type": "multipart/form-data",
+      // boundary: "something",
+      // 'Authorization':`Token ${token}`
+      // },
+      // body: JSON.stringify(body),
+      body: body,
+    }).then((resp) => resp.json());
+  }
 }

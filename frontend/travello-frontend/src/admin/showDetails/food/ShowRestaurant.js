@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 
 import Typography from "@material-ui/core/Typography";
 import AdminAPI from "../../AdminAPI";
-import AddActivityTypeModal from "../../activity/AddActivityTypeModal";
 import AddRestaurantModal from "../../food/AddRestaurantModal";
 
 export default function ShowRestaurant() {

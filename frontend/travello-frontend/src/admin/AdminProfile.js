@@ -1,4 +1,3 @@
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 function AdminInfo(props) {
   return (
     <div>

@@ -266,4 +266,14 @@ export default class AdminAPI {
       },
     }).then((resp) => resp.json());
   }
+
+  static async deleteFromDB(type, id) {
+    return await fetch(`http://127.0.0.1:8000/api/${type}/${id}/`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Authorization':`Token ${token}`
+      },
+    });
+  }
 }

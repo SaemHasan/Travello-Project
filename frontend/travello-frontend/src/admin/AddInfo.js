@@ -7,7 +7,7 @@ import HotelGridShow from "./hotel/ShowHotelCards";
 import { Button, ButtonGroup } from "@mui/material";
 
 export default function AddInfo() {
-  const [showPlace, setShowPlace] = useState(false);
+  const [showPlace, setShowPlace] = useState(true);
   const [showActivity, setShowActivity] = useState(false);
   const [showFood, setShowFood] = useState(false);
   const [showHotel, setShowHotel] = useState(false);

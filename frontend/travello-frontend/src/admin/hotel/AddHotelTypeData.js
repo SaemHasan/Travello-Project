@@ -49,6 +49,6 @@ export const typeArray = [
     title: "Add Hotel Rating Info",
     description:
       "Admin can add details of a hotel rating info to the database.",
-    navigate: "/hotelratinginfo",
+    navigate: "/showhotelratinginfo",
   },
 ];

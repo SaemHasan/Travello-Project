@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Spot, Place, PlaceRatingInfo, SpotType_Table, Spot_Type, User_Spot, Spot_Food, Spot_Activity, Review
+from .models import Spot, Place, PlaceRatingInfo, SpotType_Table, Spot_Type, User_Spot, Spot_Food, Spot_Activity, \
+    Review, User_Place
 
 # Register your models here.
 admin.site.register(Spot)
@@ -10,4 +11,5 @@ admin.site.register(Spot_Type)
 admin.site.register(User_Spot)
 admin.site.register(Spot_Food)
 admin.site.register(Spot_Activity)
+admin.site.register(User_Place)
 admin.site.register(Review)

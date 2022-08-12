@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import PlaceViewSet, SpotViewSet, SpotTypeTableViewSet, PlaceRatingInfoViewSet, SpotTypeViewSet, \
-    User_SpotViewSet, Spot_FoodViewSet, Spot_ActivityViewSet, SpotRatingInfoViewSet, ReviewViewSet
+    User_SpotViewSet, Spot_FoodViewSet, Spot_ActivityViewSet, SpotRatingInfoViewSet, ReviewViewSet, UserPlaceViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
@@ -14,6 +14,7 @@ router.register('spot_foods', Spot_FoodViewSet, basename='spot_foods')
 router.register('spot_activities', Spot_ActivityViewSet, basename='spot_activities')
 router.register('spot_rating_infos', SpotRatingInfoViewSet, basename='spot_rating_infos')
 router.register('reviews', ReviewViewSet, basename='reviews')
+router.register('user_places', UserPlaceViewSet, basename='user_places')
 
 
 urlpatterns = [

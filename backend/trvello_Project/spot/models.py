@@ -86,6 +86,15 @@ class User_Spot(models.Model):
         return self.user_id.username + " " + self.spot_id.name
 
 
+class User_Place(models.Model):
+    user_place_id = models.BigAutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    place_id = models.ForeignKey(Place, on_delete=models.CASCADE, default=None)
+
+    def __str__(self):
+        return self.user_id.username + " " + self.place_id.name
+
+
 class Spot_Food(models.Model):
     spot_food_id = models.BigAutoField(primary_key=True)
     spot_id = models.ForeignKey(Spot, on_delete=models.CASCADE, default=None)

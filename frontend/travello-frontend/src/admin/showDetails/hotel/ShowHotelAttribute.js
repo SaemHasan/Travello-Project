@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import AdminAPI from "../../AdminAPI";
 
-export default function ShowRoom() {
+export default function ShowHotelAttribute() {
   const [data, setData] = useState([]);
-  const type = "rooms";
+  const type = "hotel_attributes";
   useEffect(() => {
     async function fetchData() {
       await AdminAPI.getFromDB(type).then(async (res) => {
@@ -19,21 +19,23 @@ export default function ShowRoom() {
 
   return (
     <div>
-      <h1>Rooms</h1>
+      <h1>Show Hotel Attribute</h1>
       <Grid container spacing={3}>
         {data.map((item) => (
-          <Grid item xs={12} md={4} key={item.id}>
+          <Grid item xs={12} md={3} key={item.id}>
             <Card sx={{ maxWidth: 345 }}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Room no : {item.room_no}
+                  Attribute ID : {item.attribute_id}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Type : {item.room_type}
+                  Attribute Name: {item.attribute_name}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Hotel id : {item.hotel_id}
-                </Typography>
+                {item.attribute_value && (
+                  <Typography variant="body2" color="text.secondary">
+                    Attribute Value: {item.attribute_value}
+                  </Typography>
+                )}
               </CardContent>
               <CardActions>
                 <Button size="small" variant="contained" color="success">

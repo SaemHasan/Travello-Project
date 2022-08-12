@@ -38,6 +38,8 @@ import ShowFoodTypeTable from "./admin/showDetails/food/ShowFoodType";
 import ShowFoodTypeRelation from "./admin/showDetails/food/ShowFoodTypeRelation";
 import ShowHotel from "./admin/showDetails/hotel/ShowHotel";
 import ShowRoom from "./admin/showDetails/hotel/ShowRoom";
+import ShowHotelAttribute from "./admin/showDetails/hotel/ShowHotelAttribute";
+import ShowHotelAttributeRelation from "./admin/showDetails/hotel/ShowHotelAttributeRelation";
 
 export default function App() {
   return (
@@ -89,6 +91,11 @@ export default function App() {
             element={<ShowFoodTypeRelation />}
           />
           <Route path="showhotel" element={<ShowHotel />} />
+          <Route path="showhotelattribute" element={<ShowHotelAttribute />} />
+          <Route
+            path="showhotelattributerelation"
+            element={<ShowHotelAttributeRelation />}
+          />
           <Route path="showroom" element={<ShowRoom />} />
           {/*admin part finish*/}
         </Route>

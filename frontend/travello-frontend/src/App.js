@@ -40,6 +40,8 @@ import ShowHotel from "./admin/showDetails/hotel/ShowHotel";
 import ShowRoom from "./admin/showDetails/hotel/ShowRoom";
 import ShowHotelAttribute from "./admin/showDetails/hotel/ShowHotelAttribute";
 import ShowHotelAttributeRelation from "./admin/showDetails/hotel/ShowHotelAttributeRelation";
+import ShowRoomAttribute from "./admin/showDetails/hotel/ShowRoomAttribute";
+import ShowRoomAttributeRelation from "./admin/showDetails/hotel/ShowRoomAttributeRelation";
 
 export default function App() {
   return (
@@ -97,6 +99,11 @@ export default function App() {
             element={<ShowHotelAttributeRelation />}
           />
           <Route path="showroom" element={<ShowRoom />} />
+          <Route path="showroomattribute" element={<ShowRoomAttribute />} />
+          <Route
+            path="showroomattributerelation"
+            element={<ShowRoomAttributeRelation />}
+          />
           {/*admin part finish*/}
         </Route>
 

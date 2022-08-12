@@ -11,9 +11,12 @@ import { useEffect, useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import AdminAPI from "../../AdminAPI";
 import AddActivityModal from "../../activity/AddActivityModal";
+import UpdateActivityModal from "../../update/activity/UpdateActivity";
 
 export default function ShowActivity() {
   const [data, setData] = useState([]);
+  const [updateShow, setUpdateShow] = useState(false);
+  const [updateItem, setUpdateItem] = useState({});
   const type = "activities";
   async function fetchData() {
     await AdminAPI.getFromDB(type).then(async (res) => {
@@ -39,6 +42,16 @@ export default function ShowActivity() {
   const handleClose = (type) => {
     setShowModal(false);
     window.location.reload(false);
+  };
+
+  const handleUpdateClose = (refresh) => {
+    setUpdateShow(false);
+    if (refresh) window.location.reload(false);
+  };
+
+  const handleUpdateShow = async (item) => {
+    await setUpdateItem(item);
+    setUpdateShow(true);
   };
 
   return (
@@ -86,7 +99,12 @@ export default function ShowActivity() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" variant="contained" color="success">
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="success"
+                  onClick={() => handleUpdateShow(item)}
+                >
                   Update
                 </Button>
                 <Button
@@ -102,6 +120,14 @@ export default function ShowActivity() {
           </Grid>
         ))}
       </Grid>
+      {updateShow && (
+        <UpdateActivityModal
+          type={type}
+          item={updateItem}
+          handleClose={handleUpdateClose}
+          show={updateShow}
+        />
+      )}
     </div>
   );
 }

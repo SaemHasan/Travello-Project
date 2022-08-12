@@ -20,13 +20,15 @@ const Home = () => {
   useEffect(() => {
       async function fetchData() {
 
-              console.log("running");
+              //console.log("running");
               //setSelectedCategory('place');
               // You can await here
 
-                const my_places = await ExploreAPI.getAllPlaces();
-                const spots = await ExploreAPI.getAllSpot(1);
+
+                //const spots = await ExploreAPI.getAllSpot(1);
                 const allspots = await ExploreAPI.getAllSpots();
+                //console.log(allspots.length);
+                const my_places = await ExploreAPI.getAllPlaces(allspots.length);
                 const activity_name = await ExploreAPI.getActivitiesNames();
                 const food_filter_response = await ExploreAPI.getFoodFilters();
                 const place_filter_list = await ExploreAPI.getSpotTypeNames();
@@ -55,14 +57,14 @@ const Home = () => {
                  {my_places.map((r) => (
 
                     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
-                    dataList.push({id: r.id, title: r.title,   category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc,place_id:r.place_id})
+                    dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc,place_id:r.place_id})
 
                 ))};
 
             {allspots.map((r) => (
 
                     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
-                    dataList.push({id: r.id, title: r.title,   category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc, place_id : r.place_id})
+                    dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc, place_id : r.place_id})
 
                 ))};
             //console.log(dataList);
@@ -90,7 +92,6 @@ const Home = () => {
             for (let m =0; m < dataList.length; m++)
             {
               dataList[m].food = []
-
             }
             for (let m =0; m < dataList.length; m++)
             {
@@ -100,7 +101,7 @@ const Home = () => {
             {
               dataList[m].place = []
             }
-            console.log(allspots.length);
+            //console.log(allspots.length);
             for (let i = 0; i < allspots.length; i++) {
               const response = await ExploreAPI.getAllFood(i+1);
               //console.log(i);
@@ -124,7 +125,7 @@ const Home = () => {
                 if (dataList[j].title === allspots[i].title)
                 {
                   dataList[j].food = uniqueArray;
-                  console.log("rakin");
+                  //console.log("rakin");
                   break;
                 }
               }
@@ -196,7 +197,7 @@ const Home = () => {
 
             for (let i = 0; i < allspots.length; i++) {
               const response = await ExploreAPI.getAllSpotTypeExplore(i+1);
-              console.log(response);
+              //console.log(response);
 
               let templist = [];
               {response.map((r) => (
@@ -246,7 +247,7 @@ const Home = () => {
 
 
 
-            console.log(dataList);
+            //console.log(dataList);
             setList(dataList);
             setResultsFound(true);
 
@@ -332,7 +333,7 @@ const Home = () => {
 
     }
     //var str = "filtersChecked.includes(item.food[0]) || filtersChecked.includes(item.food[1])"
-    console.log(str)
+    //console.log(str)
     return str
 }
 
@@ -349,7 +350,7 @@ const Home = () => {
         }
     }
     //var str = "filtersChecked.includes(item.food[0]) || filtersChecked.includes(item.food[1])"
-    console.log(str)
+    //console.log(str)
     return str
 }
 
@@ -361,7 +362,7 @@ const Home = () => {
 
     }
     //var str = "filtersChecked.includes(item.food[0]) || filtersChecked.includes(item.food[1])"
-    console.log(str)
+    //console.log(str)
     return str
 }
 

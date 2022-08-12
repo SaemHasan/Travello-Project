@@ -49,7 +49,7 @@ class HotelViewSet(viewsets.ModelViewSet):
                       'coverSrc': str(h.image), 'place': atb_list}
             hotel_list.append(myList)
 
-        print(hotel_list)
+        #print(hotel_list)
         return Response(hotel_list)
 
 

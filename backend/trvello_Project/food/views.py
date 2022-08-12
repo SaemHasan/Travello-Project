@@ -26,9 +26,9 @@ class FoodViewSet(viewsets.ModelViewSet):
     def getFoodDetails(self, request):
         food_id_list = request.data['food_id_list']
         foods = Food.objects.all()
-        print("=====================================================")
+        #print("=====================================================")
         #print(food_id_list)
-        print("=====================================================")
+        #print("=====================================================")
         return Response(FoodSerializer(foods, many=True).data)
 
     @action(detail=False, methods=['post', 'get', 'put'])
@@ -90,9 +90,9 @@ class Food_TypeViewSet(viewsets.ModelViewSet):
         final_food_list = []
         # activity = Spot_Activity.objects.get(spot_id = spot_id)
         for f in range(len(food_id)):
-            print(food_id[f])
+            #print(food_id[f])
             food = Food.objects.all().filter(food_id=food_id[f])
-            print(food)
+            #print(food)
             for k in food:
             #food2 = Food.objects.all().filter(food_id=food_id[1])
             #food = food1.expand(food2)
@@ -102,10 +102,10 @@ class Food_TypeViewSet(viewsets.ModelViewSet):
                 food_type = Food_Type.objects.all().filter(food_id=food_id[f])
                 type_list = []
                 for t in food_type:
-                    print(t)
+                    #print(t)
                     type_list.append(t.type_id.type_name.lower())
                     #print(food_type[1])
-                print(type_list)
+                #print(type_list)
                 myList = {'id': k.food_id, 'title': k.food_name, 'desc': k.short_description,
                   'coverSrc': str(k.image), 'food':type_list}
                 final_food_list.append(myList)
@@ -117,6 +117,6 @@ class Food_TypeViewSet(viewsets.ModelViewSet):
         #     food_id_list.append(myList)
         # # print(spots)
 
-        print(final_food_list)
+        #print(final_food_list)
         return Response(final_food_list)
 

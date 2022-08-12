@@ -1,12 +1,12 @@
 export default class ExploreAPI {
-  static getAllPlaces() {
+  static getAllPlaces(spotsLength) {
     return fetch(`http://127.0.0.1:8000/api/places/getAllPlaces/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         // Authorization: `Token ${token}`,
       },
-      body: JSON.stringify(),
+      body: JSON.stringify({spotsLength : spotsLength}),
     }).then((resp) => resp.json());
   }
 

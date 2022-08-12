@@ -2,8 +2,8 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 function AdminInfo(props) {
   return (
     <div>
-      <div className="row">
-        <div className="card center" style={{ width: "24rem" }}>
+      <div className="row center">
+        <div className="card justify-content-center" style={{ width: "24rem" }}>
           <img className="card-img-top" src={props.image} alt="admin" />
 
           {/*<AdminPanelSettingsIcon />*/}

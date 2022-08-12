@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Place, PlaceRatingInfo, Spot, SpotType_Table, Spot_Type, User_Spot, Spot_Food, Spot_Activity, \
-    SpotRatingInfo, Review
+    SpotRatingInfo, Review, User_Place
 
 
 class PlaceRatingInfoSerializer(serializers.ModelSerializer):
@@ -24,9 +24,11 @@ class SpotTypeSerializer(serializers.ModelSerializer):
 class PlaceSerializer(serializers.HyperlinkedModelSerializer):
     image = serializers.ImageField(
         max_length=None, allow_empty_file=True, allow_null=True, use_url=True, required=False, default=None)
+
     class Meta:
         model = Place
-        fields = ['place_id', 'name', 'short_description', 'image', 'district', 'cordinate_lattitude', 'cordinate_longitude', 'rating']
+        fields = ['place_id', 'name', 'short_description', 'image', 'district', 'cordinate_lattitude',
+                  'cordinate_longitude', 'rating']
         # fields = '__all__'
 
 
@@ -39,6 +41,12 @@ class SpotType_TableSerializer(serializers.ModelSerializer):
 class User_SpotSerializer(serializers.ModelSerializer):
     class Meta:
         model = User_Spot
+        fields = '__all__'
+
+
+class User_PlaceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User_Place
         fields = '__all__'
 
 

@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 
 import Typography from "@material-ui/core/Typography";
 import AdminAPI from "../../AdminAPI";
-import AddActivityTypeModal from "../../activity/AddActivityTypeModal";
-import AddFoodRatingModal from "../../food/AddFoodRatingInfoModal";
 import AddFoodRestaurantModal from "../../food/AddFoodRestaurantModal";
 
 export default function ShowFoodRestaurant() {

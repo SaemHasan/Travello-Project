@@ -1,14 +1,21 @@
-import { Button, Card, CardActions, CardContent, Grid } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 
 import Typography from "@material-ui/core/Typography";
 import AdminAPI from "../../AdminAPI";
-import AddActivityPriceModal from "../../activity/AddActivityPriceInfoModal";
-import AddActivityAgencyModal from "../../activity/AddActivity_AgencyModal";
+import AddFoodModal from "../../food/AddFoodModal";
+import AddHotelModal from "../../hotel/AddHotelModal";
 
-export default function ShowActivityAgency() {
+export default function ShowHotel() {
   const [data, setData] = useState([]);
-  const type = "activity_agencies";
+  const type = "hotels";
   async function fetchData() {
     await AdminAPI.getFromDB(type).then(async (res) => {
       await setData(res);
@@ -37,10 +44,10 @@ export default function ShowActivityAgency() {
 
   return (
     <div>
-      {/*<h1>Activity Agency</h1>*/}
+      {/*<h1>Hotels</h1>*/}
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <h2>Activity Agency</h2>
+          <h2>Hotel</h2>
         </Grid>
         <Grid item xs={6}>
           <Button
@@ -49,35 +56,30 @@ export default function ShowActivityAgency() {
             color="primary"
             onClick={handleAddModalShow}
           >
-            Add Activity Agency
+            Add Hotel
           </Button>
         </Grid>
       </Grid>
 
       {showModal && (
-        <AddActivityAgencyModal
-          type={type}
-          handleClose={handleClose}
-          show={showModal}
-        />
+        <AddHotelModal type={type} handleClose={handleClose} show={showModal} />
       )}
       <Grid container spacing={3}>
         {data.map((item) => (
-          <Grid item xs={12} md={3} key={item.id}>
+          <Grid item xs={12} md={4} key={item.id}>
             <Card sx={{ maxWidth: 345 }}>
+              <CardMedia
+                component="img"
+                alt="Place"
+                height="140"
+                image={item.image}
+              />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Activity Agency ID : {item.activity_agency_id}
+                  {item.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Activity ID : {item.activity_id}
-                </Typography>
-
-                <Typography variant="body2" color="text.secondary">
-                  Agency ID : {item.agency_id}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Rating : {item.rating}
+                  {item.short_description}
                 </Typography>
               </CardContent>
               <CardActions>
@@ -88,7 +90,7 @@ export default function ShowActivityAgency() {
                   size="small"
                   variant="contained"
                   color="error"
-                  onClick={() => handleDelete(item.activity_agency_id)}
+                  onClick={() => handleDelete(item.hotel_id)}
                 >
                   Delete
                 </Button>

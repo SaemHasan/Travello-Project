@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { Collapse, Button, ButtonGroup } from "react-bootstrap";
+import { Collapse } from "react-bootstrap";
 import SpotGridShow from "./spot/ShowSpotCards";
 import ActivityGridShow from "./activity/ShowActivityCards";
 import FoodGridShow from "./food/ShowFoodCards";
 import HotelGridShow from "./hotel/ShowHotelCards";
+import { Button, ButtonGroup } from "@mui/material";
 
 export default function AddInfo() {
-  const [showPlace, setShowPlace] = useState(false);
+  const [showPlace, setShowPlace] = useState(true);
   const [showActivity, setShowActivity] = useState(false);
   const [showFood, setShowFood] = useState(false);
   const [showHotel, setShowHotel] = useState(false);
@@ -39,19 +40,14 @@ export default function AddInfo() {
   return (
     <div className="container">
       <div className="justify-content-center center">
-        <ButtonGroup size="lg" className="mb-2">
-          <Button variant="success" onClick={handlePlace}>
-            Add Place
-          </Button>
-          <Button variant="success" onClick={handleActivity}>
-            Add Activity
-          </Button>
-          <Button variant="success" onClick={handleFood}>
-            Add Food
-          </Button>
-          <Button variant="success" onClick={handleHotel}>
-            Add Hotel
-          </Button>
+        <ButtonGroup
+          variant="contained"
+          aria-label="outlined primary button group"
+        >
+          <Button onClick={handlePlace}>Add Place</Button>
+          <Button onClick={handleActivity}>Add Activity</Button>
+          <Button onClick={handleFood}>Add Food</Button>
+          <Button onClick={handleHotel}>Add Hotel</Button>
         </ButtonGroup>
       </div>
       <div>

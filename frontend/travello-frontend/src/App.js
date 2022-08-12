@@ -36,6 +36,14 @@ import ShowFoodPriceInfo from "./admin/showDetails/food/ShowFoodPriceInfo";
 import ShowFoodRatingInfo from "./admin/showDetails/food/ShowFoodRatingInfo";
 import ShowFoodTypeTable from "./admin/showDetails/food/ShowFoodType";
 import ShowFoodTypeRelation from "./admin/showDetails/food/ShowFoodTypeRelation";
+import ShowHotel from "./admin/showDetails/hotel/ShowHotel";
+import ShowRoom from "./admin/showDetails/hotel/ShowRoom";
+import ShowHotelAttribute from "./admin/showDetails/hotel/ShowHotelAttribute";
+import ShowHotelAttributeRelation from "./admin/showDetails/hotel/ShowHotelAttributeRelation";
+import ShowRoomAttribute from "./admin/showDetails/hotel/ShowRoomAttribute";
+import ShowRoomAttributeRelation from "./admin/showDetails/hotel/ShowRoomAttributeRelation";
+import ShowRoomPriceInfo from "./admin/showDetails/hotel/ShowRoomPriceInfo";
+import ShowHotelRatingInfo from "./admin/showDetails/hotel/ShowHotelRatingInfo";
 
 export default function App() {
   return (
@@ -86,6 +94,20 @@ export default function App() {
             path="showfoodtyperelation"
             element={<ShowFoodTypeRelation />}
           />
+          <Route path="showhotel" element={<ShowHotel />} />
+          <Route path="showhotelattribute" element={<ShowHotelAttribute />} />
+          <Route
+            path="showhotelattributerelation"
+            element={<ShowHotelAttributeRelation />}
+          />
+          <Route path="showroom" element={<ShowRoom />} />
+          <Route path="showroomattribute" element={<ShowRoomAttribute />} />
+          <Route
+            path="showroomattributerelation"
+            element={<ShowRoomAttributeRelation />}
+          />
+          <Route path="showroompriceinfo" element={<ShowRoomPriceInfo />} />
+          <Route path="showhotelratinginfo" element={<ShowHotelRatingInfo />} />
           {/*admin part finish*/}
         </Route>
 

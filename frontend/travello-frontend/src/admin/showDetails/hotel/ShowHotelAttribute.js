@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 
 import Typography from "@material-ui/core/Typography";
 import AdminAPI from "../../AdminAPI";
-import AddActivityPriceModal from "../../activity/AddActivityPriceInfoModal";
-import AddActivityAgencyModal from "../../activity/AddActivity_AgencyModal";
+import AddFoodModal from "../../food/AddFoodModal";
+import AddHotelAttributeModal from "../../hotel/AddHotelAttributeModal";
 
-export default function ShowActivityAgency() {
+export default function ShowHotelAttribute() {
   const [data, setData] = useState([]);
-  const type = "activity_agencies";
+  const type = "hotel_attributes";
   async function fetchData() {
     await AdminAPI.getFromDB(type).then(async (res) => {
       await setData(res);
@@ -37,10 +37,10 @@ export default function ShowActivityAgency() {
 
   return (
     <div>
-      {/*<h1>Activity Agency</h1>*/}
+      {/*<h1>Show Hotel Attribute</h1>*/}
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <h2>Activity Agency</h2>
+          <h2>Hotel Attribute</h2>
         </Grid>
         <Grid item xs={6}>
           <Button
@@ -49,13 +49,13 @@ export default function ShowActivityAgency() {
             color="primary"
             onClick={handleAddModalShow}
           >
-            Add Activity Agency
+            Add Hotel Attribute
           </Button>
         </Grid>
       </Grid>
 
       {showModal && (
-        <AddActivityAgencyModal
+        <AddHotelAttributeModal
           type={type}
           handleClose={handleClose}
           show={showModal}
@@ -67,18 +67,16 @@ export default function ShowActivityAgency() {
             <Card sx={{ maxWidth: 345 }}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Activity Agency ID : {item.activity_agency_id}
+                  Attribute ID : {item.attribute_id}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Activity ID : {item.activity_id}
+                  Attribute Name: {item.attribute_name}
                 </Typography>
-
-                <Typography variant="body2" color="text.secondary">
-                  Agency ID : {item.agency_id}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Rating : {item.rating}
-                </Typography>
+                {item.attribute_value && (
+                  <Typography variant="body2" color="text.secondary">
+                    Attribute Value: {item.attribute_value}
+                  </Typography>
+                )}
               </CardContent>
               <CardActions>
                 <Button size="small" variant="contained" color="success">
@@ -88,7 +86,7 @@ export default function ShowActivityAgency() {
                   size="small"
                   variant="contained"
                   color="error"
-                  onClick={() => handleDelete(item.activity_agency_id)}
+                  onClick={() => handleDelete(item.attribute_id)}
                 >
                   Delete
                 </Button>

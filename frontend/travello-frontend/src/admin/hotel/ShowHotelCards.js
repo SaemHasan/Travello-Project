@@ -11,6 +11,7 @@ import AddRoomAttributeRelationModal from "./AddRoomAttributeRelationModal";
 import AddRoomPriceInfoModal from "./AddRoomPriceInfoModal";
 import AddHotelRatingInfoModal from "./AddHotelRatingInfoModal";
 import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 
 function HotelGridShow() {
   const [type, setType] = useState([]);
@@ -24,6 +25,7 @@ function HotelGridShow() {
     useState(false);
   const [roomPriceInfoClick, setRoomPriceInfoClick] = useState(false);
   const [hotelRatingInfoClick, setHotelRatingInfoClick] = useState(false);
+  let navigate = useNavigate();
 
   const handleClick = async (type) => {
     // console.log(type);
@@ -95,7 +97,12 @@ function HotelGridShow() {
             <Grid item xs={2} sm={4} md={4} key={idx}>
               <Card>
                 <Card.Header>
-                  <Button variant="info">{card.type}</Button>
+                  <Button
+                    variant="info"
+                    onClick={() => navigate(card.navigate)}
+                  >
+                    {card.type}
+                  </Button>
                 </Card.Header>
                 <Card.Img
                   variant="bottom"

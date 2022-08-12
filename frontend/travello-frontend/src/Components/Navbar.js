@@ -16,10 +16,10 @@ const Navbar = () => {
     if (token) {
       APIService.getUserObject(token)
         .then(async (user) => {
-          console.log("setting user");
+          // console.log("setting user");
           await setUser(user);
-          console.log("finished setting user");
-          console.log(user);
+          // console.log("finished setting user");
+          // console.log(user);
         })
         .catch((err) => {
           console.log(err);
@@ -40,7 +40,7 @@ const Navbar = () => {
   }, [token]);
 
   const LogoutBtn = () => {
-    console.log("LogoutBtn");
+    // console.log("LogoutBtn");
     localStorage.removeItem("token");
     setToken("");
     setLoggedIn(false);
@@ -48,9 +48,14 @@ const Navbar = () => {
   };
 
   const handleUserBtn = () => {
-    console.log("handleUserBtn");
-    console.log(user);
-    navigate("/user");
+    // console.log("handleUserBtn");
+    // console.log(user);
+    // console.log("is staff: ", user.is_staff);
+    if (user.username === "admin") {
+      navigate("/admin");
+    } else {
+      navigate("/user");
+    }
   };
 
   return (

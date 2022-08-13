@@ -17,12 +17,20 @@ export class SlidersActivity extends Component {
       frontend_img_path: "assets/activity/",
     };
   }
-  
 
   async componentDidMount() {
     const response = await HomeAPIService.getTopActivities(5);
     this.setState({ activities: response });
   }
+  
+  handleClick(activity) {
+    // console.log("food clicked");
+    localStorage.setItem("activity", JSON.stringify(activity));
+    localStorage.removeItem("place");
+    localStorage.removeItem("spot");
+  }
+
+
 
   render() {
     var imgSlides = () =>
@@ -32,6 +40,12 @@ export class SlidersActivity extends Component {
 
           <ul>
             <li>
+              <Link
+                underline="hover"
+                style={{ color: "black" }}
+                onClick={(e) => this.handleClick(slide)}
+                href="/oneActivity"
+              >
               <img
                 src={this.state.api_path + slide.image}
                 alt="slide"
@@ -49,18 +63,10 @@ export class SlidersActivity extends Component {
                     <p>
                       <b>{slide.description}</b>
                     </p>
-                    {/*<h4>This is image description</h4>*/}
-                    {/*<h4>This is image description</h4>*/}
-                    {/*<h4>This is image description</h4>*/}
-                    {/*<h4>This is image description</h4>*/}
-                    {/*<h4>This is image description</h4>*/}
-                    {/*<h4>This is image description</h4>*/}
-                    {/*<h4>This is image description</h4>*/}
-                    {/*<h4>This is image description</h4>*/}
-                    {/*<h4>This is image description</h4>*/}
+
                   </div>
                 </div>
-              </span>
+              </span></Link>
             </li>
           </ul>
 

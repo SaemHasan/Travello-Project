@@ -108,6 +108,31 @@ class Activity_AgencyViewSet(viewsets.ModelViewSet):
     queryset = Activity_Agency.objects.all()
     serializer_class = Activity_AgencySerializer
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getAgencyFromActivityID(self, request):
+        activity_id = int(request.data['activity_id'])
+        agency_ids = Activity_Agency.objects.all().filter(activity_id=activity_id)
+        print(agency_ids[0].agency_id.agency_id)
+        print(agency_ids[0].activity_agency_id)
+        price_id = []
+        for i in agency_ids:
+            price_id.append(ActivityPriceInfo.objects.all().filter(activity_agency_id=i.activity_agency_id))
+        print(price_id[0][0].price)
+        agencies = []
+        x = 0
+        for i in agency_ids:
+            myList = {'id': i.agency_id.agency_id, 'name': i.agency_id.agency_name,
+                      'email': i.agency_id.email, 'website': i.agency_id.website,
+                      'phoneno': i.agency_id.phone_number, 'price': price_id[x][0].price, }
+            x = x + 1
+            agencies.append(myList)
+        print(agencies)
+        # restaurants = []
+        # for i in restaurant_ids:
+
+        # restaurants_name = [restaurant.restaurant_name for restaurant in restaurants]
+        # print(restaurants.restaurant_id.restaurant_name)
+        return Response(agencies)
 
 class ActivityPriceInfoViewSet(viewsets.ModelViewSet):
     queryset = ActivityPriceInfo.objects.all()

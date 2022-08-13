@@ -29,7 +29,7 @@ function OneActivityDesc() {
             console.log("activity is not null");
             setOneActivity(activity);
             setName(activity.activity_name);
-            setDescription(activity.short_description);
+            setDescription(activity.description);
             setImgsrc(api_path + activity.image);
         }
     }, []);

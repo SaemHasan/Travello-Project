@@ -34,6 +34,7 @@ const Navbar = () => {
       console.log("token found");
       setToken(token);
       setLoggedIn(true);
+      //localStorage.setItem("log_in_user", JSON.stringify(user));
     } else {
       setLoggedIn(false);
     }

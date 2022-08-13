@@ -9,15 +9,20 @@ function ReviewBox(props) {
   // console.log(props.name);
   const [review, setReview] = React.useState("");
   const [user, setUser] = React.useState("");
+  const [showPlaceReview, setShowPlaceReview] = React.useState(false);
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"));
     if (token) {
-      console.log("token is not null");
+      // console.log("token is not null");
       APIService.getUserObject(token).then(async (data) => {
         console.log(data);
         await setUser(data);
       });
+    }
+    const p = JSON.parse(localStorage.getItem("place"));
+    if (p) {
+      setShowPlaceReview(true);
     }
   }, []);
 
@@ -42,23 +47,27 @@ function ReviewBox(props) {
   };
 
   return (
-    <div className="form">
-      {/*<h1>Review Here: </h1>*/}
-      <div className="form-body">
-        <TextField
-          id="review"
-          label="Add Review"
-          multiline
-          rows={4}
-          defaultValue={review}
-          variant="filled"
-          onChange={(e) => setReview(e.target.value)}
-        />
-      </div>
+    <div>
+      {showPlaceReview && (
+        <div className="form">
+          {/*<h1>Review Here: </h1>*/}
+          <div className="form-body">
+            <TextField
+              id="review"
+              label="Add Review"
+              multiline
+              rows={4}
+              defaultValue={review}
+              variant="filled"
+              onChange={(e) => setReview(e.target.value)}
+            />
+          </div>
 
-      <Button onClick={submitBtn} type="submit">
-        Submit
-      </Button>
+          <Button onClick={submitBtn} type="submit">
+            Submit
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

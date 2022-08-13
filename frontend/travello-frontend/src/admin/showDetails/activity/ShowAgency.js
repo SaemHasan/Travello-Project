@@ -28,8 +28,12 @@ export default function ShowAgency() {
   }, []);
 
   const handleDelete = async (id) => {
-    await AdminAPI.deleteFromDB(type, id);
-    fetchData().then(() => {});
+    let isExecuted = window.confirm("Are you sure to execute this action?");
+    console.log(isExecuted);
+    if (isExecuted) {
+      await AdminAPI.deleteFromDB(type, id);
+      fetchData().then(() => {});
+    }
   };
 
   const handleAddModalShow = () => {

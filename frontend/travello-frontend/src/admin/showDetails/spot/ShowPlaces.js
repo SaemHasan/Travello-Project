@@ -11,9 +11,12 @@ import { useEffect, useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import AdminAPI from "../../AdminAPI";
 import AddPlaceModal from "../../spot/AddPlaceModal";
+import UpdatePlaceModal from "../../update/spot/UpdatePlace";
 
 export default function ShowPlaces() {
   const [data, setData] = useState([]);
+  const [updateShow, setUpdateShow] = useState(false);
+  const [updateItem, setUpdateItem] = useState({});
   const type = "places";
   async function fetchData() {
     await AdminAPI.getFromDB(type).then(async (res) => {
@@ -39,6 +42,16 @@ export default function ShowPlaces() {
   const handleClose = (type) => {
     setShowModal(false);
     window.location.reload(false);
+  };
+
+  const handleUpdateClose = (refresh) => {
+    setUpdateShow(false);
+    if (refresh) window.location.reload(false);
+  };
+
+  const handleUpdateShow = async (item) => {
+    await setUpdateItem(item);
+    setUpdateShow(true);
   };
 
   return (
@@ -82,7 +95,12 @@ export default function ShowPlaces() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" variant="contained" color="success">
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="success"
+                  onClick={() => handleUpdateShow(item)}
+                >
                   Update
                 </Button>
                 <Button
@@ -98,6 +116,14 @@ export default function ShowPlaces() {
           </Grid>
         ))}
       </Grid>
+      {updateShow && (
+        <UpdatePlaceModal
+          type={type}
+          item={updateItem}
+          handleClose={handleUpdateClose}
+          show={updateShow}
+        />
+      )}
     </div>
   );
 }

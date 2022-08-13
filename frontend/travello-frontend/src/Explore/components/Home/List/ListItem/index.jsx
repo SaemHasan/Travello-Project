@@ -88,7 +88,7 @@ const ListItem = ({
     //localStorage.removeItem("food");
     // console.log(place);
   }
-  const toShow = desc.substring(0,230)+"...";
+
     const MAX_LENGTH = 150;
     return(
         // {{category} === "place" && (

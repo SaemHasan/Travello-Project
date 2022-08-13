@@ -8,7 +8,7 @@ const api_path = "http://127.0.0.1:8000/media/";
 const ListItem = ({
   item: { coverSrc, title, desc, price, deliveryFee, serviceTime, rating },
 }) =>{
-
+    const MAX_LENGTH = 150;
     console.log(api_path + coverSrc);
     const [places, setPlaces] = useState([
     { id: 1, checked: false, label: 'Mountain' },
@@ -31,10 +31,16 @@ const ListItem = ({
 
 
               <div>
-                <p className="heading-des-comp">
-                  {" "}
-                    {desc}
-                </p>
+                      <div>
+      {desc.length > MAX_LENGTH ?
+        (
+          <div className="heading-des">
+            {`${desc.substring(0, MAX_LENGTH)}...`}<p style={{color:"blue"}}><u>Read more</u></p>
+          </div>
+        ) :
+        <p>{desc}</p>
+      }
+    </div>
               </div>
             </div>
           </span>

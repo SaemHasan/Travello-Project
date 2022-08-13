@@ -8,9 +8,16 @@ import {
   Rating,
 } from "@mui/material";
 import Typography from "@material-ui/core/Typography";
+import {useNavigate} from "react-router-dom";
 
 export default function SearchResultPlace(props) {
   const data = props.result;
+  let navigate = useNavigate();
+
+  const handleLearnMore = (item) => {
+    localStorage.setItem("place", JSON.stringify(item));
+    navigate("/SinglePlace");
+  }
 
   if (data === undefined) {
     return (
@@ -46,7 +53,7 @@ export default function SearchResultPlace(props) {
                   <Rating name="read-only" value={item.rating} readOnly />
                 </CardContent>
                 <CardActions>
-                  <Button size="small" variant="contained" color="success">
+                  <Button size="small" variant="contained" color="success" onClick={(e) =>handleLearnMore(item)}>
                     Show More
                   </Button>
                 </CardActions>

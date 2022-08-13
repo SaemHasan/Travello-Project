@@ -7,9 +7,17 @@ import {
   Grid,
 } from "@mui/material";
 import Typography from "@material-ui/core/Typography";
+import {useNavigate} from "react-router-dom";
 
 export default function SearchResultFood(props) {
   const data = props.result;
+
+  let navigate = useNavigate();
+
+  const handleLearnMore = (item) => {
+    localStorage.setItem("food", JSON.stringify(item));
+    navigate("/oneFood");
+  }
 
   if (data === undefined) {
     return (
@@ -52,7 +60,7 @@ export default function SearchResultFood(props) {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" variant="contained" color="success">
+                  <Button size="small" variant="contained" color="success" onClick={(e) =>handleLearnMore(item)}>
                     Show More
                   </Button>
                 </CardActions>

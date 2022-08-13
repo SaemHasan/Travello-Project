@@ -17,11 +17,67 @@ function OneFoodDesc() {
   const [dataList, set_dataList] = useState([]);
   const [list, setList] = useState([]);
   const [sortedlist, setSortedList] = useState([]);
+  const Show_sorted = () => (
+              <div>
+            {sortedlist.map(article =>{
+                return(
+                    <div key={article.id}>
+                        <div
+        style={{
+          boxShadow: '1px 2px 9px #F4AAB9',
+          margin: '4em',
+          padding: '1em',
+
+        }}
+      >
+
+                           <p><b>{article.name}</b></p>
+                           <p>{article.email}</p>
+                           <p>{article.website}</p>
+                           <p>{article.phoneno}</p>
+                           <p>Price : {article.price} Taka</p>
+
+      </div>
+
+                    </div>
+                )
+            })}
+        </div>
+
+  )
+
+    const Show_unsorted = () =>(
+                <div>
+            {list.map(article =>{
+                return(
+                    <div key={article.id}>
+                        <div
+        style={{
+          boxShadow: '1px 2px 9px #F4AAB9',
+          margin: '4em',
+          padding: '1em',
+
+        }}
+      >
+
+                           <p><b>{article.name}</b></p>
+                           <p>{article.email}</p>
+                           <p>{article.website}</p>
+                           <p>{article.phoneno}</p>
+                           <p>Price : {article.price} Taka</p>
+      </div>
+
+                    </div>
+                )
+            })}
+        </div>
+    )
 
 
   useEffect(() => {
       const food = JSON.parse(localStorage.getItem("food"));
       const api_path = "http://127.0.0.1:8000";
+
 
       if (food !== null) {
         console.log("food is not null");
@@ -41,24 +97,27 @@ function OneFoodDesc() {
                     dataList.push({id: r.id, name: r.name, email: r.email,  website: r.website, phoneno: r.phoneno, price: r.price,})
                 ))};
           setList(dataList);
-          console.log(list);
+          //console.log(list);
       }
       function sortlist(){
 
-        let my_list = list;
+        let my_list = dataList;
         console.log("my_list");
-        console.log(list);
-        console.log(my_list);
+        //console.log(dataList);
+        //console.log(my_list);
         my_list.sort(function(sixth, second) {
   return sixth[1] - second[1];});
         my_list.reverse();
         console.log(my_list);
+        const t = my_list
         setSortedList(my_list);
-        console.log(sortedlist);
+        set_dataList(t);
+        console.log(t);
+        console.log(sortlist);
     }
       fetchData();
       sortlist();
-        }, []);
+        }, [sortlist]);
 
   //
   //   const p = JSON.parse(localStorage.getItem("place"));
@@ -173,62 +232,16 @@ function OneFoodDesc() {
         <p style={{ marginLeft: "10px" }}>{description}</p>
       </div>
         <div> <Button style={{float:"right", }} onClick={makesortlist}> <b>Sort by price</b> </Button> </div>
-        {sortlist === false && (
-        <div>
-            {list.map(article =>{
-                return(
-                    <div key={article.id}>
-                        <div
-        style={{
-          boxShadow: '1px 2px 9px #F4AAB9',
-          margin: '4em',
-          padding: '1em',
 
-        }}
-      >
+        {sortlist && <Show_sorted />}
+        {!sortlist && <Show_unsorted />}
 
-                           <p><b>{article.name}</b></p>
-                           <p>{article.email}</p>
-                           <p>{article.website}</p>
-                           <p>{article.phoneno}</p>
-                           <p>Price : {article.price} Taka</p>
-      </div>
 
-                    </div>
-                )
-            })}
-        </div>
 
-            )}
 
-        {sortlist === true && (
-        <div>
-            {sortedlist.map(article =>{
-                return(
-                    <div key={article.id}>
-                        <div
-        style={{
-          boxShadow: '1px 2px 9px #F4AAB9',
-          margin: '4em',
-          padding: '1em',
 
-        }}
-      >
-
-                           <p><b>{article.name}</b></p>
-                           <p>{article.email}</p>
-                           <p>{article.website}</p>
-                           <p>{article.phoneno}</p>
-                           <p>Price : {article.price} Taka</p>
-      </div>
-
-                    </div>
-                )
-            })}
-        </div>
-
-            )}
     </div>
+
   );
 }
 

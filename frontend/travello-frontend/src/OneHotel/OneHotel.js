@@ -2,6 +2,7 @@ import "../App.css";
 import React, { useEffect, useState } from "react";
 import {Link} from "@mui/material";
 import ComparisonAPI from "../Comparison/ComparisonAPI";
+import OneHotelAPI from "./OneHotelAPI";
 
 
 
@@ -21,7 +22,7 @@ function OneHotel() {
 
 
       const hotel_id = JSON.parse(localStorage.getItem("hotel_id"));
-      const hotel_response = await ComparisonAPI.getAllActivity(hotel_id);
+      const hotel_response = await OneHotelAPI.getOneHotel(hotel_id);
       console.log(hotel_response)
 
 

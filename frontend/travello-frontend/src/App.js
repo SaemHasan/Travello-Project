@@ -46,6 +46,7 @@ import ShowRoomAttribute from "./admin/showDetails/hotel/ShowRoomAttribute";
 import ShowRoomAttributeRelation from "./admin/showDetails/hotel/ShowRoomAttributeRelation";
 import ShowRoomPriceInfo from "./admin/showDetails/hotel/ShowRoomPriceInfo";
 import ShowHotelRatingInfo from "./admin/showDetails/hotel/ShowHotelRatingInfo";
+import OneHotel from "./OneHotel/OneHotel"
 
 export default function App() {
   return (
@@ -57,6 +58,7 @@ export default function App() {
           <Route path="About" element={<About />} />
           <Route path="Explore" element={<Explore />} />
           <Route path="Comparison" element={<Comparison />} />
+          <Route path="OneHotel" element={<OneHotel />} />
           <Route path="OnePlace" element={<OnePlace />} />
           <Route path="OneFood" element={<OneFood />} />
           <Route path="OneActivity" element={<OneActivity />} />

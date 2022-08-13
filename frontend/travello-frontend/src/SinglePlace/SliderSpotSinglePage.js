@@ -61,7 +61,7 @@ export class SlidersSpot extends Component {
                   alt="slide"
                   className="imgdetails"
                 />
-                <h2>{slide.name}</h2>
+                <h2 style={{textAlign:"center"}}>{slide.name}</h2>
                 <span className="large-slide">
                   <div className="div-color-slide">
                     <img
@@ -85,14 +85,14 @@ export class SlidersSpot extends Component {
       ));
     return (
       <div id="explore">
-        <div style={{ marginBottom: "40px", marginLeft: "40px" }}>
+        <div style={{ marginBottom: "40px", marginLeft: "400px" }}>
           <Slider
-            dots={true}
-            slidesToShow={2}
+            dots={false}
+            slidesToShow={1}
             slidesToScroll={1}
             autoplay={true}
-            arrows={true}
-            autoplaySpeed={3000}
+            arrows={false}
+            autoplaySpeed={1000}
           >
             {imgSlides()}
           </Slider>

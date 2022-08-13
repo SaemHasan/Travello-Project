@@ -11,6 +11,7 @@ import Registration from "./Registration/Registration";
 import Explore from "./Explore/Explore";
 import Comparison from "./Comparison/Comparison";
 import OnePlace from "./OnePlace/OnePlace";
+import OneFood from "./OneFood/OneFood";
 import SearchResult from "./searchResult/SearchResult";
 import React from "react";
 import UserProfile from "./UserProfile/UserProfile";
@@ -56,6 +57,7 @@ export default function App() {
           <Route path="Explore" element={<Explore />} />
           <Route path="Comparison" element={<Comparison />} />
           <Route path="OnePlace" element={<OnePlace />} />
+          <Route path="OneFood" element={<OneFood />} />
           <Route path="search" element={<SearchResult />} />
           <Route path="user" element={<UserProfile />} />
 

@@ -19,6 +19,7 @@ export default function AddHotelAttributeModal(props) {
     AdminAPI.postToDB(uploadData, "hotel_attributes")
       .then((response) => {
         console.log(response);
+        alert("Added Successfully");
       })
       .catch((error) => {
         console.log(error);

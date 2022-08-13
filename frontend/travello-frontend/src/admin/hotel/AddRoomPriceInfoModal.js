@@ -23,6 +23,7 @@ export default function AddRoomPriceInfoModal(props) {
     uploadData.append("room_id", selectedRoom);
     AdminAPI.postToDB(uploadData, "room_price_infos").then((res) => {
       console.log(res);
+      alert("Added Successfully");
     });
 
     // console.log("save data to db here");

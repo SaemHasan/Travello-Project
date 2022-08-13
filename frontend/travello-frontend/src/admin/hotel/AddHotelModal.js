@@ -39,6 +39,7 @@ export default function AddHotelModal(props) {
     AdminAPI.addHotelToDB(uploadData)
       .then((res) => {
         console.log("response : ", res);
+        alert("Added Successfully");
       })
       .catch((err) => {
         console.log(err);

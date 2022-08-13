@@ -25,6 +25,7 @@ export default function AddPlaceRatingModal(props) {
 
     AdminAPI.addPlaceRatingInfoToDB(uploadData).then((res) => {
       console.log(res);
+      alert("Added Successfully");
     });
 
     // console.log("save data to db here");

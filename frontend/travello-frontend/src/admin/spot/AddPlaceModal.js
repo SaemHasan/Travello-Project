@@ -25,6 +25,7 @@ export default function AddPlaceModal(props) {
     AdminAPI.addPlaceToDB(uploadData)
       .then((res) => {
         console.log("response : ", res);
+        alert("Added Successfully");
       })
       .catch((err) => {
         console.log(err);

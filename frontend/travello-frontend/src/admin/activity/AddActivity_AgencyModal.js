@@ -21,9 +21,15 @@ export default function AddActivityAgencyModal(props) {
     uploadData.append("agency_id", selectedAgency);
     uploadData.append("rating", rating);
     // console.log("save data to db here");
-    AdminAPI.addActivityAgencyToDB(uploadData).then((res) => {
-      console.log(res);
-    });
+    AdminAPI.addActivityAgencyToDB(uploadData)
+      .then((res) => {
+        console.log(res);
+        alert("Activity Agency Added");
+      })
+      .catch((err) => {
+        console.log(err);
+        // alert("Error! Please try again.");
+      });
     setShow(false);
     props.handleClose(props.type);
   };
@@ -32,8 +38,6 @@ export default function AddActivityAgencyModal(props) {
     setShow(false);
     props.handleClose(props.type);
   };
-
-  const handleShow = () => setShow(true);
 
   useEffect(() => {
     setShow(props.show);

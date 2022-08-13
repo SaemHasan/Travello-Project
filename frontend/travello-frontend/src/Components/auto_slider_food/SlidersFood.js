@@ -50,7 +50,7 @@ export class SlidersFood extends Component {
                 underline="hover"
                 style={{ color: "black" }}
                 onClick={(e) => this.handleClick(slide)}
-                href="/oneplace"
+                href="/oneFood"
               >
                 <img
                   src={this.state.api_path + slide.image}

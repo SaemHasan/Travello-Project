@@ -4,10 +4,10 @@ from rest_framework.response import Response
 import json
 
 from .models import Place, Spot, SpotType_Table, PlaceRatingInfo, Spot_Type, \
-    User_Spot, Spot_Food, Spot_Activity, SpotRatingInfo, Review, User_Place
+    User_Spot, Spot_Food, Spot_Activity, SpotRatingInfo, Review_Place, User_Place, Review_Spot
 from .serializers import PlaceSerializer, SpotSerializer, SpotTypeSerializer, PlaceRatingInfoSerializer, \
     SpotType_TableSerializer, User_SpotSerializer, Spot_FoodSerializer, Spot_ActivitySerializer, \
-    SpotRatingInfoSerializer, ReviewSerializer, User_PlaceSerializer
+    SpotRatingInfoSerializer, ReviewPlaceSerializer, User_PlaceSerializer, ReviewSpotSerializer
 from rest_framework import viewsets
 
 
@@ -112,7 +112,7 @@ class SpotViewSet(viewsets.ModelViewSet):
         return Response(SpotSerializer(spot, many=True).data)
 
     @action(detail=False, methods=['post', 'get', 'put'])
-    def getAllSpot(self, request):  #spots of a place
+    def getAllSpot(self, request):  # spots of a place
         place_id = int(request.data['place_id'])
         # activity = Spot_Activity.objects.get(spot_id = spot_id)
         place_id = Spot.objects.all().filter(place_id=place_id)
@@ -264,9 +264,9 @@ class SpotRatingInfoViewSet(viewsets.ModelViewSet):
     serializer_class = SpotRatingInfoSerializer
 
 
-class ReviewViewSet(viewsets.ModelViewSet):
-    queryset = Review.objects.all()
-    serializer_class = ReviewSerializer
+class ReviewPlaceViewSet(viewsets.ModelViewSet):
+    queryset = Review_Place.objects.all()
+    serializer_class = ReviewPlaceSerializer
 
     # @action(detail=False, methods=['post', 'get', 'put'])
     # def getReview(self, request):
@@ -276,6 +276,11 @@ class ReviewViewSet(viewsets.ModelViewSet):
     #     reviews = Review.objects.filter(place=place)
     #     print(reviews)
     #     return Response(ReviewSerializer(reviews, many=True).data)
+
+
+class ReviewSpotViewSet(viewsets.ModelViewSet):
+    queryset = Review_Spot.objects.all()
+    serializer_class = ReviewSpotSerializer
 
 
 class UserPlaceViewSet(viewsets.ModelViewSet):

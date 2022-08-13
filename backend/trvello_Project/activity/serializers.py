@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .models import Activity, Agency, ActivityType_Table, Activity_Agency, ActivityPriceInfo, ActivityRatingInfo
+from .models import Activity, Agency, ActivityType_Table, Activity_Agency, ActivityPriceInfo, ActivityRatingInfo, \
+    Review_Activity
+
 
 class ActivitySerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,4 +31,9 @@ class ActivityPriceInfoSerializer(serializers.ModelSerializer):
 class ActivityRatingInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = ActivityRatingInfo
+        fields = '__all__'
+
+class ReviewActivitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review_Activity
         fields = '__all__'

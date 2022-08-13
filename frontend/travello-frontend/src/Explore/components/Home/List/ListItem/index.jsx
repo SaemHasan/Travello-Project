@@ -19,8 +19,9 @@ const ListItem = ({
   //   { id: 3, checked: false, label: 'Forest' },
   // ]);
   //
-    async function handleClick(id,category,place_id) {
+    async function handleClick(id,category,place_id,e) {
 
+    //e.preventDefault();
     //console.log("spot clicked");
     if (category === "place")
     {
@@ -71,7 +72,7 @@ const ListItem = ({
     // console.log(place);
   }
   const toShow = desc.substring(0,230)+"...";
-    const MAX_LENGTH = 200;
+    const MAX_LENGTH = 150;
     return(
         // {{category} === "place" && (
         <div className='listItem-wrap-explore' >
@@ -97,7 +98,7 @@ const ListItem = ({
       {desc.length > MAX_LENGTH ?
         (
           <div className="heading-des">
-            {`${desc.substring(0, MAX_LENGTH)}...`}<a href="#">Read more</a>
+            {`${desc.substring(0, MAX_LENGTH)}...`}<p style={{color:"blue"}}><u>Read more</u></p>
           </div>
         ) :
         <p>{desc}</p>

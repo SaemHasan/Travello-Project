@@ -112,6 +112,8 @@ class Activity_AgencyViewSet(viewsets.ModelViewSet):
     def getAgencyFromActivityID(self, request):
         activity_id = int(request.data['activity_id'])
         agency_ids = Activity_Agency.objects.all().filter(activity_id=activity_id)
+        activity_name = agency_ids[0].activity_id.activity_name
+        print(activity_name)
         print(agency_ids[0].agency_id.agency_id)
         print(agency_ids[0].activity_agency_id)
         price_id = []

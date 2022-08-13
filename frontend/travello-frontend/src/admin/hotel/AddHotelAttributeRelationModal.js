@@ -24,6 +24,7 @@ export default function AddHotelAttributeRelationModal(props) {
     // console.log("save data to db here");
     AdminAPI.postToDB(uploadData, "hotel_attribute_tables").then((res) => {
       console.log(res);
+      alert("Added Successfully");
     });
     setShow(false);
     props.handleClose(props.type);

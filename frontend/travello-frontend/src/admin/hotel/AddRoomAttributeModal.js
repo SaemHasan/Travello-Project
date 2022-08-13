@@ -17,6 +17,7 @@ export default function AddRoomAttributeModal(props) {
     AdminAPI.postToDB(uploadData, "room_attributes")
       .then((response) => {
         console.log(response);
+        alert("Added Successfully");
       })
       .catch((error) => {
         console.log(error);

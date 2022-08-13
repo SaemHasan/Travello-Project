@@ -32,6 +32,7 @@ export default function AddRestaurantModal(props) {
     AdminAPI.addRestaurantToDB(uploadData)
       .then((res) => {
         console.log("response : ", res);
+        alert("Added Successfully");
       })
       .catch((err) => {
         console.log(err);

@@ -23,6 +23,7 @@ export default function AddHotelRatingInfoModal(props) {
     uploadData.append("hotel_id", selectedHotel);
     AdminAPI.postToDB(uploadData, "hotel_rating_infos").then((res) => {
       console.log(res);
+      alert("Added Successfully");
     });
 
     // console.log("save data to db here");

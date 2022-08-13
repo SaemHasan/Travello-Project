@@ -17,9 +17,11 @@ export default function AddActivityTypeModal(props) {
     AdminAPI.addActivityTypeToDB(uploadData)
       .then((response) => {
         console.log(response);
+        alert("Activity Type Added Successfully");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
+        // alert("Error! Please try again.");
       });
     setShow(false);
     props.handleClose(props.type);
@@ -29,8 +31,6 @@ export default function AddActivityTypeModal(props) {
     setShow(false);
     props.handleClose(props.type);
   };
-
-  const handleShow = () => setShow(true);
 
   useEffect(() => {
     setShow(props.show);

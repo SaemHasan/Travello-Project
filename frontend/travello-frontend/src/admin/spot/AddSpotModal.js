@@ -33,6 +33,7 @@ export default function AddSpotModal(props) {
     AdminAPI.addSpotToDB(uploadData)
       .then((res) => {
         console.log("response : ", res);
+        alert("Added Successfully");
       })
       .catch((err) => {
         console.log(err);

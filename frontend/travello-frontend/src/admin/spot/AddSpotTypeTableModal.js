@@ -17,6 +17,7 @@ export default function AddSpotTypeTableModal(props) {
     AdminAPI.addSpotTypeTableToDB(uploadData)
       .then((response) => {
         console.log(response);
+        alert("Added Successfully");
       })
       .catch((error) => {
         console.log(error);

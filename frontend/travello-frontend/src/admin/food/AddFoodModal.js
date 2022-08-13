@@ -21,6 +21,7 @@ export default function AddFoodModal(props) {
     AdminAPI.addFoodToDB(uploadData)
       .then((res) => {
         console.log(res);
+        alert("Added Successfully");
       })
       .catch((err) => {
         console.log(err);

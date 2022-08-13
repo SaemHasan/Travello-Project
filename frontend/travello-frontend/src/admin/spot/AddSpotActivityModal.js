@@ -22,6 +22,7 @@ export default function AddSpotActivityModal(props) {
     // console.log("save data to db here");
     AdminAPI.addSpotActivityToDB(uploadData).then((res) => {
       console.log(res);
+      alert("Added Successfully");
     });
     setShow(false);
     props.handleClose(props.type);

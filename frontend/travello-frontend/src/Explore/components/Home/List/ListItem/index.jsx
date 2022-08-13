@@ -70,6 +70,8 @@ const ListItem = ({
     //localStorage.removeItem("food");
     // console.log(place);
   }
+  const toShow = desc.substring(0,230)+"...";
+    const MAX_LENGTH = 200;
     return(
         // {{category} === "place" && (
         <div className='listItem-wrap-explore' >
@@ -90,7 +92,17 @@ const ListItem = ({
 
               <img src={api_path + coverSrc} className="large-image-explore" alt="adventure" />
               <div>
-          <p className="heading-des"> {desc} </p>
+          {/*<p className="heading-des"> {toShow} </p>*/}
+                      <div>
+      {desc.length > MAX_LENGTH ?
+        (
+          <div className="heading-des">
+            {`${desc.substring(0, MAX_LENGTH)}...`}<a href="#">Read more</a>
+          </div>
+        ) :
+        <p>{desc}</p>
+      }
+    </div>
 
 
 

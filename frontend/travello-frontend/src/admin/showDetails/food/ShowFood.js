@@ -66,7 +66,7 @@ export default function ShowFood() {
 
       <Grid container spacing={3}>
         {data.map((item) => (
-          <Grid item xs={12} md={4} key={item.id}>
+          <Grid item xs={12} md={4} key={item.food_id}>
             <Card sx={{ maxWidth: 345 }}>
               <CardMedia
                 component="img"

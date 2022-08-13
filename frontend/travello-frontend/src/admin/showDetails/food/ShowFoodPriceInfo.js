@@ -63,7 +63,7 @@ export default function ShowFoodPriceInfo() {
 
       <Grid container spacing={3}>
         {data.map((item) => (
-          <Grid item xs={12} md={3} key={item.id}>
+          <Grid item xs={12} md={3} key={item.price_id}>
             <Card sx={{ maxWidth: 345 }}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">

@@ -58,10 +58,10 @@ export default function ShowActivity() {
     <div>
       {/*<h1>Activities</h1>*/}
       <Grid container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={6} key="1">
           <h2>Activities</h2>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} key="2">
           <Button
             size="large"
             variant="contained"
@@ -82,7 +82,7 @@ export default function ShowActivity() {
       )}
       <Grid container spacing={3}>
         {data.map((item) => (
-          <Grid item xs={12} md={4} key={item.id}>
+          <Grid item xs={12} md={4} key={item.activity_id}>
             <Card sx={{ maxWidth: 345 }}>
               <CardMedia
                 component="img"
@@ -94,7 +94,7 @@ export default function ShowActivity() {
                 <Typography gutterBottom variant="h5" component="div">
                   {item.activity_name}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="secondary">
                   {item.type}
                 </Typography>
               </CardContent>

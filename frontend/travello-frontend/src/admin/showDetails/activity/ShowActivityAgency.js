@@ -1,4 +1,11 @@
-import { Button, Card, CardActions, CardContent, Grid } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Grid,
+  Rating,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import AdminAPI from "../../AdminAPI";
@@ -61,21 +68,21 @@ export default function ShowActivityAgency() {
       )}
       <Grid container spacing={3}>
         {data.map((item) => (
-          <Grid item xs={12} md={3} key={item.id}>
+          <Grid item xs={12} md={3} key={item.activity_agency_id}>
             <Card sx={{ maxWidth: 345 }}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                   Activity Agency ID : {item.activity_agency_id}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="secondary">
                   Activity ID : {item.activity_id}
                 </Typography>
 
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="secondary">
                   Agency ID : {item.agency_id}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Rating : {item.rating}
+                <Typography variant="body2" color="secondary">
+                  <Rating name="read-only" value={item.rating} readOnly />
                 </Typography>
               </CardContent>
               <CardActions>

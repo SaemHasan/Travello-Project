@@ -50,9 +50,16 @@ const ListItem = ({
         localStorage.removeItem("explore_spot");
         localStorage.removeItem("explore_place");
         const place = await ExploreAPI.getOnePlacebyID(place_id);
-        console.log(place_id);
+        let places = []
+        {place.map((r) => (
+
+                    //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
+                    places.push({place_id: r.place_id, name: r.name, short_description: r.short_description,  image: r.image,})
+
+                ))};
+        //console.log(place);
         localStorage.setItem("explore_place", JSON.stringify(place));
-        localStorage.setItem("place", JSON.stringify(place));
+        localStorage.setItem("place", JSON.stringify(places[0]));
         //const explore_place = JSON.parse(localStorage.getItem("explore_place"));
         //console.log(explore_place);
         window.location.href = "/SinglePlace";

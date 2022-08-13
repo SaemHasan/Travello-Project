@@ -3,28 +3,28 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import "./Sliders.css";
-import HomeAPIService from "../../home/HomeAPIService";
 import { Link } from "@mui/material";
+import SinglePlaceAPI from "./SinglePlaceAPI";
 
-export class SlidersPlace extends Component {
+export class SlidersSpot extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      places: [],
+      spots: [],
+      frontend_img_path: "assets/spot/",
       api_path: "http://127.0.0.1:8000",
-      absoulute_path: "../../../backend/trvello_Project",
-      frontend_img_path: "assets/place/",
     };
   }
 
   async componentDidMount() {
-    const response = await HomeAPIService.getTopPlaces(5);
+    const explore_place = JSON.parse(localStorage.getItem("place"));
+    console.log(explore_place.place_id)
+    const response = await SinglePlaceAPI.getSpotsByPlaceID(explore_place.place_id);
     // response.map((num, index) => {
     //   num.image = this.updateImgPath(num.image);
     // });
-    this.setState({ places: response });
-    //console.log(this.state.api_path + this.state.places[1].image)
-    // console.log(this.state.places);
+    this.setState({ spots: response });
+    // console.log("spots",this.state.spots);
   }
 
   // updateImgPath(imgPath) {
@@ -32,28 +32,29 @@ export class SlidersPlace extends Component {
   //   return myArray[myArray.length - 1];
   // }
 
-  handleClick(place) {
-    console.log("clicked");
-    localStorage.setItem("place", JSON.stringify(place));
-    localStorage.removeItem("spot");
+  handleClick(spot) {
+    console.log("spot clicked");
+    localStorage.setItem("spot", JSON.stringify(spot));
+    localStorage.removeItem("place");
     localStorage.removeItem("food");
     // console.log(place);
   }
 
   render() {
-    // console.log(this.state.places);
+    // console.log(this.state.spots);
+    // console.log(sliderData);
     let imgSlides = () =>
-      this.state.places.map((slide, index) => (
-        <div className="imgpad" key={slide.place_id}>
+      this.state.spots.map((slide, index) => (
+        <div className="imgpad" key={slide.spot_id}>
           {/*<img className="imgdetails" src= {num.img} width="100%" alt={"explore img"}/>*/}
 
           <ul>
             <li>
               <Link
                 underline="hover"
-                onClick={(e) => this.handleClick(slide)}
-                href="/SinglePlace"
                 style={{ color: "black" }}
+                onClick={(e) => this.handleClick(slide)}
+                href="/oneplace"
               >
                 <img
                   src={this.state.api_path + slide.image}
@@ -82,7 +83,6 @@ export class SlidersPlace extends Component {
           {/*<h4>{slide.desc}</h4>*/}
         </div>
       ));
-
     return (
       <div id="explore">
         <div style={{ marginBottom: "40px", marginLeft: "40px" }}>
@@ -101,4 +101,4 @@ export class SlidersPlace extends Component {
     );
   }
 }
-export default SlidersPlace;
+export default SlidersSpot;

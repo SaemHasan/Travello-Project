@@ -59,6 +59,22 @@ class ActivityViewSet(viewsets.ModelViewSet):
         #print(activity_filter_list)
         return Response(activity_filter_list)
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getSearchResult(self, request):
+        keyword = request.data['keyword']
+        location = request.data['location']
+
+        activities = Activity.objects.all()
+        result = []
+        if (keyword != ''):
+            activities1 = activities.filter(description__icontains=keyword)
+            result = activities1
+        if (location != ''):
+            activities2 = activities.filter(description__icontains=location)
+            result |= activities2
+        # print(result)
+        return Response(ActivitySerializer(result, many=True).data)
+
 
 
 

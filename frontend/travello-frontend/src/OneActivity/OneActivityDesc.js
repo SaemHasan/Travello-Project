@@ -129,63 +129,22 @@ function OneActivityDesc() {
       <div>
         <img
           className="img-fluid mainImage"
-          src={pic}
+          src={imgsrc}
           alt="Responsive image"
           width={"100%"}
         />
       </div>
-      {/*<div className="row">*/}
-      {/*  <div className="column" style={{ backgroundColor: "#bbb" }}>*/}
-      {/*    <Link href="/Comparison" onClick={() => localStorage.setItem("load_category", JSON.stringify("place"))} >*/}
-      {/*      <img*/}
-      {/*      className="my_image"*/}
-      {/*      src={hotelimg}*/}
-      {/*      height={"50"}*/}
-      {/*      alt={"hotel"}*/}
-      {/*    />*/}
-      {/*          </Link>*/}
-      {/*    <img*/}
-      {/*      className="my_image"*/}
-      {/*      src={hotelimg}*/}
-      {/*      height={"50"}*/}
-      {/*      alt={"hotel"}*/}
-      {/*    />*/}
-      {/*    /!*<h2>Column 1</h2>*!/*/}
-      {/*    /!*<p>Some text..</p>*!/*/}
-      {/*  </div>*/}
-      {/*  <div className="column" style={{ backgroundColor: "#bbb" }}>*/}
-      {/*    <Link href="/Comparison" onClick={() => localStorage.setItem("load_category", JSON.stringify("food"))} >*/}
-      {/*          <img className="my_image" src={foodimg} height={"50"} alt={"food"} />*/}
-      {/*          </Link>*/}
-
-      {/*    /!*<h2>Column 2</h2>*!/*/}
-      {/*    /!*<p>Some text..</p>*!/*/}
-      {/*  </div>*/}
-      {/*  <div className="column" style={{ backgroundColor: "#bbb" }}>*/}
-      {/*    <Link href="/Comparison" onClick={() => localStorage.setItem("load_category", JSON.stringify("activity"))}>*/}
-      {/*    <img*/}
-      {/*      className="my_image"*/}
-      {/*      src={activityimg}*/}
-      {/*      height={"50"}*/}
-      {/*      alt={"activity"}*/}
-      {/*    />*/}
-      {/*    </Link>*/}
-
-      {/*    /!*<h2>Column 3</h2>*!/*/}
-      {/*    /!*<p>Some text..</p>*!/*/}
-      {/*  </div>*/}
-      {/*</div>*/}
       <div
         style={{ marginTop: "20px", marginBottom: "20px", marginLeft: "10px" }}
       >
         <h2>
           <b>
-            <u>abcd</u>
+            <u>{name}</u>
           </b>
         </h2>
       </div>
       <div>
-        <p style={{ marginLeft: "10px" }}>blah blah blah</p>
+        <p style={{ marginLeft: "10px" }}>{description}</p>
       </div>
     </div>
   );

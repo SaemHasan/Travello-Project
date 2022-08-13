@@ -3,9 +3,7 @@ import EmptyView from "../../components/common/EmptyView";
 import FilterPanel from "../../components/Home/FilterPanel";
 import List from "../../components/Home/List";
 import SearchBar from "../../components/Home/SearchBar";
-//import { dataList } from "../../constants";
 import "./styles.css";
-import ComparisonAPI from "../../../Comparison/ComparisonAPI";
 import ExploreAPI from "../../ExploreAPI";
 
 const Home = () => {

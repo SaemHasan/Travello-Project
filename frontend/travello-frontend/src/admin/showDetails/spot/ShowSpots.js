@@ -4,7 +4,7 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  Grid,
+  Grid, Rating,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -94,8 +94,11 @@ export default function ShowSpots() {
                 <Typography gutterBottom variant="h5" component="div">
                   {item.name}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {item.short_description}
+                {/*<Typography variant="body2" color="text.secondary">*/}
+                {/*  {item.short_description}*/}
+                {/*</Typography>*/}
+                <Typography variant="body2" color="secondary">
+                  <Rating name="read-only" value={item.rating} readOnly />
                 </Typography>
               </CardContent>
               <CardActions>

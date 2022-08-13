@@ -27,6 +27,9 @@ function ReviewBox(props) {
     if (p || spot) {
       setShowPlaceReview(true);
     }
+    else{
+      console.log("no place or spot");
+    }
   }, []);
 
   const submitBtn = () => {

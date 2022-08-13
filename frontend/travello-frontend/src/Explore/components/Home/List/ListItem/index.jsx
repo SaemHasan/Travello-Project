@@ -3,10 +3,13 @@ import React, { useEffect, useState } from 'react';
 import './styles.css';
 import { Link } from "@mui/material";
 import ExploreAPI from "../../../../ExploreAPI";
+import APIService from "../../../../../APIService";
 
 const api_path = "http://127.0.0.1:8000/media/";
 
-
+const Getuser = () => {
+    const [user, setUser] = useState({});
+}
 
 const ListItem = ({
   item: { id, coverSrc, title, desc, price, deliveryFee, serviceTime, rating, category, place_id },
@@ -19,13 +22,28 @@ const ListItem = ({
   //   { id: 3, checked: false, label: 'Forest' },
   // ]);
   //
-    async function handleClick(id,category,place_id) {
+    async function handleClick(id,category,place_id,e) {
 
+    //e.preventDefault();
     //console.log("spot clicked");
     if (category === "place")
     {
-
+        // const token = JSON.parse(localStorage.getItem("token"));
+        // if (token) {
+        //     APIService.getUserObject(token)
+        //     .then(async (user) => {
+        //     // console.log("setting user");
+        //         await setUser(user);
+        //     // console.log("finished setting user");
+        //         console.log(user);
+        //     })
+        //     .catch((err) => {
+        //     console.log(err);
+        //     });
+        // }
         //console.log("place");
+        //const user = JSON.parse(localStorage.getItem("log_in_user"));
+        //console.log(user);
         localStorage.removeItem("place");
         localStorage.removeItem("food");
         localStorage.removeItem("spot");
@@ -35,7 +53,7 @@ const ListItem = ({
         //console.log(place);
         localStorage.setItem("explore_place", JSON.stringify(place));
         localStorage.setItem("place", JSON.stringify(place));
-        const explore_place = JSON.parse(localStorage.getItem("explore_place"));
+        //const explore_place = JSON.parse(localStorage.getItem("explore_place"));
         //console.log(explore_place);
         window.location.href = "/Oneplace";
 
@@ -70,6 +88,8 @@ const ListItem = ({
     //localStorage.removeItem("food");
     // console.log(place);
   }
+  const toShow = desc.substring(0,230)+"...";
+    const MAX_LENGTH = 150;
     return(
         // {{category} === "place" && (
         <div className='listItem-wrap-explore' >
@@ -90,7 +110,17 @@ const ListItem = ({
 
               <img src={api_path + coverSrc} className="large-image-explore" alt="adventure" />
               <div>
-          <p className="heading-des"> {desc} </p>
+          {/*<p className="heading-des"> {toShow} </p>*/}
+                      <div>
+      {desc.length > MAX_LENGTH ?
+        (
+          <div className="heading-des">
+            {`${desc.substring(0, MAX_LENGTH)}...`}<p style={{color:"blue"}}><u>Read more</u></p>
+          </div>
+        ) :
+        <p>{desc}</p>
+      }
+    </div>
 
 
 

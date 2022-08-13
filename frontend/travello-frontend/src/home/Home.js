@@ -12,6 +12,7 @@ import SlidersActivity from "../Components/auto_slider_activity/SlidersActivity"
 import SlidersFood from "../Components/auto_slider_food/SlidersFood";
 import SlidersPlace from "../Components/auto_slider_place/SlidersPlace";
 import SlidersSpot from "../Components/auto_slider_spot/SlidersSpot";
+import Footer from "../Components/Footer/Footer";
 
 
 function Home() {
@@ -38,16 +39,9 @@ function Home() {
 
   return (
     <div className="App">
-      {/*<div id = "clearDiv"  className = "img"><img src={pic}   alt={"waterfall"}/></div>*/}
-      {/*<div>*/}
-      {/*  <video src="tourism.mp4" ref={vidRef} muted autoPlay loop />*/}
-      {/*</div>*/}
       <div>
         <SearchBar />
       </div>
-      {/*<div>*/}
-      {/*  <h3> Top five places </h3>*/}
-      {/*</div>*/}
       <div>
         <div style={{ marginBottom: "20px", height: "40px"}}>
           <div className="col-sm-12 btn btn-info">
@@ -58,9 +52,6 @@ function Home() {
       <div style={{ marginLeft: "-50px" }}>
         <SlidersPlace />
       </div>
-      {/*<div>*/}
-      {/*  <h3> Top five spots </h3>*/}
-      {/*</div>*/}
       <div>
         <div style={{ marginBottom: "20px", height: "40px" }}>
           <div className="col-sm-12 btn btn-info">
@@ -71,9 +62,6 @@ function Home() {
       <div style={{ marginLeft: "-50px" }}>
         <SlidersSpot />
       </div>
-      {/*<div>*/}
-      {/*  <h3> Top five foods </h3>*/}
-      {/*</div>*/}
       <div>
         <div style={{ marginBottom: "20px", height: "40px" }}>
           <div className="col-sm-12 btn btn-info">
@@ -84,9 +72,6 @@ function Home() {
       <div style={{ marginLeft: "-50px" }}>
         <SlidersFood />
       </div>
-      {/*<div>*/}
-      {/*  <h3> Top five activities </h3>*/}
-      {/*</div>*/}
       <div>
         <div style={{ marginBottom: "20px", height: "40px" }}>
           <div className="col-sm-12 btn btn-info">
@@ -97,10 +82,11 @@ function Home() {
       <div style={{ marginLeft: "-50px" }}>
         <SlidersActivity />
       </div>
-      {/*<Hello/>*/}
-      {/*<ArticleList articles={articles}></ArticleList>*/}
-      {/*<DemoList demos={demos}/>*/}
+        <div>
+            <Footer/>
+        </div>
     </div>
+
   );
 }
 

@@ -1,10 +1,7 @@
 import "../App.css";
-import { OneFoodData } from "./OneFood-data";
 import React, { useEffect, useState } from "react";
 import "./OneFoodDesc.css";
 import OneFoodAPI from "./OneFoodAPI";
-import {Link} from "@mui/material";
-import pic from "../images/homepage.jpg";
 
 
 
@@ -12,13 +9,41 @@ import pic from "../images/homepage.jpg";
 
 function OneFoodDesc() {
 
-  // const [onePlace, setOnePlace] = useState([]);
-  // const [name, setName] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [imgsrc, setImgsrc] = useState("");
-  //
-  //
-  // useEffect(() => {
+  const [oneFood, setOneFood] = useState([]);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [imgsrc, setImgsrc] = useState("");
+  const [dataList, set_dataList] = useState([]);
+  const [list, setList] = useState(dataList);
+
+
+  useEffect(() => {
+      const food = JSON.parse(localStorage.getItem("food"));
+      const api_path = "http://127.0.0.1:8000";
+
+      if (food !== null) {
+        console.log("food is not null");
+        setOneFood(food);
+        setName(food.food_name);
+        setDescription(food.short_description);
+        setImgsrc(api_path + food.image);
+    }
+      async function fetchData() {
+          //console.log(food.food_id);
+          const response = await OneFoodAPI.getRestaurantFromFoodID(food.food_id);
+          //console.log(response);
+          while (dataList.length !== 0) {
+                  dataList.pop();
+                }
+                {response.map((r) => (
+                    dataList.push({id: r.id, name: r.name, email: r.email,  website: r.website, phoneno: r.phoneno, price: r.price,})
+                ))};
+          setList(dataList);
+          console.log(list);
+      }
+      fetchData();
+        }, []);
+
   //
   //   const p = JSON.parse(localStorage.getItem("place"));
   //   const api_path = "http://127.0.0.1:8000";
@@ -108,64 +133,48 @@ function OneFoodDesc() {
       <div>
         <img
           className="img-fluid mainImage"
-          src={pic}
+          src={imgsrc}
           alt="Responsive image"
           width={"100%"}
         />
       </div>
-      {/*<div className="row">*/}
-      {/*  <div className="column" style={{ backgroundColor: "#bbb" }}>*/}
-      {/*    <Link href="/Comparison" onClick={() => localStorage.setItem("load_category", JSON.stringify("place"))} >*/}
-      {/*      <img*/}
-      {/*      className="my_image"*/}
-      {/*      src={hotelimg}*/}
-      {/*      height={"50"}*/}
-      {/*      alt={"hotel"}*/}
-      {/*    />*/}
-      {/*          </Link>*/}
-      {/*    <img*/}
-      {/*      className="my_image"*/}
-      {/*      src={hotelimg}*/}
-      {/*      height={"50"}*/}
-      {/*      alt={"hotel"}*/}
-      {/*    />*/}
-      {/*    /!*<h2>Column 1</h2>*!/*/}
-      {/*    /!*<p>Some text..</p>*!/*/}
-      {/*  </div>*/}
-      {/*  <div className="column" style={{ backgroundColor: "#bbb" }}>*/}
-      {/*    <Link href="/Comparison" onClick={() => localStorage.setItem("load_category", JSON.stringify("food"))} >*/}
-      {/*          <img className="my_image" src={foodimg} height={"50"} alt={"food"} />*/}
-      {/*          </Link>*/}
 
-      {/*    /!*<h2>Column 2</h2>*!/*/}
-      {/*    /!*<p>Some text..</p>*!/*/}
-      {/*  </div>*/}
-      {/*  <div className="column" style={{ backgroundColor: "#bbb" }}>*/}
-      {/*    <Link href="/Comparison" onClick={() => localStorage.setItem("load_category", JSON.stringify("activity"))}>*/}
-      {/*    <img*/}
-      {/*      className="my_image"*/}
-      {/*      src={activityimg}*/}
-      {/*      height={"50"}*/}
-      {/*      alt={"activity"}*/}
-      {/*    />*/}
-      {/*    </Link>*/}
-
-      {/*    /!*<h2>Column 3</h2>*!/*/}
-      {/*    /!*<p>Some text..</p>*!/*/}
-      {/*  </div>*/}
-      {/*</div>*/}
       <div
         style={{ marginTop: "20px", marginBottom: "20px", marginLeft: "10px" }}
       >
         <h2>
           <b>
-            <u>abcd</u>
+            <u>{name}</u>
           </b>
         </h2>
       </div>
       <div>
-        <p style={{ marginLeft: "10px" }}>blah blah blah</p>
+        <p style={{ marginLeft: "10px" }}>{description}</p>
       </div>
+        <div>
+            {list.map(article =>{
+                return(
+                    <div key={article.id}>
+                        <div
+        style={{
+          boxShadow: '1px 2px 9px #F4AAB9',
+          margin: '4em',
+          padding: '1em',
+        }}
+      >
+                           <p><b>{article.name}</b></p>
+                           <p>{article.email}</p>
+                           <p>{article.website}</p>
+                           <p>{article.phoneno}</p>
+                           <p>Price : {article.price} Taka</p>
+      </div>
+
+                    </div>
+                )
+            })}
+        </div>
+
+
     </div>
   );
 }

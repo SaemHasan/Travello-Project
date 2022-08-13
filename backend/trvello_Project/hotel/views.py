@@ -20,7 +20,9 @@ class HotelViewSet(viewsets.ModelViewSet):
         hotel_id = int(request.data['hotel_id'])
         hotel = Hotel.objects.all().filter(hotel_id=hotel_id)
 
+
         print(hotel)
+        #print(hotel_atb)
         return Response(HotelSerializer(hotel, many=True).data)
 
 
@@ -80,6 +82,19 @@ class Hotel_AttributeViewSet(viewsets.ModelViewSet):
 class Hotel_Attribute_TableViewSet(viewsets.ModelViewSet):
     queryset = Hotel_Attribute_Table.objects.all()
     serializer_class = Hotel_Attribute_TableSerializer
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getOneHotelAttribute(self, request):
+        hotel_id = int(request.data['hotel_id'])
+        hotel_atb = Hotel_Attribute_Table.objects.all().filter(hotel_id=hotel_id)
+        atb_list = []
+        for atb in hotel_atb:
+            #l = {'name':atb.attribute_id.attribute_name}
+            atb_list.append(atb.attribute_id.attribute_name)
+            #atb_list.append(l)
+
+
+        print(hotel_atb)
+        return Response(atb_list)
 
 
 class HotelRatingInfoViewSet(viewsets.ModelViewSet):
@@ -90,6 +105,26 @@ class HotelRatingInfoViewSet(viewsets.ModelViewSet):
 class RoomViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getRooms(self, request):
+        hotel_id = int(request.data['hotel_id'])
+        room = Room.objects.all().filter(hotel_id=hotel_id)
+        rooms = []
+
+        for r in room:
+            atb = Room_Attribute_Table.objects.all().filter(room_id = r.room_id)
+            l = []
+            for a in atb:
+                l.append({'name':a.attribute_id.attribute_name, 'value':a.value})
+            ml = {'room_no':r.room_no,'room_type':r.room_type,'room_atb':l}
+            rooms.append(ml)
+
+
+
+        print(rooms)
+        #print(hotel_atb)
+        return Response(rooms)
 
 
 class RoomPriceInfoViewSet(viewsets.ModelViewSet):

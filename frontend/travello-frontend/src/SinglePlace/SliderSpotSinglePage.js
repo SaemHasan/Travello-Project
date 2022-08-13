@@ -17,14 +17,38 @@ export class SlidersSpot extends Component {
   }
 
   async componentDidMount() {
-    const explore_place = JSON.parse(localStorage.getItem("place"));
-    console.log(explore_place.place_id)
-    const response = await SinglePlaceAPI.getSpotsByPlaceID(explore_place.place_id);
-    // response.map((num, index) => {
-    //   num.image = this.updateImgPath(num.image);
-    // });
-    this.setState({ spots: response });
-    // console.log("spots",this.state.spots);
+    const explore_place = JSON.parse(localStorage.getItem("explore_place"));
+    if (explore_place !== null) {
+            let my_place = [];
+      {
+        explore_place.map((r) =>
+          my_place.push({
+            id: r.place_id,
+            name: r.name,
+            short_description: r.short_description,
+            image: r.image,
+          })
+        );
+      }
+          const response = await SinglePlaceAPI.getSpotsByPlaceID(my_place[0].id);
+
+          this.setState({ spots: response });
+
+    }
+        const p = JSON.parse(localStorage.getItem("place"));
+
+    if (p !== null) {
+        const response = await SinglePlaceAPI.getSpotsByPlaceID(p.place_id);
+
+          this.setState({ spots: response });
+
+    }
+
+
+
+
+
+
   }
 
   // updateImgPath(imgPath) {

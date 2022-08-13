@@ -68,7 +68,7 @@ export default class SinglePlaceAPI {
   }
 
     static getSpotsByPlaceID(place_id) {
-    return fetch(`http://127.0.0.1:8000/api/spots/getAllSpot/`, {
+    return fetch(`http://127.0.0.1:8000/api/spots/getSpotsByPlaceID/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

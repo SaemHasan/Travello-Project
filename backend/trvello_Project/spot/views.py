@@ -113,12 +113,21 @@ class SpotViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['post', 'get', 'put'])
     def getAllSpot(self, request):  # spots of a place
-        place_id = int(request.data['place_id'])
         # activity = Spot_Activity.objects.get(spot_id = spot_id)
-        sopt_list = Spot.objects.all().filter(place_id=place_id)
+        sopt_list = Spot.objects.all()
+        # activity = Activity.activity_name
+        return Response(SpotSerializer(sopt_list, many=True).data)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getSpotsByPlaceID(self, request):  # spots of a place
+
+        p_id = int(request.data['place_id'])
+        print(p_id)
+        # activity = Spot_Activity.objects.get(spot_id = spot_id)
+        sopt_list = Spot.objects.all().filter(place_id_id=p_id)
         # activity = Activity.activity_name
 
-        # print(place_id)
+        print(p_id)
         return Response(SpotSerializer(sopt_list, many=True).data)
 
     @action(detail=False, methods=['post', 'get', 'put'])

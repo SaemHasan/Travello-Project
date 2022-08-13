@@ -17,6 +17,13 @@ class ActivityViewSet(viewsets.ModelViewSet):
     serializer_class = ActivitySerializer
 
     @action(detail=False, methods=['post', 'get', 'put'])
+    def getOneActivity(self, request):
+        activity_id = int(request.data['activity_id'])
+        activity = Activity.objects.all().filter(activity_id=activity_id)
+        # print(foods)
+        return Response(ActivitySerializer(activity, many=True).data)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
     def getTopActivities(self, request):
         number = int(request.data['number'])
         activities = Activity.objects.all()[:number]

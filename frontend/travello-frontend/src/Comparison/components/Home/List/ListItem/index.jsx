@@ -5,6 +5,7 @@ import './styles.css';
 import { Link } from "@mui/material";
 import ComparisonAPI from "../../../../ComparisonAPI";
 import ExploreAPI from "../../../../../Explore/ExploreAPI";
+import SinglePlaceAPI from "../../../../../SinglePlace/SinglePlaceAPI";
 
 const api_path = "http://127.0.0.1:8000/media/";
 const ListItem = ({
@@ -19,8 +20,46 @@ const ListItem = ({
   // ]);
     async function handleClick(id) {
 
+        const category = JSON.parse(localStorage.getItem("load_category"));
+        if(category==="place") //hotel ta place nam a dewa
+        {
         localStorage.setItem("hotel_id", JSON.stringify(id));
-        window.location.href = "/OneHotel";
+        window.location.href = "/Onehotel";
+
+        }
+        else if(category==="food") //hotel ta place nam a dewa
+        {
+            const food_obj = await ComparisonAPI.getOneFood(id);
+            let food_list = [];
+            {food_obj.map((r) => (
+                    //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
+                    food_list.push({food_id: r.food_id, food_name: r.food_name, short_description: r.short_description,  image: r.image})
+
+                ))};
+            console.log(food_list)
+
+
+        localStorage.setItem("food", JSON.stringify(food_list[0]));
+        window.location.href = "/Onefood";
+
+        }
+        else if(category==="activity") //hotel ta place nam a dewa
+        {
+
+            const activity_obj = await ComparisonAPI.getOneActivity(id);
+            let activity_list = [];
+            {activity_obj.map((r) => (
+                    //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
+                    activity_list.push({activity_id: r.activity_id, activity_name: r.activity_name, type: r.type,  description: r.description, image: r.image,  type_id: r.type_id})
+
+                ))};
+            console.log(activity_list)
+
+
+        localStorage.setItem("activity", JSON.stringify(activity_list[0]));
+        window.location.href = "/Oneactivity";
+
+        }
   }
 
     return(

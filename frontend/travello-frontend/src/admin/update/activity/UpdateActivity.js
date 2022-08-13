@@ -30,7 +30,7 @@ export default function UpdateActivityModal(props) {
     const uploadData = new FormData();
     uploadData.append("activity_name", activityName);
     uploadData.append("description", activityDescription);
-    if (activityImage !== null)
+    if (activityImage !== "")
       uploadData.append("image", activityImage, activityImage.name);
     uploadData.append("type", activityType);
     uploadData.append("type_id", type.type_id);
@@ -55,7 +55,7 @@ export default function UpdateActivityModal(props) {
     setActivityName(props.item.activity_name);
     setActivityType(props.item.type);
     setActivityDescription(props.item.description);
-    setActivityImage(props.item.image);
+    // setActivityImage(props.item.image);
     setTypeID(props.item.type_id);
     setId(props.item.activity_id);
     setShow(props.show);

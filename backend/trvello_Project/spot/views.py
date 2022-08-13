@@ -268,14 +268,13 @@ class ReviewPlaceViewSet(viewsets.ModelViewSet):
     queryset = Review_Place.objects.all()
     serializer_class = ReviewPlaceSerializer
 
-    # @action(detail=False, methods=['post', 'get', 'put'])
-    # def getReview(self, request):
-    #     print("dhjs  djhsf")
-    #     place_id = int(request.data['place_id'])
-    #     place = Place.objects.get(place_id=place_id)
-    #     reviews = Review.objects.filter(place=place)
-    #     print(reviews)
-    #     return Response(ReviewSerializer(reviews, many=True).data)
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getReview(self, request):
+        place_id = int(request.data['place_id'])
+        place = Place.objects.get(place_id=place_id)
+        reviews = Review_Place.objects.filter(place=place)
+        # print(reviews)
+        return Response(ReviewPlaceSerializer(reviews, many=True).data)
 
 
 class ReviewSpotViewSet(viewsets.ModelViewSet):

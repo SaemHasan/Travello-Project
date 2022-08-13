@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import APIService from "../APIService";
 import OnePlaceAPI from "./OnePlaceAPI";
+import { TextField } from "@mui/material";
+import { Form } from "react-bootstrap";
 
 function ReviewBox(props) {
   // console.log(props.name);
@@ -20,39 +22,43 @@ function ReviewBox(props) {
   }, []);
 
   const submitBtn = () => {
-    console.log(user);
+    // console.log(user);
     console.log("here");
     const p = JSON.parse(localStorage.getItem("place"));
-    console.log(p);
-    OnePlaceAPI.addReview({
-      desc: review,
-      user: user.id,
-      place: p.place_id,
+    // console.log(p);
+    const type = "review_places";
+    OnePlaceAPI.addReview(
+      {
+        desc: review,
+        user: user.username,
+        place: p.place_id,
+      },
+      type
+    ).then((res) => {
+      console.log(res);
     });
+
+    window.location.reload(false);
   };
 
   return (
     <div className="form">
-      <h1>Review Here: </h1>
-      <div>
-        <label className="form__label" htmlFor="review">
-          Review
-        </label>
-        <input
-          className="form__input"
-          type="text"
-          value={review}
-          onChange={(e) => setReview(e.target.value)}
+      {/*<h1>Review Here: </h1>*/}
+      <div className="form-body">
+        <TextField
           id="review"
-          placeholder="Review"
+          label="Add Review"
+          multiline
+          rows={4}
+          defaultValue={review}
+          variant="filled"
+          onChange={(e) => setReview(e.target.value)}
         />
       </div>
 
-      <div className="footer">
-        <Button onClick={submitBtn} type="submit">
-          Submit
-        </Button>
-      </div>
+      <Button onClick={submitBtn} type="submit">
+        Submit
+      </Button>
     </div>
   );
 }

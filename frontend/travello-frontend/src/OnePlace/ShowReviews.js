@@ -1,60 +1,53 @@
 import React, { useEffect, useState } from "react";
 import OnePlaceAPI from "./OnePlaceAPI";
-import APIService from "../APIService";
+import { Card, CardContent, Grid } from "@mui/material";
+import Typography from "@material-ui/core/Typography";
 
 function ShowReviews() {
   const [reviews, setReviews] = useState([]);
-  const [user, setUser] = useState("");
   const [place, setPlace] = useState("");
   const [result, setResult] = useState("");
+  const user_image = "/assets/user.jpeg";
+
+  const p = JSON.parse(localStorage.getItem("place"));
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("token"));
-
-    APIService.getUserObject(token).then(async (data) => {
-      await setUser(data);
-    });
-
-    const p = JSON.parse(localStorage.getItem("place"));
     setPlace(p);
+    // console.log("place :", p);
 
-    // console.log(user);
-    console.log(p.place_id);
+    const type = "review_places";
 
-    OnePlaceAPI.getReviews().then(async (data) => {
-      // console.log(data);
-      console.log("here dshajid");
-      console.log(data);
-      await setReviews(data);
-    });
-
-    // console.log("details");
-    // console.log(reviews);
-    // console.log(user);
-    // console.log(place);
-
-    // reviews.map((review) => {
-    //   if (review.user != user.id && review.place != place.place_id) {
-    //     console.log("here i am");
-    //     reviews.pop(review);
-    //   }
+    // OnePlaceAPI.getReviews().then(async (data) => {
+    //   // console.log(data);
+    //   await setReviews(data);
     // });
+
+    OnePlaceAPI.getReviewbyPlaceID(p.place_id, type).then(async (res) => {
+      await setReviews(res);
+    });
   }, []);
 
   return (
     <div>
-      <h1>Reviews</h1>
-      {reviews &&
-        reviews.map((article) => {
-          return (
-            <div key={article.review_id}>
-              {/*<h2>{article.title}</h2>*/}
+      {reviews.length && <h1>Reviews</h1>}
 
-              <p>{article.user}</p>
-              <p>{article.desc}</p>
-            </div>
-          );
-        })}
+      <Grid container spacing={3}>
+        {reviews &&
+          reviews.map((item, idx) => (
+            <Grid item xs={12} md={4} key={idx}>
+              <Card sx={{ maxWidth: 345 }}>
+                <CardContent>
+                  <Typography gutterBottom variant="h6" component="div">
+                    {item.user}
+                  </Typography>
+                  <Typography variant="body2" color="secondary">
+                    {item.desc}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+      </Grid>
     </div>
   );
 }

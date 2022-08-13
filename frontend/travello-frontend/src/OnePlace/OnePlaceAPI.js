@@ -14,8 +14,8 @@ export default class OnePlaceAPI {
   //   return myArray[myArray.length - 1];
   // }
 
-  static addReview(body) {
-    return fetch("http://127.0.0.1:8000/api/reviews/", {
+  static addReview(body, type) {
+    return fetch(`http://127.0.0.1:8000/api/${type}/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export default class OnePlaceAPI {
   }
 
   static getReviews() {
-    return fetch("http://127.0.0.1:8000/api/reviews/", {
+    return fetch("http://127.0.0.1:8000/api/review_places/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -35,8 +35,8 @@ export default class OnePlaceAPI {
     }).then((resp) => resp.json());
   }
 
-  static getReviewbyID(user_id, place_id) {
-    return fetch("http://127.0.0.1:8000/api/reviews/getReview/", {
+  static getReviewbyPlaceID(place_id, type) {
+    return fetch(`http://127.0.0.1:8000/api/${type}/getReview/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -57,4 +57,13 @@ export default class OnePlaceAPI {
     }).then((resp) => resp.json());
   }
 
+  static getUserFromID(id) {
+    return fetch(`http://127.0.0.1:8000/api/users/${id}/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Authorization':`Token ${token['mytoken']}`
+      },
+    }).then((resp) => resp.json());
+  }
 }

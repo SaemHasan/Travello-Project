@@ -119,7 +119,8 @@ class Review_Place(models.Model):
     review_id = models.BigAutoField(primary_key=True)
     desc = models.CharField(max_length=1000, null=True)
     place = models.ForeignKey(Place, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.CharField(max_length=100, null=True)
 
     def __str__(self):
         return str(self.review_id)
@@ -129,7 +130,8 @@ class Review_Spot(models.Model):
     review_id = models.BigAutoField(primary_key=True)
     desc = models.CharField(max_length=1000, null=True)
     spot = models.ForeignKey(Spot, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.CharField(max_length=100, null=True)
 
     def __str__(self):
         return str(self.review_id)

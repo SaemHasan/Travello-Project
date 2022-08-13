@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Food, Restaurant, Food_Restaurant, FoodPriceInfo, FoodRatingInfo, \
-    FoodType_Table, Food_Type
+    FoodType_Table, Food_Type, Review_Food
 
 
 class FoodSerializer(serializers.ModelSerializer):
@@ -42,4 +42,10 @@ class FoodType_TableSerializer(serializers.ModelSerializer):
 class Food_TypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Food_Type
+        fields = '__all__'
+
+
+class ReviewFoodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review_Food
         fields = '__all__'

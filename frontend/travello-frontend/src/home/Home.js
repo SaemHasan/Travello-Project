@@ -15,27 +15,6 @@ import SlidersSpot from "../Components/auto_slider_spot/SlidersSpot";
 import Footer from "../Components/Footer/Footer";
 
 function Home() {
-  // const [articles, setArticles] = useState([]);
-  // const [demos, setDemos] = useState([]);
-
-  // const vidRef = useRef();
-  //
-  // useEffect(() => {
-  //   vidRef.current.play();
-  // }, []);
-
-  //   useEffect(() => {
-  //       APIService.GetArticles()
-  //           .then(resp => setArticles(resp))
-  //           .catch(error => console.log(error))
-  // }, [])
-  //
-  //   useEffect(()=>{
-  //       APIService.GetDemo()
-  //           .then(resp => setDemos(resp))
-  //           .catch(error => console.log(error))
-  //   },[])
-
   return (
     <div className="App">
       <div>

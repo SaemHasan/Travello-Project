@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -74,3 +75,10 @@ class ActivityRatingInfo(models.Model):
 
     def __str__(self):
         return self.activity_agency_id.activity_id.activity_name + " " + self.activity_agency_id.agency_id.agency_name
+
+
+class Review_Activity(models.Model):
+    review_id = models.AutoField(primary_key=True)
+    desc = models.CharField(max_length=1000, null=True)
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE, default=None)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)

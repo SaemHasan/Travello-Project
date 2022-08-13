@@ -19,7 +19,7 @@ const Footer = () => {
           <Column>
             <Heading>About Us</Heading>
             <FooterLink href="#">Rakin</FooterLink>
-            <FooterLink href="#">Sayem</FooterLink>
+            <FooterLink href="#">Saem</FooterLink>
             <FooterLink href="#">Joy</FooterLink>
           </Column>
           <Column>
@@ -34,7 +34,6 @@ const Footer = () => {
             <FooterLink href="#">shafqatrakin@gmail.com</FooterLink>
             <FooterLink href="#">sayim.hasan@gmail.com</FooterLink>
             <FooterLink href="#">iamjoysaha1.0@gmail.com</FooterLink>
-            {/*<FooterLink href="#">Mumbai</FooterLink>*/}
           </Column>
           <Column>
             <Heading>Social Media</Heading>

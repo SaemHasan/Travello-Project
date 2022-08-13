@@ -18,18 +18,9 @@ export class SlidersFood extends Component {
 
   async componentDidMount() {
     const response = await HomeAPIService.getTopFoods(5);
-    // response.map((num, index) => {
-    //   num.image = this.updateImgPath(num.image);
-    // });
-    this.setState({ foods: response });
-    // console.log(response);
-    // console.log("spots",this.state.spots);
-  }
 
-  // updateImgPath(imgPath) {
-  //   const myArray = imgPath.split("/");
-  //   return myArray[myArray.length - 1];
-  // }
+    this.setState({ foods: response });
+  }
 
   handleClick(food) {
     // console.log("food clicked");

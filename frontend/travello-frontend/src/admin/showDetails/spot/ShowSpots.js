@@ -11,9 +11,12 @@ import { useEffect, useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import AdminAPI from "../../AdminAPI";
 import AddSpotModal from "../../spot/AddSpotModal";
+import UpdateSpotModal from "../../update/spot/UpdateSpot";
 
 export default function ShowSpots() {
   const [data, setData] = useState([]);
+  const [updateShow, setUpdateShow] = useState(false);
+  const [updateItem, setUpdateItem] = useState({});
   const type = "spots";
   async function fetchData() {
     await AdminAPI.getFromDB(type).then(async (res) => {
@@ -28,8 +31,12 @@ export default function ShowSpots() {
   }, []);
 
   const handleDelete = async (id) => {
-    await AdminAPI.deleteFromDB(type, id);
-    fetchData().then(() => {});
+    let isExecuted = window.confirm("Are you sure to execute this action?");
+    console.log(isExecuted);
+    if (isExecuted) {
+      await AdminAPI.deleteFromDB(type, id);
+      fetchData().then(() => {});
+    }
   };
 
   const handleAddModalShow = () => {
@@ -39,6 +46,16 @@ export default function ShowSpots() {
   const handleClose = (type) => {
     setShowModal(false);
     window.location.reload(false);
+  };
+
+  const handleUpdateClose = (refresh) => {
+    setUpdateShow(false);
+    if (refresh) window.location.reload(false);
+  };
+
+  const handleUpdateShow = async (item) => {
+    await setUpdateItem(item);
+    setUpdateShow(true);
   };
 
   return (
@@ -65,7 +82,7 @@ export default function ShowSpots() {
       )}
       <Grid container spacing={3}>
         {data.map((item) => (
-          <Grid item xs={12} md={4} key={item.id}>
+          <Grid item xs={12} md={4} key={item.spot_id}>
             <Card sx={{ maxWidth: 345 }}>
               <CardMedia
                 component="img"
@@ -82,7 +99,12 @@ export default function ShowSpots() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" variant="contained" color="success">
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="success"
+                  onClick={() => handleUpdateShow(item)}
+                >
                   Update
                 </Button>
                 <Button
@@ -98,6 +120,14 @@ export default function ShowSpots() {
           </Grid>
         ))}
       </Grid>
+      {updateShow && (
+        <UpdateSpotModal
+          type={type}
+          item={updateItem}
+          handleClose={handleUpdateClose}
+          show={updateShow}
+        />
+      )}
     </div>
   );
 }

@@ -32,9 +32,11 @@ export default function AddAgencyModal(props) {
     AdminAPI.addAgencyToDB(uploadData)
       .then((res) => {
         console.log("response : ", res);
+        alert("Agency Added Successfully");
       })
       .catch((err) => {
         console.log(err);
+        // alert("Error! Please try again.");
       });
     // console.log("save data to db here");
     setShow(false);

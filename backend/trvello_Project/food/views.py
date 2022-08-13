@@ -4,9 +4,10 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from .models import Food, Restaurant, Food_Restaurant, FoodPriceInfo, \
-    FoodRatingInfo, FoodType_Table, Food_Type
+    FoodRatingInfo, FoodType_Table, Food_Type, Review_Food
 from .serializers import FoodSerializer, RestaurantSerializer, Food_RestaurantSerializer, \
-    FoodPriceInfoSerializer, FoodRatingInfoSerializer, FoodType_TableSerializer, Food_TypeSerializer
+    FoodPriceInfoSerializer, FoodRatingInfoSerializer, FoodType_TableSerializer, Food_TypeSerializer, \
+    ReviewFoodSerializer
 
 
 # Create your views here.
@@ -26,9 +27,9 @@ class FoodViewSet(viewsets.ModelViewSet):
     def getFoodDetails(self, request):
         food_id_list = request.data['food_id_list']
         foods = Food.objects.all()
-        #print("=====================================================")
-        #print(food_id_list)
-        #print("=====================================================")
+        # print("=====================================================")
+        # print(food_id_list)
+        # print("=====================================================")
         return Response(FoodSerializer(foods, many=True).data)
 
     @action(detail=False, methods=['post', 'get', 'put'])
@@ -132,24 +133,24 @@ class Food_TypeViewSet(viewsets.ModelViewSet):
         final_food_list = []
         # activity = Spot_Activity.objects.get(spot_id = spot_id)
         for f in range(len(food_id)):
-            #print(food_id[f])
+            # print(food_id[f])
             food = Food.objects.all().filter(food_id=food_id[f])
-            #print(food)
+            # print(food)
             for k in food:
-            #food2 = Food.objects.all().filter(food_id=food_id[1])
-            #food = food1.expand(food2)
-            #final_food_list = []
-            #print(type(food))
-                #for type_id in foo
+                # food2 = Food.objects.all().filter(food_id=food_id[1])
+                # food = food1.expand(food2)
+                # final_food_list = []
+                # print(type(food))
+                # for type_id in foo
                 food_type = Food_Type.objects.all().filter(food_id=food_id[f])
                 type_list = []
                 for t in food_type:
-                    #print(t)
+                    # print(t)
                     type_list.append(t.type_id.type_name.lower())
-                    #print(food_type[1])
-                #print(type_list)
+                    # print(food_type[1])
+                # print(type_list)
                 myList = {'id': k.food_id, 'title': k.food_name, 'desc': k.short_description,
-                  'coverSrc': str(k.image), 'food':type_list}
+                          'coverSrc': str(k.image), 'food': type_list}
                 final_food_list.append(myList)
         #     # food_type = Food_Type.Food_Type.get_food()
         #     #print(i.food_id.food_name)
@@ -159,6 +160,10 @@ class Food_TypeViewSet(viewsets.ModelViewSet):
         #     food_id_list.append(myList)
         # # print(spots)
 
-        #print(final_food_list)
+        # print(final_food_list)
         return Response(final_food_list)
 
+
+class ReviewFoodViewSet(viewsets.ModelViewSet):
+    queryset = Review_Food.objects.all()
+    serializer_class = ReviewFoodSerializer

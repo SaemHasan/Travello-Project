@@ -24,6 +24,7 @@ export default function AddSpotRatingModal(props) {
 
     AdminAPI.addSpotRatingInfoToDB(uploadData).then((res) => {
       console.log(res);
+      alert("Added Successfully");
     });
 
     // console.log("save data to db here");

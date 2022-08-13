@@ -1,4 +1,12 @@
-import { Button, Card, CardActions, CardContent, Grid } from "@mui/material";
+import {
+  Alert,
+  AlertTitle,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Grid,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 
 import Typography from "@material-ui/core/Typography";
@@ -24,8 +32,12 @@ export default function ShowActivityTypeTable() {
   }, []);
 
   const handleDelete = async (id) => {
-    await AdminAPI.deleteFromDB(type, id);
-    fetchData().then(() => {});
+    let isExecuted = window.confirm("Are you sure to execute this action?");
+    console.log(isExecuted);
+    if (isExecuted) {
+      await AdminAPI.deleteFromDB(type, id);
+      fetchData().then(() => {});
+    }
   };
 
   const handleAddModalShow = () => {
@@ -75,7 +87,7 @@ export default function ShowActivityTypeTable() {
 
       <Grid container spacing={3}>
         {data.map((item) => (
-          <Grid item xs={12} md={3} key={item.id}>
+          <Grid item xs={12} md={3} key={item.type_id}>
             <Card sx={{ maxWidth: 345 }}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -98,7 +110,9 @@ export default function ShowActivityTypeTable() {
                   size="small"
                   variant="contained"
                   color="error"
-                  onClick={() => handleDelete(item.type_id)}
+                  onClick={() => {
+                    handleDelete(item.type_id);
+                  }}
                 >
                   Delete
                 </Button>

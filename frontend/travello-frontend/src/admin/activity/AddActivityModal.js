@@ -36,9 +36,11 @@ export default function AddActivityModal(props) {
     AdminAPI.addActivityToDB(uploadData)
       .then((res) => {
         console.log("response : ", res);
+        alert("Activity Added Successfully");
       })
       .catch((err) => {
         console.log(err);
+        // alert("Error! Please try again.");
       });
     setActivityName("");
     setActivityImage("");
@@ -58,7 +60,6 @@ export default function AddActivityModal(props) {
     setShow(false);
     props.handleClose(props.type);
   };
-  const handleShow = () => setShow(true);
 
   useEffect(() => {
     setShow(props.show);

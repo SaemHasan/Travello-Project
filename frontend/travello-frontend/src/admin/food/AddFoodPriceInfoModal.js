@@ -27,6 +27,7 @@ export default function AddFoodPriceModal(props) {
 
     AdminAPI.postToDB(uploadData, "food_price_infos").then((res) => {
       console.log(res);
+      alert("Added Successfully");
     });
 
     // console.log("save data to db here");

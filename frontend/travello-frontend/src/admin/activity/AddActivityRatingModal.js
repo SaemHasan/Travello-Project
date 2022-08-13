@@ -25,9 +25,15 @@ export default function AddActivityRatingModal(props) {
     uploadData.append("end_time", end_time);
     uploadData.append("activity_agency_id", selectedActivityAgency);
     // console.log("uploadData: ", factor, "selected: ", selectedActivityAgency);
-    AdminAPI.addActivityRatingInfoToDB(uploadData).then((res) => {
-      console.log(res);
-    });
+    AdminAPI.addActivityRatingInfoToDB(uploadData)
+      .then((res) => {
+        console.log(res);
+        alert("Activity Rating Added Successfully");
+      })
+      .catch((err) => {
+        console.log(err);
+        // alert("Error! Please try again.");
+      });
 
     // console.log("save data to db here");
     setShow(false);
@@ -38,8 +44,6 @@ export default function AddActivityRatingModal(props) {
     setShow(false);
     props.handleClose(props.type);
   };
-
-  const handleShow = () => setShow(true);
 
   useEffect(() => {
     setShow(props.show);

@@ -22,6 +22,7 @@ export default function AddSpotTypeModal(props) {
     // console.log("save data to db here");
     AdminAPI.addSpotTypeToDB(uploadData).then((res) => {
       console.log(res);
+      alert("Added Successfully");
     });
     setShow(false);
     props.handleClose(props.type);

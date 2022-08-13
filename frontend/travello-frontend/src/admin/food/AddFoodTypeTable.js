@@ -17,6 +17,7 @@ export default function AddFoodTypeTableModal(props) {
     AdminAPI.postToDB(uploadData, "food_type_tables")
       .then((response) => {
         console.log(response);
+        alert("Added Successfully");
       })
       .catch((error) => {
         console.log(error);

@@ -14,38 +14,16 @@ import SlidersPlace from "../Components/auto_slider_place/SlidersPlace";
 import SlidersSpot from "../Components/auto_slider_spot/SlidersSpot";
 import Footer from "../Components/Footer/Footer";
 
-
 function Home() {
-  // const [articles, setArticles] = useState([]);
-  // const [demos, setDemos] = useState([]);
-
-  // const vidRef = useRef();
-  //
-  // useEffect(() => {
-  //   vidRef.current.play();
-  // }, []);
-
-  //   useEffect(() => {
-  //       APIService.GetArticles()
-  //           .then(resp => setArticles(resp))
-  //           .catch(error => console.log(error))
-  // }, [])
-  //
-  //   useEffect(()=>{
-  //       APIService.GetDemo()
-  //           .then(resp => setDemos(resp))
-  //           .catch(error => console.log(error))
-  //   },[])
-
   return (
     <div className="App">
       <div>
         <SearchBar />
       </div>
       <div>
-        <div style={{ marginBottom: "20px", height: "40px"}}>
+        <div style={{ marginBottom: "20px", height: "40px" }}>
           <div className="col-sm-12 btn btn-info">
-              <b>Explore your favourites places</b>
+            <b>Explore your favourites places</b>
           </div>
         </div>
       </div>
@@ -55,7 +33,7 @@ function Home() {
       <div>
         <div style={{ marginBottom: "20px", height: "40px" }}>
           <div className="col-sm-12 btn btn-info">
-              <b>Explore your favourites spots</b>
+            <b>Explore your favourites spots</b>
           </div>
         </div>
       </div>
@@ -65,7 +43,7 @@ function Home() {
       <div>
         <div style={{ marginBottom: "20px", height: "40px" }}>
           <div className="col-sm-12 btn btn-info">
-              <b>Explore your favourites foods</b>
+            <b>Explore your favourites foods</b>
           </div>
         </div>
       </div>
@@ -75,18 +53,17 @@ function Home() {
       <div>
         <div style={{ marginBottom: "20px", height: "40px" }}>
           <div className="col-sm-12 btn btn-info">
-              <b>Explore your favourites activities</b>
+            <b>Explore your favourites activities</b>
           </div>
         </div>
       </div>
       <div style={{ marginLeft: "-50px" }}>
         <SlidersActivity />
       </div>
-        <div>
-            <Footer/>
-        </div>
+      {/*<div>*/}
+      {/*  <Footer />*/}
+      {/*</div>*/}
     </div>
-
   );
 }
 

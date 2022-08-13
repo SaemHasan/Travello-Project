@@ -28,8 +28,12 @@ export default function ShowAgency() {
   }, []);
 
   const handleDelete = async (id) => {
-    await AdminAPI.deleteFromDB(type, id);
-    fetchData().then(() => {});
+    let isExecuted = window.confirm("Are you sure to execute this action?");
+    console.log(isExecuted);
+    if (isExecuted) {
+      await AdminAPI.deleteFromDB(type, id);
+      fetchData().then(() => {});
+    }
   };
 
   const handleAddModalShow = () => {
@@ -68,7 +72,7 @@ export default function ShowAgency() {
       )}
       <Grid container spacing={3}>
         {data.map((item) => (
-          <Grid item xs={12} md={4} key={item.id}>
+          <Grid item xs={12} md={4} key={item.agency_id}>
             <Card sx={{ maxWidth: 345 }}>
               <CardMedia
                 component="img"

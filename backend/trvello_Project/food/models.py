@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -80,3 +81,13 @@ class FoodRatingInfo(models.Model):
 
     def __str__(self):
         return self.food_restaurant_id.food_id.food_name + " " + self.food_restaurant_id.restaurant_id.restaurant_name
+
+
+class Review_Food(models.Model):
+    review_id = models.AutoField(primary_key=True)
+    desc = models.CharField(max_length=1000, null=True)
+    food = models.ForeignKey(Food, on_delete=models.CASCADE)
+    user = models.CharField(max_length=100, null=True)
+
+    def __str__(self):
+        return str(self.review_id)

@@ -22,6 +22,7 @@ export default function AddRoomModal(props) {
     AdminAPI.postToDB(uploadData, "rooms")
       .then((res) => {
         console.log("response : ", res);
+        alert("Added Successfully");
       })
       .catch((err) => {
         console.log(err);

@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import { allDistricts } from "../spot/BDdistricts";
-import AdminAPI from "../AdminAPI";
+import AdminAPI from "../../AdminAPI";
+import { allDistricts } from "../../spot/BDdistricts";
 
-export default function AddHotelModal(props) {
+export default function UpdateSpotModal(props) {
+  const [id, setID] = useState("");
   const [show, setShow] = useState(false);
-  const [allSpots, setAllSpots] = useState([]);
+  const [allPlaces, setAllPlaces] = useState([]);
   const [name, setName] = useState("");
   const [short_description, setShort_description] = useState("");
   const [addressline, setAddressline] = useState("");
@@ -16,10 +17,7 @@ export default function AddHotelModal(props) {
   const [upzila, setUpzila] = useState("");
   const [image, setImage] = useState("");
   const [rating, setRating] = useState("");
-  const [spot_id, setSpot_id] = useState("");
-  const [phone_number, setPhone_number] = useState("");
-  const [website, setWebsite] = useState("");
-  const [email, setEmail] = useState("");
+  const [place_id, setPlace_id] = useState("");
 
   const handleSave = () => {
     const uploadData = new FormData();
@@ -29,42 +27,49 @@ export default function AddHotelModal(props) {
     uploadData.append("district", district);
     uploadData.append("thana", thana);
     uploadData.append("upzila", upzila);
-    uploadData.append("image", image, image.name);
+    if (image !== "") {
+      uploadData.append("image", image, image.name);
+    }
     uploadData.append("rating", rating);
-    uploadData.append("website", website);
-    uploadData.append("email", email);
-    uploadData.append("phone_number", phone_number);
-    uploadData.append("spot_id", spot_id);
+    uploadData.append("place_id", place_id);
 
-    AdminAPI.addHotelToDB(uploadData)
+    AdminAPI.UpdateDB(uploadData, props.type, id)
       .then((res) => {
         console.log("response : ", res);
-        alert("Added Successfully");
       })
       .catch((err) => {
         console.log(err);
       });
     // console.log("save data to db here");
     setShow(false);
-    props.handleClose(props.type);
+    props.handleClose(true);
   };
 
   const handleClose = () => {
     setShow(false);
-    props.handleClose(props.type);
+    props.handleClose(false);
   };
 
-  const handleShow = () => setShow(true);
-
   useEffect(() => {
+    setID(props.item.spot_id);
+    setName(props.item.name);
+    setShort_description(props.item.short_description);
+    if (props.item.address_line !== null) {
+      setAddressline(props.item.address_line);
+    }
+    setDistrict(props.item.district);
+    setThana(props.item.thana);
+    setUpzila(props.item.upzila);
+    setRating(props.item.rating);
+    setPlace_id(props.item.place_id);
     setShow(props.show);
     // console.log("show: ", props.show);
   }, [props.show]);
 
   useEffect(() => {
     // console.log("do api call here");
-    AdminAPI.getSpots().then(async (res) => {
-      await setAllSpots(res);
+    AdminAPI.getPlaces().then(async (res) => {
+      await setAllPlaces(res);
     });
   }, []);
 
@@ -77,17 +82,18 @@ export default function AddHotelModal(props) {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add Hotel</Modal.Title>
+          <Modal.Title>Update Spot</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Hotel Name</Form.Label>
+              <Form.Label>Spot Name</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Hotel name"
+                placeholder="spot name"
                 autoFocus
+                value={name}
                 onChange={(e) => setName(e.target.value)}
               />
             </Form.Group>
@@ -99,6 +105,7 @@ export default function AddHotelModal(props) {
               <Form.Control
                 as="textarea"
                 rows={3}
+                value={short_description}
                 onChange={(e) => setShort_description(e.target.value)}
               />
             </Form.Group>
@@ -108,6 +115,7 @@ export default function AddHotelModal(props) {
               <Form.Control
                 type="text"
                 placeholder="Address Line"
+                value={addressline}
                 onChange={(e) => setAddressline(e.target.value)}
               />
             </Form.Group>
@@ -117,6 +125,7 @@ export default function AddHotelModal(props) {
               <Form.Control
                 type="text"
                 placeholder="Thana"
+                value={thana}
                 onChange={(e) => setThana(e.target.value)}
               />
             </Form.Group>
@@ -126,6 +135,7 @@ export default function AddHotelModal(props) {
               <Form.Control
                 type="text"
                 placeholder="upzila"
+                value={upzila}
                 onChange={(e) => setUpzila(e.target.value)}
               />
             </Form.Group>
@@ -140,10 +150,13 @@ export default function AddHotelModal(props) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
-              <Form.Label>Select Spot</Form.Label>
-              <Form.Select onChange={(e) => setSpot_id(e.target.value)}>
-                {allSpots.map((type, idx) => (
-                  <option key={idx} value={type.spot_id}>
+              <Form.Label>Select Place</Form.Label>
+              <Form.Select
+                value={place_id}
+                onChange={(e) => setPlace_id(e.target.value)}
+              >
+                {allPlaces.map((type, idx) => (
+                  <option key={idx} value={type.place_id}>
                     {type.name}
                   </option>
                 ))}
@@ -152,7 +165,10 @@ export default function AddHotelModal(props) {
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
               <Form.Label>Select District</Form.Label>
-              <Form.Select onChange={(e) => setDistrict(e.target.value)}>
+              <Form.Select
+                value={district}
+                onChange={(e) => setDistrict(e.target.value)}
+              >
                 {allDistricts.map((type, idx) => (
                   <option key={idx} value={type.name}>
                     {type.name}
@@ -169,34 +185,8 @@ export default function AddHotelModal(props) {
                 min="0"
                 max="5"
                 placeholder="rating"
+                value={rating}
                 onChange={(e) => setRating(e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput9">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="name@example.com"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput10">
-              <Form.Label>Website</Form.Label>
-              <Form.Control
-                type="link"
-                placeholder="website"
-                onChange={(e) => setWebsite(e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput11">
-              <Form.Label>Phone Number</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Phone Number"
-                onChange={(e) => setPhone_number(e.target.value)}
               />
             </Form.Group>
           </Form>

@@ -24,6 +24,7 @@ export default function AddRoomAttributeRelationModal(props) {
     // console.log("save data to db here");
     AdminAPI.postToDB(uploadData, "room_attribute_tables").then((res) => {
       console.log(res);
+      alert("Added Successfully");
     });
     setShow(false);
     props.handleClose(props.type);

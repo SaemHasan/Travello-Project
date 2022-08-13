@@ -23,6 +23,7 @@ export default function AddFoodRestaurantModal(props) {
     // console.log("save data to db here");
     AdminAPI.postToDB(uploadData, "food_restaurants").then((res) => {
       console.log(res);
+      alert("Added Successfully");
     });
     setShow(false);
     props.handleClose(props.type);

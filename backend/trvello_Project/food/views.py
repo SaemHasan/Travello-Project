@@ -74,6 +74,30 @@ class Food_RestaurantViewSet(viewsets.ModelViewSet):
     queryset = Food_Restaurant.objects.all()
     serializer_class = Food_RestaurantSerializer
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getRestaurantFromFoodID(self, request):
+        food_id = int(request.data['food_id'])
+        restaurant_ids = Food_Restaurant.objects.all().filter(food_id=food_id)
+        print(restaurant_ids[0].restaurant_id.restaurant_id)
+        print(restaurant_ids[0].food_restaurant_id)
+        price_id = []
+        for i in restaurant_ids:
+            price_id.append(FoodPriceInfo.objects.all().filter(food_restaurant_id=i.food_restaurant_id))
+        print(price_id[1][0].price)
+        restaurants = []
+        x=0
+        for i in restaurant_ids:
+            myList = {'id': i.restaurant_id.restaurant_id, 'name': i.restaurant_id.restaurant_name,
+                      'email': i.restaurant_id.email, 'website': i.restaurant_id.website, 'phoneno': i.restaurant_id.phone_number, 'price': price_id[x][0].price,}
+            x = x + 1
+            restaurants.append(myList)
+        print(restaurants)
+        #restaurants = []
+        #for i in restaurant_ids:
+
+        #restaurants_name = [restaurant.restaurant_name for restaurant in restaurants]
+        #print(restaurants.restaurant_id.restaurant_name)
+        return Response(restaurants)
 
 class FoodPriceInfoViewSet(viewsets.ModelViewSet):
     queryset = FoodPriceInfo.objects.all()

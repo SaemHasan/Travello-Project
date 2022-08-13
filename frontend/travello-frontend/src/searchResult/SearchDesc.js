@@ -1,19 +1,9 @@
 // import { Link } from 'react-router-dom';
 import { Link } from "@mui/material";
 
-function updateImgPath(imgPath) {
-  const myArray = imgPath.split("/");
-  return myArray[myArray.length - 1];
-}
-
 function SearchDesc(props) {
   const result = props.result;
-  result.map((num, index) => {
-    if (num.image !== null) {
-      num.image = updateImgPath(num.image);
-    }
-  });
-  console.log(result);
+  // console.log(result);
 
   const handleClick = (place) => {
     localStorage.setItem("place", JSON.stringify(place));
@@ -51,7 +41,7 @@ function SearchDesc(props) {
                   >
                     <h5 className="card-title">{item.name}</h5>
                   </Link>
-                  <p className="card-text"> {item.short_description}</p>
+                  {/*<p className="card-text"> {item.short_description}</p>*/}
                 </div>
               </div>
             );

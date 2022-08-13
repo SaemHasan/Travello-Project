@@ -38,6 +38,24 @@ class FoodViewSet(viewsets.ModelViewSet):
         foods_name = [food.food_name for food in foods]
         return Response(foods_name)
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getSearchResult(self, request):
+        keyword = request.data['keyword']
+        location = request.data['location']
+
+        foods = Food.objects.all()
+        result = []
+        if (keyword != ''):
+            foods1 = foods.filter(short_description__icontains=keyword)
+            # print(places1)
+            result = foods1
+        if (location != ''):
+            foods2 = foods.filter(short_description__icontains=location)
+            # print(places2)
+            result |= foods2
+        # print(result)
+        return Response(FoodSerializer(result, many=True).data)
+
 
 class RestaurantViewSet(viewsets.ModelViewSet):
     queryset = Restaurant.objects.all()

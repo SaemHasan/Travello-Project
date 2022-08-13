@@ -8,9 +8,11 @@ import reportWebVitals from "./reportWebVitals";
 const root = createRoot(document.getElementById("root"));
 root.render(
   // <CookiesProvider>
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // <React.StrictMode>
+
+  <App />
+
+  // {/*</React.StrictMode>*/}
   // </CookiesProvider>
 );
 

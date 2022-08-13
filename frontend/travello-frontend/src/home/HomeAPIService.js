@@ -1,5 +1,5 @@
-export default class HomeAPIService{
-    static getTopPlaces(number) {
+export default class HomeAPIService {
+  static getTopPlaces(number) {
     return fetch(`http://127.0.0.1:8000/api/places/getTopPlaces/`, {
       method: "POST",
       headers: {
@@ -9,7 +9,6 @@ export default class HomeAPIService{
       body: JSON.stringify({ number: number }),
     }).then((resp) => resp.json());
   }
-
 
   static getTopSpots(number) {
     return fetch(`http://127.0.0.1:8000/api/spots/getTopSpots/`, {
@@ -55,4 +54,25 @@ export default class HomeAPIService{
     }).then((resp) => resp.json());
   }
 
+  static searchFood(keyword, location) {
+    return fetch(`http://127.0.0.1:8000/api/foods/getSearchResult/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ keyword: keyword, location: location }),
+    }).then((resp) => resp.json());
+  }
+
+  static searchActivity(keyword, location) {
+    return fetch(`http://127.0.0.1:8000/api/activities/getSearchResult/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ keyword: keyword, location: location }),
+    }).then((resp) => resp.json());
+  }
 }

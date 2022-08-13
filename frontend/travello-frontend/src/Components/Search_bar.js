@@ -24,19 +24,46 @@ const Search_bar = () => {
   };
 
   const handleSearchBtn = async () => {
-    console.log("search type: ", value);
-    console.log("search keyword: ", keyword_text);
-    console.log("search location: ", location_text);
+    // console.log("search type: ", value);
+    // console.log("search keyword: ", keyword_text);
+    // console.log("search location: ", location_text);
+    if (value === "") {
+      alert("Please select a search type.");
+    } else if (keyword_text === "" && location_text === "") {
+      alert("Please enter a keyword or location.");
+    } else {
+      if (value === "Place") {
+        const resp = await HomeAPIService.searchPlace(
+          keyword_text,
+          location_text
+        );
+        localStorage.setItem("searchResult", JSON.stringify(resp));
+        localStorage.setItem("searchType", JSON.stringify(value));
+        // console.log("search place: ", resp);
+      }
 
-    if (value === "Place") {
-      const resp = await HomeAPIService.searchPlace(
-        keyword_text,
-        location_text
-      );
-      localStorage.setItem("searchResult", JSON.stringify(resp));
-      console.log("search place: ", resp);
+      if (value === "Food") {
+        const resp = await HomeAPIService.searchFood(
+          keyword_text,
+          location_text
+        );
+        localStorage.setItem("searchResult", JSON.stringify(resp));
+        localStorage.setItem("searchType", JSON.stringify(value));
+        // console.log("search food: ", resp);
+      }
+
+      if (value === "Activity") {
+        const resp = await HomeAPIService.searchActivity(
+          keyword_text,
+          location_text
+        );
+        localStorage.setItem("searchResult", JSON.stringify(resp));
+        localStorage.setItem("searchType", JSON.stringify(value));
+        // console.log("search activity: ", resp);
+      }
+
+      navigate("/search");
     }
-    navigate("/search");
   };
   return (
     <div className="divSearchBar">

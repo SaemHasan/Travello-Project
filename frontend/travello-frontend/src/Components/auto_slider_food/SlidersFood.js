@@ -3,7 +3,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import "./Sliders.css";
-// import {sliderData} from "./slider-data";
 import HomeAPIService from "../../home/HomeAPIService";
 import { Link } from "@mui/material";
 
@@ -23,7 +22,7 @@ export class SlidersFood extends Component {
     //   num.image = this.updateImgPath(num.image);
     // });
     this.setState({ foods: response });
-    console.log(response);
+    // console.log(response);
     // console.log("spots",this.state.spots);
   }
 
@@ -33,7 +32,7 @@ export class SlidersFood extends Component {
   // }
 
   handleClick(food) {
-    console.log("food clicked");
+    // console.log("food clicked");
     localStorage.setItem("food", JSON.stringify(food));
     localStorage.removeItem("place");
     localStorage.removeItem("spot");

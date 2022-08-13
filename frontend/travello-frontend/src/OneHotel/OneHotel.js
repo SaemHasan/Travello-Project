@@ -79,17 +79,17 @@ function OneHotel() {
                 </div>
 
         <div>
-            {list.map(article =>{
+            {list.map(l =>{
                 return(
-                    <div key={article.id}>
+                    <div key={l.id}>
                         <div
         style={{
           boxShadow: '1px 2px 9px #F4AAB9',
-          margin: '4em',
-          padding: '1em',
+          margin: '1em',
+          padding: '.5em',
         }}
       >
-                           <p><b>{article.name}</b></p>
+                           <p><b>{l.name}</b></p>
 
       </div>
 

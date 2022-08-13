@@ -14,7 +14,7 @@ function OneFoodDesc() {
   const [description, setDescription] = useState("");
   const [imgsrc, setImgsrc] = useState("");
   const [dataList, set_dataList] = useState([]);
-  const [list, setList] = useState(dataList);
+  const [list, setList] = useState([]);
 
 
   useEffect(() => {

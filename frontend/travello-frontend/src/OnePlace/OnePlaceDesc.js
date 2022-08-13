@@ -13,38 +13,40 @@ function OnePlaceDesc() {
 
   useEffect(() => {
     const api_path = "http://127.0.0.1:8000";
-    const explore_place = JSON.parse(localStorage.getItem("explore_place"));
-    if (explore_place !== null) {
-      //console.log("explore_place is not null");
-      //console.log(exploreSpot);
-      //const spot = await OnePlaceAPI.getOneSpotbyID(exploreSpot);
-      let my_place = [];
-      {
-        explore_place.map((r) =>
-          my_place.push({
-            id: r.place_id,
-            name: r.name,
-            short_description: r.short_description,
-            image: r.image,
-          })
-        );
-      }
-      //console.log(my_place);
-      //console.log(spot);
-      //console.log(my_place[0].id);
-      setOnePlace(my_place[0]);
-      setName(my_place[0].name);
-      setDescription(my_place[0].short_description);
-      setImgsrc(api_path + String(my_place[0].image));
-    } else {
-      console.log("explore place null found");
-    }
+    // const explore_place = JSON.parse(localStorage.getItem("explore_place"));
+    // if (explore_place !== null) {
+    //   //console.log("explore_place is not null");
+    //   console.log(explore_place);
+    //   //const spot = await OnePlaceAPI.getOneSpotbyID(exploreSpot);
+    //   let my_place = [];
+    //   {
+    //     explore_place.map((r) =>
+    //       my_place.push({
+    //         id: r.place_id,
+    //         name: r.name,
+    //         short_description: r.short_description,
+    //         image: r.image,
+    //       })
+    //     );
+    //   }
+    //   //console.log(my_place);
+    //   //console.log(spot);
+    //   //console.log(my_place[0].id);
+    //   setOnePlace(my_place[0]);
+    //   setName(my_place[0].name);
+    //   setDescription(my_place[0].short_description);
+    //   setImgsrc(api_path + String(my_place[0].image));
+    //   console.log("explore place is not null");
+    // } else {
+    //   console.log("explore place null found");
+    // }
 
     const exploreSpot = JSON.parse(localStorage.getItem("explore_spot"));
     if (exploreSpot !== null) {
       //console.log("spot is not null");
       //console.log(exploreSpot);
       //const spot = await OnePlaceAPI.getOneSpotbyID(exploreSpot);
+      // console.log("explore Spot: ",exploreSpot)
       let my_spot = [];
       {
         exploreSpot.map((r) =>
@@ -66,15 +68,31 @@ function OnePlaceDesc() {
       console.log("explore spot null found");
     }
 
-    const p = JSON.parse(localStorage.getItem("place"));
-
+    let p = JSON.parse(localStorage.getItem("place"));
+    const explore_pArr = JSON.parse(localStorage.getItem("explore_place"));
+    if(p === null && explore_pArr !== null ){
+      p = explore_pArr[0];
+      localStorage.setItem("place", JSON.stringify(p));
+    }
     if (p !== null) {
       console.log("p is not null");
+        console.log(p);
       setOnePlace(p);
       setName(p.name);
       setDescription(p.short_description);
       setImgsrc(api_path + p.image);
       // OnePlaceAPI.updateImgPath(p.image);
+    }
+
+
+    if (explore_pArr !== null) {
+      console.log("explore_p is not null");
+      // console.log(explore_pArr);
+      const explore_p = explore_pArr[0]
+      setOnePlace(explore_p);
+      setName(explore_p.name);
+      setDescription(explore_p.short_description);
+      setImgsrc(api_path + explore_p.image);
     }
 
     const spot = JSON.parse(localStorage.getItem("spot"));

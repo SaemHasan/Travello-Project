@@ -35,13 +35,13 @@ function ShowReviews() {
         <Grid container spacing={3}>
           {reviews.length &&
             reviews.map((item, idx) => (
-              <Grid item xs={12} md={4} key={idx}>
+              <Grid item xs={12} md={6} key={idx}>
                 <Card sx={{ maxWidth: 345 }}>
                   <CardContent>
-                    <Typography gutterBottom variant="h6" component="div">
+                    <Typography gutterBottom variant="h4" component="div">
                       {item.user}
                     </Typography>
-                    <Typography variant="body2" color="secondary">
+                    <Typography variant="h6" color="secondary">
                       {item.desc}
                     </Typography>
                   </CardContent>

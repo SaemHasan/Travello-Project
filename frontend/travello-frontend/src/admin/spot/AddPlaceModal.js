@@ -14,11 +14,13 @@ export default function AddPlaceModal(props) {
   const [district, setDistrict] = useState("");
 
   const handleSave = () => {
-    console.log(name, short_description, image, rating, district);
+    // console.log(name, short_description, image, rating, district);
     const uploadData = new FormData();
     uploadData.append("name", name);
     uploadData.append("short_description", short_description);
-    uploadData.append("image", image, image.name);
+    if (image !== "") {
+      uploadData.append("image", image, image.name);
+    }
     uploadData.append("rating", rating);
     uploadData.append("district", district);
 
@@ -40,7 +42,6 @@ export default function AddPlaceModal(props) {
     props.handleClose(props.type);
   };
 
-  const handleShow = () => setShow(true);
 
   useEffect(() => {
     setShow(props.show);
@@ -94,6 +95,7 @@ export default function AddPlaceModal(props) {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
               <Form.Label>Select District</Form.Label>
               <Form.Select onChange={(e) => setDistrict(e.target.value)}>
+                <option value="">Select District</option>
                 {allDistricts.map((type, idx) => (
                   <option key={idx} value={type.name}>
                     {type.name}

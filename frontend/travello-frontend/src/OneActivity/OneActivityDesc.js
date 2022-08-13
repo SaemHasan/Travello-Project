@@ -108,9 +108,9 @@ function OneActivityDesc() {
         console.log("my_list");
         //console.log(dataList);
         //console.log(my_list);
-        my_list.sort(function(sixth, second) {
-  return sixth[1] - second[1];});
-        my_list.reverse();
+        my_list.sort(function(first, second) {
+  return first.price - second.price;});
+        //my_list.reverse();
         console.log(my_list);
         const t = my_list
         setSortedList(my_list);

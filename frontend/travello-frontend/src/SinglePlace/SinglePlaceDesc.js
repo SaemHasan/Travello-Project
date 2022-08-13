@@ -55,6 +55,7 @@ function SinglePlaceDesc() {
       <div>
         <p style={{ marginLeft: "10px" }}>{description}</p>
       </div>
+        <div> <h1 style={{textAlign:"center", marginTop:"20px", marginBottom:"20px"}}><b>Famous Spots of {name}</b></h1></div>
       <div style={{ marginLeft: "-50px" }}>
         <SliderSpotSinglePage />
       </div>

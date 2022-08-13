@@ -60,9 +60,9 @@ function Home() {
       <div style={{ marginLeft: "-50px" }}>
         <SlidersActivity />
       </div>
-      {/*<div>*/}
-      {/*  <Footer />*/}
-      {/*</div>*/}
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 }

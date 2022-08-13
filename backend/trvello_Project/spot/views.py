@@ -282,6 +282,15 @@ class ReviewSpotViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSpotSerializer
 
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getReview(self, request):
+        spot_id = int(request.data['place_id'])
+        spot = Spot.objects.get(spot_id=spot_id)
+        reviews = Review_Spot.objects.filter(spot=spot)
+        # print(reviews)
+        return Response(ReviewSpotSerializer(reviews, many=True).data)
+
+
 class UserPlaceViewSet(viewsets.ModelViewSet):
     queryset = User_Place.objects.all()
     serializer_class = User_PlaceSerializer

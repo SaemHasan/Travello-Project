@@ -12,6 +12,27 @@ import pic from "../images/homepage.jpg";
 
 function OneActivityDesc() {
 
+    const [sortlist, setSortList] = useState(false);
+    const [oneActivity, setOneActivity] = useState([]);
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [imgsrc, setImgsrc] = useState("");
+    const [dataList, set_dataList] = useState([]);
+    const [list, setList] = useState([]);
+    const [sortedlist, setSortedList] = useState([]);
+
+    useEffect(() => {
+        const activity = JSON.parse(localStorage.getItem("activity"));
+        const api_path = "http://127.0.0.1:8000";
+
+        if (activity !== null) {
+            console.log("activity is not null");
+            setOneActivity(activity);
+            setName(activity.activity_name);
+            setDescription(activity.short_description);
+            setImgsrc(api_path + activity.image);
+        }
+    }, []);
   // const [onePlace, setOnePlace] = useState([]);
   // const [name, setName] = useState("");
   // const [description, setDescription] = useState("");

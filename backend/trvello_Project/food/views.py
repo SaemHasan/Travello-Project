@@ -83,7 +83,7 @@ class Food_RestaurantViewSet(viewsets.ModelViewSet):
         price_id = []
         for i in restaurant_ids:
             price_id.append(FoodPriceInfo.objects.all().filter(food_restaurant_id=i.food_restaurant_id))
-        print(price_id[1][0].price)
+        #print(price_id[1][0].price)
         restaurants = []
         x=0
         for i in restaurant_ids:

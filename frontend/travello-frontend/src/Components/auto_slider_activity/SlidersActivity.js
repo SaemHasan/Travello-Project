@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import "./Sliders.css";
+import './Sliders.css';
+import {sliderData} from "./slider-data";
 import HomeAPIService from "../../home/HomeAPIService";
+import { Link } from "@mui/material";
+
 
 export class SlidersActivity extends Component {
   constructor(props) {
@@ -11,8 +14,10 @@ export class SlidersActivity extends Component {
     this.state = {
       activities: [],
       api_path: "http://127.0.0.1:8000",
+      frontend_img_path: "assets/activity/",
     };
   }
+  
 
   async componentDidMount() {
     const response = await HomeAPIService.getTopActivities(5);
@@ -58,6 +63,7 @@ export class SlidersActivity extends Component {
               </span>
             </li>
           </ul>
+
 
           {/*<h4>{slide.desc}</h4>*/}
         </div>

@@ -23,7 +23,7 @@ export class SlidersPlace extends Component {
     //   num.image = this.updateImgPath(num.image);
     // });
     this.setState({ places: response });
-    console.log(this.state.api_path + this.state.places[1].image)
+    //console.log(this.state.api_path + this.state.places[1].image)
     // console.log(this.state.places);
   }
 

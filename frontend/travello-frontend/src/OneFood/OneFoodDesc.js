@@ -2,7 +2,7 @@ import "../App.css";
 import React, { useEffect, useState } from "react";
 import "./OneFoodDesc.css";
 import OneFoodAPI from "./OneFoodAPI";
-
+import Button from "react-bootstrap/Button";
 
 
 
@@ -32,9 +32,9 @@ function OneFoodDesc() {
           //console.log(food.food_id);
           const response = await OneFoodAPI.getRestaurantFromFoodID(food.food_id);
           //console.log(response);
-          while (dataList.length !== 0) {
-                  dataList.pop();
-                }
+          // while (dataList.length !== 0) {
+          //         dataList.pop();
+          //       }
                 {response.map((r) => (
                     dataList.push({id: r.id, name: r.name, email: r.email,  website: r.website, phoneno: r.phoneno, price: r.price,})
                 ))};
@@ -151,6 +151,7 @@ function OneFoodDesc() {
       <div>
         <p style={{ marginLeft: "10px" }}>{description}</p>
       </div>
+        <div> <Button style={{float:"right", }}> <b>Sort by price</b> </Button> </div>
         <div>
             {list.map(article =>{
                 return(
@@ -160,8 +161,10 @@ function OneFoodDesc() {
           boxShadow: '1px 2px 9px #F4AAB9',
           margin: '4em',
           padding: '1em',
+
         }}
       >
+                            <p>abcddddd</p>
                            <p><b>{article.name}</b></p>
                            <p>{article.email}</p>
                            <p>{article.website}</p>

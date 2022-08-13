@@ -46,6 +46,16 @@ export default class ComparisonAPI {
       body: JSON.stringify({ spot_id: spot_id }),
     }).then((resp) => resp.json());
   }
+  static getOneFood(food_id) {
+    return fetch(`http://127.0.0.1:8000/api/foods/getOneFood/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ food_id: food_id }),
+    }).then((resp) => resp.json());
+  }
 
   static getFoodTypes(foods) {
     return fetch(`http://127.0.0.1:8000/api/food_types/getFoodTypes/`, {
@@ -85,6 +95,17 @@ export default class ComparisonAPI {
         // Authorization: `Token ${token}`,
       },
       body: JSON.stringify({ spot_id: spot_id }),
+    }).then((resp) => resp.json());
+  }
+
+  static getOneActivity(activity_id) {
+    return fetch(`http://127.0.0.1:8000/api/activities/getOneActivity/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ activity_id: activity_id }),
     }).then((resp) => resp.json());
   }
 }

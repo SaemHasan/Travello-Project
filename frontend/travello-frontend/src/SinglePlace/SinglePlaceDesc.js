@@ -15,6 +15,33 @@ function SinglePlaceDesc() {
   useEffect(() => {
     const api_path = "http://127.0.0.1:8000";
 
+
+        const explore_place = JSON.parse(localStorage.getItem("explore_place"));
+    if (explore_place !== null) {
+      //console.log("explore_place is not null");
+      //console.log(exploreSpot);
+      //const spot = await OnePlaceAPI.getOneSpotbyID(exploreSpot);
+      let my_place = [];
+      {
+        explore_place.map((r) =>
+          my_place.push({
+            id: r.place_id.place_id,
+            name: r.name,
+            short_description: r.short_description,
+            image: r.image,
+          })
+        );
+      }
+      //console.log(my_place);
+      //console.log(spot);
+      //console.log(my_place[0].id);
+      setOnePlace(my_place[0]);
+      setName(my_place[0].name);
+      setDescription(my_place[0].short_description);
+      setImgsrc(api_path + String(my_place[0].image));
+    } else {
+      console.log("explore place null found");
+    }
     const p = JSON.parse(localStorage.getItem("place"));
 
     if (p !== null) {

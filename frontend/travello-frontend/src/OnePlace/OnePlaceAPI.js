@@ -25,15 +25,15 @@ export default class OnePlaceAPI {
     }).then((resp) => resp.json());
   }
 
-  static getReviews() {
-    return fetch("http://127.0.0.1:8000/api/review_places/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        // 'Authorization':`Token ${token['mytoken']}`
-      },
-    }).then((resp) => resp.json());
-  }
+  // static getReviews() {
+  //   return fetch("http://127.0.0.1:8000/api/review_places/", {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       // 'Authorization':`Token ${token['mytoken']}`
+  //     },
+  //   }).then((resp) => resp.json());
+  // }
 
   static getReviewbyPlaceID(place_id, type) {
     return fetch(`http://127.0.0.1:8000/api/${type}/getReview/`, {

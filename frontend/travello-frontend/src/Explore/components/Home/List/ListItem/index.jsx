@@ -50,12 +50,12 @@ const ListItem = ({
         localStorage.removeItem("explore_spot");
         localStorage.removeItem("explore_place");
         const place = await ExploreAPI.getOnePlacebyID(place_id);
-        //console.log(place);
+        console.log(place_id);
         localStorage.setItem("explore_place", JSON.stringify(place));
         localStorage.setItem("place", JSON.stringify(place));
         //const explore_place = JSON.parse(localStorage.getItem("explore_place"));
         //console.log(explore_place);
-        window.location.href = "/Oneplace";
+        window.location.href = "/SinglePlace";
 
     }
     else if (category === "spot")

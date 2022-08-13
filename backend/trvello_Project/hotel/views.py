@@ -15,6 +15,14 @@ class HotelViewSet(viewsets.ModelViewSet):
     queryset = Hotel.objects.all()
     serializer_class = HotelSerializer
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getOneHotel(self, request):
+        hotel_id = int(request.data['hotel_id'])
+        hotel = Hotel.objects.all().filter(hotel_id=hotel_id)
+
+        print(hotel)
+        return Response(HotelSerializer(hotel, many=True).data)
+
 
     # @action(detail=False, methods=['post', 'get', 'put'])
     # def getAllHotels(self, request):

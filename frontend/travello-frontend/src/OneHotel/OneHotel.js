@@ -13,6 +13,8 @@ function OneHotel() {
     const api_path = "http://127.0.0.1:8000";
     let hotel_atb_response = null
     let atb_list = []
+      const [dataList, set_dataList] = useState([]);
+  const [list, setList] = useState(dataList);
 
 
 
@@ -24,13 +26,11 @@ function OneHotel() {
             const hotel_response = await OneHotelAPI.getOneHotel(hotel_id);
             const room_response = await OneHotelAPI.getRooms(hotel_id);
             hotel_atb_response = await OneHotelAPI.getOneHotelAttribute(hotel_id);
-            {
-                hotel_atb_response.map((r) => (
-                    //console.log(r.activity_id)
-                    //activity_id_list.push(r.activity_id)
-                    atb_list.push(r)
-                ))
-            }
+                {hotel_atb_response.map((r) => (
+                    dataList.push({name: r.name})
+                ))};
+          setList(dataList);
+          console.log(list);
             //console.log(atb_list)
             console.log(room_response)
 
@@ -77,13 +77,26 @@ function OneHotel() {
                 <div>
                     <p style={{marginLeft: "10px"}}>{description}</p>
                 </div>
-                <p>after</p>
 
+        <div>
+            {list.map(article =>{
+                return(
+                    <div key={article.id}>
+                        <div
+        style={{
+          boxShadow: '1px 2px 9px #F4AAB9',
+          margin: '4em',
+          padding: '1em',
+        }}
+      >
+                           <p><b>{article.name}</b></p>
 
-                <div>
+      </div>
 
-
-                </div>
+                    </div>
+                )
+            })}
+        </div>
 
 
             </div>

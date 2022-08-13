@@ -9,12 +9,14 @@ import Button from "react-bootstrap/Button";
 
 function OneFoodDesc() {
 
+  const [sortlist, setSortList] = useState(false);
   const [oneFood, setOneFood] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [imgsrc, setImgsrc] = useState("");
   const [dataList, set_dataList] = useState([]);
   const [list, setList] = useState([]);
+  const [sortedlist, setSortedList] = useState([]);
 
 
   useEffect(() => {
@@ -32,16 +34,30 @@ function OneFoodDesc() {
           //console.log(food.food_id);
           const response = await OneFoodAPI.getRestaurantFromFoodID(food.food_id);
           //console.log(response);
-          // while (dataList.length !== 0) {
-          //         dataList.pop();
-          //       }
+          while (dataList.length !== 0) {
+                  dataList.pop();
+                }
                 {response.map((r) => (
                     dataList.push({id: r.id, name: r.name, email: r.email,  website: r.website, phoneno: r.phoneno, price: r.price,})
                 ))};
           setList(dataList);
           console.log(list);
       }
+      function sortlist(){
+
+        let my_list = list;
+        console.log("my_list");
+        console.log(list);
+        console.log(my_list);
+        my_list.sort(function(sixth, second) {
+  return sixth[1] - second[1];});
+        my_list.reverse();
+        console.log(my_list);
+        setSortedList(my_list);
+        console.log(sortedlist);
+    }
       fetchData();
+      sortlist();
         }, []);
 
   //
@@ -122,6 +138,11 @@ function OneFoodDesc() {
   // let hotelimg = OnePlaceData[1].image;
   // let foodimg = OnePlaceData[2].image;
   // let activityimg = OnePlaceData[3].image;
+    function makesortlist() {
+        setSortList(true);
+    }
+
+
 
   return (
 
@@ -151,7 +172,8 @@ function OneFoodDesc() {
       <div>
         <p style={{ marginLeft: "10px" }}>{description}</p>
       </div>
-        <div> <Button style={{float:"right", }}> <b>Sort by price</b> </Button> </div>
+        <div> <Button style={{float:"right", }} onClick={makesortlist}> <b>Sort by price</b> </Button> </div>
+        {sortlist === false && (
         <div>
             {list.map(article =>{
                 return(
@@ -164,7 +186,7 @@ function OneFoodDesc() {
 
         }}
       >
-                            <p>abcddddd</p>
+
                            <p><b>{article.name}</b></p>
                            <p>{article.email}</p>
                            <p>{article.website}</p>
@@ -177,7 +199,35 @@ function OneFoodDesc() {
             })}
         </div>
 
+            )}
 
+        {sortlist === true && (
+        <div>
+            {sortedlist.map(article =>{
+                return(
+                    <div key={article.id}>
+                        <div
+        style={{
+          boxShadow: '1px 2px 9px #F4AAB9',
+          margin: '4em',
+          padding: '1em',
+
+        }}
+      >
+
+                           <p><b>{article.name}</b></p>
+                           <p>{article.email}</p>
+                           <p>{article.website}</p>
+                           <p>{article.phoneno}</p>
+                           <p>Price : {article.price} Taka</p>
+      </div>
+
+                    </div>
+                )
+            })}
+        </div>
+
+            )}
     </div>
   );
 }

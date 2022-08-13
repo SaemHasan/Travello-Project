@@ -421,9 +421,6 @@ const getHotelStr = (size) => {
           <FilterPanel
             // selectedCategory={selectedCategory}
             // selectCategory={handleSelectCategory}
-            selectedRating={selectedRating}
-
-            selectRating={handleSelectRating}
             places={filters}
             // foods={foods}
             // activities={activities}

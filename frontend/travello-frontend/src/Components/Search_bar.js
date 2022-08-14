@@ -64,6 +64,7 @@ const Search_bar = () => {
 
       navigate("/search");
     }
+
   };
   return (
     <div className="divSearchBar">

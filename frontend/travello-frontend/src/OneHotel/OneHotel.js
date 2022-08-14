@@ -1,10 +1,10 @@
 import "../App.css";
 import "./OneHotel.css"
 import React, { useEffect, useState } from "react";
-import {Link} from "@mui/material";
+
 import OneHotelAPI from "./OneHotelAPI";
-import List from "../Comparison/components/Home/List";
-import {render} from 'react-dom';
+import {Button, Card, CardActions, CardContent, Grid} from "@mui/material";
+import Typography from "@material-ui/core/Typography";
 
 function OneHotel() {
     const [name, setName] = useState("");
@@ -27,6 +27,13 @@ function OneHotel() {
             const hotel_response = await OneHotelAPI.getOneHotel(hotel_id);
             const room_response = await OneHotelAPI.getRooms(hotel_id);
             hotel_atb_response = await OneHotelAPI.getOneHotelAttribute(hotel_id);
+            while (dataList.length !== 0) {
+                  dataList.pop()
+                }
+
+            while(room_list.length !==0){
+                room_list.pop()
+            }
                 {hotel_atb_response.map((r) => (
                     dataList.push({atb_id:r.id, name:r.name})
                 ))};
@@ -101,27 +108,33 @@ function OneHotel() {
                 )
             })}
         </div>
-                <div>
-                    {room_list.map(r =>{
-                return(
-                    <div key={r.room_id}>
-                        <div>
-                           <p><b>{r.room_type}</b></p>
-                                            <div>
-                    {r.room_atb.map(rb =>{
-                return(
-                    <div key={rb.id}>
-                        <div>
-                           <p><b>{rb.name}</b></p>
-                           <p><b>{rb.value}</b></p>
+                <h3><u>Rooms:</u></h3>
+            <Grid container spacing={3}>
 
-      </div></div>
-                )})}
-        </div>
-                           {/*<p><b>{r.room_atb}</b></p>*/}
-      </div></div>
-                )})}
-        </div>
+        {room_list.map((item) => (
+          <Grid item xs={12} md={6} key={item.room_id}>
+            <Card sx={{ maxWidth: 345 }}>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Room no : {item.room_no}
+                </Typography>
+                <Typography variant="h6" color="text.secondary">
+                  Type : {item.room_type}
+                </Typography>
+                  {
+                      item.room_atb.map((attr)=>{
+                          return(
+                             <Typography variant="h6" color="primary">
+                                 {attr.name} : {attr.value}
+                             </Typography>
+                          )
+                      })
+                  }
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
 
 
 

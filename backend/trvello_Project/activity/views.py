@@ -72,13 +72,16 @@ class ActivityViewSet(viewsets.ModelViewSet):
         location = request.data['location']
 
         activities = Activity.objects.all()
-        result = []
+        result = ""
         if (keyword != ''):
             activities1 = activities.filter(description__icontains=keyword)
             result = activities1
         if (location != ''):
             activities2 = activities.filter(description__icontains=location)
-            result |= activities2
+            if result == "":
+                result = activities2
+            else:
+                result |= activities2
         # print(result)
         return Response(ActivitySerializer(result, many=True).data)
 

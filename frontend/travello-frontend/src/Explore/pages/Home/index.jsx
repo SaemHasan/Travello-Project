@@ -392,7 +392,7 @@ const Home = () => {
 
     if (placesChecked.length) {
       updatedList = updatedList.filter((item) =>
-          eval(getPlaceStr(item.activity.length))
+          eval(getPlaceStr(item.place.length))
       );
     }
 

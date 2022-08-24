@@ -35,6 +35,7 @@ const Home = () => {
                       uniquePlace_nameAray.push(allPlaceName[k]);
                   }
               }
+              setAllPlaceName(uniquePlace_nameAray);
 
               console.log(uniquePlace_nameAray);
 
@@ -81,12 +82,12 @@ const Home = () => {
                 while (allPlaceName.length !== 0){
                       allPlaceName.pop();
                 }
-                 {my_places.map((r) => (
-
-                    //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
-                    dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc,place_id:r.place_id})
-
-                ))};
+                //  {my_places.map((r) => (
+                //
+                //     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
+                //     dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc,place_id:r.place_id})
+                //
+                // ))};
 
             {allspots.map((r) => (
 
@@ -360,6 +361,13 @@ const Home = () => {
     return updatedList;
     //return p1 * p2;   // The function returns the product of p1 and p2
   }
+  function getplaceList(list, placeName) {
+      console.log(allPlaceName)
+    let updatedList = [];
+    updatedList = list.filter((item) => item.place_name === placeName);
+    return updatedList;
+    //return p1 * p2;   // The function returns the product of p1 and p2
+  }
 
   function makespotList(list) {
     let updatedList = [];
@@ -551,17 +559,22 @@ const Home = () => {
             </h1>
           )}
             <div>
-            {allPlaceName && allPlaceName.map(article =>{
+            {allPlaceName.map(placeName =>{
                 return(
                     <div >
-                        <h2>{article}</h2>
-                        {/*<p>{article.description}</p>*/}
+                                    <h1
+              className="center_title"
+              style={{ color: "blue", marginBottom: "30px", marginTop: "10px"}}
+            >
+              {placeName}
+            </h1>
+                        <div className="fullPlace">{resultsFound ? <List list={getplaceList(list, placeName)} /> : <EmptyView />}</div>
                     </div>
                 )
             })}
         </div>
-            <div className="fullPlace">{resultsFound ? <List list={makeplaceList(list)} /> : <EmptyView />}</div>
-            <div className="fullPlace">{resultsFound ? <List list={makeplaceList(list)} /> : <EmptyView />}</div>
+
+            {/*<div className="fullPlace">{resultsFound ? <List list={makeplaceList(list)} /> : <EmptyView />}</div>*/}
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -573,10 +586,10 @@ const Home = () => {
               className="center_title"
               style={{ color: "blue", marginBottom: "30px", marginTop: "10px"}}
             >
-              Spots
+              {/*Spots*/}
             </h1>
           )}
-          <div>{resultsFound ? <List list={makespotList(list)} /> : <EmptyView />}</div>
+          {/*<div>{resultsFound ? <List list={makespotList(list)} /> : <EmptyView />}</div>*/}
         </div>
       </div>
     </div>

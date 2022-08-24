@@ -111,7 +111,10 @@ const ListItem = ({
 
                 //href=
               >
-                    <img src={api_path + coverSrc} alt="adventure"/>
+                    {/*<img src={api_path + coverSrc} alt="adventure"/>*/}
+                        <p>
+                            {category}
+                        </p>
       <span className="large-explore">
           <div className="div-color-explore">
 

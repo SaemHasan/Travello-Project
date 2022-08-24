@@ -1,9 +1,10 @@
 // import React from 'react';
 import React, { useEffect, useState } from 'react';
 import './styles.css';
-import { Link } from "@mui/material";
+import {Card, CardContent, Grid, Link} from "@mui/material";
 import ExploreAPI from "../../../../ExploreAPI";
 import APIService from "../../../../../APIService";
+import Typography from "@material-ui/core/Typography";
 
 const api_path = "http://127.0.0.1:8000/media/";
 
@@ -12,16 +13,64 @@ const Getuser = () => {
 }
 
 const ListItem = ({
-  item: { id, coverSrc, title, desc, price, deliveryFee, serviceTime, rating, category, place_id },
+  item: { id, coverSrc, title, desc, price, deliveryFee, serviceTime, rating, category, place_id, place,food,activity },
 }) =>{
 
-  //   const isPlace = true;
-  //   const [places, setPlaces] = useState([
-  //   { id: 1, checked: false, label: 'Mountain' },
-  //   { id: 2, checked: false, label: 'Waterfall' },
-  //   { id: 3, checked: false, label: 'Forest' },
-  // ]);
-  //
+
+    let [food1Dlist, setFood1Dlist] = useState([])
+
+    function food_list(){
+        while (food1Dlist.length !== 0) {
+                  food1Dlist.pop();
+                }
+        for (let m =0; m < food.length; m++)
+              {
+
+                  for (let n =0; n < food[m].length; n++)
+                  {
+                      food1Dlist.push(food[m][n]);
+
+                  }
+
+
+              }
+        let uniqueArray=[]
+              for(let k=0; k < food1Dlist.length; k++){
+                  if(uniqueArray.indexOf(food1Dlist[k]) === -1) {
+                      uniqueArray.push(food1Dlist[k]);
+                  }
+              }
+        //       setFood1Dlist(uniqueArray);
+        console.log("food1Dlist");
+        console.log(uniqueArray);
+        food1Dlist = uniqueArray;
+        //console.log(uniqueArray);
+        //return food1Dlist;
+    }
+
+
+
+        function activity_list(){
+        // while (activity1Dlist.length !== 0) {
+        //           activity1Dlist.pop();
+        //         }
+
+        let uniqueArray=[]
+              for(let k=0; k < activity.length; k++){
+                  if(uniqueArray.indexOf(activity[k]) === -1) {
+                      uniqueArray.push(activity[k]);
+                  }
+              }
+        //       setFood1Dlist(uniqueArray);
+        console.log("food1Dlist");
+        console.log(uniqueArray);
+        activity = uniqueArray;
+        //console.log(uniqueArray);
+        //return food1Dlist;
+    }
+
+
+
     async function handleClick(id,category,place_id,e) {
 
     //e.preventDefault();
@@ -112,9 +161,59 @@ const ListItem = ({
                 //href=
               >
                     {/*<img src={api_path + coverSrc} alt="adventure"/>*/}
-                        <p>
-                            {category}
-                        </p>
+
+                                    <Grid container spacing={3}>
+
+
+          <Grid item xs={12} md={12} >
+            <Card sx={{ maxWidth: 500 }}>
+              <CardContent>
+                  {title}
+
+                  {
+                      place.map((attr)=>{
+                          return(
+                             <Typography variant="h6" color="primary">
+                                 {attr}
+                             </Typography>
+                          )
+                      })
+                  }
+                  {food_list()}
+                  <Typography variant="h6" color="text.secondary">
+                                    {
+                      food1Dlist.map((food)=>{
+
+                          return(
+                             <Typography variant="h6" color="primary">
+                                 {food}
+                             </Typography>
+                          )
+                      })
+                  }
+                      {activity_list()}
+                  {
+                      activity.map((atv)=>{
+                          return(
+                             <Typography variant="h6" color="primary">
+                                 {atv}
+                             </Typography>
+                          )
+                      })
+                  }
+                      {rating}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+
+      </Grid>
+                        {/*<p>*/}
+                        {/*    {category}*/}
+                        {/*</p>*/}
+                        {/*                        <p>*/}
+                        {/*    {place}*/}
+                        {/*</p>*/}
       <span className="large-explore">
           <div className="div-color-explore">
 
@@ -161,10 +260,10 @@ const ListItem = ({
 
 
             {/*<img src={coverSrc} alt=''/>*/}
-            <header>
-                <h4>{title}</h4>
-                <span>🌟{rating}</span>
-            </header>
+            {/*<header>*/}
+            {/*    //<h4>{title}</h4>*/}
+            {/*    //<span>🌟{rating}</span>*/}
+            {/*</header>*/}
             {/*<footer>*/}
             {/*    <p>*/}
             {/*        <b>{serviceTime}</b> <span> Delivery Fee ${deliveryFee}</span>*/}

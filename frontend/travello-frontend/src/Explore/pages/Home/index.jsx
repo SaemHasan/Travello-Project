@@ -256,16 +256,19 @@ const Home = () => {
                       uniqueArray.push(templist[k]);
                   }
               }
+              console.log(dataList)
               //console.log(uniqueArray);
               for (let j =0; j < dataList.length; j++)
               {
                 if (dataList[j].title === allspots[i].title)
                 {
                   dataList[j].place = uniqueArray;
-                  //console.log("rakin");
+                  console.log("rakin");
+                  console.log(dataList[j].place);
                   break;
                 }
               }
+
               templist=[];
               uniqueArray=[];
               for (let m =0; m < dataList.length; m++)
@@ -282,6 +285,7 @@ const Home = () => {
                 }
 
               }
+              console.log(dataList)
 
 
             }
@@ -365,6 +369,20 @@ const Home = () => {
       console.log(allPlaceName)
     let updatedList = [];
     updatedList = list.filter((item) => item.place_name === placeName);
+
+    for(let m=0; m < updatedList.length; m++) {
+        let uniqueArray = []
+        for (let k = 0; k < updatedList[m].place.length; k++) {
+            if (uniqueArray.indexOf(updatedList[m].place[k]) === -1) {
+                uniqueArray.push(updatedList[m].place[k]);
+            }
+        }
+        updatedList[m].place = uniqueArray;
+      console.log(updatedList[0].place)
+      console.log("updatedList.place")
+    }
+
+
     return updatedList;
     //return p1 * p2;   // The function returns the product of p1 and p2
   }

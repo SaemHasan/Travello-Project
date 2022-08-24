@@ -169,6 +169,10 @@ const ListItem = ({
             <Card sx={{ maxWidth: 500 }}>
               <CardContent>
                   {title}
+                  <br/>
+                  Attractions:
+
+
 
                   {
                       place.map((attr)=>{
@@ -180,6 +184,9 @@ const ListItem = ({
                       })
                   }
                   {food_list()}
+                  <br/>
+
+                  Famous Foods:
                   <Typography variant="h6" color="text.secondary">
                                     {
                       food1Dlist.map((food)=>{
@@ -192,6 +199,9 @@ const ListItem = ({
                       })
                   }
                       {activity_list()}
+                      <br/>
+
+                  Famous Activities:
                   {
                       activity.map((atv)=>{
                           return(
@@ -201,7 +211,7 @@ const ListItem = ({
                           )
                       })
                   }
-                      {rating}
+                     Rating: {rating}
                 </Typography>
               </CardContent>
             </Card>

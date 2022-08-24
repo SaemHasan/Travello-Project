@@ -45,7 +45,7 @@ class FoodViewSet(viewsets.ModelViewSet):
         location = request.data['location']
 
         foods = Food.objects.all()
-        result = []
+        result = ""
         if (keyword != ''):
             foods1 = foods.filter(short_description__icontains=keyword)
             # print(places1)
@@ -53,7 +53,11 @@ class FoodViewSet(viewsets.ModelViewSet):
         if (location != ''):
             foods2 = foods.filter(short_description__icontains=location)
             # print(places2)
-            result |= foods2
+            if result == "":
+                result = foods2
+            else:
+                result |= foods2
+
         # print(result)
         return Response(FoodSerializer(result, many=True).data)
 

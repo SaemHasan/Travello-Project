@@ -48,15 +48,18 @@ class PlaceViewSet(viewsets.ModelViewSet):
         location = request.data['location']
 
         places = Place.objects.all()
-        result = []
+        result = ""
         if (keyword != ''):
             places1 = places.filter(short_description__icontains=keyword)
             # print(places1)
             result = places1
         if (location != ''):
             places2 = places.filter(short_description__icontains=location)
-            # print(places2)
-            result |= places2
+            print(places2)
+            if result == "":
+                result = places2
+            else:
+                result |= places2
         # print(result)
         return Response(PlaceSerializer(result, many=True).data)
 

@@ -245,7 +245,7 @@ const Home = () => {
 
 
 
-            //console.log(dataList);
+            console.log(dataList);
             setList(dataList);
             setResultsFound(true);
 

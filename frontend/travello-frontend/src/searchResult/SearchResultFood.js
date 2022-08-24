@@ -32,6 +32,14 @@ export default function SearchResultFood(props) {
       </div>
     );
   } else {
+    if(data[0].image.includes("http://127.0.0.1:8000")){
+
+    }
+    else{
+      data.map((item) => {
+        item.image = "http://127.0.0.1:8000" + item.image;
+      });
+    }
     return (
       <div>
         {/*<h1>Food</h1>*/}
@@ -49,7 +57,7 @@ export default function SearchResultFood(props) {
                   component="img"
                   alt="Place"
                   height="140"
-                  image={"http://127.0.0.1:8000" + item.image}
+                  image={item.image}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">

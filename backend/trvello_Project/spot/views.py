@@ -154,6 +154,37 @@ class SpotViewSet(viewsets.ModelViewSet):
 
         return Response(spot_list)
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getOneSpotActivities_search(self, request):
+        location = request.data['location']
+
+        places = Spot.objects.all()
+        result = ""
+        if (location != ''):
+            places2 = places.filter(short_description__icontains=location)
+            activities = Spot_Activity.objects.all().filter(spot_id__in=places2)
+            print(activities)
+            # print(places2)
+            result = activities
+        # print(result)
+        return Response(Spot_ActivitySerializer(result, many=True).data)
+
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getOneSpotFoods_search(self, request):
+        location = request.data['location']
+
+        places = Spot.objects.all()
+        result = ""
+        if (location != ''):
+            places2 = places.filter(short_description__icontains=location)
+            foods = Spot_Food.objects.all().filter(spot_id__in=places2)
+            print(foods)
+            # print(places2)
+            result = foods
+        # print(result)
+        return Response(Spot_FoodSerializer(result, many=True).data)
+
 
 class SpotTypeTableViewSet(viewsets.ModelViewSet):
     queryset = SpotType_Table.objects.all()

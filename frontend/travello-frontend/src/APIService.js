@@ -19,6 +19,26 @@ export default class APIService {
     }).then((resp) => resp.json());
   }
 
+  static getFromDB(type) {
+    return fetch(`http://127.0.0.1:8000/api/${type}/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Authorization':`Token ${token['mytoken']}`
+      },
+    }).then((resp) => resp.json());
+  }
+
+  static getFromDB_byID(type, id) {
+    return fetch(`http://127.0.0.1:8000/api/${type}/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Authorization':`Token ${token['mytoken']}`
+      },
+    }).then((resp) => resp.json());
+  }
+
   // static UpdateArticle(article_id, body, token) {
   //
   //  return fetch(`http://127.0.0.1:8000/api/articles/${article_id}/`, {

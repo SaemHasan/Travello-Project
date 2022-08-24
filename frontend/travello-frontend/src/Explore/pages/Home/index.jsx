@@ -15,6 +15,31 @@ const Home = () => {
   const [activities, setActivity] = useState([]);
   const [foods, setFoods] = useState([]);
   const [places, setPlaces] = useState([]);
+  const [allPlaceName, setAllPlaceName] = useState([]);
+
+  useEffect(() => {
+  console.log(list)
+
+      while (allPlaceName.length !== 0) {
+                  allPlaceName.pop();
+                }
+
+      for (let m =0; m < list.length; m++)
+            {
+              allPlaceName.push(list[m].place_name);
+            }
+            //console.log(all_place_name);
+            let uniquePlace_nameAray=[]
+              for(let k=0; k < allPlaceName.length; k++){
+                  if(uniquePlace_nameAray.indexOf(allPlaceName[k]) === -1) {
+                      uniquePlace_nameAray.push(allPlaceName[k]);
+                  }
+              }
+
+              console.log(uniquePlace_nameAray);
+
+}, [JSON.stringify(list)])
+
   useEffect(() => {
       async function fetchData() {
 
@@ -30,6 +55,7 @@ const Home = () => {
                 const activity_name = await ExploreAPI.getActivitiesNames();
                 const food_filter_response = await ExploreAPI.getFoodFilters();
                 const place_filter_list = await ExploreAPI.getSpotTypeNames();
+                //const all_place_name = []
 
                 //set_place_list(response)
                   //console.log("activity_name");
@@ -52,6 +78,9 @@ const Home = () => {
                 while (places.length !== 0) {
                   places.pop();
                 }
+                while (allPlaceName.length !== 0){
+                      allPlaceName.pop();
+                }
                  {my_places.map((r) => (
 
                     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
@@ -62,10 +91,26 @@ const Home = () => {
             {allspots.map((r) => (
 
                     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
-                    dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc, place_id : r.place_id})
+                    dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc, place_id : r.place_id, place_name : r.place_name})
 
                 ))};
             //console.log(dataList);
+
+            for (let m =0; m < dataList.length; m++)
+            {
+              allPlaceName.push(dataList[m].place_name);
+            }
+            //console.log(all_place_name);
+            let uniquePlace_nameAray=[]
+              for(let k=0; k < allPlaceName.length; k++){
+                  if(uniquePlace_nameAray.indexOf(allPlaceName[k]) === -1) {
+                      uniquePlace_nameAray.push(allPlaceName[k]);
+                  }
+              }
+
+              setAllPlaceName(uniquePlace_nameAray);
+
+              console.log(uniquePlace_nameAray);
             {activity_name.map((r) => (
 
                     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
@@ -245,7 +290,7 @@ const Home = () => {
 
 
 
-            console.log(dataList);
+            //console.log(dataList);
             setList(dataList);
             setResultsFound(true);
 
@@ -505,7 +550,18 @@ const Home = () => {
               Places
             </h1>
           )}
-          {resultsFound ? <List list={makeplaceList(list)} /> : <EmptyView />}
+            <div>
+            {allPlaceName && allPlaceName.map(article =>{
+                return(
+                    <div >
+                        <h2>{article}</h2>
+                        {/*<p>{article.description}</p>*/}
+                    </div>
+                )
+            })}
+        </div>
+            <div className="fullPlace">{resultsFound ? <List list={makeplaceList(list)} /> : <EmptyView />}</div>
+            <div className="fullPlace">{resultsFound ? <List list={makeplaceList(list)} /> : <EmptyView />}</div>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -520,7 +576,7 @@ const Home = () => {
               Spots
             </h1>
           )}
-          {resultsFound ? <List list={makespotList(list)} /> : <EmptyView />}
+          <div>{resultsFound ? <List list={makespotList(list)} /> : <EmptyView />}</div>
         </div>
       </div>
     </div>

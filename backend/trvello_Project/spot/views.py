@@ -95,6 +95,27 @@ class SpotViewSet(viewsets.ModelViewSet):
     serializer_class = SpotSerializer
 
     @action(detail=False, methods=['post', 'get', 'put'])
+    def getSearchResult(self, request):
+        keyword = request.data['keyword']
+        location = request.data['location']
+
+        places = Spot.objects.all()
+        result = ""
+        if (keyword != ''):
+            places1 = places.filter(short_description__icontains=keyword)
+            # print(places1)
+            result = places1
+        if (location != ''):
+            places2 = places.filter(short_description__icontains=location)
+            # print(places2)
+            if result == "":
+                result = places2
+            else:
+                result |= places2
+        # print(result)
+        return Response(SpotSerializer(result, many=True).data)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
     def getRecommendatioByUserInterest(self, request):
         token = request.data['token']
         interests = request.data['interests']

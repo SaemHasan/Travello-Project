@@ -54,6 +54,17 @@ export default class HomeAPIService {
     }).then((resp) => resp.json());
   }
 
+  static searchSpot(keyword, location) {
+    return fetch(`http://127.0.0.1:8000/api/spots/getSearchResult/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ keyword: keyword, location: location }),
+    }).then((resp) => resp.json());
+  }
+
   static searchFood(keyword, location) {
     return fetch(`http://127.0.0.1:8000/api/foods/getSearchResult/`, {
       method: "POST",

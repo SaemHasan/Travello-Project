@@ -28,6 +28,7 @@ const Search_bar = () => {
     // console.log("search type: ", value);
     // console.log("search keyword: ", keyword_text);
     // console.log("search location: ", location_text);
+
     if (value === "") {
       alert("Please select a search type.");
     } else if (keyword_text === "" && location_text === "") {
@@ -68,6 +69,13 @@ const Search_bar = () => {
         navigate("/search");
         // console.log("search place: ", resp);
       }
+      else if(value === "Spot"){
+          const resp = await HomeAPIService.searchSpot(keyword_text, location_text);
+            localStorage.setItem("searchResult", JSON.stringify(resp));
+            localStorage.setItem("searchType", JSON.stringify(value));
+            navigate("/search");
+            // console.log("search spot: ", resp);
+      }
     }
     else {
       if (value === "Place") {
@@ -98,6 +106,13 @@ const Search_bar = () => {
         localStorage.setItem("searchResult", JSON.stringify(resp));
         localStorage.setItem("searchType", JSON.stringify(value));
         // console.log("search activity: ", resp);
+      }
+
+      else if(value === "Spot"){
+          const resp = await HomeAPIService.searchSpot(keyword_text, location_text);
+            localStorage.setItem("searchResult", JSON.stringify(resp));
+            localStorage.setItem("searchType", JSON.stringify(value));
+            // console.log("search spot: ", resp);
       }
 
       navigate("/search");
@@ -140,6 +155,7 @@ const Search_bar = () => {
                 Select Category
               </option>
               <option value="Place">Place</option>
+              <option value="Spot">Spot</option>
               <option value="Food">Food</option>
               <option value="Activity">Activity</option>
             </select>

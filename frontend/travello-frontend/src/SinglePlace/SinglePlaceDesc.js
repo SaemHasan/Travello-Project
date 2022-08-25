@@ -49,7 +49,12 @@ function SinglePlaceDesc() {
       setOnePlace(p);
       setName(p.name);
       setDescription(p.short_description);
-      setImgsrc(api_path + p.image);
+      if(p.image.includes("http://127.0.0.1:8000")){
+        setImgsrc(p.image);
+      }
+      else {
+          setImgsrc(api_path + p.image);
+      }
       // OnePlaceAPI.updateImgPath(p.image);
     }
 

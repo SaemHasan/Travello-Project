@@ -5,6 +5,7 @@ import {Card, CardContent, Grid, Link} from "@mui/material";
 import ExploreAPI from "../../../../ExploreAPI";
 import APIService from "../../../../../APIService";
 import Typography from "@material-ui/core/Typography";
+import Button from "react-bootstrap/Button";
 
 const api_path = "http://127.0.0.1:8000/media/";
 
@@ -18,6 +19,10 @@ const ListItem = ({
 
 
     let [food1Dlist, setFood1Dlist] = useState([])
+    const [disable, setDisable] = React.useState(false);
+      const visited_btn = () => {
+          setDisable(true);
+  };
 
     function food_list(){
         while (food1Dlist.length !== 0) {
@@ -175,7 +180,7 @@ const ListItem = ({
 
 
                   {
-                      place.map((attr)=>{
+                      place.slice(0,2).map((attr)=>{
                           return(
                              <Typography variant="h6" color="primary">
                                  {attr}
@@ -204,7 +209,7 @@ const ListItem = ({
                   Famous Foods :
                   {/*<Typography variant="h6" color="text.secondary">*/}
                                     {
-                      food_names.map((foods)=>{
+                      food_names.slice(0,2).map((foods)=>{
 
                           return(
                              <Typography variant="h6" color="primary">
@@ -218,7 +223,7 @@ const ListItem = ({
 
                   Famous Activities:
                   {
-                      activity.map((atv)=>{
+                      activity.slice(0,2).map((atv)=>{
                           return(
                              <Typography variant="h6" color="primary">
                                  {atv}
@@ -233,6 +238,7 @@ const ListItem = ({
           </Grid>
 
       </Grid>
+
                         {/*<p>*/}
                         {/*    {category}*/}
                         {/*</p>*/}
@@ -265,6 +271,14 @@ const ListItem = ({
 
       </span>
                 </Link>
+                    <br/>
+                    <div style={{alignContent:"center"}}>
+                            <Button disabled={disable} onClick={() => {
+                                visited_btn()
+                            }}>
+                              Visited
+                            </Button>
+                        </div>
                 </li>
 
 

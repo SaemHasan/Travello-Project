@@ -5,6 +5,7 @@ import List from "../../components/Home/List";
 import SearchBar from "../../components/Home/SearchBar";
 import "./styles.css";
 import ExploreAPI from "../../ExploreAPI";
+import Button from "react-bootstrap/Button";
 
 const Home = () => {
 
@@ -622,6 +623,8 @@ const Home = () => {
             </h1>
                         <div className="fullPlace">{resultsFound ? <List list={getplaceList(list, placeName)} /> : <EmptyView />}</div>
                     </div>
+
+
                 )
             })}
         </div>

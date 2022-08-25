@@ -186,8 +186,10 @@ const ListItem = ({
 
 
           <Grid item xs={12} md={12} >
-            <Card sx={{ maxWidth: 500 }} style={{ width: "320px"}}>
+            <Card sx={{ maxWidth: 500 }} style={{ width: "280px"}}>
+                <div style={{backgroundColor:"#D4F1F4"}}>
               <CardContent>
+                  {/*<br/>*/}
                   <h1 style={{alignContent:"center"}}>{title} </h1>
                   <br/>
                   Attractions:
@@ -249,10 +251,14 @@ const ListItem = ({
                      Rating: 🌟{rating}
                 {/*</Typography>*/}
               </CardContent>
+                    </div>
+
             </Card>
           </Grid>
 
       </Grid>
+                        {/*<br/>*/}
+                        {/*<br/>*/}
 
                         {/*<p>*/}
                         {/*    {category}*/}

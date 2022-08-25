@@ -15,7 +15,7 @@ export default function ShowSpots(props){
 
     return (
         <>
-            <h1>Spots</h1>
+            {/*<h1>Spots</h1>*/}
             <Grid container spacing={3}>
           {props.data.map((item) => (
             <Grid item xs={12} md={3} key={item.spot_id}>

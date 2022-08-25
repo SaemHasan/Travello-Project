@@ -15,6 +15,32 @@ const Home = () => {
   const [activities, setActivity] = useState([]);
   const [foods, setFoods] = useState([]);
   const [places, setPlaces] = useState([]);
+  const [allPlaceName, setAllPlaceName] = useState([]);
+
+  useEffect(() => {
+  //console.log(list)
+
+      while (allPlaceName.length !== 0) {
+                  allPlaceName.pop();
+                }
+
+      for (let m =0; m < list.length; m++)
+            {
+              allPlaceName.push(list[m].place_name);
+            }
+            //console.log(all_place_name);
+            let uniquePlace_nameAray=[]
+              for(let k=0; k < allPlaceName.length; k++){
+                  if(uniquePlace_nameAray.indexOf(allPlaceName[k]) === -1) {
+                      uniquePlace_nameAray.push(allPlaceName[k]);
+                  }
+              }
+              setAllPlaceName(uniquePlace_nameAray);
+
+              //console.log(uniquePlace_nameAray);
+
+}, [JSON.stringify(list)])
+
   useEffect(() => {
       async function fetchData() {
 
@@ -30,6 +56,7 @@ const Home = () => {
                 const activity_name = await ExploreAPI.getActivitiesNames();
                 const food_filter_response = await ExploreAPI.getFoodFilters();
                 const place_filter_list = await ExploreAPI.getSpotTypeNames();
+                //const all_place_name = []
 
                 //set_place_list(response)
                   //console.log("activity_name");
@@ -52,20 +79,39 @@ const Home = () => {
                 while (places.length !== 0) {
                   places.pop();
                 }
-                 {my_places.map((r) => (
-
-                    //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
-                    dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc,place_id:r.place_id})
-
-                ))};
+                while (allPlaceName.length !== 0){
+                      allPlaceName.pop();
+                }
+                //  {my_places.map((r) => (
+                //
+                //     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
+                //     dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc,place_id:r.place_id})
+                //
+                // ))};
 
             {allspots.map((r) => (
 
                     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
-                    dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc, place_id : r.place_id})
+                    dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc, place_id : r.place_id, place_name : r.place_name, food_names: "shutki"})
 
                 ))};
             //console.log(dataList);
+
+            for (let m =0; m < dataList.length; m++)
+            {
+              allPlaceName.push(dataList[m].place_name);
+            }
+            //console.log(all_place_name);
+            let uniquePlace_nameAray=[]
+              for(let k=0; k < allPlaceName.length; k++){
+                  if(uniquePlace_nameAray.indexOf(allPlaceName[k]) === -1) {
+                      uniquePlace_nameAray.push(allPlaceName[k]);
+                  }
+              }
+
+              setAllPlaceName(uniquePlace_nameAray);
+
+              //console.log(uniquePlace_nameAray);
             {activity_name.map((r) => (
 
                     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
@@ -102,8 +148,42 @@ const Home = () => {
             //console.log(allspots.length);
             for (let i = 0; i < allspots.length; i++) {
               const response = await ExploreAPI.getAllFood(i+1);
+              //console.log("in get all food");
+              //console.log(response);
+              let templist_foods = [];
+              //let templist_food_id = [];
+              {response.map((r) => (
+                //console.log(r.activity_id)
+                    //activity_id_list.push(r.activity_id)
+                    templist_foods.push({ids : r.id_list , foods :  r.name_list})
+                ))}
+                //console.log(templist_foods);
+                // {response.map((r) => (
+                // //console.log(r.activity_id)
+                //     //activity_id_list.push(r.activity_id)
+                //     templist_food_id.push(r.id_list)
+                // ))}
+                let uniqueArray_food=[]
+              for(let k=0; k < templist_foods[0].foods.length; k++){
+                  if(uniqueArray_food.indexOf(templist_foods[0].foods[k]) === -1) {
+                      uniqueArray_food.push(templist_foods[0].foods[k]);
+                  }
+              }
+              //console.log("unique food ")
+              //console.log(uniqueArray_food);
+              for (let j =0; j < dataList.length; j++)
+              {
+                if (dataList[j].title === allspots[i].title)
+                {
+                  dataList[j].food_names = uniqueArray_food;
+                  //console.log("rakin");
+                  break;
+                }
+              }
+              //console.log("food names");
+              //console.log(dataList);
               //console.log(i);
-              let final_food_response = await ExploreAPI.getFoodTypes(response);
+              let final_food_response = await ExploreAPI.getFoodTypes(templist_foods[0].ids);
               //console.log(final_food_response);
               let templist = [];
               {final_food_response.map((r) => (
@@ -210,6 +290,7 @@ const Home = () => {
                       uniqueArray.push(templist[k]);
                   }
               }
+              //console.log(dataList)
               //console.log(uniqueArray);
               for (let j =0; j < dataList.length; j++)
               {
@@ -217,9 +298,11 @@ const Home = () => {
                 {
                   dataList[j].place = uniqueArray;
                   //console.log("rakin");
+                  //console.log(dataList[j].place);
                   break;
                 }
               }
+
               templist=[];
               uniqueArray=[];
               for (let m =0; m < dataList.length; m++)
@@ -236,6 +319,7 @@ const Home = () => {
                 }
 
               }
+              //console.log(dataList)
 
 
             }
@@ -245,7 +329,7 @@ const Home = () => {
 
 
 
-            console.log(dataList);
+            //console.log(dataList);
             setList(dataList);
             setResultsFound(true);
 
@@ -312,6 +396,27 @@ const Home = () => {
   function makeplaceList(list) {
     let updatedList = [];
     updatedList = list.filter((item) => item.category === "place");
+    return updatedList;
+    //return p1 * p2;   // The function returns the product of p1 and p2
+  }
+  function getplaceList(list, placeName) {
+      //console.log(allPlaceName)
+    let updatedList = [];
+    updatedList = list.filter((item) => item.place_name === placeName);
+
+    for(let m=0; m < updatedList.length; m++) {
+        let uniqueArray = []
+        for (let k = 0; k < updatedList[m].place.length; k++) {
+            if (uniqueArray.indexOf(updatedList[m].place[k]) === -1) {
+                uniqueArray.push(updatedList[m].place[k]);
+            }
+        }
+        updatedList[m].place = uniqueArray;
+      //console.log(updatedList[0].place)
+      //console.log("updatedList.place")
+    }
+
+
     return updatedList;
     //return p1 * p2;   // The function returns the product of p1 and p2
   }
@@ -505,7 +610,23 @@ const Home = () => {
               Places
             </h1>
           )}
-          {resultsFound ? <List list={makeplaceList(list)} /> : <EmptyView />}
+            <div>
+            {allPlaceName.map(placeName =>{
+                return(
+                    <div >
+                                    <h1
+              className="center_title"
+              style={{ color: "blue", marginBottom: "30px", marginTop: "10px"}}
+            >
+              {placeName}
+            </h1>
+                        <div className="fullPlace">{resultsFound ? <List list={getplaceList(list, placeName)} /> : <EmptyView />}</div>
+                    </div>
+                )
+            })}
+        </div>
+
+            {/*<div className="fullPlace">{resultsFound ? <List list={makeplaceList(list)} /> : <EmptyView />}</div>*/}
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -517,10 +638,10 @@ const Home = () => {
               className="center_title"
               style={{ color: "blue", marginBottom: "30px", marginTop: "10px"}}
             >
-              Spots
+              {/*Spots*/}
             </h1>
           )}
-          {resultsFound ? <List list={makespotList(list)} /> : <EmptyView />}
+          {/*<div>{resultsFound ? <List list={makespotList(list)} /> : <EmptyView />}</div>*/}
         </div>
       </div>
     </div>

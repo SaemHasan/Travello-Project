@@ -25,3 +25,9 @@
   /*align-content: center;*/
   text-align: center;
 }
+
+.fullPlace{
+  background: url("./home_img.jpg");
+    background-repeat: no-repeat;
+    background-size: 1600px 700px;
+}

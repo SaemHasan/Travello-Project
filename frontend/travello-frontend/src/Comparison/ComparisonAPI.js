@@ -36,8 +36,8 @@ export default class ComparisonAPI {
 
 
 
-    static getAllFood(spot_id) {
-    return fetch(`http://127.0.0.1:8000/api/spot_foods/getAllFood/`, {
+    static getAllFoodComparison(spot_id) {
+    return fetch(`http://127.0.0.1:8000/api/spot_foods/getAllFoodComparison/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

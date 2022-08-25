@@ -36,10 +36,7 @@ export default function AddSpotDetailsModal(props) {
     uploadData.district = district
     uploadData.thana = thana
     uploadData.upzila = upzila
-    if (image) {
-      // console.log(image)
-      uploadData.image = image
-    }
+    uploadData.image = image
     uploadData.rating = rating
     uploadData.place_id = place_id
 

@@ -131,12 +131,12 @@ export default function AddSpotActivityDetailsModal(props) {
     const type = getActivityTypeObj(typeID);
 
     const uploadData = new FormData();
-    uploadData.append("activity_name", activityName);
-    uploadData.append("description", activityDescription);
+    uploadData.append("activity_name", name);
+    uploadData.append("description", des);
     if (img !== "") {
       uploadData.append("image", img, img.name);
     }
-    uploadData.append("type", activityType);
+    uploadData.append("type", actType);
     uploadData.append("type_id", type.type_id);
 
     let id = -1;

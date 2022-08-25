@@ -188,9 +188,10 @@ export default function AddSpotFoodDetailsModal(props) {
   }
 
   const handleSave = async () => {
+      // console.log()
       let spotid = await handleSpotSave(props.spot.name, props.spot.short_description, props.spot.address_line, props.spot.district, props.spot.thana, props.spot.upzila, props.spot.image, props.spot.rating, props.spot.place_id);
     await saveFoodToDB(spotid);
-    // await props.handleSave(spotid);
+    await props.handleSave(spotid);
   };
 
   useEffect(() => {

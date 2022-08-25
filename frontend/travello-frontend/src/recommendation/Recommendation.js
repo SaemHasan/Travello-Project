@@ -7,6 +7,7 @@ export default function Recommendation() {
     const [spotRecommendationByVisit, setSpotRecommendationByVisit] = useState([]);
     const [spotRecommendationByInterests, setSpotRecommendationByInterests] = useState([]);
     const [userVisitedSpots, setUserVisitedSpots] = useState([]);
+    const [userInterestObjs, setUserInterestObjs] = useState([]);
     const [userInterests, setUserInterests] = useState([]);
     const [show, setShow] = useState(false);
 
@@ -23,8 +24,8 @@ export default function Recommendation() {
                 }
             }
         }
-        setSpotRecommendationByInterests(spotRecommendationByInterests);
-        // console.log("getUniqueSpots finish: ", spotRecommendationByInterests);
+        await setSpotRecommendationByInterests(spotRecommendationByInterests);
+        console.log("getUniqueSpots finish: ", spotRecommendationByInterests);
 
     }
 
@@ -39,16 +40,18 @@ export default function Recommendation() {
                 await setUserVisitedSpots(res);
                 // console.log("res ",res);
                 res = await RecommendationAPI.getUserInterests(token);
-                // console.log("res ", res);
+                await setUserInterestObjs(res);
+                console.log("res ", res);
                 if (res.length !== 0) {
-                    await res.map(async (r) => {
-                        await setUserInterests([...userInterests, r.interest]);
-                    })
-                    // console.log("interests : ",userInterests);
-                    res = await RecommendationAPI.getRecommendatioByUserInterest(token, userInterests);
+                    let interests = [];
+                    for (let i =0;i<res.length;i++){
+                        interests.push(res[i].interest);
+                    }
+                    // console.log("interests : ",interests);
+                    res = await RecommendationAPI.getRecommendatioByUserInterest(token, interests);
                     await setSpotRecommendationByInterests(res);
                     // console.log("res ",res);
-                    if(spotRecommendationByVisit.length !== 0 && spotRecommendationByInterests.length !== 0){
+                    if(spotRecommendationByVisit.length !== 0 && res.length !== 0){
                         await getUniqueSpots();
                     }
                 }
@@ -63,7 +66,7 @@ export default function Recommendation() {
             }
 
             fetchUser().then();
-        }, [spotRecommendationByVisit]);
+        }, []);
 
 
     if (show) {

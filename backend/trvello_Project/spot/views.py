@@ -115,36 +115,7 @@ class SpotViewSet(viewsets.ModelViewSet):
         # print(result)
         return Response(SpotSerializer(result, many=True).data)
 
-    @action(detail=False, methods=['post', 'get', 'put'])
-    def getRecommendatioByUserInterest(self, request):
-        token = request.data['token']
-        interests = request.data['interests']
-
-        spots = Spot.objects.all()
-        recommended_spots = []
-        for spot in spots:
-            types = Spot_Type.objects.all().filter(spot_id=spot.spot_id)
-            for type in types:
-                # print("type : ", type)
-                # print("interests : ", interests)
-                if type.type_id.type_name in interests:
-                    recommended_spots.append(spot)
-                    break
-        return Response(SpotSerializer(recommended_spots, many=True).data)
-
-    @action(detail=False, methods=['post', 'get', 'put'])
-    def getUserVisitedSpots(self, request):
-        token = request.data['token']
-        user_id = User.objects.get(auth_token=token).id
-        user_spot = User_Spot.objects.all().filter(user_id=user_id)
-
-        return Response(User_SpotSerializer(user_spot, many=True).data)
-
-
-    @action(detail=False, methods=['post', 'get', 'put'])
-    def getRecommendationByUserVisitedSpot(self, request):
-        token = request.data['token']
-        user_id = User.objects.get(auth_token=token).id
+    def getRecommenedSpots(self, user_id):
         user_spot = User_Spot.objects.all().filter(user_id=user_id)
         # print(user_spot)
 
@@ -169,9 +140,50 @@ class SpotViewSet(viewsets.ModelViewSet):
                 if j.spot_id not in visited_spot_list and j.spot_id not in recommendation_spot_list:
                     recommendation_spot_list.append(j.spot_id)
 
-        # recommendation_spot_list = recommendation_spot_list.distinct()
-        # print(recommendation_spot_list)
+        return recommendation_spot_list
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getRecommendatioByUserInterest(self, request):
+        token = request.data['token']
+        user_id = User.objects.get(auth_token=token).id
+        interests = request.data['interests']
+        user_spot = User_Spot.objects.all().filter(user_id=user_id)
+        # print(user_spot)
 
+        visited_spot_list = []
+        for i in user_spot:
+            visited_spot_list.append(i.spot_id)
+
+        spots = Spot.objects.all()
+        recommendation_spot_list = self.getRecommenedSpots(user_id)
+        # for i in visited_spot_list:
+            # spots = spots.exclude(spot_id=i.spot_id)
+        recommended_spots = []
+        for spot in spots:
+            types = Spot_Type.objects.all().filter(spot_id=spot.spot_id)
+            for type in types:
+                # print("type : ", type)
+                # print("interests : ", interests)
+                if type.type_id.type_name in interests and spot not in visited_spot_list and spot not in recommendation_spot_list:
+                    recommended_spots.append(spot)
+                    break
+        return Response(SpotSerializer(recommended_spots, many=True).data)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getUserVisitedSpots(self, request):
+        token = request.data['token']
+        user_id = User.objects.get(auth_token=token).id
+        user_spot = User_Spot.objects.all().filter(user_id=user_id)
+
+        return Response(User_SpotSerializer(user_spot, many=True).data)
+
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getRecommendationByUserVisitedSpot(self, request):
+        token = request.data['token']
+        user_id = User.objects.get(auth_token=token).id
+
+        recommendation_spot_list = self.getRecommenedSpots(user_id)
+        # print(recommendation_spot_list)
         return Response(SpotSerializer(recommendation_spot_list, many=True).data)
         # return Response(User_SpotSerializer(user_spot, many=True).data)
 

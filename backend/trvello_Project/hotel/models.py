@@ -97,3 +97,13 @@ class Room_Attribute_Table(models.Model):
     def __str__(self):
         return self.room_id.room_type + " " + self.attribute_id.attribute_name
 
+
+class MISC_Detail(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE, default=None)
+    name = models.CharField(max_length=100, null=True)
+    distance = models.FloatField(default=1)
+
+    def __str__(self):
+        return self.name
+

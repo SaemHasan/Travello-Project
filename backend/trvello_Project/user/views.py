@@ -25,7 +25,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['post', 'get', 'put'])
     def getUserInterests(self, request):
-        print("here i am")
+        # print("here i am")
         print(request.data)
         user = User.objects.get(auth_token=request.data['token'])
         interests = UserProfile_Interests.objects.filter(user=user)

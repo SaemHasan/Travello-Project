@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Hotel, Hotel_Attribute, Hotel_Attribute_Table, HotelRatingInfo, \
-    Room, RoomPriceInfo, Room_Attribute, Room_Attribute_Table
+    Room, RoomPriceInfo, Room_Attribute, Room_Attribute_Table, MISC_Detail
 
 
 class HotelSerializer(serializers.ModelSerializer):
@@ -48,4 +48,10 @@ class Room_AttributeSerializer(serializers.ModelSerializer):
 class Room_Attribute_TableSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room_Attribute_Table
+        fields = '__all__'
+
+
+class MISC_DetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MISC_Detail
         fields = '__all__'

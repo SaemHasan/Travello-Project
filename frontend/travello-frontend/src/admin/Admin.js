@@ -22,6 +22,7 @@ function Admin() {
   return (
     <div className="container">
       <h1>Admin Page</h1>
+
       <AdminInfo user={user} image={user_image} />
       {/*<GridShow />*/}
       <AddInfo />

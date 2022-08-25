@@ -10,19 +10,19 @@ export default function AddActivityTypeModal(props) {
   const [show, setShow] = useState(false);
   const [type_name, setTypeName] = useState("");
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const uploadData = new FormData();
     uploadData.append("type_name", type_name);
 
-    AdminAPI.addActivityTypeToDB(uploadData)
-      .then((response) => {
-        console.log(response);
-        alert("Activity Type Added Successfully");
-      })
-      .catch((err) => {
-        console.log(err);
-        // alert("Error! Please try again.");
-      });
+    await AdminAPI.addActivityTypeToDB(uploadData)
+        .then((response) => {
+          console.log(response);
+          alert("Activity Type Added Successfully");
+        })
+        .catch((err) => {
+          console.log(err);
+          // alert("Error! Please try again.");
+        });
     setShow(false);
     props.handleClose(props.type);
   };

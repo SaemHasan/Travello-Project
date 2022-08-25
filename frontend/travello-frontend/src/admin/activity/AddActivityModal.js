@@ -23,7 +23,7 @@ export default function AddActivityModal(props) {
     }
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const type = getActivityTypeObj(typeID);
 
     const uploadData = new FormData();
@@ -33,15 +33,15 @@ export default function AddActivityModal(props) {
     uploadData.append("type", activityType);
     uploadData.append("type_id", type.type_id);
 
-    AdminAPI.addActivityToDB(uploadData)
-      .then((res) => {
-        console.log("response : ", res);
-        alert("Activity Added Successfully");
-      })
-      .catch((err) => {
-        console.log(err);
-        // alert("Error! Please try again.");
-      });
+    await AdminAPI.addActivityToDB(uploadData)
+        .then((res) => {
+          console.log("response : ", res);
+          alert("Activity Added Successfully");
+        })
+        .catch((err) => {
+          console.log(err);
+          // alert("Error! Please try again.");
+        });
     setActivityName("");
     setActivityImage("");
     setActivityDescription("");

@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import HomeAPIService from "../home/HomeAPIService";
 import SearchResult from "../searchResult/SearchResult";
 import { useNavigate } from "react-router-dom";
+import APIService from "../APIService";
 
 const Search_bar = () => {
   const getInitialState = () => {
@@ -31,7 +32,44 @@ const Search_bar = () => {
       alert("Please select a search type.");
     } else if (keyword_text === "" && location_text === "") {
       alert("Please enter a keyword or location.");
-    } else {
+    }
+    else if (keyword_text === "" && location_text !== ""){
+      // activity
+      if(value === "Activity"){
+        const resp = await HomeAPIService.searchSpotActivity(keyword_text, location_text);
+        let activities = []
+        for(let i = 0; i < resp.length; i++){
+          activities.push(await APIService.getFromDB_byID("activities",resp[i].activity_id))
+        }
+        console.log("activities: ", activities);
+        localStorage.setItem("searchResult", JSON.stringify(activities));
+        localStorage.setItem("searchType", JSON.stringify(value));
+        navigate("/search");
+      }
+      // food
+      else if(value === "Food"){
+        const resp = await HomeAPIService.searchSpotFood(keyword_text, location_text);
+        let foods = []
+        for(let i = 0; i < resp.length; i++){
+          foods.push(await APIService.getFromDB_byID("foods",resp[i].food_id))
+        }
+        console.log("foods: ", foods);
+        localStorage.setItem("searchResult", JSON.stringify(foods));
+        localStorage.setItem("searchType", JSON.stringify(value));
+        navigate("/search");
+      }
+      else if (value === "Place") {
+        const resp = await HomeAPIService.searchPlace(
+          keyword_text,
+          location_text
+        );
+        localStorage.setItem("searchResult", JSON.stringify(resp));
+        localStorage.setItem("searchType", JSON.stringify(value));
+        navigate("/search");
+        // console.log("search place: ", resp);
+      }
+    }
+    else {
       if (value === "Place") {
         const resp = await HomeAPIService.searchPlace(
           keyword_text,

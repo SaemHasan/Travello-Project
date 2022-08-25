@@ -75,4 +75,27 @@ export default class HomeAPIService {
       body: JSON.stringify({ keyword: keyword, location: location }),
     }).then((resp) => resp.json());
   }
+
+  static searchSpotActivity(keyword, location) {
+    return fetch(`http://127.0.0.1:8000/api/spots/getOneSpotActivities_search/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ keyword: keyword, location: location }),
+    }).then((resp) => resp.json());
+  }
+
+  static searchSpotFood(keyword, location) {
+    return fetch(`http://127.0.0.1:8000/api/spots/getOneSpotFoods_search/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ keyword: keyword, location: location }),
+    }).then((resp) => resp.json());
+  }
+
 }

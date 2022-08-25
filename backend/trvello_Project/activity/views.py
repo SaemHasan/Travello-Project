@@ -78,10 +78,18 @@ class ActivityViewSet(viewsets.ModelViewSet):
             result = activities1
         if (location != ''):
             activities2 = activities.filter(description__icontains=location)
+
             if result == "":
                 result = activities2
             else:
                 result |= activities2
+        if result != "":
+            result = result.distinct()
+            initial_res = result
+            for i in range(initial_res.count()):
+                for j in range(initial_res.count()):
+                    if j>i and initial_res[i].activity_name == initial_res[j].activity_name:
+                        result = result.exclude(activity_id=initial_res[j].activity_id)
         # print(result)
         return Response(ActivitySerializer(result, many=True).data)
 

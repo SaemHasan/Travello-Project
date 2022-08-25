@@ -17,26 +17,28 @@ export default function AddRestaurantModal(props) {
   const [website, setWebsite] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const uploadData = new FormData();
     uploadData.append("restaurant_name", name);
     uploadData.append("address_line", addressline);
     uploadData.append("district", district);
     uploadData.append("thana", thana);
     uploadData.append("upzila", upzila);
-    uploadData.append("image", image, image.name);
+    if(image !== "") {
+      uploadData.append("image", image, image.name);
+    }
     uploadData.append("website", website);
     uploadData.append("email", email);
     uploadData.append("phone_number", phone_number);
 
-    AdminAPI.addRestaurantToDB(uploadData)
-      .then((res) => {
-        console.log("response : ", res);
-        alert("Added Successfully");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    await AdminAPI.addRestaurantToDB(uploadData)
+        .then((res) => {
+          console.log("response : ", res);
+          alert("Added Successfully");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     // console.log("save data to db here");
     setShow(false);
     props.handleClose(props.type);

@@ -13,7 +13,7 @@ export default function AddPlaceModal(props) {
   const [rating, setRating] = useState("");
   const [district, setDistrict] = useState("");
 
-  const handleSave = () => {
+  const handleSave = async () => {
     // console.log(name, short_description, image, rating, district);
     const uploadData = new FormData();
     uploadData.append("name", name);
@@ -24,14 +24,14 @@ export default function AddPlaceModal(props) {
     uploadData.append("rating", rating);
     uploadData.append("district", district);
 
-    AdminAPI.addPlaceToDB(uploadData)
-      .then((res) => {
-        console.log("response : ", res);
-        alert("Added Successfully");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    await AdminAPI.addPlaceToDB(uploadData)
+        .then((res) => {
+          console.log("response : ", res);
+          alert("Added Successfully");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     // console.log("save data to db here");
     setShow(false);
     props.handleClose(props.type);

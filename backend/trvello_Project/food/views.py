@@ -58,6 +58,15 @@ class FoodViewSet(viewsets.ModelViewSet):
             else:
                 result |= foods2
 
+        if result != "":
+            result = result.distinct()
+            print("result ", result.count())
+            initial_res = result
+            for i in range(initial_res.count()):
+                for j in range(initial_res.count()):
+                    if j>i:
+                        if initial_res[i].food_name == initial_res[j].food_name:
+                            result = result.exclude(food_id=initial_res[i].food_id)
         # print(result)
         return Response(FoodSerializer(result, many=True).data)
 

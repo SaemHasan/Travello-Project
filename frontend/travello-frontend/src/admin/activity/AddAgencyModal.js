@@ -17,27 +17,29 @@ export default function AddAgencyModal(props) {
   const [website, setWebsite] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const uploadData = new FormData();
     uploadData.append("agency_name", name);
     uploadData.append("address_line", addressline);
     uploadData.append("district", district);
     uploadData.append("thana", thana);
-    uploadData.append("image", image, image.name);
+    if (image !== "") {
+      uploadData.append("image", image, image.name);
+    }
     uploadData.append("rating", rating);
     uploadData.append("website", website);
     uploadData.append("email", email);
     uploadData.append("phone_number", phone_number);
 
-    AdminAPI.addAgencyToDB(uploadData)
-      .then((res) => {
-        console.log("response : ", res);
-        alert("Agency Added Successfully");
-      })
-      .catch((err) => {
-        console.log(err);
-        // alert("Error! Please try again.");
-      });
+    await AdminAPI.addAgencyToDB(uploadData)
+        .then((res) => {
+          console.log("response : ", res);
+          alert("Agency Added Successfully");
+        })
+        .catch((err) => {
+          console.log(err);
+          // alert("Error! Please try again.");
+        });
     // console.log("save data to db here");
     setShow(false);
     props.handleClose(props.type);

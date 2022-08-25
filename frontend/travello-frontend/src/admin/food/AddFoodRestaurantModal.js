@@ -15,13 +15,13 @@ export default function AddFoodRestaurantModal(props) {
   const [selectedRestaurant, setSelectedRestaurant] = useState("");
   const [rating, setRating] = useState(0);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const uploadData = new FormData();
     uploadData.append("food_id", selectedFood);
     uploadData.append("restaurant_id", selectedRestaurant);
     uploadData.append("rating", rating);
     // console.log("save data to db here");
-    AdminAPI.postToDB(uploadData, "food_restaurants").then((res) => {
+    await AdminAPI.postToDB(uploadData, "food_restaurants").then((res) => {
       console.log(res);
       alert("Added Successfully");
     });

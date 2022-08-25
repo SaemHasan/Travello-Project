@@ -9,9 +9,9 @@ import Button from "react-bootstrap/Button";
 
 const api_path = "http://127.0.0.1:8000/media/";
 
-const Getuser = () => {
-    const [user, setUser] = useState({});
-}
+// const Getuser = () => {
+//     const [user, setUser] = useState({});
+// }
 
 const ListItem = ({
   item: { id, coverSrc, title, desc, price, deliveryFee, serviceTime, rating, category, place_id, place,food,activity, food_names },
@@ -20,8 +20,19 @@ const ListItem = ({
 
     let [food1Dlist, setFood1Dlist] = useState([])
     const [disable, setDisable] = React.useState(false);
-      const visited_btn = () => {
+      const Visited_btn = () => {
           setDisable(true);
+          const [user, setUser] = React.useState("");
+          const token = JSON.parse(localStorage.getItem("token"));
+    if (token) {
+      // console.log("token is not null");
+      //setShowReviewBox(true);
+      APIService.getUserObject(token).then(async (data) => {
+        console.log(data);
+        await setUser(data);
+      });
+    }
+    console.log(user);
   };
 
     function food_list(){
@@ -180,7 +191,7 @@ const ListItem = ({
 
 
                   {
-                      place.slice(0,2).map((attr)=>{
+                      place.slice(0,2).map((attr,key)=>{
                           return(
                              <Typography variant="h6" color="primary">
                                  {attr}
@@ -209,7 +220,7 @@ const ListItem = ({
                   Famous Foods :
                   {/*<Typography variant="h6" color="text.secondary">*/}
                                     {
-                      food_names.slice(0,2).map((foods)=>{
+                      food_names.slice(0,2).map((foods,key)=>{
 
                           return(
                              <Typography variant="h6" color="primary">
@@ -223,7 +234,7 @@ const ListItem = ({
 
                   Famous Activities:
                   {
-                      activity.slice(0,2).map((atv)=>{
+                      activity.slice(0,2).map((atv,key)=>{
                           return(
                              <Typography variant="h6" color="primary">
                                  {atv}
@@ -274,7 +285,7 @@ const ListItem = ({
                     <br/>
                     <div style={{alignContent:"center"}}>
                             <Button disabled={disable} onClick={() => {
-                                visited_btn()
+                                Visited_btn()
                             }}>
                               Visited
                             </Button>

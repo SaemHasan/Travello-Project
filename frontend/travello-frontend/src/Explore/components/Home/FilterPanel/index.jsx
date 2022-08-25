@@ -22,14 +22,14 @@ const FilterPanel = ({
   changePrice,
 }) => (
   <div>
-    <div className='input-group'>
-      <p className='label'>Category</p>
-      <FilterListToggle
-        options={categoryList}
-        value={selectedCategory}
-        selectToggle={selectCategory}
-      />
-    </div>
+    {/*<div className='input-group'>*/}
+    {/*  <p className='label'>Category</p>*/}
+    {/*  <FilterListToggle*/}
+    {/*    options={categoryList}*/}
+    {/*    value={selectedCategory}*/}
+    {/*    selectToggle={selectCategory}*/}
+    {/*  />*/}
+    {/*</div>*/}
     <div className='input-group'>
         <div className='first'><p className='label_cuisine'>Place filters</p></div>
         <div className='input-group_2'>

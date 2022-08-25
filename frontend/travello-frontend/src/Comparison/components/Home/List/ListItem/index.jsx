@@ -9,7 +9,7 @@ import SinglePlaceAPI from "../../../../../SinglePlace/SinglePlaceAPI";
 
 const api_path = "http://127.0.0.1:8000/media/";
 const ListItem = ({
-  item: {id, coverSrc, title, desc, price, deliveryFee, serviceTime, rating },
+  item: {id, coverSrc, title, desc, price, deliveryFee, serviceTime, rating, misc },
 }) =>{
     const MAX_LENGTH = 150;
     console.log(api_path + coverSrc);
@@ -103,8 +103,12 @@ const ListItem = ({
       </ul>
 
 
+{misc.map(mis =>{
+    return(
+            <h8> {mis}<br/> </h8>
 
-            <h5> demo </h5>
+    )
+    })}
       <header>
         <h4>{title}</h4>
         <span>🌟{rating}</span>

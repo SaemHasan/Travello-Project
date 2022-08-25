@@ -7,6 +7,7 @@ import Modal from "react-bootstrap/Modal";
 import AdminAPI from "../AdminAPI";
 import APIService from "../../APIService";
 import AddRestaurantModal from "../food/AddRestaurantModal";
+import ShowSpotAddConfirmation from "./ShowSpotAddConfirmation";
 
 export default function AddSpotFoodDetailsModal(props) {
   const [allFoodsFromUser, setAllFoodsFromUser] = useState([]);
@@ -15,6 +16,8 @@ export default function AddSpotFoodDetailsModal(props) {
 
   const [show, setShow] = useState(false);
   const [addMoreFood, setAddMoreFood] = useState(false);
+  const [showNext, setShowNext] = useState(false);
+
   const [foodName, setFoodName] = useState("");
   const [short_description, setShortDescription] = useState("");
   const [image, setImage] = useState("");
@@ -27,19 +30,28 @@ export default function AddSpotFoodDetailsModal(props) {
     setFoodName("");
     setShortDescription("");
     setImage("");
+    setRestaurantId("");
+    setPrice("");
+    setRating("");
   }
 
   function saveInputFromUser(){
-      if(foodName === ""){
-            alert("Please enter food name");
+      if(foodName === "" || restaurantId === "" || price === "" || rating === ""){
+            alert("Please enter all fields");
             return;
       }
       let data = {
           food_name: foodName,
-          short_description: short_description
+          short_description: short_description,
+          restaurant_id : restaurantId,
+          price: price,
+          rating: rating,
       }
       if(image !== ""){
             data.image = image;
+      }
+      else{
+          data.image = "";
       }
       setAllFoodsFromUser([...allFoodsFromUser, data]);
   }
@@ -58,6 +70,7 @@ export default function AddSpotFoodDetailsModal(props) {
       clearAll();
       setShow(false);
       setAddMoreFood(false);
+      setShowNext(true);
   }
 
 
@@ -77,6 +90,66 @@ export default function AddSpotFoodDetailsModal(props) {
         setAllRestaurants(res);
     });
     setShowAddRestaurantModal(false);
+  };
+
+  const handleFoodInfoSave = async (name, des, img) => {
+      const uploadData = new FormData();
+      uploadData.append("food_name", name);
+      uploadData.append("short_description", des);
+      if (img !== "") {
+          uploadData.append("image", img, img.name);
+      }
+      let id = -1;
+      await AdminAPI.addFoodToDB(uploadData)
+          .then((res) => {
+              console.log(res);
+              id = res.food_id;
+              // alert("Added Successfully");
+          })
+
+      return id;
+  };
+
+  const handleFoodRestaurantSave = async (food_id, res_id, rate) => {
+    const uploadData = new FormData();
+    uploadData.append("food_id", food_id);
+    uploadData.append("restaurant_id", res_id);
+    uploadData.append("rating", rate);
+    // console.log("save data to db here");
+    let id = -1;
+    await AdminAPI.postToDB(uploadData, "food_restaurants").then((res) => {
+      console.log(res);
+      id = res.food_restaurant_id;
+      // alert("Added Successfully");
+    });
+    return id;
+  };
+
+  const handleFoodPriceSave = async (p, food_res_id) => {
+      const uploadData = new FormData();
+      uploadData.append("price", p);
+      uploadData.append("food_restaurant_id", food_res_id);
+
+      await AdminAPI.postToDB(uploadData, "food_price_infos").then((res) => {
+          console.log(res);
+          // alert("Added Successfully");
+      });
+
+  };
+
+  const saveFoodToDB = async () => {
+      for (const food of allFoodsFromUser) {
+          let id = await handleFoodInfoSave(food.food_name, food.short_description, food.image);
+          console.log("food id ", id);
+          id = await handleFoodRestaurantSave(id, food.restaurant_id, food.rating);
+          console.log("food restaurant id ", id);
+          await handleFoodPriceSave(food.price, id);
+      }
+  }
+
+  const handleSave = async () => {
+    await saveFoodToDB();
+
   };
 
   useEffect(() => {
@@ -288,6 +361,20 @@ export default function AddSpotFoodDetailsModal(props) {
                     handleClose={handleCloseAddRestaurant}
                 />
             }
+        </>
+
+        <>
+          {showNext &&
+            <ShowSpotAddConfirmation
+              show={showNext}
+              handleClose={handleClose}
+              handleSave = {handleSave}
+              spot={props.spot}
+              activites={props.activities}
+              foods = {props.foods}
+
+            />
+          }
         </>
     </>
   );

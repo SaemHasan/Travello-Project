@@ -8,11 +8,14 @@ export default function ShowSpots(props){
 
     const handleLearnMore = (item) => {
         localStorage.setItem("spot", JSON.stringify(item));
-        navigate("/SinglePlace");
+        localStorage.removeItem("place");
+        localStorage.removeItem("food");
+        navigate("/oneplace");
     }
 
     return (
         <>
+            {/*<h1>Spots</h1>*/}
             <Grid container spacing={3}>
           {props.data.map((item) => (
             <Grid item xs={12} md={3} key={item.spot_id}>

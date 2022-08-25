@@ -19,6 +19,14 @@ export default class APIService {
     }).then((resp) => resp.json());
   }
 
+  // generic api method to post to db
+  static postToDB(body, type) {
+    return fetch("http://127.0.0.1:8000/api/" + type + "/", {
+      method: "POST",
+      body: body,
+    }).then((resp) => resp.json());
+  }
+
   static getFromDB(type) {
     return fetch(`http://127.0.0.1:8000/api/${type}/`, {
       method: "GET",
@@ -38,6 +46,8 @@ export default class APIService {
       },
     }).then((resp) => resp.json());
   }
+
+
 
   // static UpdateArticle(article_id, body, token) {
   //

@@ -87,7 +87,12 @@ function OneActivityDesc() {
         setOneActivity(activity);
         setName(activity.activity_name);
         setDescription(activity.description);
-        setImgsrc(api_path + activity.image);
+        if (activity.image.includes("http://127.0.0.1:8000")){
+            setImgsrc(activity.image);
+        }
+        else{
+            setImgsrc(api_path + activity.image);
+        }
     }
       async function fetchData() {
           //console.log(food.food_id);

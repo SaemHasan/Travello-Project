@@ -84,7 +84,12 @@ function OneFoodDesc() {
         setOneFood(food);
         setName(food.food_name);
         setDescription(food.short_description);
-        setImgsrc(api_path + food.image);
+        if(food.image.includes("http://127.0.0.1:8000")){
+            setImgsrc(food.image);
+            }
+            else {
+            setImgsrc(api_path + food.image);
+        }
     }
       async function fetchData() {
           //console.log(food.food_id);

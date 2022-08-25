@@ -102,7 +102,12 @@ function OnePlaceDesc() {
       setOnePlace(spot);
       setName(spot.name);
       setDescription(spot.short_description);
-      setImgsrc(api_path + spot.image);
+      if(! spot.image.includes("http://127.0.0.1:8000")) {
+        setImgsrc(api_path + spot.image);
+      }
+      else{
+        setImgsrc(spot.image);
+      }
     }
 
     const food = JSON.parse(localStorage.getItem("food"));

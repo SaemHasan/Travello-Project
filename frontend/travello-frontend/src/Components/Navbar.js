@@ -106,6 +106,18 @@ const Navbar = () => {
               </Button>
             </a>
           </li>
+          {
+            loggedIn &&
+              <li className="nav-item">
+              <a className="nav-link" href="/recommendation">
+                <Button>
+                  <Link href="/recommendation" style={{ color: "white" }}>
+                    Recommendation
+                  </Link>
+                </Button>
+              </a>
+            </li>
+          }
           {loggedIn === false && (
             <li className="nav-item">
               <a className="nav-link" href="/Login">
@@ -146,6 +158,7 @@ const Navbar = () => {
               </a>
             </li>
           )}
+
           {/*<li className="nav-item dropdown">
         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dropdown link

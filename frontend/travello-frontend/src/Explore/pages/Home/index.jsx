@@ -5,6 +5,7 @@ import List from "../../components/Home/List";
 import SearchBar from "../../components/Home/SearchBar";
 import "./styles.css";
 import ExploreAPI from "../../ExploreAPI";
+import Button from "react-bootstrap/Button";
 
 const Home = () => {
 
@@ -209,20 +210,20 @@ const Home = () => {
               }
               templist=[];
               uniqueArray=[];
-              for (let m =0; m < dataList.length; m++)
-              {
-                if (dataList[m].id === i+1)
-                {
-                  for (let n =0; n < dataList.length; n++)
-                  {
-                    if (dataList[m].place_id === dataList[n].place_id)
-                    {
-                      dataList[n].food = dataList[n].food.concat(dataList[m].food)
-                    }
-                  }
-                }
-
-              }
+              // for (let m =0; m < dataList.length; m++)
+              // {
+              //   if (dataList[m].id === i+1)
+              //   {
+              //     for (let n =0; n < dataList.length; n++)
+              //     {
+              //       if (dataList[m].place_id === dataList[n].place_id)
+              //       {
+              //         dataList[n].food = dataList[n].food.concat(dataList[m].food)
+              //       }
+              //     }
+              //   }
+              //
+              // }
 
 
             }
@@ -257,20 +258,20 @@ const Home = () => {
               }
               templist=[];
               uniqueArray=[];
-              for (let m =0; m < dataList.length; m++)
-              {
-                if (dataList[m].id === i+1)
-                {
-                  for (let n =0; n < dataList.length; n++)
-                  {
-                    if (dataList[m].place_id === dataList[n].place_id && dataList[n].id !== i+1)
-                    {
-                      dataList[n].activity = dataList[n].activity.concat(dataList[m].activity)
-                    }
-                  }
-                }
-
-              }
+              // for (let m =0; m < dataList.length; m++)
+              // {
+              //   if (dataList[m].id === i+1)
+              //   {
+              //     for (let n =0; n < dataList.length; n++)
+              //     {
+              //       if (dataList[m].place_id === dataList[n].place_id && dataList[n].id !== i+1)
+              //       {
+              //         dataList[n].activity = dataList[n].activity.concat(dataList[m].activity)
+              //       }
+              //     }
+              //   }
+              //
+              // }
             }
 
             for (let i = 0; i < allspots.length; i++) {
@@ -305,20 +306,20 @@ const Home = () => {
 
               templist=[];
               uniqueArray=[];
-              for (let m =0; m < dataList.length; m++)
-              {
-                if (dataList[m].id === i+1)
-                {
-                  for (let n =0; n < dataList.length; n++)
-                  {
-                    if (dataList[m].place_id === dataList[n].place_id && dataList[n].id !== i+1)
-                    {
-                      dataList[n].place = dataList[n].place.concat(dataList[m].place)
-                    }
-                  }
-                }
-
-              }
+              // for (let m =0; m < dataList.length; m++)
+              // {
+              //   if (dataList[m].id === i+1)
+              //   {
+              //     for (let n =0; n < dataList.length; n++)
+              //     {
+              //       if (dataList[m].place_id === dataList[n].place_id && dataList[n].id !== i+1)
+              //       {
+              //         dataList[n].place = dataList[n].place.concat(dataList[m].place)
+              //       }
+              //     }
+              //   }
+              //
+              // }
               //console.log(dataList)
 
 
@@ -622,6 +623,8 @@ const Home = () => {
             </h1>
                         <div className="fullPlace">{resultsFound ? <List list={getplaceList(list, placeName)} /> : <EmptyView />}</div>
                     </div>
+
+
                 )
             })}
         </div>

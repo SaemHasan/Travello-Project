@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import HotelViewSet, Hotel_AttributeViewSet, Hotel_Attribute_TableViewSet, HotelRatingInfoViewSet, \
-    RoomViewSet, RoomPriceInfoViewSet, Room_AttributeViewSet, Room_Attribute_TableViewSet
+    RoomViewSet, RoomPriceInfoViewSet, Room_AttributeViewSet, Room_Attribute_TableViewSet, MISC_DetailViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
@@ -12,7 +12,7 @@ router.register('rooms', RoomViewSet, basename='rooms')
 router.register('room_price_infos', RoomPriceInfoViewSet, basename='room_price_infos')
 router.register('room_attributes', Room_AttributeViewSet, basename='room_attributes')
 router.register('room_attribute_tables', Room_Attribute_TableViewSet, basename='room_attribute_tables')
-
+router.register('misc_details', MISC_DetailViewSet, basename='misc_details')
 
 urlpatterns = [
     path('api/', include(router.urls)),

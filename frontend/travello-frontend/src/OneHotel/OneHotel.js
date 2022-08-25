@@ -16,6 +16,8 @@ function OneHotel() {
       const [dataList, set_dataList] = useState([]);
   const [list, setList] = useState(dataList);
   const [room_list, setroom_list] = useState([]);
+  const [hotel_misc, sethotel_misc] = useState([]);
+
 
 
 
@@ -26,6 +28,17 @@ function OneHotel() {
             const hotel_id = JSON.parse(localStorage.getItem("hotel_id"));
             const hotel_response = await OneHotelAPI.getOneHotel(hotel_id);
             const room_response = await OneHotelAPI.getRooms(hotel_id);
+
+            const hotel_misc_response = await OneHotelAPI.getOneHotelMisc(hotel_id);
+            console.log(hotel_misc_response);
+
+            while (hotel_misc.length !== 0) {
+                  hotel_misc.pop()
+                }
+            {hotel_misc_response.map((r) => (
+                    hotel_misc.push({misc:r.misc})
+                ))};
+            console.log(hotel_misc);
             hotel_atb_response = await OneHotelAPI.getOneHotelAttribute(hotel_id);
             while (dataList.length !== 0) {
                   dataList.pop()
@@ -34,6 +47,7 @@ function OneHotel() {
             while(room_list.length !==0){
                 room_list.pop()
             }
+
                 {hotel_atb_response.map((r) => (
                     dataList.push({atb_id:r.id, name:r.name})
                 ))};
@@ -66,7 +80,7 @@ function OneHotel() {
         return (
 
 
-            <div className="body">
+            <div className="body" style={{paddingLeft:"50px", paddingRight:"50px"}}>
                 <div>
                     <img
                         className="img-fluid mainImage"
@@ -89,7 +103,9 @@ function OneHotel() {
                     <p style={{marginLeft: "10px"}}>{description}</p>
                 </div>
 
-        <div>
+                <div className="row">
+                            <div className="column" style={{marginLeft:'500px'}}>
+
             {list.map(l =>{
                 return(
                     <div key={l.atb_id}>
@@ -98,6 +114,8 @@ function OneHotel() {
           boxShadow: '1px 2px 9px #F4AAB9',
           margin: '1em',
           padding: '.5em',
+            width:'200px',
+
         }}
       >
                            <p><b>{l.name}</b></p>
@@ -108,6 +126,22 @@ function OneHotel() {
                 )
             })}
         </div>
+                </div>
+                <h3>
+                    <u>Nearest Useful Places:</u>
+                </h3>
+        <div style={{marginBottom:"20px"}}>
+            {hotel_misc.map(mis =>{
+                return(
+                    <div>
+                        <h8>{mis.misc}</h8>
+
+                    </div>
+                )
+            })}
+        </div>
+
+
                 <h3><u>Rooms:</u></h3>
             <Grid container spacing={3}>
 

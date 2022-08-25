@@ -216,118 +216,100 @@ const ListItem = ({
 
             <ul>
                 <li>
-                    <Link
-                        underline="hover"
-                        style={{color: "black"}}
-                        onClick={(e) => handleClick(id, category, place_id)}
 
-                        //href=
-                    >
-                        {/*<img src={api_path + coverSrc} alt="adventure"/>*/}
 
                         <Grid container spacing={3}>
 
 
-                            <Grid item xs={12} md={12}>
-                                <Card sx={{maxWidth: 500}} style={{width: "320px"}}>
-                                    <CardContent>
-                                        <h1 style={{alignContent: "center"}}>{title} </h1>
-                                        <br/>
-                                        Attractions:
+          <Grid item xs={12} md={12} >
+            <Card sx={{ maxWidth: 500 }} style={{ width: "280px"}}>
+                <div style={{backgroundColor:"#D4F1F4"}}>
+              <CardContent>
+                  {/*<br/>*/}
+                  <Link
+                underline="hover"
+                style={{ color: "black" }}
+                onClick={(e) => handleClick(id,category,place_id)}
 
-
-                                        {
-                                            place.slice(0, 2).map((attr, key) => {
-                                                return (
-                                                    <Typography variant="h6" color="primary">
-                                                        {attr}
-                                                    </Typography>
-                                                )
-                                            })
-                                        }
-                                        {/*{food_list()}*/}
-                                        {/*<br/>*/}
-
-                                        {/*Famous Food Types:*/}
-                                        {/*<Typography variant="h6" color="text.secondary">*/}
-                                        {/*    {*/}
-                                        {/*    food1Dlist.map((food)=>{*/}
-
-                                        {/*        return(*/}
-                                        {/*           <Typography variant="h6" color="primary">*/}
-                                        {/*               {food}*/}
-                                        {/*           </Typography>*/}
-                                        {/*        )*/}
-                                        {/*    })*/}
-                                        {/*}*/}
-
-                                        <br/>
-
-                                        Famous Foods :
-                                        {/*<Typography variant="h6" color="text.secondary">*/}
-                                        {
-                                            food_names.slice(0, 2).map((foods, key) => {
-
-                                                return (
-                                                    <Typography variant="h6" color="primary">
-                                                        {foods}
-                                                    </Typography>
-                                                )
-                                            })
-                                        }
-                                        {activity_list()}
-                                        <br/>
-
-                                        Famous Activities:
-                                        {
-                                            activity.slice(0, 2).map((atv, key) => {
-                                                return (
-                                                    <Typography variant="h6" color="primary">
-                                                        {atv}
-                                                    </Typography>
-                                                )
-                                            })
-                                        }
-                                        Rating: 🌟{rating}
-                                        {/*</Typography>*/}
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-
-                        </Grid>
-
-                        {/*<p>*/}
-                        {/*    {category}*/}
-                        {/*</p>*/}
-                        {/*                        <p>*/}
-                        {/*    {place}*/}
-                        {/*</p>*/}
-                        <span className="large-explore">
-          <div className="div-color-explore">
-
-              <img src={api_path + coverSrc} className="large-image-explore" alt="adventure"/>
-              <div>
-          {/*<p className="heading-des"> {toShow} </p>*/}
-                  <div>
-      {desc.length > MAX_LENGTH ?
-          (
-              <div className="heading-des">
-                  {`${desc.substring(0, MAX_LENGTH)}...`}<p style={{color: "blue"}}><u>Read more</u></p>
-              </div>
-          ) :
-          <p>{desc}</p>
-      }
-    </div>
+                //href=
+              >
+                  <h1 style={{alignContent:"center"}}>{title} </h1></Link>
+                  <br/>
+Attractions:
 
 
 
-              </div>
+                  {
+                      place.slice(0,2).map((attr,key)=>{
+                          return(
+                             <Typography variant="h6" color="primary">
+                                 {attr}
+                             </Typography>
+                          )
+                      })
+                  }
+                  {/*{food_list()}*/}
+                  {/*<br/>*/}
+
+                  {/*Famous Food Types:*/}
+                  {/*<Typography variant="h6" color="text.secondary">*/}
+                  {/*    {*/}
+                  {/*    food1Dlist.map((food)=>{*/}
+
+                  {/*        return(*/}
+                  {/*           <Typography variant="h6" color="primary">*/}
+                  {/*               {food}*/}
+                  {/*           </Typography>*/}
+                  {/*        )*/}
+                  {/*    })*/}
+                  {/*}*/}
+
+                  <br/>
+
+                  Famous Foods :
+                  {/*<Typography variant="h6" color="text.secondary">*/}
+                                    {
+                      food_names.slice(0,2).map((foods,key)=>{
+
+                          return(
+                             <Typography variant="h6" color="primary">
+                                 {foods}
+                             </Typography>
+                          )
+                      })
+                  }
+                      {activity_list()}
+                      <br/>
 
 
-          </div>
 
-      </span>
-                    </Link>
+                  Famous Activities:
+                  {
+                      activity.slice(0,2).map((atv,key)=>{
+                          return(
+                             <Typography variant="h6" color="primary">
+                                 {atv}
+                             </Typography>
+                          )
+                      })
+                  }
+                     Rating: 🌟{rating}
+                {/*</Typography>*/}
+              </CardContent>
+                    </div>
+
+            </Card>
+          </Grid>
+
+      </Grid>
+                        {/*<br/>*/}
+                        {/*<br/>*/}
+
+
+
+                        
+
+
                     <br/>
                     <div style={{alignContent: "center"}}>
                         <Button disabled={disable} onClick={() => {

@@ -77,6 +77,7 @@ const ListItem = ({
                 //href=
               >
                     <img src={api_path + coverSrc} alt="adventure"/>
+
       <span className="large-comp">
           <div className="div-color-comp">
 
@@ -101,10 +102,15 @@ const ListItem = ({
         </li>
       </ul>
 
+
+
+            <h5> demo </h5>
       <header>
         <h4>{title}</h4>
         <span>🌟{rating}</span>
       </header>
+
+
     </div>
   );
 };

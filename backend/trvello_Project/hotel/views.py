@@ -53,6 +53,12 @@ class HotelViewSet(viewsets.ModelViewSet):
             atb_list = []
             for atb in hotel_atb:
                 atb_list.append(atb.attribute_id.attribute_name.lower())
+
+            hotel_misc = MISC_Detail.objects.all().filter(hotel_id=h.hotel_id)
+            for misc in hotel_misc:
+                print(misc)
+            print(hotel_misc)
+
             myList = {'id': h.hotel_id, 'title': h.name, 'desc': h.short_description,
                       'coverSrc': str(h.image), 'place': atb_list, 'rating': h.rating}
             hotel_list.append(myList)

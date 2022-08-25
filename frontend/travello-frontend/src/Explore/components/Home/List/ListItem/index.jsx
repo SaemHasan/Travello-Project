@@ -173,13 +173,7 @@ const ListItem = ({
 
             <ul>
                 <li>
-                    <Link
-                underline="hover"
-                style={{ color: "black" }}
-                onClick={(e) => handleClick(id,category,place_id)}
 
-                //href=
-              >
                     {/*<img src={api_path + coverSrc} alt="adventure"/>*/}
 
                                     <Grid container spacing={3}>
@@ -190,7 +184,14 @@ const ListItem = ({
                 <div style={{backgroundColor:"#D4F1F4"}}>
               <CardContent>
                   {/*<br/>*/}
-                  <h1 style={{alignContent:"center"}}>{title} </h1>
+                  <Link
+                underline="hover"
+                style={{ color: "black" }}
+                onClick={(e) => handleClick(id,category,place_id)}
+
+                //href=
+              >
+                  <h1 style={{alignContent:"center"}}>{title} </h1></Link>
                   <br/>
                   Attractions:
 
@@ -266,32 +267,32 @@ const ListItem = ({
                         {/*                        <p>*/}
                         {/*    {place}*/}
                         {/*</p>*/}
-      <span className="large-explore">
-          <div className="div-color-explore">
+    {/*  <span className="large-explore">*/}
+    {/*      <div className="div-color-explore">*/}
 
-              <img src={api_path + coverSrc} className="large-image-explore" alt="adventure" />
-              <div>
-          {/*<p className="heading-des"> {toShow} </p>*/}
-                      <div>
-      {desc.length > MAX_LENGTH ?
-        (
-          <div className="heading-des">
-            {`${desc.substring(0, MAX_LENGTH)}...`}<p style={{color:"blue"}}><u>Read more</u></p>
-          </div>
-        ) :
-        <p>{desc}</p>
-      }
-    </div>
-
-
-
-              </div>
+    {/*          <img src={api_path + coverSrc} className="large-image-explore" alt="adventure" />*/}
+    {/*          <div>*/}
+    {/*      /!*<p className="heading-des"> {toShow} </p>*!/*/}
+    {/*                  <div>*/}
+    {/*  {desc.length > MAX_LENGTH ?*/}
+    {/*    (*/}
+    {/*      <div className="heading-des">*/}
+    {/*        {`${desc.substring(0, MAX_LENGTH)}...`}<p style={{color:"blue"}}><u>Read more</u></p>*/}
+    {/*      </div>*/}
+    {/*    ) :*/}
+    {/*    <p>{desc}</p>*/}
+    {/*  }*/}
+    {/*</div>*/}
 
 
-          </div>
 
-      </span>
-                </Link>
+    {/*          </div>*/}
+
+
+    {/*      </div>*/}
+
+    {/*  </span>*/}
+
                     <br/>
                     <div style={{alignContent:"center"}}>
                             <Button disabled={disable} onClick={() => {

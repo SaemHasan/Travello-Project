@@ -5,12 +5,14 @@ import ActivityGridShow from "./activity/ShowActivityCards";
 import FoodGridShow from "./food/ShowFoodCards";
 import HotelGridShow from "./hotel/ShowHotelCards";
 import { Button, ButtonGroup } from "@mui/material";
+import AddSpotDetailsModal from "./spot/AddSpotAllDetailsModal";
 
 export default function AddInfo() {
   const [showPlace, setShowPlace] = useState(true);
   const [showActivity, setShowActivity] = useState(false);
   const [showFood, setShowFood] = useState(false);
   const [showHotel, setShowHotel] = useState(false);
+  const [showSpotDetails, setShowSpotDetails] = useState(false);
 
   const handlePlace = () => {
     setShowPlace(!showPlace);
@@ -37,6 +39,10 @@ export default function AddInfo() {
     setShowFood(false);
   };
 
+  const handleSpotDetails = () => {
+    setShowSpotDetails(!showSpotDetails);
+  };
+
   return (
     <div className="container">
       <div className="justify-content-center center">
@@ -48,6 +54,7 @@ export default function AddInfo() {
           <Button onClick={handleActivity}>Add Activity</Button>
           <Button onClick={handleFood}>Add Food</Button>
           <Button onClick={handleHotel}>Add Hotel</Button>
+          <Button onClick={handleSpotDetails}>Add Spot Details</Button>
         </ButtonGroup>
       </div>
       <div>
@@ -74,6 +81,12 @@ export default function AddInfo() {
             <HotelGridShow />
           </div>
         </Collapse>
+      </div>
+      {/*for spot details*/}
+      <div>
+        {showSpotDetails &&
+          <AddSpotDetailsModal show={showSpotDetails} handleClose={handleSpotDetails}/>
+        }
       </div>
     </div>
   );

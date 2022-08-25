@@ -8,6 +8,8 @@ export default function ShowSpots(props){
 
     const handleLearnMore = (item) => {
         localStorage.setItem("spot", JSON.stringify(item));
+        localStorage.removeItem("place");
+        localStorage.removeItem("food");
         navigate("/oneplace");
     }
 

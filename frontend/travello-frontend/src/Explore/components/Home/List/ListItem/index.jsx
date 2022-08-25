@@ -20,8 +20,12 @@ const ListItem = ({
 
     let [food1Dlist, setFood1Dlist] = useState([])
     const [disable, setDisable] = React.useState(false);
-      const Visited_btn = () => {
+      const Visited_btn = (spot_id, place_id) => {
           setDisable(true);
+          console.log("spot_id");
+          console.log(spot_id);
+          console.log("place_id");
+          console.log(place_id);
     //       const [user, setUser] = React.useState("");
     //       const token = JSON.parse(localStorage.getItem("token"));
     // if (token) {
@@ -285,7 +289,7 @@ const ListItem = ({
                     <br/>
                     <div style={{alignContent:"center"}}>
                             <Button disabled={disable} onClick={() => {
-                                Visited_btn()
+                                Visited_btn(id,place_id)
                             }}>
                               Visited
                             </Button>

@@ -22,17 +22,17 @@ const ListItem = ({
     const [disable, setDisable] = React.useState(false);
       const Visited_btn = () => {
           setDisable(true);
-          const [user, setUser] = React.useState("");
-          const token = JSON.parse(localStorage.getItem("token"));
-    if (token) {
-      // console.log("token is not null");
-      //setShowReviewBox(true);
-      APIService.getUserObject(token).then(async (data) => {
-        console.log(data);
-        await setUser(data);
-      });
-    }
-    console.log(user);
+    //       const [user, setUser] = React.useState("");
+    //       const token = JSON.parse(localStorage.getItem("token"));
+    // if (token) {
+    //   // console.log("token is not null");
+    //   //setShowReviewBox(true);
+    //   APIService.getUserObject(token).then(async (data) => {
+    //     console.log(data);
+    //     await setUser(data);
+    //   });
+    // }
+    // console.log(user);
   };
 
     function food_list(){

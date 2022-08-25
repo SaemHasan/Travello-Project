@@ -48,6 +48,7 @@ import ShowRoomPriceInfo from "./admin/showDetails/hotel/ShowRoomPriceInfo";
 import ShowHotelRatingInfo from "./admin/showDetails/hotel/ShowHotelRatingInfo";
 import OneHotel from "./OneHotel/OneHotel"
 import SinglePlace from "./SinglePlace/SinglePlace";
+import Recommendation from "./recommendation/Recommendation";
 
 export default function App() {
   return (
@@ -116,6 +117,7 @@ export default function App() {
           />
           <Route path="showroompriceinfo" element={<ShowRoomPriceInfo />} />
           <Route path="showhotelratinginfo" element={<ShowHotelRatingInfo />} />
+          <Route path="recommendation" element={<Recommendation />} />
           {/*admin part finish*/}
         </Route>
 

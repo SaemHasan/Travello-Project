@@ -81,6 +81,7 @@ export default class APIService {
   //
   // }
   //
+
   static LoginUser(body) {
     return fetch("http://127.0.0.1:8000/auth/", {
       method: "POST",

@@ -13,7 +13,7 @@ const Getuser = () => {
 }
 
 const ListItem = ({
-  item: { id, coverSrc, title, desc, price, deliveryFee, serviceTime, rating, category, place_id, place,food,activity },
+  item: { id, coverSrc, title, desc, price, deliveryFee, serviceTime, rating, category, place_id, place,food,activity, food_names },
 }) =>{
 
 
@@ -41,8 +41,8 @@ const ListItem = ({
                   }
               }
         //       setFood1Dlist(uniqueArray);
-        console.log("food1Dlist");
-        console.log(uniqueArray);
+        //console.log("food1Dlist");
+        //console.log(uniqueArray);
         food1Dlist = uniqueArray;
         //console.log(uniqueArray);
         //return food1Dlist;
@@ -62,8 +62,8 @@ const ListItem = ({
                   }
               }
         //       setFood1Dlist(uniqueArray);
-        console.log("food1Dlist");
-        console.log(uniqueArray);
+        //console.log("food1Dlist");
+        //console.log(uniqueArray);
         activity = uniqueArray;
         //console.log(uniqueArray);
         //return food1Dlist;
@@ -166,9 +166,9 @@ const ListItem = ({
 
 
           <Grid item xs={12} md={12} >
-            <Card sx={{ maxWidth: 500 }}>
+            <Card sx={{ maxWidth: 500 }} style={{ width: "320px"}}>
               <CardContent>
-                  {title}
+                  <h1 style={{alignContent:"center"}}>{title} </h1>
                   <br/>
                   Attractions:
 
@@ -183,17 +183,32 @@ const ListItem = ({
                           )
                       })
                   }
-                  {food_list()}
+                  {/*{food_list()}*/}
+                  {/*<br/>*/}
+
+                  {/*Famous Food Types:*/}
+                  {/*<Typography variant="h6" color="text.secondary">*/}
+                  {/*    {*/}
+                  {/*    food1Dlist.map((food)=>{*/}
+
+                  {/*        return(*/}
+                  {/*           <Typography variant="h6" color="primary">*/}
+                  {/*               {food}*/}
+                  {/*           </Typography>*/}
+                  {/*        )*/}
+                  {/*    })*/}
+                  {/*}*/}
+
                   <br/>
 
-                  Famous Foods:
-                  <Typography variant="h6" color="text.secondary">
+                  Famous Foods :
+                  {/*<Typography variant="h6" color="text.secondary">*/}
                                     {
-                      food1Dlist.map((food)=>{
+                      food_names.map((foods)=>{
 
                           return(
                              <Typography variant="h6" color="primary">
-                                 {food}
+                                 {foods}
                              </Typography>
                           )
                       })
@@ -211,8 +226,8 @@ const ListItem = ({
                           )
                       })
                   }
-                     Rating: {rating}
-                </Typography>
+                     Rating: 🌟{rating}
+                {/*</Typography>*/}
               </CardContent>
             </Card>
           </Grid>

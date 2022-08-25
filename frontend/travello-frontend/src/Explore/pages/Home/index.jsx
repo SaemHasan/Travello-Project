@@ -18,7 +18,7 @@ const Home = () => {
   const [allPlaceName, setAllPlaceName] = useState([]);
 
   useEffect(() => {
-  console.log(list)
+  //console.log(list)
 
       while (allPlaceName.length !== 0) {
                   allPlaceName.pop();
@@ -37,7 +37,7 @@ const Home = () => {
               }
               setAllPlaceName(uniquePlace_nameAray);
 
-              console.log(uniquePlace_nameAray);
+              //console.log(uniquePlace_nameAray);
 
 }, [JSON.stringify(list)])
 
@@ -92,7 +92,7 @@ const Home = () => {
             {allspots.map((r) => (
 
                     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
-                    dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc, place_id : r.place_id, place_name : r.place_name})
+                    dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc, place_id : r.place_id, place_name : r.place_name, food_names: "shutki"})
 
                 ))};
             //console.log(dataList);
@@ -111,7 +111,7 @@ const Home = () => {
 
               setAllPlaceName(uniquePlace_nameAray);
 
-              console.log(uniquePlace_nameAray);
+              //console.log(uniquePlace_nameAray);
             {activity_name.map((r) => (
 
                     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
@@ -148,8 +148,42 @@ const Home = () => {
             //console.log(allspots.length);
             for (let i = 0; i < allspots.length; i++) {
               const response = await ExploreAPI.getAllFood(i+1);
+              //console.log("in get all food");
+              //console.log(response);
+              let templist_foods = [];
+              //let templist_food_id = [];
+              {response.map((r) => (
+                //console.log(r.activity_id)
+                    //activity_id_list.push(r.activity_id)
+                    templist_foods.push({ids : r.id_list , foods :  r.name_list})
+                ))}
+                //console.log(templist_foods);
+                // {response.map((r) => (
+                // //console.log(r.activity_id)
+                //     //activity_id_list.push(r.activity_id)
+                //     templist_food_id.push(r.id_list)
+                // ))}
+                let uniqueArray_food=[]
+              for(let k=0; k < templist_foods[0].foods.length; k++){
+                  if(uniqueArray_food.indexOf(templist_foods[0].foods[k]) === -1) {
+                      uniqueArray_food.push(templist_foods[0].foods[k]);
+                  }
+              }
+              //console.log("unique food ")
+              //console.log(uniqueArray_food);
+              for (let j =0; j < dataList.length; j++)
+              {
+                if (dataList[j].title === allspots[i].title)
+                {
+                  dataList[j].food_names = uniqueArray_food;
+                  //console.log("rakin");
+                  break;
+                }
+              }
+              //console.log("food names");
+              //console.log(dataList);
               //console.log(i);
-              let final_food_response = await ExploreAPI.getFoodTypes(response);
+              let final_food_response = await ExploreAPI.getFoodTypes(templist_foods[0].ids);
               //console.log(final_food_response);
               let templist = [];
               {final_food_response.map((r) => (
@@ -256,15 +290,15 @@ const Home = () => {
                       uniqueArray.push(templist[k]);
                   }
               }
-              console.log(dataList)
+              //console.log(dataList)
               //console.log(uniqueArray);
               for (let j =0; j < dataList.length; j++)
               {
                 if (dataList[j].title === allspots[i].title)
                 {
                   dataList[j].place = uniqueArray;
-                  console.log("rakin");
-                  console.log(dataList[j].place);
+                  //console.log("rakin");
+                  //console.log(dataList[j].place);
                   break;
                 }
               }
@@ -285,7 +319,7 @@ const Home = () => {
                 }
 
               }
-              console.log(dataList)
+              //console.log(dataList)
 
 
             }
@@ -366,7 +400,7 @@ const Home = () => {
     //return p1 * p2;   // The function returns the product of p1 and p2
   }
   function getplaceList(list, placeName) {
-      console.log(allPlaceName)
+      //console.log(allPlaceName)
     let updatedList = [];
     updatedList = list.filter((item) => item.place_name === placeName);
 
@@ -378,8 +412,8 @@ const Home = () => {
             }
         }
         updatedList[m].place = uniqueArray;
-      console.log(updatedList[0].place)
-      console.log("updatedList.place")
+      //console.log(updatedList[0].place)
+      //console.log("updatedList.place")
     }
 
 

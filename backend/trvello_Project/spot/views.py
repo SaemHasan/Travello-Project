@@ -39,7 +39,7 @@ class PlaceViewSet(viewsets.ModelViewSet):
         place_id = int(request.data['place_id'])
         place = Place.objects.all().filter(place_id=place_id)
 
-        print(place)
+        # print(place)
         return Response(SpotSerializer(place, many=True).data)
 
     @action(detail=False, methods=['post', 'get', 'put'])
@@ -55,7 +55,7 @@ class PlaceViewSet(viewsets.ModelViewSet):
             result = places1
         if (location != ''):
             places2 = places.filter(short_description__icontains=location)
-            print(places2)
+            # print(places2)
             if result == "":
                 result = places2
             else:
@@ -111,7 +111,7 @@ class SpotViewSet(viewsets.ModelViewSet):
         spot_id = int(request.data['spot_id'])
         spot = Spot.objects.all().filter(spot_id=spot_id)
 
-        print(spot)
+        # print(spot)
         return Response(SpotSerializer(spot, many=True).data)
 
     @action(detail=False, methods=['post', 'get', 'put'])
@@ -125,12 +125,12 @@ class SpotViewSet(viewsets.ModelViewSet):
     def getSpotsByPlaceID(self, request):  # spots of a place
 
         p_id = int(request.data['place_id'])
-        print(p_id)
+        # print(p_id)
         # activity = Spot_Activity.objects.get(spot_id = spot_id)
         sopt_list = Spot.objects.all().filter(place_id_id=p_id)
         # activity = Activity.activity_name
 
-        print(p_id)
+        # print(p_id)
         return Response(SpotSerializer(sopt_list, many=True).data)
 
     @action(detail=False, methods=['post', 'get', 'put'])
@@ -149,7 +149,7 @@ class SpotViewSet(viewsets.ModelViewSet):
             # print(i.activity_id.description)
             # print(i.image)
             spot_list.append(myList)
-        print(spot_list)
+        # print(spot_list)
         # print(spot)
 
         return Response(spot_list)
@@ -220,13 +220,23 @@ class Spot_FoodViewSet(viewsets.ModelViewSet):
         # activity = Spot_Activity.objects.get(spot_id = spot_id)
         food = Spot_Food.objects.all().filter(spot_id=spot_id)
         food_id_list = []
+        food_name_list = []
         # print(type(food))
+        food_dict = []
         for i in food:
             food_id_list.append(i.food_id.food_id)
+            food_name_list.append(i.food_id.food_name)
+
         # print(spots)
 
         # print(food)
-        return Response(food_id_list)
+        my_list = {'id_list': food_id_list, 'name_list': food_name_list}
+        food_dict.append(my_list)
+        #print(food_name_list)
+
+
+        #print(food_dict)
+        return Response(food_dict)
 
 
 class Spot_ActivityViewSet(viewsets.ModelViewSet):

@@ -24,29 +24,26 @@ export default function AddSpotActivityDetailsModal(props) {
   const [activityImage, setActivityImage] = useState("");
   const [activityType, setActivityType] = useState("");
   const [typeID, setTypeID] = useState("");
+  const [agencyID, setAgencyID] = useState("");
+  const [price, setPrice] = useState("");
+  const [rating, setRating] = useState("");
 
-  const getActivityTypeObj = (typeid) => {
-    for (let i = 0; i < activityTypes.length; i++) {
-      if (activityTypes[i].type_id === parseInt(typeid)) {
-        // console.log("activity type: ", activityTypes[i]);
-        return activityTypes[i];
-      }
-    }
-  };
+
 
   function saveInputFromUser() {
-    if(activityName === ""){
-      alert("Please enter activity name");
+    if(activityName === "" || agencyID === "" || typeID === "" || price === "" || rating === "") {
+      alert("Please enter all fields");
       return;
     }
     let uploadData = {}
     uploadData.activity_name = activityName;
     uploadData.description = activityDescription;
-    if(activityName !==""){
-      uploadData.image = activityImage;
-    }
+    uploadData.image = activityImage;
     uploadData.type = activityType;
     uploadData.type_id = typeID;
+    uploadData.agency_id = agencyID;
+    uploadData.price = price;
+    uploadData.rating = rating;
     setAllActivityFromUser([...allActivityFromUser, uploadData]);
   }
 
@@ -56,6 +53,9 @@ export default function AddSpotActivityDetailsModal(props) {
     setActivityImage("");
     setActivityType("");
     setTypeID("");
+    setAgencyID("");
+    setPrice("");
+    setRating("");
   }
 
   const handleAddMoreActivity = async () => {
@@ -116,6 +116,92 @@ export default function AddSpotActivityDetailsModal(props) {
       });
 
     setShowAddType(false);
+  }
+
+  const getActivityTypeObj = (typeid) => {
+    for (let i = 0; i < activityTypes.length; i++) {
+      if (activityTypes[i].type_id === parseInt(typeid)) {
+        // console.log("activity type: ", activityTypes[i]);
+        return activityTypes[i];
+      }
+    }
+  };
+
+  const handleActivitySave = async (typeID, name, des, img, actType) => {
+    const type = getActivityTypeObj(typeID);
+
+    const uploadData = new FormData();
+    uploadData.append("activity_name", activityName);
+    uploadData.append("description", activityDescription);
+    if (img !== "") {
+      uploadData.append("image", img, img.name);
+    }
+    uploadData.append("type", activityType);
+    uploadData.append("type_id", type.type_id);
+
+    let id = -1;
+    await AdminAPI.addActivityToDB(uploadData)
+        .then((res) => {
+          id = res.activity_id
+          console.log("response : ", res);
+        })
+
+    return id;
+  };
+
+  const handleActivityAgencySave = async (activityID, agencyID, rating) => {
+    const uploadData = new FormData();
+    uploadData.append("activity_id", activityID);
+    uploadData.append("agency_id", agencyID);
+    uploadData.append("rating", rating);
+    // console.log("save data to db here");
+    let id = -1;
+    await AdminAPI.addActivityAgencyToDB(uploadData)
+        .then((res) => {
+          id = res.activity_agency_id
+          console.log(res);
+          // alert("Activity Agency Added");
+        })
+    return id;
+  };
+
+  const handleActivityPriceSave = async (price, id) => {
+    const uploadData = new FormData();
+    uploadData.append("price", price);
+    uploadData.append("activity_agency_id", id);
+    // console.log("uploadData: ", price, "selected: ", selectedActivityAgency);
+    await AdminAPI.addActivityPriceInfoToDB(uploadData)
+        .then((res) => {
+          console.log(res);
+          // alert("Activity Price Added Successfully");
+        })
+  };
+
+  const handleSpotActivitySave = (spotid, activityID) => {
+    const uploadData = new FormData();
+    uploadData.append("spot_id", spotid);
+    uploadData.append("activity_id", activityID);
+    // console.log("save data to db here");
+    AdminAPI.addSpotActivityToDB(uploadData).then((res) => {
+      console.log(res);
+
+    });
+  };
+
+  const saveActivitiesToDB = async (spotID) => {
+    for (const activity of allActivityFromUser) {
+      const activity_id = await handleActivitySave(activity.type_id, activity.activity_name, activity.description, activity.image, activity.type);
+      console.log("activity_id: ", activity_id);
+      const activity_agency_id = await handleActivityAgencySave(activity_id, activity.agency_id, activity.rating);
+      console.log("activity_agency_id: ", activity_agency_id);
+      await handleActivityPriceSave(activity.price, activity_agency_id);
+      await handleSpotActivitySave(spotID, activity_id);
+    }
+  }
+
+  const handleSave = async (spotID) => {
+    await saveActivitiesToDB(spotID);
+    alert("Added Successfully");
   }
 
   useEffect(() => {
@@ -208,7 +294,7 @@ export default function AddSpotActivityDetailsModal(props) {
 
             <Form.Group>
               <Form.Label>Select Agency</Form.Label>
-                <Form.Select onChange={(e) => props.setAgencyID(e.target.value)}>
+                <Form.Select onChange={(e) => setAgencyID(e.target.value)}>
                   <option value={0}>Select Agency</option>
                     {agencies.map((agency, idx) => (
                     <option key={idx} value={agency.agency_id}>
@@ -219,6 +305,28 @@ export default function AddSpotActivityDetailsModal(props) {
               <Button variant="primary" onClick={handleAddAgency}>
                 Add Agency
               </Button>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput55">
+              <Form.Label>Rating</Form.Label>
+              <Form.Control
+                type="number"
+                step="0.1"
+                min="0"
+                max="5"
+                placeholder="rating"
+                onChange={(e) => setRating(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
+              <Form.Label>Price</Form.Label>
+              <Form.Control
+                type="number"
+                min="0"
+                placeholder="price"
+                onChange={(e) => setPrice(e.target.value)}
+              />
             </Form.Group>
 
           </Form>
@@ -300,7 +408,7 @@ export default function AddSpotActivityDetailsModal(props) {
 
             <Form.Group>
               <Form.Label>Select Agency</Form.Label>
-                <Form.Select onChange={(e) => props.setAgencyID(e.target.value)}>
+                <Form.Select onChange={(e) => setAgencyID(e.target.value)}>
                   <option value={0}>Select Agency</option>
                     {agencies.map((agency, idx) => (
                     <option key={idx} value={agency.agency_id}>
@@ -312,6 +420,29 @@ export default function AddSpotActivityDetailsModal(props) {
                 Add Agency
               </Button>
             </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput55">
+              <Form.Label>Rating</Form.Label>
+              <Form.Control
+                type="number"
+                step="0.1"
+                min="0"
+                max="5"
+                placeholder="rating"
+                onChange={(e) => setRating(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
+              <Form.Label>Price</Form.Label>
+              <Form.Control
+                type="number"
+                min="0"
+                placeholder="price"
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </Form.Group>
+
           </Form>
         </Modal.Body>
 
@@ -330,6 +461,7 @@ export default function AddSpotActivityDetailsModal(props) {
             <AddSpotFoodDetailsModal
               show={foodShow}
               handleClose={handleClose}
+              handleSave={handleSave}
               spot={props.spot}
               activities={allActivityFromUser}
               />

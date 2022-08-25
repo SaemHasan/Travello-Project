@@ -15,21 +15,21 @@ export default function AddActivityAgencyModal(props) {
   const [selectedAgency, setSelectedAgency] = useState("");
   const [rating, setRating] = useState(0);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const uploadData = new FormData();
     uploadData.append("activity_id", selectedActivity);
     uploadData.append("agency_id", selectedAgency);
     uploadData.append("rating", rating);
     // console.log("save data to db here");
-    AdminAPI.addActivityAgencyToDB(uploadData)
-      .then((res) => {
-        console.log(res);
-        alert("Activity Agency Added");
-      })
-      .catch((err) => {
-        console.log(err);
-        // alert("Error! Please try again.");
-      });
+    await AdminAPI.addActivityAgencyToDB(uploadData)
+        .then((res) => {
+          console.log(res);
+          alert("Activity Agency Added");
+        })
+        .catch((err) => {
+          console.log(err);
+          // alert("Error! Please try again.");
+        });
     setShow(false);
     props.handleClose(props.type);
   };

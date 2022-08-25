@@ -137,19 +137,60 @@ export default function AddSpotFoodDetailsModal(props) {
 
   };
 
-  const saveFoodToDB = async () => {
+  const handleSpotFoodSave = async (spotID, foodID) => {
+      const uploadData = new FormData();
+      uploadData.append("spot_id", spotID);
+      uploadData.append("food_id", foodID);
+      // console.log("save data to db here");
+      await AdminAPI.addSpotFoodToDB(uploadData).then((res) => {
+          console.log(res);
+          // alert("Added Successfully");
+      });
+  };
+
+  const handleSpotSave = async (name, des, adLine, dis, thana, upzila, image, rating, place_id) => {
+        // const spot = props.spot
+        // console.log(spot)
+        // const spotName = props.spot.name;
+        const uploadData = new FormData();
+        // uploadData.append("name", spotName);
+        uploadData.append("short_description", des);
+        uploadData.append("address_line", adLine);
+        uploadData.append("district", dis);
+        uploadData.append("thana", thana);
+        uploadData.append("upzila", upzila);
+        uploadData.append("name", name);
+        if(image !== "") {
+            uploadData.append("image", image, image.name);
+        }
+        uploadData.append("rating", rating);
+        uploadData.append("place_id", place_id);
+
+        let id = -1;
+        await AdminAPI.addSpotToDB(uploadData)
+            .then((res) => {
+                id = res.spot_id
+                console.log("response : ", res);
+                // alert("Added Successfully");
+            })
+        return id;
+    };
+
+  const saveFoodToDB = async (spotID) => {
       for (const food of allFoodsFromUser) {
-          let id = await handleFoodInfoSave(food.food_name, food.short_description, food.image);
-          console.log("food id ", id);
-          id = await handleFoodRestaurantSave(id, food.restaurant_id, food.rating);
+          let food_id = await handleFoodInfoSave(food.food_name, food.short_description, food.image);
+          console.log("food id ", food_id);
+          let id = await handleFoodRestaurantSave(food_id, food.restaurant_id, food.rating);
           console.log("food restaurant id ", id);
           await handleFoodPriceSave(food.price, id);
+          await handleSpotFoodSave(spotID, food_id);
       }
   }
 
   const handleSave = async () => {
-    await saveFoodToDB();
-
+      let spotid = await handleSpotSave(props.spot.name, props.spot.short_description, props.spot.address_line, props.spot.district, props.spot.thana, props.spot.upzila, props.spot.image, props.spot.rating, props.spot.place_id);
+    await saveFoodToDB(spotid);
+    // await props.handleSave(spotid);
   };
 
   useEffect(() => {

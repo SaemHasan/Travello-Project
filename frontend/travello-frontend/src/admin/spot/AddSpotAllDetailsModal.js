@@ -25,8 +25,8 @@ export default function AddSpotDetailsModal(props) {
   const [fetchAgainPlace, setFetchAgainPlace] = useState(false);
   const handleNext = () => {
 
-    if(name ===""){
-      alert("Please fill all the fields");
+    if(name ==="" || place_id ===""){
+      alert("Please fill name and place");
       return;
     }
     let uploadData = {}

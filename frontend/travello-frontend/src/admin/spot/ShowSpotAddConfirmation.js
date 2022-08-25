@@ -1,6 +1,7 @@
 import {Modal} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
 import Button from "react-bootstrap/Button";
+import AdminAPI from "../AdminAPI";
 
 export default function ShowSpotAddConfirmation(props){
     const [show, setShow] = useState(false);
@@ -10,7 +11,10 @@ export default function ShowSpotAddConfirmation(props){
         props.handleClose();
     };
 
-    const handleSave = () => {
+
+
+    const handleSave = async () => {
+        // console.log("props.spot : ", props.spot);
         props.handleSave();
         setShow(false);
     };

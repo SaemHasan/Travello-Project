@@ -4,6 +4,9 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import AdminAPI from "../AdminAPI";
 import AddSpotFoodDetailsModal from "./AddSpotFoodDetails";
+import APIService from "../../APIService";
+import AddAgencyModal from "../activity/AddAgencyModal";
+import AddActivityTypeModal from "../activity/AddActivityTypeModal";
 
 export default function AddSpotActivityDetailsModal(props) {
   const [foodShow, setFoodShow] = useState(false);
@@ -12,6 +15,9 @@ export default function AddSpotActivityDetailsModal(props) {
   const [show, setShow] = useState(false);
   const [activityTypes, setActivityTypes] = useState([]);
   const [reRender, setReRender] = useState(false);
+  const [agencies, setAgencies] = useState([]);
+  const [showAddAgency, setShowAddAgency] = useState(false);
+  const [showAddType, setShowAddType] = useState(false);
 
   const [activityName, setActivityName] = useState("");
   const [activityDescription, setActivityDescription] = useState("");
@@ -85,6 +91,33 @@ export default function AddSpotActivityDetailsModal(props) {
     // props.handleClose();
   };
 
+  const handleAddAgency = () => {
+    setShowAddAgency(true);
+  }
+
+  const handleCloseAddAgency = (t) => {
+    APIService.getFromDB("agencies").then(async (agencies) => {
+      await setAgencies(agencies);
+    });
+    setShowAddAgency(false);
+  }
+
+  const handleAddType = () => {
+    setShowAddType(true);
+  }
+
+  const handleCloseAddType = (t) => {
+    AdminAPI.getActivityTypes()
+      .then(async (activityTypes) => {
+        await setActivityTypes(activityTypes);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    setShowAddType(false);
+  }
+
   useEffect(() => {
     setShow(props.show);
     // console.log("show: ", props.show);
@@ -98,6 +131,10 @@ export default function AddSpotActivityDetailsModal(props) {
       .catch((err) => {
         console.log(err);
       });
+
+    APIService.getFromDB("agencies").then(async (agencies) => {
+      await setAgencies(agencies);
+    });
   }, []);
 
   return (
@@ -165,7 +202,25 @@ export default function AddSpotActivityDetailsModal(props) {
                   </option>
                 ))}
               </Form.Select>
+              <Button variant="primary" onClick={handleAddType}>
+                Add Type</Button>
             </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Select Agency</Form.Label>
+                <Form.Select onChange={(e) => props.setAgencyID(e.target.value)}>
+                  <option value={0}>Select Agency</option>
+                    {agencies.map((agency, idx) => (
+                    <option key={idx} value={agency.agency_id}>
+                        {agency.agency_name}
+                    </option>
+                    ))}
+                </Form.Select>
+              <Button variant="primary" onClick={handleAddAgency}>
+                Add Agency
+              </Button>
+            </Form.Group>
+
           </Form>
         </Modal.Body>
 
@@ -261,6 +316,24 @@ export default function AddSpotActivityDetailsModal(props) {
               spot={props.spot}
               activities={allActivityFromUser}
               />
+        }
+      </>
+
+      <>
+        {
+          showAddAgency &&
+            <AddAgencyModal
+              show={showAddAgency}
+              handleClose={handleCloseAddAgency}
+            />
+        }
+      </>
+      <>
+        {
+          showAddType &&
+            <AddActivityTypeModal
+                show={showAddType}
+                handleClose={handleCloseAddType} />
         }
       </>
     </>

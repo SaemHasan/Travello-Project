@@ -125,8 +125,8 @@ class SpotViewSet(viewsets.ModelViewSet):
         for spot in spots:
             types = Spot_Type.objects.all().filter(spot_id=spot.spot_id)
             for type in types:
-                print("type : ", type)
-                print("interests : ", interests)
+                # print("type : ", type)
+                # print("interests : ", interests)
                 if type.type_id.type_name in interests:
                     recommended_spots.append(spot)
                     break
@@ -166,9 +166,11 @@ class SpotViewSet(viewsets.ModelViewSet):
         for i in visited_spot_type_ids:
             related_spots = Spot_Type.objects.all().filter(type_id=i)
             for j in related_spots:
-                if j.spot_id not in visited_spot_list:
+                if j.spot_id not in visited_spot_list and j.spot_id not in recommendation_spot_list:
                     recommendation_spot_list.append(j.spot_id)
-        print(recommendation_spot_list)
+
+        # recommendation_spot_list = recommendation_spot_list.distinct()
+        # print(recommendation_spot_list)
 
         return Response(SpotSerializer(recommendation_spot_list, many=True).data)
         # return Response(User_SpotSerializer(user_spot, many=True).data)

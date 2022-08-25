@@ -294,6 +294,23 @@ export default function AddSpotActivityDetailsModal(props) {
                   </option>
                 ))}
               </Form.Select>
+              <Button variant="primary" onClick={handleAddType}>
+                Add Type</Button>
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Select Agency</Form.Label>
+                <Form.Select onChange={(e) => props.setAgencyID(e.target.value)}>
+                  <option value={0}>Select Agency</option>
+                    {agencies.map((agency, idx) => (
+                    <option key={idx} value={agency.agency_id}>
+                        {agency.agency_name}
+                    </option>
+                    ))}
+                </Form.Select>
+              <Button variant="primary" onClick={handleAddAgency}>
+                Add Agency
+              </Button>
             </Form.Group>
           </Form>
         </Modal.Body>

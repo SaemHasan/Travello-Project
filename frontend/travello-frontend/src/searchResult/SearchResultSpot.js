@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import Typography from "@material-ui/core/Typography";
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
 
 export default function SearchResultSpot(props) {
   const data = props.result;

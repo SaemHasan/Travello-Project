@@ -238,6 +238,29 @@ class Spot_FoodViewSet(viewsets.ModelViewSet):
         #print(food_dict)
         return Response(food_dict)
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getAllFoodComparison(self, request):
+        spot_id = int(request.data['spot_id'])
+        # activity = Spot_Activity.objects.get(spot_id = spot_id)
+        food = Spot_Food.objects.all().filter(spot_id=spot_id)
+        food_id_list = []
+        food_name_list = []
+        # print(type(food))
+        food_dict = []
+        for i in food:
+            food_id_list.append(i.food_id.food_id)
+            #food_name_list.append(i.food_id.food_name)
+
+        # print(spots)
+
+        # print(food)
+        #my_list = {'id_list': food_id_list, 'name_list': food_name_list}
+        #food_dict.append(my_list)
+        # print(food_name_list)
+
+        # print(food_dict)
+        return Response(food_id_list)
+
 
 class Spot_ActivityViewSet(viewsets.ModelViewSet):
     queryset = Spot_Activity.objects.all()

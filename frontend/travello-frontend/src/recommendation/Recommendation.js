@@ -70,7 +70,7 @@ export default function Recommendation() {
                 // console.log("res ",res);
                 res = await RecommendationAPI.getUserVisitedSpots(token);
                 await setUserVisitedSpots(res);
-                console.log("res ",res);
+                console.log("res ", res);
                 res = await RecommendationAPI.getUserInterests(token);
                 await setUserInterestObjs(res);
                 console.log("res ", res);
@@ -126,7 +126,7 @@ export default function Recommendation() {
                     </div>
                 </div>
                 <>
-                    { userVisitedSpots.length !== 0 &&
+                    {userVisitedSpots.length !== 0 &&
                         <div className="row" style={{paddingTop: 50}}>
                             <Box sx={{flexGrow: 1}}>
                                 <h4>Your Visited Spots:</h4>
@@ -134,7 +134,7 @@ export default function Recommendation() {
                                     {userVisitedSpots.map((item, index) => (
                                         <Grid item xs={2} sm={4} md={4} key={index}>
                                             <Item><h5>{item.name}</h5>
-                                            <Rating name="read-only" value={item.rating} readOnly />
+                                                <Rating name="read-only" value={item.rating} readOnly/>
                                             </Item>
                                         </Grid>
                                     ))}
@@ -153,11 +153,17 @@ export default function Recommendation() {
                                     spots</h2>
                                 <ShowSpots data={spotRecommendationByVisit}/>
                             </div>
-                            : <div>You didn't provide any visited place info.</div>
+                            :
+                            <>
+                                {
+                                    userVisitedSpots.length !== 0 &&
+                                    <div>You didn't provide any visited place info.</div>
+                                }
+                            </>
                     }
                 </div>
                 <>
-                    { userInterests.length !== 0 &&
+                    {userInterests.length !== 0 &&
                         <div className="row" style={{paddingTop: 50}}>
                             <Box sx={{flexGrow: 1}}>
                                 <h4>Your interests:</h4>
@@ -180,7 +186,13 @@ export default function Recommendation() {
                                     interests</h2>
                                 <ShowSpots data={spotRecommendationByInterests}/> </>
                             :
-                            <p>You didn't provide your interests.</p>
+                            <>{
+                                userInterests.length !== 0 ?
+                                    <div></div>
+                                    :
+                                    <div>You didn't provide any interest info.</div>
+                            }
+                            </>
                     }
                 </div>
 

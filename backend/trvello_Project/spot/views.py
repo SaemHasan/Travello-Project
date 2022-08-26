@@ -181,8 +181,12 @@ class SpotViewSet(viewsets.ModelViewSet):
         token = request.data['token']
         user_id = User.objects.get(auth_token=token).id
         user_spot = User_Spot.objects.all().filter(user_id=user_id)
+        spot_list = []
+        for i in user_spot:
+            spot = Spot.objects.get(spot_id=i.spot_id.spot_id)
+            spot_list.append(spot)
 
-        return Response(User_SpotSerializer(user_spot, many=True).data)
+        return Response(SpotSerializer(spot_list, many=True).data)
 
 
     @action(detail=False, methods=['post', 'get', 'put'])

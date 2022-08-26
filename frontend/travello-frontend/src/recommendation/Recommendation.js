@@ -1,15 +1,20 @@
 import {useEffect, useState} from "react";
-import {Link} from "@mui/material";
+import {Link, Rating} from "@mui/material";
 import RecommendationAPI from "./RecommendationAPI";
 import ShowSpots from "./ShowSpots";
 import {ShowDoughnut} from "./ShowDounut";
 import {ShowBarChart} from "./ShowBarChart";
+import {experimentalStyled as styled} from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 
 export default function Recommendation() {
     const [spotRecommendationByVisit, setSpotRecommendationByVisit] = useState([]);
     const [spotRecommendationByInterests, setSpotRecommendationByInterests] = useState([]);
     const [userVisitedSpots, setUserVisitedSpots] = useState([]);
     const [userInterestObjs, setUserInterestObjs] = useState([]);
+    const [userInterests, setUserInterests] = useState([]);
     const [VisitedSpotsData, setVisitedSpotsData] = useState({});
     const [show, setShow] = useState(false);
 
@@ -65,7 +70,7 @@ export default function Recommendation() {
                 // console.log("res ",res);
                 res = await RecommendationAPI.getUserVisitedSpots(token);
                 await setUserVisitedSpots(res);
-                // console.log("res ",res);
+                console.log("res ",res);
                 res = await RecommendationAPI.getUserInterests(token);
                 await setUserInterestObjs(res);
                 console.log("res ", res);
@@ -74,6 +79,7 @@ export default function Recommendation() {
                     for (let i = 0; i < res.length; i++) {
                         interests.push(res[i].interest);
                     }
+                    await setUserInterests(interests);
                     // console.log("interests : ",interests);
                     res = await RecommendationAPI.getRecommendatioByUserInterest(token, interests);
                     await setSpotRecommendationByInterests(res);
@@ -97,6 +103,13 @@ export default function Recommendation() {
             fetchUser().then();
         }, []);
 
+    const Item = styled(Paper)(({theme}) => ({
+        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        ...theme.typography.body2,
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.primary,
+    }));
 
     if (show) {
         return (
@@ -112,9 +125,27 @@ export default function Recommendation() {
                         <ShowBarChart data={""} title={"User Visited Spot's Page in Website"}/>
                     </div>
                 </div>
-
+                <>
+                    { userVisitedSpots.length !== 0 &&
+                        <div className="row" style={{paddingTop: 50}}>
+                            <Box sx={{flexGrow: 1}}>
+                                <h4>Your Visited Spots:</h4>
+                                <Grid container spacing={{xs: 2, md: 3}} columns={{xs: 4, sm: 8, md: 12}}>
+                                    {userVisitedSpots.map((item, index) => (
+                                        <Grid item xs={2} sm={4} md={4} key={index}>
+                                            <Item><h5>{item.name}</h5>
+                                            <Rating name="read-only" value={item.rating} readOnly />
+                                            </Item>
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                            </Box>
+                        </div>
+                    }
+                </>
 
                 <div className="row" style={{paddingTop: 50}}>
+
                     {
                         spotRecommendationByVisit.length !== 0 ?
                             <div>
@@ -125,6 +156,22 @@ export default function Recommendation() {
                             : <div>You didn't provide any visited place info.</div>
                     }
                 </div>
+                <>
+                    { userInterests.length !== 0 &&
+                        <div className="row" style={{paddingTop: 50}}>
+                            <Box sx={{flexGrow: 1}}>
+                                <h4>Your interests:</h4>
+                                <Grid container spacing={{xs: 2, md: 3}} columns={{xs: 4, sm: 8, md: 12}}>
+                                    {userInterests.map((interest, index) => (
+                                        <Grid item xs={2} sm={4} md={4} key={index}>
+                                            <Item><h5>{interest}</h5></Item>
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                            </Box>
+                        </div>
+                    }
+                </>
                 <div className="row" style={{paddingTop: 50}}>
                     {
                         spotRecommendationByInterests.length !== 0 ?

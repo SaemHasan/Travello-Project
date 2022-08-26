@@ -54,6 +54,17 @@ export default class RecommendationAPI{
         }).then((resp) => resp.json());
     }
 
+    static getTopVisitedSpotsOfWeek() {
+        return fetch(`http://127.0.0.1:8000/api/spot_visit_counts/getTopVisitedSpotsOfWeek/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                // Authorization: `Token ${token}`,
+            },
+            body: JSON.stringify({}),
+        }).then((resp) => resp.json());
+    }
+
     static getRecommendatioByUserInterest(token, interests){
         return fetch(`http://127.0.0.1:8000/api/spots/getRecommendatioByUserInterest/`, {
               method: "POST",

@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 from django.views.generic import ListView
 from django.contrib.auth.models import User
 from rest_framework.decorators import action
@@ -507,3 +507,43 @@ class SpotVisitCountViewSet(viewsets.ModelViewSet):
         visit_count.save()
         print(visit_count)
         return Response("Success")
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getTopVisitedSpotsOfToday(self, request):
+        today = date.today()
+        spots = SpotVisitCount.objects.filter(date=today).order_by('-count')[:5]
+        # print(spots)
+        spot_list = []
+        for spot in spots:
+            spot_list.append({'name': spot.spot_id.name, 'count': spot.count})
+        print(spot_list)
+        return Response(spot_list)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getTopVisitedSpotsOfWeek(self, request):
+        today = date.today()
+        spots = SpotVisitCount.objects.filter(date__range=[today - timedelta(days=7), today]).order_by('-count')
+        print(spots)
+        spots_name_list = []
+        spot_list = []
+        for spot in spots:
+            if spot.spot_id.name not in spots_name_list:
+                spots_name_list.append(spot.spot_id.name)
+                spot_list.append({'name': spot.spot_id.name, 'count': spot.count})
+            else:
+                spot_list[spots_name_list.index(spot.spot_id.name)]['count'] += spot.count
+        if len(spot_list) > 5:
+            spot_list = spot_list[:5]
+        return Response(spot_list)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getVisitHistoryOfASpot(self, request):
+        spot_id = int(request.data['spot_id'])
+        spot = Spot.objects.get(spot_id=spot_id)
+        visits = SpotVisitCount.objects.filter(spot_id=spot).order_by('-date')[:7]
+        # print(visits)
+        visit_list = []
+        for visit in visits:
+            visit_list.append({'date': visit.date, 'count': visit.count})
+        print(visit_list)
+        return Response(visit_list)

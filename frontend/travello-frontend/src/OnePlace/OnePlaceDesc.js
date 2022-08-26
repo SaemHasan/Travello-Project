@@ -4,20 +4,34 @@ import React, {useEffect, useState} from "react";
 import "./OnePlaceDesc.css";
 import OnePlaceAPI from "./OnePlaceAPI";
 import {Link} from "@mui/material";
+import {ShowBarChart} from "../home/ShowBarChart";
 
 function OnePlaceDesc() {
     const [onePlace, setOnePlace] = useState([]);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [imgsrc, setImgsrc] = useState("");
+    const [datesOfVisit, setDatesOfVisit] = useState([]);
+    const [count, setCount] = useState([]);
 
     async function updateVisitCount(spot_id) {
         await OnePlaceAPI.updateVisitCount(spot_id);
     }
 
+    async function getVisitHistory(spot_id) {
+        const res = await OnePlaceAPI.getVisitHistoryOfASpot(spot_id);
+        // console.log(res);
+        const dates = res.map(item => item.date);
+        const count = res.map(item => item.count);
+        await setDatesOfVisit(dates);
+        await setCount(count);
+        console.log(dates);
+        console.log(count);
+    }
+
+
     useEffect(() => {
         const api_path = "http://127.0.0.1:8000";
-
         const exploreSpot = JSON.parse(localStorage.getItem("explore_spot"));
         if (exploreSpot !== null) {
             let my_spot = [];
@@ -71,6 +85,7 @@ function OnePlaceDesc() {
         const spot = JSON.parse(localStorage.getItem("spot"));
         if (spot !== null) {
             updateVisitCount(spot.spot_id);
+            getVisitHistory(spot.spot_id);
             console.log("spot is not null");
             //console.log(spot);
             setOnePlace(spot);
@@ -182,6 +197,11 @@ function OnePlaceDesc() {
             <div>
                 <p style={{marginLeft: "10px"}}>{description}</p>
             </div>
+
+            <div className="col-6 center">
+                <ShowBarChart title={"Visits of last few days"} labels={datesOfVisit} data={count}/>
+            </div>
+
         </div>
     );
 }

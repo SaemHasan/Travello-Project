@@ -75,14 +75,6 @@ export const ShowBarChart = (props) => {
     return (
         <Card>
             <CardHeader
-                action={(
-                    <Button
-                        endIcon={<ArrowDropDownIcon fontSize="small"/>}
-                        size="small"
-                    >
-                        Last 7 days
-                    </Button>
-                )}
                 title={props.title}
             />
 

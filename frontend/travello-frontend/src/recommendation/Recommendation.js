@@ -16,6 +16,7 @@ export default function Recommendation() {
     const [userInterestObjs, setUserInterestObjs] = useState([]);
     const [userInterests, setUserInterests] = useState([]);
     const [VisitedSpotsData, setVisitedSpotsData] = useState({});
+    const [lastSevenDaysData, setLastSevenDaysData] = useState({});
     const [show, setShow] = useState(false);
     // const [foodOfVisitRecommendation, setFoodOfVisitRecommendation] = useState([]);
     // const [foodOfInterestRecommendation, setFoodOfInterestRecommendation] = useState([]);
@@ -70,6 +71,16 @@ export default function Recommendation() {
         setVisitedSpotsData({labels: labels, count: cnt_per})
     }
 
+    async function getTopVisitedSpotsOfWeek(){
+        const res = await RecommendationAPI.getTopVisitedSpotsOfWeek();
+        // console.log("res: ",res)
+        const labels = res.map(item => item.name);
+        const count = res.map(item => item.count);
+        console.log(labels);
+        console.log(count);
+        setLastSevenDaysData({labels: labels, count: count})
+    }
+
     async function getFoodsOfSpot(spot_list) {
         let spot_ids = spot_list.map(spot => spot.spot_id)
         const res = await RecommendationAPI.getFoodsFromSpotIDs(spot_ids)
@@ -111,6 +122,7 @@ export default function Recommendation() {
                 // }
 
                 await getTopVisitedSpots(token);
+                await getTopVisitedSpotsOfWeek();
             }
 
             async function fetchUser() {
@@ -119,6 +131,7 @@ export default function Recommendation() {
                     await getData(t).then(setShow(true));
                 } else {
                     await getTopVisitedSpots(t);
+                    await getTopVisitedSpotsOfWeek();
                 }
             }
 
@@ -144,7 +157,7 @@ export default function Recommendation() {
                         <ShowDoughnut data={VisitedSpotsData} title={"User Visited Spots"}/>
                     </div>
                     <div className="col-6">
-                        <ShowBarChart data={""} title={"User Visited Spot's Page in Website"}/>
+                        <ShowBarChart labels={lastSevenDaysData.labels} data={lastSevenDaysData.count}  title={"Top 5 Visited Spots of the Week"}/>
                     </div>
                 </div>
                 <>
@@ -229,7 +242,7 @@ export default function Recommendation() {
                         <ShowDoughnut data={VisitedSpotsData} title={"User Visited Spots"}/>
                     </div>
                     <div className="col-6">
-                        <ShowBarChart data={""} title={"User Visited Spot's Page in Website"}/>
+                        <ShowBarChart labels={lastSevenDaysData.labels} data={lastSevenDaysData.count} title={"Top 5 Visited Spots of the Week"}/>
                     </div>
 
                 </div>

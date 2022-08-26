@@ -162,11 +162,11 @@ function RegistrationForm() {
   };
 
   return (
-    <div className="form">
+    <div  className="card center" style={{ width: "27rem", marginTop: "100px" }}>
       <div className="form-body">
         <div className="username">
-          <label className="form__label" htmlFor="username">
-            Username{" "}
+          <label className="form__label" htmlFor="username" ><h5><b>
+            Username{" "}</b></h5>
           </label>
           <input
             className="form__input"
@@ -178,8 +178,8 @@ function RegistrationForm() {
           />
         </div>
         <div className="firstname">
-          <label className="form__label" htmlFor="firstName">
-            First Name{" "}
+          <label className="form__label" htmlFor="firstName"><h5><b>
+            First Name{" "}</b></h5>
           </label>
           <input
             className="form__input"
@@ -191,8 +191,8 @@ function RegistrationForm() {
           />
         </div>
         <div className="lastname">
-          <label className="form__label" htmlFor="lastName">
-            Last Name{" "}
+          <label className="form__label" htmlFor="lastName"><h5><b>
+            Last Name{" "}</b></h5>
           </label>
           <input
             type="text"
@@ -205,8 +205,8 @@ function RegistrationForm() {
           />
         </div>
         <div className="email">
-          <label className="form__label" htmlFor="email">
-            Email{" "}
+          <label className="form__label" htmlFor="email"><h5><b>
+            Email{" "}</b></h5>
           </label>
           <input
             type="email"
@@ -218,8 +218,8 @@ function RegistrationForm() {
           />
         </div>
         <div className="city">
-          <label className="form__label" htmlFor="city">
-            City{" "}
+          <label className="form__label" htmlFor="city"><h5><b>
+            City{" "}</b></h5>
           </label>
           <input
             className="form__input"
@@ -231,8 +231,8 @@ function RegistrationForm() {
           />
         </div>
         <div className="password">
-          <label className="form__label" htmlFor="password">
-            Password{" "}
+          <label className="form__label" htmlFor="password"><h5><b>
+            Password{" "}</b></h5>
           </label>
           <input
             className="form__input"
@@ -244,8 +244,8 @@ function RegistrationForm() {
           />
         </div>
         <div className="confirm-password">
-          <label className="form__label" htmlFor="confirmPassword">
-            Confirm Password{" "}
+          <label className="form__label" htmlFor="confirmPassword"><h5><b>
+            Confirm Password{" "}</b></h5>
           </label>
           <input
             className="form__input"

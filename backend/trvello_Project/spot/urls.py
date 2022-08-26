@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .views import PlaceViewSet, SpotViewSet, SpotTypeTableViewSet, PlaceRatingInfoViewSet, SpotTypeViewSet, \
-    User_SpotViewSet, Spot_FoodViewSet, Spot_ActivityViewSet, SpotRatingInfoViewSet, ReviewPlaceViewSet, \
-    UserPlaceViewSet, ReviewSpotViewSet
+    User_SpotViewSet, Spot_FoodViewSet, Spot_ActivityViewSet, SpotRatingInfoViewSet, UserPlaceViewSet, ReviewPlaceViewSet, \
+     ReviewSpotViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()

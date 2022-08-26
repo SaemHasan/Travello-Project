@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Place, PlaceRatingInfo, Spot, SpotType_Table, Spot_Type, User_Spot, Spot_Food, Spot_Activity, \
-    SpotRatingInfo, Review_Place, User_Place, Review_Spot
+    SpotRatingInfo,User_Place, Review_Place, Review_Spot
 
 
 class PlaceRatingInfoSerializer(serializers.ModelSerializer):

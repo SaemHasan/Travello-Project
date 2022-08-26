@@ -408,7 +408,7 @@ const getHotelStr = (size) => {
   }, [selectedRating, filters, searchInput]);
 
   return (
-    <div className='home'>
+    <div className='home' style={{paddingLeft:"50px", paddingRight:"50px"}}>
       {/* Search Bar */}
       <SearchBar
         value={searchInput}

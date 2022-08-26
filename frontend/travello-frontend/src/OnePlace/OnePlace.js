@@ -5,7 +5,7 @@ import ShowReviews from "./ShowReviews";
 
 function OnePlace() {
   return (
-    <div className="body">
+    <div className="body" style={{paddingLeft:"50px", paddingRight:"50px"}}>
       <OnePlaceDesc />
       <ReviewBox />
       <ShowReviews />

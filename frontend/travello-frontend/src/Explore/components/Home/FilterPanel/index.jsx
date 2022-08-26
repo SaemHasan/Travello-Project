@@ -31,7 +31,7 @@ const FilterPanel = ({
     {/*  />*/}
     {/*</div>*/}
     <div className='input-group'>
-        <div className='first'><p className='label_cuisine'>Place filters</p></div>
+        <div className='first' ><p className='label_cuisine' ><h5><b>Place filters</b></h5></p></div>
         <div className='input-group_2'>
       {places.map((place) => (
         <CheckboxPlace
@@ -42,7 +42,7 @@ const FilterPanel = ({
       ))}
         </div></div>
       <div className='input-group'>
-      <div className='first'><p className='label_cuisine'>Food filters</p></div>
+      <div className='first'><p className='label_cuisine'><h5><b>Food filters</b></h5></p></div>
         <div className='input-group_2'>
       {foods.map((food) => (
         <CheckboxFood
@@ -54,7 +54,7 @@ const FilterPanel = ({
             </div>
     </div>
       <div className='input-group'>
-      <div className='first'><p className='label_cuisine'>Activity filters</p></div>
+      <div className='first'><p className='label_cuisine'><h5><b>Activity filters</b></h5></p></div>
         <div className='input-group_2'>
       {activities.map((activity) => (
         <CheckboxActivity
@@ -70,7 +70,7 @@ const FilterPanel = ({
     {/*  <SliderProton value={selectedPrice} changePrice={changePrice} />*/}
     {/*</div>*/}
     <div className='input-group'>
-      <p className='label'>Star Rating</p>
+        <p className='label'><h5><b>Star Rating</b></h5></p>
       <FilterListToggle
         options={ratingList}
         value={selectedRating}

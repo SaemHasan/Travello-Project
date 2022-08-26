@@ -17,7 +17,10 @@ export default function Recommendation() {
     const [userInterests, setUserInterests] = useState([]);
     const [VisitedSpotsData, setVisitedSpotsData] = useState({});
     const [show, setShow] = useState(false);
-
+    // const [foodOfVisitRecommendation, setFoodOfVisitRecommendation] = useState([]);
+    // const [foodOfInterestRecommendation, setFoodOfInterestRecommendation] = useState([]);
+    // const [activityOfVisitRecommendation, setActivityOfVisitRecommendation] = useState([]);
+    // const [activityOfInterestRecommendation, setActivityOfInterestRecommendation] = useState([]);
 
     async function getUniqueSpots() {
         // console.log("getUniqueSpots : ", spotRecommendationByInterests);
@@ -31,8 +34,14 @@ export default function Recommendation() {
                 }
             }
         }
+        // console.log("here i am 3")
+        // if (spotRecommendationByInterests.length !== 0) {
+        //     console.log("here i am 3.1")
+        //     let foodres = await getFoodsOfSpot(spotRecommendationByInterests);
+        //     await setFoodOfInterestRecommendation(foodres);
+        // }
         await setSpotRecommendationByInterests(spotRecommendationByInterests);
-        console.log("getUniqueSpots finish: ", spotRecommendationByInterests);
+        // console.log("getUniqueSpots finish: ", spotRecommendationByInterests);
 
     }
 
@@ -61,19 +70,25 @@ export default function Recommendation() {
         setVisitedSpotsData({labels: labels, count: cnt_per})
     }
 
+    async function getFoodsOfSpot(spot_list) {
+        let spot_ids = spot_list.map(spot => spot.spot_id)
+        const res = await RecommendationAPI.getFoodsFromSpotIDs(spot_ids)
+        console.log("getFoodsOfSpot: ", res)
+    }
 
     useEffect(
         () => {
             async function getData(token) {
-                let res = await RecommendationAPI.getRecommendationByUserVisitedSpot(token);
-                await setSpotRecommendationByVisit(res);
+                let res1 = await RecommendationAPI.getRecommendationByUserVisitedSpot(token);
+                await setSpotRecommendationByVisit(res1);
                 // console.log("res ",res);
-                res = await RecommendationAPI.getUserVisitedSpots(token);
+                let res = await RecommendationAPI.getUserVisitedSpots(token);
                 await setUserVisitedSpots(res);
-                console.log("res ", res);
+                // console.log("res ", res);
                 res = await RecommendationAPI.getUserInterests(token);
                 await setUserInterestObjs(res);
-                console.log("res ", res);
+                // console.log("res ", res);
+                // console.log("here i am 1")
                 if (res.length !== 0) {
                     let interests = [];
                     for (let i = 0; i < res.length; i++) {
@@ -83,11 +98,18 @@ export default function Recommendation() {
                     // console.log("interests : ",interests);
                     res = await RecommendationAPI.getRecommendatioByUserInterest(token, interests);
                     await setSpotRecommendationByInterests(res);
+                    // console.log("here i am 2")
                     // console.log("res ",res);
                     if (spotRecommendationByVisit.length !== 0 && res.length !== 0) {
                         await getUniqueSpots();
                     }
                 }
+                // if (res1.length !== 0) {
+                //     console.log("here i am 4")
+                //     let foodres = await getFoodsOfSpot(res1);
+                //     await setFoodOfVisitRecommendation(foodres);
+                // }
+
                 await getTopVisitedSpots(token);
             }
 

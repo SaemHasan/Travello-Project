@@ -84,6 +84,21 @@ class SpotViewSet(viewsets.ModelViewSet):
     serializer_class = SpotSerializer
 
     @action(detail=False, methods=['post', 'get', 'put'])
+    def getFoodsFromSpotIDs(self, request):
+        spot_ids = request.data['spot_ids']
+        res = []
+        for id in spot_ids:
+            spot = Spot.objects.get(spot_id=id)
+            foods = Spot_Food.objects.all().filter(spot_id=spot)
+            foods_list = []
+            for i in foods:
+                foods_list.append(i.food_id.food_name)
+            res.append({'name': spot.name, 'foods': foods_list})
+
+        print(res)
+        return Response(res)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
     def getTopVisitedSpots(self, request):
         user_spot = User_Spot.objects.all()
         visited_spot_count = {}

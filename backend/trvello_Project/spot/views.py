@@ -1,3 +1,4 @@
+from datetime import date
 from django.views.generic import ListView
 from django.contrib.auth.models import User
 from rest_framework.decorators import action
@@ -493,3 +494,16 @@ class UserPlaceViewSet(viewsets.ModelViewSet):
 class SpotVisitCountViewSet(viewsets.ModelViewSet):
     queryset = SpotVisitCount.objects.all()
     serializer_class = SpotVisitCountSerializer
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def updateVisitCount(self, request):
+        spot_id = int(request.data['spot_id'])
+        spot = Spot.objects.get(spot_id=spot_id)
+        if(SpotVisitCount.objects.filter(spot_id=spot, date=date.today()).exists()):
+            visit_count = SpotVisitCount.objects.get(spot_id=spot, date=date.today())
+        else:
+            visit_count = SpotVisitCount(spot_id=spot, date=date.today())
+        visit_count.count += 1
+        visit_count.save()
+        print(visit_count)
+        return Response("Success")

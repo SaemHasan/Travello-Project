@@ -57,6 +57,17 @@ export default class OnePlaceAPI {
     }).then((resp) => resp.json());
   }
 
+  static updateVisitCount(spot_id) {
+    return fetch(`http://127.0.0.1:8000/api/spot_visit_counts/updateVisitCount/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ spot_id: spot_id }),
+    }).then((resp) => resp.json());
+  }
+
   static getUserFromID(id) {
     return fetch(`http://127.0.0.1:8000/api/users/${id}/`, {
       method: "GET",

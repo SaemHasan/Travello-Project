@@ -12,17 +12,6 @@ from .serializers import PlaceSerializer, SpotSerializer, SpotTypeSerializer, Pl
 from rest_framework import viewsets
 
 
-# from activity.models import Activity
-
-
-# import sys
-# sys.path.append("..")
-# from ..food.models import Food_Type
-
-# sys.path.append('/backend/trvello_Project')
-# from food.models import Food_Type
-
-
 class PlaceViewSet(viewsets.ModelViewSet):
     queryset = Place.objects.all()
     # print(queryset)

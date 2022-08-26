@@ -73,15 +73,15 @@ function ReviewBox(props) {
                     <div className="form">
                         {/*<h1>Review Here: </h1>*/}
                         <div className="form-body">
-                            <TextField
-                                id="review"
-                                label="Add Review"
-                                multiline
-                                rows={4}
-                                defaultValue={review}
-                                variant="filled"
-                                onChange={(e) => setReview(e.target.value)}
-                            />
+                            {/*<TextField*/}
+                            {/*    id="review"*/}
+                            {/*    label="Add Review"*/}
+                            {/*    multiline*/}
+                            {/*    rows={4}*/}
+                            {/*    defaultValue={review}*/}
+                            {/*    variant="filled"*/}
+                            {/*    onChange={(e) => setReview(e.target.value)}*/}
+                            {/*/>*/}
 
                             <FormControl fullWidth sx={{m: 1}}>
                                 <InputLabel htmlFor="add review">Review</InputLabel>

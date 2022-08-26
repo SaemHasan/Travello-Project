@@ -7,7 +7,7 @@ const SearchBar = ({ value, changeInput }) => (
     <SearchIcon className='searchBar-icon' />
     <input
       type='text'
-      placeholder='Travello Search'
+      placeholder='Travello Search by Spot Name'
       value={value}
       onChange={changeInput}
     />

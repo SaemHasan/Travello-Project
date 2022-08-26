@@ -51,10 +51,10 @@ export default function LoginBody() {
   };
 
   return (
-    <div className="Login">
-      <Form onSubmit={(e) => handleSubmit(e)}>
+    <div  className="card center" style={{ width: "27rem", marginTop: "100px" }}>
+      <Form style={{paddingRight:"30px"}} onSubmit={(e) => handleSubmit(e)}>
         <Form.Group size="lg" controlId="email">
-          <Form.Label>Username</Form.Label>
+          <Form.Label><h4><b>Username</b></h4></Form.Label>
           <Form.Control
             autoFocus
             type="text"
@@ -62,8 +62,8 @@ export default function LoginBody() {
             onChange={(e) => setUsername(e.target.value)}
           />
         </Form.Group>
-        <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
+        <Form.Group size="lg" controlId="password" style={{marginTop: "20px"}}>
+          <Form.Label><h4><b>Password</b></h4></Form.Label>
           <Form.Control
             type="password"
             value={password}

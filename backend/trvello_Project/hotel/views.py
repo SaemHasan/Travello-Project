@@ -19,7 +19,6 @@ class HotelViewSet(viewsets.ModelViewSet):
     def getOneHotel(self, request):
         hotel_id = int(request.data['hotel_id'])
         hotel = Hotel.objects.all().filter(hotel_id=hotel_id)
-
         print(hotel)
         # print(hotel_atb)
         return Response(HotelSerializer(hotel, many=True).data)
@@ -53,12 +52,34 @@ class HotelViewSet(viewsets.ModelViewSet):
             atb_list = []
             for atb in hotel_atb:
                 atb_list.append(atb.attribute_id.attribute_name.lower())
+
+            hotel_misc = MISC_Detail.objects.all().filter(hotel_id=h.hotel_id)
+
+            misc_list = []
+            for misc in hotel_misc:
+                mystr = str(misc.name) + " is " + str(misc.distance) + " KM away."
+                misc_list.append(mystr)
+
+            #print(misc_list)
             myList = {'id': h.hotel_id, 'title': h.name, 'desc': h.short_description,
-                      'coverSrc': str(h.image), 'place': atb_list, 'rating': h.rating}
+                      'coverSrc': str(h.image), 'place': atb_list, 'rating': h.rating, 'misc':misc_list}
             hotel_list.append(myList)
 
         # print(hotel_list)
         return Response(hotel_list)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getOneHotelMisc(self, request):
+        hotel_id = int(request.data['hotel_id'])
+        hotel_misc = MISC_Detail.objects.all().filter(hotel_id=hotel_id)
+        misc_list = []
+        misc_dict = []
+        for misc in hotel_misc:
+            mystr = str(misc.name) + " is " + str(misc.distance) + " KM away."
+            misc_list.append({'misc':mystr})
+
+
+        return Response(misc_list)
 
 
 class Hotel_AttributeViewSet(viewsets.ModelViewSet):

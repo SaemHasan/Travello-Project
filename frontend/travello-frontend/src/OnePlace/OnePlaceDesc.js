@@ -136,7 +136,7 @@ function OnePlaceDesc() {
           width={"100%"}
         />
       </div>
-      <div className="row">
+      <div className="row" style={{paddingLeft:"10px", paddingRight:"10px"}}>
         <div className="column" style={{ backgroundColor: "#bbb" }}>
           <Link
             href="/Comparison"

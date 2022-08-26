@@ -55,7 +55,7 @@ function SearchResult() {
   }, []);
 
   return (
-    <div className="body">
+    <div className="body" style={{paddingLeft:"50px", paddingRight:"50px"}}>
       <h2 className="center_title">Search Result</h2>
       {showPlace && <SearchResultPlace result={result} />}
       {showFood && <SearchResultFood result={result} />}

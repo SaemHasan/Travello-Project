@@ -12,7 +12,8 @@
   .btn_login {
     /*padding: 30px 0;*/
     height: 50px;
-    width: 320px;
+    width: 340px;
+      margin-bottom: 30px;
   }
 .side-by-side {
   display: flex;

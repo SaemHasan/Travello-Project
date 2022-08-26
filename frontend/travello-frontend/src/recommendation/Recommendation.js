@@ -77,7 +77,7 @@ export default function Recommendation() {
                     {
                         spotRecommendationByVisit.length !== 0 ?
                             <div>
-                                <h2 className="center_title">Recommendation by visited spots</h2>
+                                <h2 className="center_title" style={{marginBottom: "20px"}}>Recommendation by visited spots</h2>
                                 <ShowSpots data={spotRecommendationByVisit}/>
                             </div>
                             : <div>You didn't provide any visited place info.</div>
@@ -87,7 +87,7 @@ export default function Recommendation() {
                     {
                         spotRecommendationByInterests.length !== 0 ?
                             <>
-                                <h2 className="center_title">Recommendation by interests</h2>
+                                <h2 className="center_title" style={{marginBottom: "20px"}}>Recommendation by interests</h2>
                                 <ShowSpots data={spotRecommendationByInterests}/> </>
                             :
                             <p>You didn't provide your interests.</p>

@@ -16,7 +16,7 @@ import Footer from "../Components/Footer/Footer";
 
 function Home() {
   return (
-    <div className="App">
+    <div className="App" style={{paddingLeft:"50px", paddingRight:"50px"}}>
       <div>
         <SearchBar />
       </div>

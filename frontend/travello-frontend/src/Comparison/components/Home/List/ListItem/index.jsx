@@ -9,9 +9,10 @@ import SinglePlaceAPI from "../../../../../SinglePlace/SinglePlaceAPI";
 
 const api_path = "http://127.0.0.1:8000/media/";
 const ListItem = ({
-  item: {id, coverSrc, title, desc, price, deliveryFee, serviceTime, rating },
+  item: {id, coverSrc, title, desc, price, deliveryFee, serviceTime, rating, misc, category },
 }) =>{
     const MAX_LENGTH = 150;
+    const [gCategory, setgCategory] = useState("");
     console.log(api_path + coverSrc);
   //   const [places, setPlaces] = useState([
   //   { id: 1, checked: false, label: 'Mountain' },
@@ -21,6 +22,8 @@ const ListItem = ({
     async function handleClick(id) {
 
         const category = JSON.parse(localStorage.getItem("load_category"));
+        //setgCategory(category)
+        //console.log(gCategory)
         if(category==="place") //hotel ta place nam a dewa
         {
         localStorage.setItem("hotel_id", JSON.stringify(id));
@@ -77,6 +80,7 @@ const ListItem = ({
                 //href=
               >
                     <img src={api_path + coverSrc} alt="adventure"/>
+
       <span className="large-comp">
           <div className="div-color-comp">
 
@@ -101,10 +105,20 @@ const ListItem = ({
         </li>
       </ul>
 
+
+                {category === "place" && misc.map(mis =>{
+        return(
+                <h8> {mis}<br/> </h8>
+
+        )
+        })}
+
       <header>
         <h4>{title}</h4>
         <span>🌟{rating}</span>
       </header>
+
+
     </div>
   );
 };

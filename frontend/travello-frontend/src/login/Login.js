@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 
 function Login() {
   return (
-    <div className="body">
+    <div className="body" style={{paddingLeft:"50px", paddingRight:"50px"}}>
       {/*<Header/>*/}
         <Navbar/>
       <LoginBody/>

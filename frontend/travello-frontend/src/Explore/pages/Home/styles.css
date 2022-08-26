@@ -27,7 +27,9 @@
 }
 
 .fullPlace{
-  background: url("./home_img.jpg");
+  /*background-color: #75E6DA;*/
+  background-color: #FFFFFF;
     background-repeat: no-repeat;
-    background-size: 1600px 700px;
+    background-size: 1600px 1600px;
+  width: 1100px;
 }

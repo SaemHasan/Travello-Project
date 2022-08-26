@@ -183,7 +183,7 @@ const [list, setList] = useState([]);
                 {response.map((r) => (
                 //console.log(r.activity_id)
                     //activity_id_list.push(r.activity_id)
-                    dataList.push({id: r.id, title: r.title , place: r.place, coverSrc: r.coverSrc,desc:r.desc, rating:r.rating})
+                    dataList.push({id: r.id, title: r.title , place: r.place, coverSrc: r.coverSrc,desc:r.desc, rating:r.rating, misc:r.misc, category:"place"})
 
 
                 ))}
@@ -408,7 +408,7 @@ const getHotelStr = (size) => {
   }, [selectedRating, filters, searchInput]);
 
   return (
-    <div className='home'>
+    <div className='home' style={{paddingLeft:"50px", paddingRight:"50px"}}>
       {/* Search Bar */}
       <SearchBar
         value={searchInput}

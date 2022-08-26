@@ -123,7 +123,7 @@ class Review_Place(models.Model):
     user = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return str(self.review_id)
+        return str(self.review_id) + " " + self.place.name
 
 
 class Review_Spot(models.Model):
@@ -134,4 +134,4 @@ class Review_Spot(models.Model):
     user = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return str(self.review_id)
+        return str(self.review_id) + " " + self.spot.name

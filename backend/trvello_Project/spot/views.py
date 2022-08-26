@@ -5,10 +5,10 @@ from rest_framework.response import Response
 import json
 
 from .models import Place, Spot, SpotType_Table, PlaceRatingInfo, Spot_Type, \
-    User_Spot, Spot_Food, Spot_Activity, SpotRatingInfo, Review_Place, User_Place, Review_Spot
+    User_Spot, Spot_Food, Spot_Activity, SpotRatingInfo, User_Place, Review_Place,  Review_Spot
 from .serializers import PlaceSerializer, SpotSerializer, SpotTypeSerializer, PlaceRatingInfoSerializer, \
     SpotType_TableSerializer, User_SpotSerializer, Spot_FoodSerializer, Spot_ActivitySerializer, \
-    SpotRatingInfoSerializer, ReviewPlaceSerializer, User_PlaceSerializer, ReviewSpotSerializer
+    SpotRatingInfoSerializer, User_PlaceSerializer, ReviewPlaceSerializer, ReviewSpotSerializer
 from rest_framework import viewsets
 
 

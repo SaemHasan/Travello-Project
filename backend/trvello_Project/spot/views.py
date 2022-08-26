@@ -5,10 +5,10 @@ from rest_framework.response import Response
 import json
 
 from .models import Place, Spot, SpotType_Table, PlaceRatingInfo, Spot_Type, \
-    User_Spot, Spot_Food, Spot_Activity, SpotRatingInfo, User_Place, Review_Place,  Review_Spot
+    User_Spot, Spot_Food, Spot_Activity, SpotRatingInfo, User_Place, Review_Place, Review_Spot, SpotVisitCount
 from .serializers import PlaceSerializer, SpotSerializer, SpotTypeSerializer, PlaceRatingInfoSerializer, \
     SpotType_TableSerializer, User_SpotSerializer, Spot_FoodSerializer, Spot_ActivitySerializer, \
-    SpotRatingInfoSerializer, User_PlaceSerializer, ReviewPlaceSerializer, ReviewSpotSerializer
+    SpotRatingInfoSerializer, User_PlaceSerializer, ReviewPlaceSerializer, ReviewSpotSerializer, SpotVisitCountSerializer
 from rest_framework import viewsets
 
 
@@ -111,7 +111,7 @@ class SpotViewSet(viewsets.ModelViewSet):
         # print(visited_spot_count)
         sorted_visited_spot_count = sorted(visited_spot_count.items(), key=lambda x: x[1], reverse=True)
 
-        if(sorted_visited_spot_count.__len__()>5):
+        if (sorted_visited_spot_count.__len__() > 5):
             sorted_visited_spot_count = sorted_visited_spot_count[:5]
 
         print(sorted_visited_spot_count)
@@ -164,6 +164,7 @@ class SpotViewSet(viewsets.ModelViewSet):
                     recommendation_spot_list.append(j.spot_id)
 
         return recommendation_spot_list
+
     @action(detail=False, methods=['post', 'get', 'put'])
     def getRecommendatioByUserInterest(self, request):
         token = request.data['token']
@@ -179,7 +180,7 @@ class SpotViewSet(viewsets.ModelViewSet):
         spots = Spot.objects.all()
         recommendation_spot_list = self.getRecommenedSpots(user_id)
         # for i in visited_spot_list:
-            # spots = spots.exclude(spot_id=i.spot_id)
+        # spots = spots.exclude(spot_id=i.spot_id)
         recommended_spots = []
         for spot in spots:
             types = Spot_Type.objects.all().filter(spot_id=spot.spot_id)
@@ -202,7 +203,6 @@ class SpotViewSet(viewsets.ModelViewSet):
             spot_list.append(spot)
 
         return Response(SpotSerializer(spot_list, many=True).data)
-
 
     @action(detail=False, methods=['post', 'get', 'put'])
     def getRecommendationByUserVisitedSpot(self, request):
@@ -289,7 +289,6 @@ class SpotViewSet(viewsets.ModelViewSet):
             result = activities
         # print(result)
         return Response(Spot_ActivitySerializer(result, many=True).data)
-
 
     @action(detail=False, methods=['post', 'get', 'put'])
     def getOneSpotFoods_search(self, request):
@@ -384,10 +383,9 @@ class Spot_FoodViewSet(viewsets.ModelViewSet):
         # print(food)
         my_list = {'id_list': food_id_list, 'name_list': food_name_list}
         food_dict.append(my_list)
-        #print(food_name_list)
+        # print(food_name_list)
 
-
-        #print(food_dict)
+        # print(food_dict)
         return Response(food_dict)
 
     @action(detail=False, methods=['post', 'get', 'put'])
@@ -401,13 +399,13 @@ class Spot_FoodViewSet(viewsets.ModelViewSet):
         food_dict = []
         for i in food:
             food_id_list.append(i.food_id.food_id)
-            #food_name_list.append(i.food_id.food_name)
+            # food_name_list.append(i.food_id.food_name)
 
         # print(spots)
 
         # print(food)
-        #my_list = {'id_list': food_id_list, 'name_list': food_name_list}
-        #food_dict.append(my_list)
+        # my_list = {'id_list': food_id_list, 'name_list': food_name_list}
+        # food_dict.append(my_list)
         # print(food_name_list)
 
         # print(food_dict)
@@ -478,7 +476,6 @@ class ReviewSpotViewSet(viewsets.ModelViewSet):
     queryset = Review_Spot.objects.all()
     serializer_class = ReviewSpotSerializer
 
-
     @action(detail=False, methods=['post', 'get', 'put'])
     def getReview(self, request):
         spot_id = int(request.data['place_id'])
@@ -491,3 +488,8 @@ class ReviewSpotViewSet(viewsets.ModelViewSet):
 class UserPlaceViewSet(viewsets.ModelViewSet):
     queryset = User_Place.objects.all()
     serializer_class = User_PlaceSerializer
+
+
+class SpotVisitCountViewSet(viewsets.ModelViewSet):
+    queryset = SpotVisitCount.objects.all()
+    serializer_class = SpotVisitCountSerializer

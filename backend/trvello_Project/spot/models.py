@@ -1,8 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 # Create your models here.
+from django.utils import timezone
+from django.utils.datetime_safe import datetime
+
+
 class Place(models.Model):
     place_id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=100)
@@ -135,3 +138,13 @@ class Review_Spot(models.Model):
 
     def __str__(self):
         return str(self.review_id) + " " + self.spot.name
+
+
+class SpotVisitCount(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    spot_id = models.ForeignKey(Spot, on_delete=models.CASCADE, default=None)
+    count = models.IntegerField(default=0)
+    date = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return self.spot_id.name + " " + str(self.count)

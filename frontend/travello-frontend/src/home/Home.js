@@ -1,12 +1,6 @@
 import React from "react";
 import "../App.css";
-import { useState, useEffect, useRef } from "react";
-import ArticleList from "../Components/ArticleList";
-import DemoList from "../Components/DemoList";
-import Hello from "../Components/Hello";
-// import pic from "../images/homepage.jpg";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import APIService from "../APIService";
 import SearchBar from "../Components/Search_bar";
 import SlidersActivity from "../Components/auto_slider_activity/SlidersActivity";
 import SlidersFood from "../Components/auto_slider_food/SlidersFood";

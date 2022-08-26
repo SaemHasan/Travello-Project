@@ -106,7 +106,7 @@ function OneHotel() {
                 <div className="row">
                             <div className="column" style={{marginLeft:'500px'}}>
 
-            {list.map(l =>{
+            {list.slice(0,6).map(l =>{
                 return(
                     <div key={l.atb_id}>
                         <div

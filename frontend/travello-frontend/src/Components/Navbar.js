@@ -60,7 +60,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{paddingLeft:"50px", paddingRight:"50px"}}>
       <div className="navbar-brand" href="#">
         <b>
           <i>

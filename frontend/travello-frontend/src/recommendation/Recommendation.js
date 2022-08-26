@@ -8,7 +8,7 @@ export default function Recommendation() {
     const [spotRecommendationByInterests, setSpotRecommendationByInterests] = useState([]);
     const [userVisitedSpots, setUserVisitedSpots] = useState([]);
     const [userInterestObjs, setUserInterestObjs] = useState([]);
-    const [userInterests, setUserInterests] = useState([]);
+    // const [userInterests, setUserInterests] = useState([]);
     const [show, setShow] = useState(false);
 
 

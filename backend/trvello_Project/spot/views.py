@@ -84,6 +84,25 @@ class SpotViewSet(viewsets.ModelViewSet):
     serializer_class = SpotSerializer
 
     @action(detail=False, methods=['post', 'get', 'put'])
+    def getTopVisitedSpots(self, request):
+        user_spot = User_Spot.objects.all()
+        visited_spot_count = {}
+        for i in user_spot:
+            if i.spot_id.name in visited_spot_count:
+                visited_spot_count[i.spot_id.name] = visited_spot_count[i.spot_id.name] + 1
+            else:
+                visited_spot_count[i.spot_id.name] = 1
+
+        # print(visited_spot_count)
+        sorted_visited_spot_count = sorted(visited_spot_count.items(), key=lambda x: x[1], reverse=True)
+
+        if(sorted_visited_spot_count.__len__()>5):
+            sorted_visited_spot_count = sorted_visited_spot_count[:5]
+
+        print(sorted_visited_spot_count)
+        return Response(sorted_visited_spot_count)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
     def getSearchResult(self, request):
         keyword = request.data['keyword']
         location = request.data['location']

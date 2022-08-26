@@ -2,13 +2,15 @@ import {useEffect, useState} from "react";
 import {Link} from "@mui/material";
 import RecommendationAPI from "./RecommendationAPI";
 import ShowSpots from "./ShowSpots";
+import {ShowDoughnut} from "./ShowDounut";
+import {ShowBarChart} from "./ShowBarChart";
 
 export default function Recommendation() {
     const [spotRecommendationByVisit, setSpotRecommendationByVisit] = useState([]);
     const [spotRecommendationByInterests, setSpotRecommendationByInterests] = useState([]);
     const [userVisitedSpots, setUserVisitedSpots] = useState([]);
     const [userInterestObjs, setUserInterestObjs] = useState([]);
-    // const [userInterests, setUserInterests] = useState([]);
+    const [VisitedSpotsData, setVisitedSpotsData] = useState({});
     const [show, setShow] = useState(false);
 
 
@@ -27,6 +29,31 @@ export default function Recommendation() {
         await setSpotRecommendationByInterests(spotRecommendationByInterests);
         console.log("getUniqueSpots finish: ", spotRecommendationByInterests);
 
+    }
+
+    async function getTopVisitedSpots(t){
+        const res = await RecommendationAPI.getTopVisitedSpots(t);
+        let labels = []
+        let cnt = []
+        let cnt_per = []
+        for(let i=0;i<res.length;i++){
+            labels.push(res[i][0])
+            cnt.push(res[i][1])
+        }
+        let total =0;
+        // console.log(cnt[0])
+        for(let i=0;i<cnt.length;i++){
+            total+=parseFloat(cnt[i])
+        }
+        // console.log("total: ",total)
+        for(let i=0;i<cnt.length;i++){
+            // let per = (parseFloat(cnt[i])/t)*100
+            // console.log("per: ",per)
+            cnt_per.push((cnt[i]/total)*100)
+        }
+        // console.log(labels);
+        // console.log(cnt_per);
+        setVisitedSpotsData({labels:labels, count: cnt_per})
     }
 
 
@@ -55,7 +82,7 @@ export default function Recommendation() {
                         await getUniqueSpots();
                     }
                 }
-
+                await getTopVisitedSpots(token);
             }
 
             async function fetchUser() {
@@ -71,9 +98,19 @@ export default function Recommendation() {
 
     if (show) {
         return (
+
             <div className="container">
                 <h1 className="center_title">Recommendation</h1>
-                <div className="row">
+
+                <div className="row" style={{paddingTop:50}}>
+                    <ShowDoughnut data={VisitedSpotsData} title={"User Visited Spots"}/>
+                </div>
+
+                <div className="row" style={{paddingTop:50}}>
+                    <ShowBarChart data={""} title={"User Visited Spot's Page"}/>
+                </div>
+
+                <div className="row" style={{paddingTop:50}}>
                     {
                         spotRecommendationByVisit.length !== 0 ?
                             <div>
@@ -94,12 +131,21 @@ export default function Recommendation() {
                     }
                 </div>
 
+
+
             </div>
         )
     } else {
         return (
             <div className="container center">
-                <h1>PLEASE LOG IN FIRST.</h1>
+                <div className="row" style={{paddingTop:50}}>
+                    <ShowDoughnut data={VisitedSpotsData} title={"User Visited Spots"}/>
+                </div>
+
+                <div className="row" style={{paddingTop:50}}>
+                    <ShowBarChart data={""} title={"User Visited Spot's Page"}/>
+                </div>
+                <h1>PLEASE LOG IN TO SEE MORE RECOMMENDATIONS.</h1>
                 <h4>You can <Link href="login"> log in</Link> or <Link href="Registration">Register</Link>.</h4>
             </div>
         )

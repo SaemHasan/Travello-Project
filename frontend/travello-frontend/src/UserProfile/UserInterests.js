@@ -17,7 +17,7 @@ function UserInterests() {
   }, []);
 
   return (
-    <div className="col-3 center">
+    <div>
       <h3>User Interests:</h3>
       <ul className="list-group list-group-flush">
         {interests.map((item) => (

@@ -20,9 +20,19 @@ function OnePlaceDesc() {
     const [misc, setMisc] = useState([]);
     const [miscLength, setmiscLength] = useState(false);
     const [disable, setDisable] = React.useState(false);
+    let [getAgencyCor, setgetAgencyCor] = React.useState([]);
+    //const [recohotel, setRecohotel] = React.useState("");
+    let recohotel = "";
+    const [reco_id, setreco_id] = React.useState();
+    const [is_reco_hotel, setisreco_hotel] = React.useState(false);
 
     async function updateVisitCount(spot_id) {
         await OnePlaceAPI.updateVisitCount(spot_id);
+    }
+    function handleClick(id) {
+        console.log(id)
+        localStorage.setItem("hotel_id", JSON.stringify(id));
+        window.location.href = "/Onehotel";
     }
 
     async function getVisitHistory(spot_id) {
@@ -109,10 +119,25 @@ function OnePlaceDesc() {
                 const hotel_list_byID = await OnePlaceAPI.getHotelIDCor(spot_id);
 
                 const activity_list_byID = await OnePlaceAPI.getActivityIdCor(spot_id, activity_list[0].activity_list);
-                const getAgencyCor = await OnePlaceAPI.getAgencyCor(activity_list_byID);
+                setgetAgencyCor(await OnePlaceAPI.getAgencyCor(activity_list_byID, hotel_list_byID));
                 console.log(hotel_list_byID)
                 console.log("i am in explore spot");
-                console.log(getAgencyCor);
+                console.log(getAgencyCor.name);
+                //setRecohotel(getAgencyCor.name)
+                recohotel = getAgencyCor.name
+                console.log(recohotel)
+                if(recohotel !== "")
+                {
+                    console.log("in print")
+                    console.log(recohotel)
+                    setisreco_hotel(true);
+                    setreco_id(getAgencyCor.hotel_id);
+                    console.log(getAgencyCor.hotel_id);
+                    recohotel = getAgencyCor.name
+                    //setRecohotel(getAgencyCor.name)
+                }
+
+
             }
 
             GetSpotAdvantages(my_spot[0].id);
@@ -331,26 +356,55 @@ function OnePlaceDesc() {
                     </Button>
                 </div>
             </div>
+            {/*<div className="row">*/}
+            {/*    <div className="column"*/}
+            {/*    style={{marginTop: "20px", marginBottom: "-50px", marginLeft: "-150px"}}*/}
+            {/*>*/}
+            {/*    <h2>*/}
+            {/*        <b>*/}
+            {/*            <u>{name}</u>*/}
+            {/*        </b>*/}
+            {/*    </h2>*/}
+
+            {/*</div>*/}
+            {/*    <div className="column"  style={{width:"100px", height:"60px", marginTop: "20px", marginLeft:"-150px"}}><Button disabled={disable} onClick={() => {*/}
+            {/*                Visited_btn()*/}
+            {/*            }}>Visited</Button></div>*/}
+            {/*</div>*/}
 
             <div>
                 <p style={{marginLeft: "10px"}}>{description}</p>
             </div>
             {miscLength === true && (
-                <div>
-                    <u><h3 style={{marginLeft: "10px"}}>From {name}</h3></u>
-                    {
-                        misc.map((atv, key) => {
-                            return (
-                                <b><p style={{
-                                    color: "#000000",
-                                    marginLeft: "20px",
-                                    marginTop: "20px",
-                                }}>{atv.misc_name} is {atv.distance} Km away</p></b>
-                            )
-                        })
-                    }
-                </div>
-            )}
+            <div>
+                <u><h3 style={{marginLeft: "10px"}}>From {name}</h3></u>
+                {
+                      misc.map((atv,key)=>{
+                          return(
+                                <b><p style={{color:"#000000", marginLeft: "20px", marginTop: "20px",}}>{atv.misc_name} is {atv.distance} Km away</p></b>
+                          )
+                      })
+                  }
+            </div>
+                )}
+
+            {is_reco_hotel === true && (
+            <div>
+                <u><h3 style={{marginLeft: "10px"}}>Recommended Hotel</h3></u>
+
+                    <Link
+                underline="hover"
+                style={{ color: "black" }}
+                onClick={(e) => handleClick(getAgencyCor.hotel_id)}
+
+                //href=
+              >
+                    <h3>{getAgencyCor.name}</h3>
+                    </Link>
+
+            </div>
+                )}
+
             <div className="col-6 center">
                 <ShowBarChart title={"Visits of last few days"} labels={datesOfVisit} data={count}/>
             </div>

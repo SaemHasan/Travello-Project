@@ -8,7 +8,7 @@ from .serializers import ActivitySerializer, AgencySerializer, ActivityType_Tabl
 from .models import Activity, Agency, ActivityType_Table, Activity_Agency, ActivityPriceInfo, ActivityRatingInfo, \
     Review_Activity
 
-
+from math import sin, cos, sqrt, atan2, radians
 # Create your views here.
 
 
@@ -157,13 +157,21 @@ class Activity_AgencyViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['post', 'get', 'put'])
     def getAgencyCor(self, request):
         activity_id_list = request.data['activity_id_list']
+        hotel_list_byID = request.data['hotel_list_byID']
+        distance_list = []
+        #print(activity_id_list)
+        for h in hotel_list_byID:
+            distance = 0
+            for i in range(len(activity_id_list)):
+                agency_ids = Activity_Agency.objects.all().filter(activity_id=activity_id_list[i])
+                for ag in agency_ids:
+                    distance = distance + get_distance(h["cordinate_lattitude"], h["cordinate_longitude"], ag.agency_id.cordinate_lattitude, ag.agency_id.cordinate_longitude)
+            print(distance)
+            distance_list.append(distance)
+        min_value = min(distance_list)
+        min_index = distance_list.index(min_value)
 
-        print(activity_id_list)
-        for i in range(len(activity_id_list)):
-            agency_ids = Activity_Agency.objects.all().filter(activity_id=activity_id_list[i])
-            for ag in agency_ids:
-                print(ag.agency_id.agency_name)
-        return Response(activity_id_list)
+        return Response(hotel_list_byID[min_index])
 
 class ActivityPriceInfoViewSet(viewsets.ModelViewSet):
     queryset = ActivityPriceInfo.objects.all()
@@ -178,3 +186,23 @@ class ActivityRatingInfoViewSet(viewsets.ModelViewSet):
 class ReviewActivityViewSet(viewsets.ModelViewSet):
     queryset = Review_Activity.objects.all()
     serializer_class = ReviewActivitySerializer
+
+
+def get_distance(lat1, lon1, lat2, lon2):
+    R = 6373.0
+
+    lat1 = radians(float(lat1))
+    lon1 = radians(float(lon1))
+    lat2 = radians(float(lat2))
+    lon2 = radians(float(lon2))
+
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+
+    a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+    distance = R * c
+
+    print("Result:", distance)
+    return distance

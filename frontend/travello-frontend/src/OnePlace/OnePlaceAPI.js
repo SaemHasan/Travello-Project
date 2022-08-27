@@ -121,14 +121,14 @@ export default class OnePlaceAPI {
       body: JSON.stringify({ spot_id: spot_id, activity_list:activity_list }),
     }).then((resp) => resp.json());
   }
-    static getAgencyCor(activity_id_list) {
+    static getAgencyCor(activity_id_list, hotel_list_byID) {
     return fetch(`http://127.0.0.1:8000/api/activity_agencies/getAgencyCor/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         // 'Authorization':`Token ${token['mytoken']}`
       },
-      body: JSON.stringify({ activity_id_list:activity_id_list }),
+      body: JSON.stringify({ activity_id_list:activity_id_list, hotel_list_byID:hotel_list_byID }),
     }).then((resp) => resp.json());
   }
 }

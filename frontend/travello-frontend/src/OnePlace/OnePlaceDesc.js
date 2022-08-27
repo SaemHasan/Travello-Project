@@ -20,6 +20,8 @@ function OnePlaceDesc() {
     const [misc, setMisc] = useState([]);
     const [miscLength, setmiscLength] = useState(false);
     const [disable, setDisable] = React.useState(false);
+    const [reco_hotel, setreco_hotel] = React.useState("empty");
+    const [is_reco_hotel, setisreco_hotel] = React.useState(false);
 
     async function updateVisitCount(spot_id) {
         await OnePlaceAPI.updateVisitCount(spot_id);
@@ -109,10 +111,18 @@ function OnePlaceDesc() {
                 const hotel_list_byID = await OnePlaceAPI.getHotelIDCor(spot_id);
 
                 const activity_list_byID = await OnePlaceAPI.getActivityIdCor(spot_id, activity_list[0].activity_list);
-                const getAgencyCor = await OnePlaceAPI.getAgencyCor(activity_list_byID);
+                const getAgencyCor = await OnePlaceAPI.getAgencyCor(activity_list_byID, hotel_list_byID);
                 console.log(hotel_list_byID)
                 console.log("i am in explore spot");
-                console.log(getAgencyCor);
+                console.log(getAgencyCor.name);
+                setreco_hotel(getAgencyCor.name)
+                if(reco_hotel !== "empty")
+                {
+                    console.log("in print")
+                    setisreco_hotel(true);
+                }
+
+
             }
             GetSpotAdvantages(my_spot[0].id);
             //console.log(templist);
@@ -328,6 +338,20 @@ function OnePlaceDesc() {
                           )
                       })
                   }
+            </div>
+                )}
+
+            {is_reco_hotel === false && (
+            <div>
+                <u><h3 style={{marginLeft: "10px"}}>Recommended Hotel</h3></u>
+                {
+                    // reco_hotel.map((atv,key)=>{
+                    //       return(
+                    //             <b><p style={{color:"#000000", marginLeft: "20px", marginTop: "20px",}}>{atv.name}</p></b>
+                    //       )
+                    //   })
+                    <h3>{reco_hotel}</h3>
+                }
             </div>
                 )}
             <div className="col-6 center">

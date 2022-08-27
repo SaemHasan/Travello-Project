@@ -132,4 +132,15 @@ export default class APIService {
       body: JSON.stringify({ token: token }),
     }).then((resp) => resp.json());
   }
+
+  static updateSpotRatingInfo(spot_id, rating) {
+    return fetch(`http://127.0.0.1:8000/api/spot_rating_infos/updateSpotRatingInfo/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ spot_id: spot_id, rating: rating }),
+    }).then((resp) => resp.json());
+  }
 }

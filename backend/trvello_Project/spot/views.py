@@ -459,6 +459,19 @@ class SpotRatingInfoViewSet(viewsets.ModelViewSet):
     queryset = SpotRatingInfo.objects.all()
     serializer_class = SpotRatingInfoSerializer
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def updateSpotRatingInfo(self, request):
+        spot_id = request.data['spot_id']
+        value = request.data['rating']
+        spot = Spot.objects.get(spot_id=spot_id)
+        spot_rating = SpotRatingInfo.objects.get(spot_id=spot)
+        factor = spot_rating.factor
+        rating = spot.rating
+        new_rating = (factor * rating + (1-factor) * value)
+        spot.rating = new_rating
+        spot.save()
+
+        return Response("Success")
 
 class ReviewPlaceViewSet(viewsets.ModelViewSet):
     queryset = Review_Place.objects.all()

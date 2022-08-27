@@ -19,6 +19,19 @@ class PlaceViewSet(viewsets.ModelViewSet):
     serializer_class = PlaceSerializer
 
     @action(detail=False, methods=['post', 'get', 'put'])
+    def getAllplaceSpotNames(self, request):
+        places = Place.objects.all().values('name')
+        spots = Spot.objects.all().values('name')
+        placeSpotNames = []
+        for place in places:
+            placeSpotNames.append(place)
+        for spot in spots:
+            placeSpotNames.append(spot)
+        print(placeSpotNames)
+
+        return Response(placeSpotNames)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
     def getPlaceSpotPercentage(self, request):
         place_id = request.data.get('place_id')
         user_id = request.data.get('user_id')

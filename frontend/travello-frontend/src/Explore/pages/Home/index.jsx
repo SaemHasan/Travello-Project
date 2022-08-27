@@ -17,6 +17,7 @@ const Home = () => {
   const [foods, setFoods] = useState([]);
   const [places, setPlaces] = useState([]);
   const [allPlaceName, setAllPlaceName] = useState([]);
+  const [myfilterlist, setmyfilterlist] = useState([]);
 
   useEffect(() => {
   //console.log(list)

@@ -3,8 +3,9 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .models import UserProfile_Interests, User_Type
-from .serializers import UserSerializer, UserProfile_Interests_Serializer, User_Type_Serializer
+from .models import UserProfile_Interests, User_Type, UserLogginCount
+from .serializers import UserSerializer, UserProfile_Interests_Serializer, User_Type_Serializer, \
+    UserLoginCountSerializer
 from django.contrib.auth.models import User
 
 
@@ -40,3 +41,8 @@ class UserProfileInterestsViewSet(viewsets.ModelViewSet):
 class User_Type_ViewSet(viewsets.ModelViewSet):
     queryset = User_Type.objects.all()
     serializer_class = User_Type_Serializer
+
+
+class UserLoginCountViewSet(viewsets.ModelViewSet):
+    queryset = UserLogginCount.objects.all()
+    serializer_class = UserLoginCountSerializer

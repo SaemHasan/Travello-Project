@@ -2,6 +2,7 @@ import UserInfo from "./UserInfo";
 import { useEffect, useState } from "react";
 import APIService from "../APIService";
 import UserInterests from "./UserInterests";
+import AddSpot from "./AddSpot";
 
 function UserProfile() {
   const [user, setUser] = useState({});
@@ -23,7 +24,15 @@ function UserProfile() {
     <div className="container">
       {/*<h1>User</h1>*/}
       <UserInfo user={user} image={user_image} />
-      <UserInterests />
+      <div className="row center">
+        <div className="col-md-12 center">
+          {/*<AddSpot/>*/}
+        </div>
+        <div className="col-md-12 center">
+          <UserInterests user={user} />
+        </div>
+      </div>
+
       {/*<DemoModal />*/}
     </div>
   );

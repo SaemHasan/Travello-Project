@@ -282,6 +282,7 @@ export default function AddSpotActivityDetailsModal(props) {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
               <Form.Label>Select Type</Form.Label>
               <Form.Select onChange={(e) => setTypeID(e.target.value)}>
+                <option>Select Type</option>
                 {activityTypes.map((type, idx) => (
                   <option key={idx} value={type.type_id}>
                     {type.type_name}

@@ -1,7 +1,7 @@
 // import React from 'react';
 import React, {useEffect, useState} from 'react';
 import './styles.css';
-import {Card, CardContent, Grid, Link} from "@mui/material";
+import {Card, CardContent, Grid, Link, Rating} from "@mui/material";
 import ExploreAPI from "../../../../ExploreAPI";
 import APIService from "../../../../../APIService";
 import Typography from "@material-ui/core/Typography";
@@ -38,6 +38,14 @@ const ListItem = ({
     let [food1Dlist, setFood1Dlist] = useState([])
     const [disable, setDisable] = React.useState(false);
     const [user, setUser] = React.useState("");
+    const [ratingValue, setRatingValue] = React.useState(0);
+    const [ratingDisable, setRatingDisable] = React.useState(false);
+
+    const handleRatingValue = async (value) => {
+        setRatingValue(value);
+        const res = await APIService.updateSpotRatingInfo(id, value);
+        console.log(res);
+    }
 
     const Visited_btn = async () => {
         setDisable(true);
@@ -68,6 +76,7 @@ const ListItem = ({
                 }
             } else {
                 setDisable(true);
+                setRatingDisable(true)
             }
         }
 
@@ -219,115 +228,119 @@ const ListItem = ({
                 <li>
 
 
-                        <Grid container spacing={3}>
+                    <Grid container spacing={3}>
 
 
-          <Grid item xs={12} md={12} >
-            <Card sx={{ maxWidth: 500 }} style={{ width: "280px"}}>
-                <div style={{backgroundColor:"#D4F1F4"}}>
-              <CardContent>
-                  {/*<br/>*/}
-                  <Link
-                underline="hover"
-                style={{ color: "black" }}
-                onClick={(e) => handleClick(id,category,place_id)}
+                        <Grid item xs={12} md={12}>
+                            <Card sx={{maxWidth: 500}} style={{width: "280px"}}>
+                                <div style={{backgroundColor: "#D4F1F4"}}>
+                                    <CardContent>
+                                        {/*<br/>*/}
+                                        <Link
+                                            underline="hover"
+                                            style={{color: "black"}}
+                                            onClick={(e) => handleClick(id, category, place_id)}
 
-                //href=
-              >
-                  <h1 style={{alignContent:"center"}}>{title} </h1></Link>
-                  <br/>
-Attractions:
-
-
-
-                  {
-                      place.slice(0,2).map((attr,key)=>{
-                          return(
-                             <Typography variant="h6" color="primary">
-                                 {attr}
-                             </Typography>
-                          )
-                      })
-                  }
-                  {/*{food_list()}*/}
-                  {/*<br/>*/}
-
-                  {/*Famous Food Types:*/}
-                  {/*<Typography variant="h6" color="text.secondary">*/}
-                  {/*    {*/}
-                  {/*    food1Dlist.map((food)=>{*/}
-
-                  {/*        return(*/}
-                  {/*           <Typography variant="h6" color="primary">*/}
-                  {/*               {food}*/}
-                  {/*           </Typography>*/}
-                  {/*        )*/}
-                  {/*    })*/}
-                  {/*}*/}
-
-                  <br/>
-
-                  Famous Foods :
-                  {/*<Typography variant="h6" color="text.secondary">*/}
-                                    {
-                      food_names.slice(0,2).map((foods,key)=>{
-
-                          return(
-                             <Typography variant="h6" color="primary">
-                                 {foods}
-                             </Typography>
-                          )
-                      })
-                  }
-                      {activity_list()}
-                      <br/>
+                                            //href=
+                                        >
+                                            <h1 style={{alignContent: "center"}}>{title} </h1></Link>
+                                        <br/>
+                                        Attractions:
 
 
+                                        {
+                                            place.slice(0, 2).map((attr, key) => {
+                                                return (
+                                                    <Typography variant="h6" color="primary">
+                                                        {attr}
+                                                    </Typography>
+                                                )
+                                            })
+                                        }
+                                        {/*{food_list()}*/}
+                                        {/*<br/>*/}
 
-                  Famous Activities:
-                  {
-                      activity.slice(0,2).map((atv,key)=>{
-                          return(
-                             <Typography variant="h6" color="primary">
-                                 {atv}
-                             </Typography>
-                          )
-                      })
-                  }
-                  <br/>
-                  {
-                      misc.slice(0,2).map((atv,key)=>{
-                          return(
-                             <Typography variant="h6">
-                                <p style={{color:"#000080"}}>{atv.misc_name} is {atv.distance} Km away</p>
-                             </Typography>
-                          )
-                      })
-                  }
-                     Rating: 🌟{rating}
-                {/*</Typography>*/}
-              </CardContent>
-                    </div>
+                                        {/*Famous Food Types:*/}
+                                        {/*<Typography variant="h6" color="text.secondary">*/}
+                                        {/*    {*/}
+                                        {/*    food1Dlist.map((food)=>{*/}
 
-            </Card>
-          </Grid>
+                                        {/*        return(*/}
+                                        {/*           <Typography variant="h6" color="primary">*/}
+                                        {/*               {food}*/}
+                                        {/*           </Typography>*/}
+                                        {/*        )*/}
+                                        {/*    })*/}
+                                        {/*}*/}
 
-      </Grid>
-                        {/*<br/>*/}
-                        {/*<br/>*/}
+                                        <br/>
+
+                                        Famous Foods :
+                                        {/*<Typography variant="h6" color="text.secondary">*/}
+                                        {
+                                            food_names.slice(0, 2).map((foods, key) => {
+
+                                                return (
+                                                    <Typography variant="h6" color="primary">
+                                                        {foods}
+                                                    </Typography>
+                                                )
+                                            })
+                                        }
+                                        {activity_list()}
+                                        <br/>
 
 
+                                        Famous Activities:
+                                        {
+                                            activity.slice(0, 2).map((atv, key) => {
+                                                return (
+                                                    <Typography variant="h6" color="primary">
+                                                        {atv}
+                                                    </Typography>
+                                                )
+                                            })
+                                        }
+                                        <br/>
+                                        {
+                                            misc.slice(0, 2).map((atv, key) => {
+                                                return (
+                                                    <Typography variant="h6">
+                                                        <p style={{color: "#000080"}}>{atv.misc_name} is {atv.distance} Km
+                                                            away</p>
+                                                    </Typography>
+                                                )
+                                            })
+                                        }
+                                        Rating: 🌟{rating.toFixed(2)}
+                                        {/*</Typography>*/}
+                                    </CardContent>
+                                </div>
 
-                        
+                            </Card>
+                        </Grid>
+
+                    </Grid>
+                    {/*<br/>*/}
+                    {/*<br/>*/}
 
 
                     <br/>
                     <div style={{alignContent: "center"}}>
                         <Button disabled={disable} onClick={() => {
-                            Visited_btn()
+                            Visited_btn().then()
                         }}>
                             Visited
                         </Button>
+                    </div>
+                    <div>
+                        <Rating disabled={ratingDisable}
+                            name="simple-controlled"
+                            value={ratingValue}
+                            onChange={(event, newValue) => {
+                                handleRatingValue(newValue);
+                            }}
+                            />
                     </div>
                 </li>
 

@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import { allDistricts } from "./BDdistricts";
-import AdminAPI from "../AdminAPI";
+import AdminAPI from "../../admin/AdminAPI";
+import {allDistricts} from "./BDdistricts";
 import AddSpotActivityDetailsModal from "./AddSpotActivityDetails";
-import AddPlaceModal from "./AddPlaceModal";
 
 export default function AddSpotDetailsModal(props) {
   const [activityShow, setActivityShow] = useState(false);
-  const [addNewPlace, setAddNewPlace] = useState(false);
   const [show, setShow] = useState(false);
   const [allPlaces, setAllPlaces] = useState([]);
   const [name, setName] = useState("");
@@ -22,7 +20,6 @@ export default function AddSpotDetailsModal(props) {
   const [rating, setRating] = useState("");
   const [place_id, setPlace_id] = useState("");
   const [spotData, setSpotData] = useState({});
-  const [fetchAgainPlace, setFetchAgainPlace] = useState(false);
   const handleNext = () => {
 
     if(name ==="" || place_id ===""){
@@ -50,14 +47,7 @@ export default function AddSpotDetailsModal(props) {
     props.handleClose();
   };
 
-  const handleAddNewPlace = () => {
-    setAddNewPlace(true);
-  }
 
-  const handleCloseAddNewPlace = async (t) => {
-    setFetchAgainPlace(!fetchAgainPlace);
-    setAddNewPlace(false);
-  }
 
 
   useEffect(() => {
@@ -70,7 +60,7 @@ export default function AddSpotDetailsModal(props) {
     AdminAPI.getPlaces().then(async (res) => {
       await setAllPlaces(res);
     });
-  }, [fetchAgainPlace]);
+  }, []);
 
   return (
     <>
@@ -154,9 +144,6 @@ export default function AddSpotDetailsModal(props) {
                   </option>
                 ))}
               </Form.Select>
-              <Button variant="primary" onClick={handleAddNewPlace}>
-              Add New Place
-              </Button>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
@@ -205,15 +192,6 @@ export default function AddSpotDetailsModal(props) {
         )}
       </>
 
-      <>
-        {
-          addNewPlace &&
-            <AddPlaceModal
-              show={addNewPlace}
-              handleClose={handleCloseAddNewPlace}
-            />
-        }
-      </>
 
     </>
   );

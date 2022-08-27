@@ -7,6 +7,8 @@ import {Link} from "@mui/material";
 import {ShowBarChart} from "../home/ShowBarChart";
 import ExploreAPI from "../Explore/ExploreAPI";
 import Typography from "@material-ui/core/Typography";
+import Button from "react-bootstrap/Button";
+import APIService from "../APIService";
 
 function OnePlaceDesc() {
     const [onePlace, setOnePlace] = useState([]);
@@ -17,7 +19,7 @@ function OnePlaceDesc() {
     const [count, setCount] = useState([]);
     const [misc, setMisc] = useState([]);
     const [miscLength, setmiscLength] = useState(false);
-
+    const [disable, setDisable] = React.useState(false);
 
     async function updateVisitCount(spot_id) {
         await OnePlaceAPI.updateVisitCount(spot_id);
@@ -34,13 +36,27 @@ function OnePlaceDesc() {
         console.log(count);
     }
 
+    const Visited_btn = async () => {
+        setDisable(true);
+        // if (user) {
+        //     console.log("spot id : ", id)
+        //     console.log("user id : ", user.id)
+        //     const uploadData = new FormData();
+        //     uploadData.append("spot_id", id);
+        //     uploadData.append("user_id", user.id);
+        //     await APIService.postToDB(uploadData, "user_spots");
+        // }
+
+    };
 
     useEffect(() => {
 
         const api_path = "http://127.0.0.1:8000";
         const exploreSpot = JSON.parse(localStorage.getItem("explore_spot"));
         if (exploreSpot !== null) {
+            const activity_list = JSON.parse(localStorage.getItem("activity_list"));
             console.log("i am in explore spot");
+            console.log(activity_list);
             let my_spot = [];
             {
                 exploreSpot.map((r) =>
@@ -54,19 +70,19 @@ function OnePlaceDesc() {
             }
             async function GetSpotAdvantages(spot_id) {
                 setmiscLength(false);
-                console.log("i am in this function");
+                //console.log("i am in this function");
                 while (misc.length !== 0){
             console.log("rakin");
                       misc.pop();
                 }
                 for (let m =0; m < misc.length; m++)
             {
-                console.log("kopppp");
+                //console.log("kopppp");
               misc[m] = []
             }
-                console.log(spot_id);
+                //console.log(spot_id);
                 const response = await OnePlaceAPI.getHotelMIscofSpot(spot_id);
-                console.log(response);
+                //console.log(response);
                 let templist = [];
 
                 {
@@ -213,16 +229,13 @@ function OnePlaceDesc() {
                             src={hotelimg}
                             height={"50"}
                             alt={"hotel"}
+
                         />
+                        <br/>
+                        <b><u>Hotels</u></b>
                     </Link>
-                    <img
-                        className="my_image"
-                        src={hotelimg}
-                        height={"50"}
-                        alt={"hotel"}
-                    />
-                    {/*<h2>Column 1</h2>*/}
-                    {/*<p>Some text..</p>*/}
+
+
                 </div>
                 <div className="column" style={{backgroundColor: "#bbb"}}>
                     <Link
@@ -237,6 +250,8 @@ function OnePlaceDesc() {
                             height={"50"}
                             alt={"food"}
                         />
+                        <br/>
+                        <b><u>Foods</u></b>
                     </Link>
 
                     {/*<h2>Column 2</h2>*/}
@@ -255,21 +270,30 @@ function OnePlaceDesc() {
                             height={"50"}
                             alt={"activity"}
                         />
+                        <br/>
+                        <b><u>Activities</u></b>
                     </Link>
 
                     {/*<h2>Column 3</h2>*/}
                     {/*<p>Some text..</p>*/}
                 </div>
             </div>
-            <div
-                style={{marginTop: "20px", marginBottom: "20px", marginLeft: "10px"}}
+            <div className="row">
+                <div className="column"
+                style={{marginTop: "20px", marginBottom: "-50px", marginLeft: "-150px"}}
             >
                 <h2>
                     <b>
                         <u>{name}</u>
                     </b>
                 </h2>
+
             </div>
+                <div className="column"  style={{width:"100px", height:"60px", marginTop: "20px", marginLeft:"-150px"}}><Button disabled={disable} onClick={() => {
+                            Visited_btn()
+                        }}>Visited</Button></div>
+            </div>
+
             <div>
                 <p style={{marginLeft: "10px"}}>{description}</p>
             </div>

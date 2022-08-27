@@ -17,7 +17,7 @@ const Home = () => {
   const [foods, setFoods] = useState([]);
   const [places, setPlaces] = useState([]);
   const [allPlaceName, setAllPlaceName] = useState([]);
-  const [myfilterlist, setmyfilterlist] = useState([]);
+
 
   useEffect(() => {
   //console.log(list)
@@ -555,6 +555,12 @@ const Home = () => {
     const activitiesChecked = activities
       .filter((item) => item.checked)
       .map((item) => item.label.toLowerCase());
+
+    console.log(activitiesChecked)
+      let mylist =[{'activity_list':activitiesChecked}]
+      console.log(mylist)
+      localStorage.setItem("activity_list", JSON.stringify(mylist));
+
 
     if (activitiesChecked.length) {
       updatedList = updatedList.filter((item) =>

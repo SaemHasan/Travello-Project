@@ -12,6 +12,7 @@ const Home = () => {
 
   //const [dataList, setdataList] = useState();
   const [dataList, set_dataList] = useState([]);
+  const [hotelList, set_hotelList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [list, setList] = useState(dataList);
   const [activities, setActivity] = useState([]);
@@ -103,7 +104,7 @@ const Home = () => {
             {allspots.map((r) => (
 
                     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
-                    dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc, place_id : r.place_id, place_name : r.place_name, food_names: "shutki", misc: "abc", hotel:"" })
+                    dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc, place_id : r.place_id, place_name : r.place_name, food_names: "shutki", misc: "abc", hotel:"", cordinate_lattitude:r.cordinate_lattitude, cordinate_longitude:r.cordinate_longitude })
 
                 ))};
             //console.log(dataList);
@@ -434,24 +435,28 @@ const Home = () => {
   }
   function getplaceList(list, placeName) {
       //console.log(allPlaceName)
-    let updatedList = [];
-    updatedList = list.filter((item) => item.place_name === placeName);
+      let updatedList = [];
+      updatedList = list.filter((item) => item.place_name === placeName);
+      //console.log(updatedList)
+      //console.log("spot lise:")
+      //const min_distance = await ExploreAPI.getMinDistance(updatedList);
+      //console.log(min_distance)
 
-    for(let m=0; m < updatedList.length; m++) {
-        let uniqueArray = []
-        for (let k = 0; k < updatedList[m].place.length; k++) {
-            if (uniqueArray.indexOf(updatedList[m].place[k]) === -1) {
-                uniqueArray.push(updatedList[m].place[k]);
-            }
-        }
-        updatedList[m].place = uniqueArray;
-      //console.log(updatedList[0].place)
-      //console.log("updatedList.place")
-    }
+      for (let m = 0; m < updatedList.length; m++) {
+          let uniqueArray = []
+          for (let k = 0; k < updatedList[m].place.length; k++) {
+              if (uniqueArray.indexOf(updatedList[m].place[k]) === -1) {
+                  uniqueArray.push(updatedList[m].place[k]);
+              }
+          }
+          updatedList[m].place = uniqueArray;
+          //console.log(updatedList[0].place)
+          //console.log("updatedList.place")
+      }
 
 
-    return updatedList;
-    //return p1 * p2;   // The function returns the product of p1 and p2
+      return updatedList;
+      //return p1 * p2;   // The function returns the product of p1 and p2
   }
 
   function makespotList(list) {
@@ -532,6 +537,30 @@ const Home = () => {
           updatedList = updatedList.filter((item) =>
               eval(getPlaceStr(item.place.length))
           );
+          for (let m =0; m < allPlaceName.length; m++)
+            {
+                  console.log(allPlaceName[m])
+                  let newList = updatedList.filter((item) => item.place_name === allPlaceName[m]);
+                  console.log(newList)
+                //   //console.log("spot lise:")
+                if(newList.length!==0)
+                {
+                    const min_distance = await ExploreAPI.getMinDistance(newList);
+                    console.log(min_distance.name)
+                    for(let n=0; n<updatedList.length; n++)
+                    {
+                        if(updatedList[n].place_name === allPlaceName[m])
+                        {
+                            updatedList[n].hotel = min_distance.name
+                        }
+                    }
+                }
+
+                //   //hotelList.push({"Sylhet":min_distance.name})
+                //   //console.log(hotelList["Sylhet"])
+
+            }
+
       }
 
       // if (placesChecked.length) {

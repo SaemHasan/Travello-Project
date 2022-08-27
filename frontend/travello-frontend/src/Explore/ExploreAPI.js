@@ -174,14 +174,15 @@ export default class ExploreAPI {
       body: JSON.stringify({ activity_id_list:activity_id_list, hotel_list_byID:hotel_list_byID }),
     }).then((resp) => resp.json());
   }
-    // static getAllFood(spot_id) {
-    // return fetch(`http://127.0.0.1:8000/api/spot_foods/getAllFood/`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     // Authorization: `Token ${token}`,
-    //   },
-    //   body: JSON.stringify({ spot_id: spot_id }),
-    // }).then((resp) => resp.json());
-  //}
+
+    static getMinDistance(spot_id) {
+    return fetch(`http://127.0.0.1:8000/api/hotels/getMinDistance/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Authorization':`Token ${token['mytoken']}`
+      },
+      body: JSON.stringify({ spot_id: spot_id }),
+    }).then((resp) => resp.json());
+  }
 }

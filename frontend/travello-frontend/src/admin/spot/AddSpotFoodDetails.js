@@ -413,7 +413,7 @@ export default function AddSpotFoodDetailsModal(props) {
               handleSave = {handleSave}
               spot={props.spot}
               activites={props.activities}
-              foods = {props.foods}
+              foods = {allFoodsFromUser}
 
             />
           }

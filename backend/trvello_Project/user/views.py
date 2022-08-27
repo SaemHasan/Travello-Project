@@ -66,10 +66,19 @@ class UserLoginCountViewSet(viewsets.ModelViewSet):
 
         return Response(UserLoginCountSerializer(user_login_count).data)
 
-
     @action(detail=False, methods=['post', 'get', 'put'])
     def getUserLoginCountOfLastWeek(self, request):
-        user = User.objects.get(auth_token=request.data['token'])
-        user_login_count = UserLogginCount.objects.filter(user=user).filter(date__gt=datetime.now() - timedelta(days=7))
-        print(user_login_count)
-        return Response(UserLoginCountSerializer(user_login_count, many=True).data)
+        user_login_count = UserLogginCount.objects.filter(date__gt=datetime.now() - timedelta(days=7))
+        date_wise_count = {}
+        for count in user_login_count:
+            date = str(count.date)
+            if date in date_wise_count:
+                date_wise_count[date] += count.count
+            else:
+                date_wise_count[date] = count.count
+
+        date_count_list = []
+        for date, count in date_wise_count.items():
+            date_count_list.append({"date": date, "count": count})
+        print("date count \n", date_count_list)
+        return Response(date_count_list)

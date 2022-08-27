@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import UserProfile_Interests, User_Type
+from .models import UserProfile_Interests, User_Type, UserLogginCount
 from rest_framework.authtoken.views import Token
 
 
@@ -40,4 +40,10 @@ class UserProfile_Interests_Serializer(serializers.ModelSerializer):
 class User_Type_Serializer(serializers.ModelSerializer):
     class Meta:
         model = User_Type
+        fields = '__all__'
+
+
+class UserLoginCountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserLogginCount
         fields = '__all__'

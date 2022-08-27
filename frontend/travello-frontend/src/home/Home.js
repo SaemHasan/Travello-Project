@@ -23,8 +23,8 @@ function Home() {
             await setLabels(labels)
             const count = res.map(item => item.count)
             await setCount(count)
-            console.log(labels)
-            console.log(count)
+            // console.log(labels)
+            // console.log(count)
         }
         getTopVisitedSpotsOfToday().then( () => {
 

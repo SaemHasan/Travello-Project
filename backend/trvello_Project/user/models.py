@@ -42,3 +42,13 @@ class User_Type(models.Model):
 
     def __str__(self):
         return self.user_id.username + " " + self.type_id.type_name
+
+
+class UserLogginCount(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    count = models.IntegerField(default=0)
+    date = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username + " " + str(self.count) + " " + str(self.date)

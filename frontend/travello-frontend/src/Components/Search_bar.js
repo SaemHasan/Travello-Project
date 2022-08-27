@@ -61,6 +61,11 @@ const Search_bar = () => {
         fetchData();
     }, [])
 
+    const handleKeywordChange = (value) => {
+        console.log("keyword ", value);
+        setKeyword(value);
+    };
+
     const handleChange_dropdown = (e) => {
         // console.log("search dropdown: ",e.target.value);
         setValue(e.target.value);
@@ -163,44 +168,44 @@ const Search_bar = () => {
             <div className="search">
                 <div className="side-by-side">
 
-                    <Autocomplete
-                        id="keyword"
-                        freeSolo
-                        fullWidth
-                        options={keywordOptions.map((option) => option.label)}
-                        onChange={(e, values) => setKeyword(values)}
-                        renderInput={(params) => <TextField {...params} label="Keyword"/>}
-                    />
-
-                    <Autocomplete
-                        id="location"
-                        freeSolo
-                        fullWidth
-                        options={locations.map((option) => option.name)}
-                        onChange={(e, values) => {
-                            setLocation(values);
-                        }}
-                        renderInput={(params) => <TextField {...params} label="Location"/>}
-                    />
-
-                    {/*<TextField*/}
+                    {/*<Autocomplete*/}
                     {/*    id="keyword"*/}
-                    {/*    variant="outlined"*/}
                     {/*    fullWidth*/}
-                    {/*    label="Keyword"*/}
-                    {/*    onChange={(e) => {*/}
-                    {/*        setKeyword(e.target.value);*/}
+                    {/*    options={keywordOptions.map((option) => option.label)}*/}
+                    {/*    onChange={(e, values) => {*/}
+                    {/*        handleKeywordChange(values);*/}
                     {/*    }}*/}
+                    {/*    renderInput={(params) => <TextField {...params} label="Keyword"/>}*/}
                     {/*/>*/}
-                    {/*<TextField*/}
+
+                    {/*<Autocomplete*/}
                     {/*    id="location"*/}
-                    {/*    variant="outlined"*/}
                     {/*    fullWidth*/}
-                    {/*    label="Location"*/}
-                    {/*    onChange={(e) => {*/}
-                    {/*        setLocation(e.target.value);*/}
+                    {/*    options={locations.map((option) => option.name)}*/}
+                    {/*    onChange={(e, values) => {*/}
+                    {/*        setLocation(values);*/}
                     {/*    }}*/}
+                    {/*    renderInput={(params) => <TextField {...params} label="Location"/>}*/}
                     {/*/>*/}
+
+                    <TextField
+                        id="keyword"
+                        variant="outlined"
+                        fullWidth
+                        label="Keyword"
+                        onChange={(e) => {
+                            setKeyword(e.target.value);
+                        }}
+                    />
+                    <TextField
+                        id="location"
+                        variant="outlined"
+                        fullWidth
+                        label="Location"
+                        onChange={(e) => {
+                            setLocation(e.target.value);
+                        }}
+                    />
 
                     <div>
                         <select

@@ -296,7 +296,8 @@ class SpotViewSet(viewsets.ModelViewSet):
         for i in spot:
             myList = {'id': i.spot_id, 'title': i.name,
                       'category': "spot", 'coverSrc': str(i.image), 'rating': i.rating, 'place_id': i.place_id.place_id,
-                      'desc': i.short_description, 'place_name': i.place_id.name}
+                      'desc': i.short_description, 'place_name': i.place_id.name, 'cordinate_lattitude':i.cordinate_lattitude,
+                      'cordinate_longitude':i.cordinate_longitude}
             # print(i.activity_id.activity_name)
             # print(i.activity_id.type)
             # print(i.activity_id.description)

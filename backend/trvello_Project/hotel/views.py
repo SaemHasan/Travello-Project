@@ -11,6 +11,7 @@ from .serializers import HotelSerializer, Hotel_AttributeSerializer, Hotel_Attri
 from random import seed
 from random import random
 from random import randint
+from math import sin, cos, sqrt, atan2, radians
 
 # Create your views here.
 
@@ -26,21 +27,47 @@ class HotelViewSet(viewsets.ModelViewSet):
         # print(hotel_atb)
         return Response(HotelSerializer(hotel, many=True).data)
 
-    # @action(detail=False, methods=['post', 'get', 'put'])
-    # def getAllHotels(self, request):
-    #     spot_id = int(request.data['spot_id'])
-    #     #activity = Spot_Activity.objects.get(spot_id = spot_id)
-    #     hotel = Hotel.objects.all().filter(spot_id_id = spot_id)
-    #
-    #     # for i in food:
-    #     #     food_id_list.append(i.food_id.food_id)
-    #     print("Hereeeee")
-    #
-    #
-    #     print(hotel)
-    #     #return Response(food_id_list)
-    #
-    #     return Response(HotelSerializer(hotel, many=True).data)
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getMinDistance(self, request):
+        spot_id_list = request.data['spot_id']
+        hotel = Hotel.objects.all().filter(spot_id=spot_id_list[0]["id"])
+        print("======================startttt===============================")
+        for i in range(len(spot_id_list)-1):
+            hotel |= Hotel.objects.all().filter(spot_id=spot_id_list[i+1]["id"])
+        print(hotel)
+        distance_list = []
+        hotel_list = []
+        result_dict = []
+
+        for h in hotel:
+            distance = 0
+            for i in range(len(spot_id_list)):
+                distance+=get_distance(h.cordinate_lattitude, h.cordinate_longitude, spot_id_list[i]["cordinate_lattitude"], spot_id_list[i]["cordinate_longitude"])
+
+            print(distance)
+            distance_list.append(distance)
+            hotel_list.append(h)
+            print("distance")
+        print("======================end===============================")
+
+
+        min_value = min(distance_list)
+        min_index = distance_list.index(min_value)
+        print(hotel_list[min_index].hotel_id)
+
+
+
+
+
+        mylist = {"id":hotel_list[min_index].hotel_id, "name":hotel_list[min_index].name}
+
+
+
+
+
+
+        return Response(mylist)
+
     @action(detail=False, methods=['post', 'get', 'put'])
     def getAllHotels(self, request):
         hotel_list = []
@@ -189,3 +216,23 @@ class Room_Attribute_TableViewSet(viewsets.ModelViewSet):
 class MISC_DetailViewSet(viewsets.ModelViewSet):
     queryset = MISC_Detail.objects.all()
     serializer_class = MISC_DetailSerializer
+
+
+def get_distance(lat1, lon1, lat2, lon2):
+    R = 6373.0
+
+    lat1 = radians(float(lat1))
+    lon1 = radians(float(lon1))
+    lat2 = radians(float(lat2))
+    lon2 = radians(float(lon2))
+
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+
+    a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+    distance = R * c
+
+    #print("Result:", distance)
+    return distance

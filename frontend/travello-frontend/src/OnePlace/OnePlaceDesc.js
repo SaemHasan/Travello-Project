@@ -40,7 +40,9 @@ function OnePlaceDesc() {
         const api_path = "http://127.0.0.1:8000";
         const exploreSpot = JSON.parse(localStorage.getItem("explore_spot"));
         if (exploreSpot !== null) {
+            const activity_list = JSON.parse(localStorage.getItem("activity_list"));
             console.log("i am in explore spot");
+            console.log(activity_list);
             let my_spot = [];
             {
                 exploreSpot.map((r) =>
@@ -54,19 +56,19 @@ function OnePlaceDesc() {
             }
             async function GetSpotAdvantages(spot_id) {
                 setmiscLength(false);
-                console.log("i am in this function");
+                //console.log("i am in this function");
                 while (misc.length !== 0){
             console.log("rakin");
                       misc.pop();
                 }
                 for (let m =0; m < misc.length; m++)
             {
-                console.log("kopppp");
+                //console.log("kopppp");
               misc[m] = []
             }
-                console.log(spot_id);
+                //console.log(spot_id);
                 const response = await OnePlaceAPI.getHotelMIscofSpot(spot_id);
-                console.log(response);
+                //console.log(response);
                 let templist = [];
 
                 {
@@ -213,7 +215,9 @@ function OnePlaceDesc() {
                             src={hotelimg}
                             height={"50"}
                             alt={"hotel"}
+
                         />
+                        Hotel
                     </Link>
                     <img
                         className="my_image"

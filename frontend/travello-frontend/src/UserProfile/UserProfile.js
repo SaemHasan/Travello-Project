@@ -26,7 +26,7 @@ function UserProfile() {
       <UserInfo user={user} image={user_image} />
       <div className="row center">
         <div className="col-md-12 center">
-          <AddSpot/>
+          {/*<AddSpot/>*/}
         </div>
         <div className="col-md-12 center">
           <UserInterests user={user} />

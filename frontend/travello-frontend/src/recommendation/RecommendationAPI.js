@@ -10,6 +10,17 @@ export default class RecommendationAPI{
             }).then((resp) => resp.json());
     }
 
+    static getTopVisitedSpots(token){
+        return fetch(`http://127.0.0.1:8000/api/spots/getTopVisitedSpots/`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                // Authorization: `Token ${token}`,
+              },
+              body: JSON.stringify({ token : token }),
+            }).then((resp) => resp.json());
+    }
+
     static getUserVisitedSpots(token){
         return fetch(`http://127.0.0.1:8000/api/spots/getUserVisitedSpots/`, {
               method: "POST",
@@ -21,6 +32,17 @@ export default class RecommendationAPI{
             }).then((resp) => resp.json());
     }
 
+    static getFoodsFromSpotIDs(spot_ids){
+        return fetch(`http://127.0.0.1:8000/api/spots/getFoodsFromSpotIDs/`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                // Authorization: `Token ${token}`,
+              },
+              body: JSON.stringify({ spot_ids : spot_ids }),
+            }).then((resp) => resp.json());
+    }
+
     static async getUserInterests(token) {
         return await fetch(`http://127.0.0.1:8000/api/users/getUserInterests/`, {
             method: "POST",
@@ -29,6 +51,17 @@ export default class RecommendationAPI{
                 // Authorization: `Token ${token}`,
             },
             body: JSON.stringify({token: token}),
+        }).then((resp) => resp.json());
+    }
+
+    static getTopVisitedSpotsOfWeek() {
+        return fetch(`http://127.0.0.1:8000/api/spot_visit_counts/getTopVisitedSpotsOfWeek/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                // Authorization: `Token ${token}`,
+            },
+            body: JSON.stringify({}),
         }).then((resp) => resp.json());
     }
 

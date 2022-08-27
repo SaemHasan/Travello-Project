@@ -1,24 +1,43 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "../App.css";
-import { useState, useEffect, useRef } from "react";
-import ArticleList from "../Components/ArticleList";
-import DemoList from "../Components/DemoList";
-import Hello from "../Components/Hello";
-// import pic from "../images/homepage.jpg";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import APIService from "../APIService";
 import SearchBar from "../Components/Search_bar";
 import SlidersActivity from "../Components/auto_slider_activity/SlidersActivity";
 import SlidersFood from "../Components/auto_slider_food/SlidersFood";
 import SlidersPlace from "../Components/auto_slider_place/SlidersPlace";
 import SlidersSpot from "../Components/auto_slider_spot/SlidersSpot";
 import Footer from "../Components/Footer/Footer";
+import HomeAPIService from "./HomeAPIService";
+import {ShowBarChart} from "./ShowBarChart";
 
 function Home() {
+    const [topVisitedSpotsOfToday, setTopVisitedSpotsOfToday] = useState([]);
+    const [labels, setLabels] = useState([]);
+    const [count, setCount] = useState([]);
+    useEffect(() => {
+        async function getTopVisitedSpotsOfToday(){
+            const res = await HomeAPIService.getTopVisitedSpotsOfToday()
+            await setTopVisitedSpotsOfToday(res)
+            // console.log(res)
+            const labels = res.map(item => item.name)
+            await setLabels(labels)
+            const count = res.map(item => item.count)
+            await setCount(count)
+            console.log(labels)
+            console.log(count)
+        }
+        getTopVisitedSpotsOfToday().then( () => {
+
+        })
+    } , []);
+
   return (
     <div className="App" style={{paddingLeft:"50px", paddingRight:"50px"}}>
       <div>
         <SearchBar />
+      </div>
+      <div className="col-6 center">
+          <ShowBarChart labels={labels} data={count} title={"Today's Top Visited Spots"}/>
       </div>
       <div>
         <div style={{ marginBottom: "20px", height: "40px" }}>

@@ -43,6 +43,17 @@ export default class HomeAPIService {
     }).then((resp) => resp.json());
   }
 
+  static getTopVisitedSpotsOfToday() {
+    return fetch(`http://127.0.0.1:8000/api/spot_visit_counts/getTopVisitedSpotsOfToday/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({  }),
+    }).then((resp) => resp.json());
+  }
+
   static searchPlace(keyword, location) {
     return fetch(`http://127.0.0.1:8000/api/places/getSearchResult/`, {
       method: "POST",

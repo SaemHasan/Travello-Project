@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .views import PlaceViewSet, SpotViewSet, SpotTypeTableViewSet, PlaceRatingInfoViewSet, SpotTypeViewSet, \
     User_SpotViewSet, Spot_FoodViewSet, Spot_ActivityViewSet, SpotRatingInfoViewSet, UserPlaceViewSet, ReviewPlaceViewSet, \
-     ReviewSpotViewSet
+     ReviewSpotViewSet, SpotVisitCountViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
@@ -17,6 +17,7 @@ router.register('spot_rating_infos', SpotRatingInfoViewSet, basename='spot_ratin
 router.register('review_places', ReviewPlaceViewSet, basename='review_places')
 router.register('user_places', UserPlaceViewSet, basename='user_places')
 router.register('review_spots', ReviewSpotViewSet, basename='review_spots')
+router.register('spot_visit_counts', SpotVisitCountViewSet, basename='spot_visit_counts')
 
 urlpatterns = [
     path('api/', include(router.urls)),

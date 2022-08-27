@@ -107,7 +107,7 @@ const Navbar = () => {
             </a>
           </li>
           {
-            loggedIn &&
+            // loggedIn &&
               <li className="nav-item">
               <a className="nav-link" href="/recommendation">
                 <Button>

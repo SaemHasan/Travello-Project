@@ -1,3 +1,4 @@
+from datetime import date, timedelta
 from django.views.generic import ListView
 from django.contrib.auth.models import User
 from rest_framework.decorators import action
@@ -5,10 +6,10 @@ from rest_framework.response import Response
 import json
 
 from .models import Place, Spot, SpotType_Table, PlaceRatingInfo, Spot_Type, \
-    User_Spot, Spot_Food, Spot_Activity, SpotRatingInfo, User_Place, Review_Place,  Review_Spot
+    User_Spot, Spot_Food, Spot_Activity, SpotRatingInfo, User_Place, Review_Place, Review_Spot, SpotVisitCount
 from .serializers import PlaceSerializer, SpotSerializer, SpotTypeSerializer, PlaceRatingInfoSerializer, \
     SpotType_TableSerializer, User_SpotSerializer, Spot_FoodSerializer, Spot_ActivitySerializer, \
-    SpotRatingInfoSerializer, User_PlaceSerializer, ReviewPlaceSerializer, ReviewSpotSerializer
+    SpotRatingInfoSerializer, User_PlaceSerializer, ReviewPlaceSerializer, ReviewSpotSerializer, SpotVisitCountSerializer
 from rest_framework import viewsets
 
 
@@ -84,6 +85,40 @@ class SpotViewSet(viewsets.ModelViewSet):
     serializer_class = SpotSerializer
 
     @action(detail=False, methods=['post', 'get', 'put'])
+    def getFoodsFromSpotIDs(self, request):
+        spot_ids = request.data['spot_ids']
+        res = []
+        for id in spot_ids:
+            spot = Spot.objects.get(spot_id=id)
+            foods = Spot_Food.objects.all().filter(spot_id=spot)
+            foods_list = []
+            for i in foods:
+                foods_list.append(i.food_id.food_name)
+            res.append({'name': spot.name, 'foods': foods_list})
+
+        print(res)
+        return Response(res)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getTopVisitedSpots(self, request):
+        user_spot = User_Spot.objects.all()
+        visited_spot_count = {}
+        for i in user_spot:
+            if i.spot_id.name in visited_spot_count:
+                visited_spot_count[i.spot_id.name] = visited_spot_count[i.spot_id.name] + 1
+            else:
+                visited_spot_count[i.spot_id.name] = 1
+
+        # print(visited_spot_count)
+        sorted_visited_spot_count = sorted(visited_spot_count.items(), key=lambda x: x[1], reverse=True)
+
+        if (sorted_visited_spot_count.__len__() > 5):
+            sorted_visited_spot_count = sorted_visited_spot_count[:5]
+
+        print(sorted_visited_spot_count)
+        return Response(sorted_visited_spot_count)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
     def getSearchResult(self, request):
         keyword = request.data['keyword']
         location = request.data['location']
@@ -130,6 +165,7 @@ class SpotViewSet(viewsets.ModelViewSet):
                     recommendation_spot_list.append(j.spot_id)
 
         return recommendation_spot_list
+
     @action(detail=False, methods=['post', 'get', 'put'])
     def getRecommendatioByUserInterest(self, request):
         token = request.data['token']
@@ -145,7 +181,7 @@ class SpotViewSet(viewsets.ModelViewSet):
         spots = Spot.objects.all()
         recommendation_spot_list = self.getRecommenedSpots(user_id)
         # for i in visited_spot_list:
-            # spots = spots.exclude(spot_id=i.spot_id)
+        # spots = spots.exclude(spot_id=i.spot_id)
         recommended_spots = []
         for spot in spots:
             types = Spot_Type.objects.all().filter(spot_id=spot.spot_id)
@@ -162,9 +198,12 @@ class SpotViewSet(viewsets.ModelViewSet):
         token = request.data['token']
         user_id = User.objects.get(auth_token=token).id
         user_spot = User_Spot.objects.all().filter(user_id=user_id)
+        spot_list = []
+        for i in user_spot:
+            spot = Spot.objects.get(spot_id=i.spot_id.spot_id)
+            spot_list.append(spot)
 
-        return Response(User_SpotSerializer(user_spot, many=True).data)
-
+        return Response(SpotSerializer(spot_list, many=True).data)
 
     @action(detail=False, methods=['post', 'get', 'put'])
     def getRecommendationByUserVisitedSpot(self, request):
@@ -251,7 +290,6 @@ class SpotViewSet(viewsets.ModelViewSet):
             result = activities
         # print(result)
         return Response(Spot_ActivitySerializer(result, many=True).data)
-
 
     @action(detail=False, methods=['post', 'get', 'put'])
     def getOneSpotFoods_search(self, request):
@@ -346,10 +384,9 @@ class Spot_FoodViewSet(viewsets.ModelViewSet):
         # print(food)
         my_list = {'id_list': food_id_list, 'name_list': food_name_list}
         food_dict.append(my_list)
-        #print(food_name_list)
+        # print(food_name_list)
 
-
-        #print(food_dict)
+        # print(food_dict)
         return Response(food_dict)
 
     @action(detail=False, methods=['post', 'get', 'put'])
@@ -363,13 +400,13 @@ class Spot_FoodViewSet(viewsets.ModelViewSet):
         food_dict = []
         for i in food:
             food_id_list.append(i.food_id.food_id)
-            #food_name_list.append(i.food_id.food_name)
+            # food_name_list.append(i.food_id.food_name)
 
         # print(spots)
 
         # print(food)
-        #my_list = {'id_list': food_id_list, 'name_list': food_name_list}
-        #food_dict.append(my_list)
+        # my_list = {'id_list': food_id_list, 'name_list': food_name_list}
+        # food_dict.append(my_list)
         # print(food_name_list)
 
         # print(food_dict)
@@ -440,7 +477,6 @@ class ReviewSpotViewSet(viewsets.ModelViewSet):
     queryset = Review_Spot.objects.all()
     serializer_class = ReviewSpotSerializer
 
-
     @action(detail=False, methods=['post', 'get', 'put'])
     def getReview(self, request):
         spot_id = int(request.data['place_id'])
@@ -453,3 +489,61 @@ class ReviewSpotViewSet(viewsets.ModelViewSet):
 class UserPlaceViewSet(viewsets.ModelViewSet):
     queryset = User_Place.objects.all()
     serializer_class = User_PlaceSerializer
+
+
+class SpotVisitCountViewSet(viewsets.ModelViewSet):
+    queryset = SpotVisitCount.objects.all()
+    serializer_class = SpotVisitCountSerializer
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def updateVisitCount(self, request):
+        spot_id = int(request.data['spot_id'])
+        spot = Spot.objects.get(spot_id=spot_id)
+        if(SpotVisitCount.objects.filter(spot_id=spot, date=date.today()).exists()):
+            visit_count = SpotVisitCount.objects.get(spot_id=spot, date=date.today())
+        else:
+            visit_count = SpotVisitCount(spot_id=spot, date=date.today())
+        visit_count.count += 1
+        visit_count.save()
+        print(visit_count)
+        return Response("Success")
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getTopVisitedSpotsOfToday(self, request):
+        today = date.today()
+        spots = SpotVisitCount.objects.filter(date=today).order_by('-count')[:5]
+        # print(spots)
+        spot_list = []
+        for spot in spots:
+            spot_list.append({'name': spot.spot_id.name, 'count': spot.count})
+        print(spot_list)
+        return Response(spot_list)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getTopVisitedSpotsOfWeek(self, request):
+        today = date.today()
+        spots = SpotVisitCount.objects.filter(date__range=[today - timedelta(days=7), today]).order_by('-count')
+        print(spots)
+        spots_name_list = []
+        spot_list = []
+        for spot in spots:
+            if spot.spot_id.name not in spots_name_list:
+                spots_name_list.append(spot.spot_id.name)
+                spot_list.append({'name': spot.spot_id.name, 'count': spot.count})
+            else:
+                spot_list[spots_name_list.index(spot.spot_id.name)]['count'] += spot.count
+        if len(spot_list) > 5:
+            spot_list = spot_list[:5]
+        return Response(spot_list)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getVisitHistoryOfASpot(self, request):
+        spot_id = int(request.data['spot_id'])
+        spot = Spot.objects.get(spot_id=spot_id)
+        visits = SpotVisitCount.objects.filter(spot_id=spot).order_by('-date')[:7]
+        # print(visits)
+        visit_list = []
+        for visit in visits:
+            visit_list.append({'date': visit.date, 'count': visit.count})
+        print(visit_list)
+        return Response(visit_list)

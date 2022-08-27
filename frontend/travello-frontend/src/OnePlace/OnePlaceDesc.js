@@ -67,20 +67,20 @@ function OnePlaceDesc() {
                     })
                 );
             }
+
             async function GetSpotAdvantages(spot_id) {
 
 
                 setmiscLength(false);
                 //console.log("i am in this function");
-                while (misc.length !== 0){
-            console.log("rakin");
-                      misc.pop();
+                while (misc.length !== 0) {
+                    console.log("rakin");
+                    misc.pop();
                 }
-                for (let m =0; m < misc.length; m++)
-            {
-                //console.log("kopppp");
-              misc[m] = []
-            }
+                for (let m = 0; m < misc.length; m++) {
+                    //console.log("kopppp");
+                    misc[m] = []
+                }
                 //console.log(spot_id);
                 const response = await OnePlaceAPI.getHotelMIscofSpot(spot_id);
                 //console.log(response);
@@ -93,13 +93,13 @@ function OnePlaceDesc() {
                         templist.push(r)
                     ))
                 }
-                let uniqueArray=[]
-              for(let k=0; k < templist.length; k++){
-                  if(uniqueArray.indexOf(templist[k]) === -1) {
-                      uniqueArray.push(templist[k]);
-                  }
-              }
-              setMisc(uniqueArray);
+                let uniqueArray = []
+                for (let k = 0; k < templist.length; k++) {
+                    if (uniqueArray.indexOf(templist[k]) === -1) {
+                        uniqueArray.push(templist[k]);
+                    }
+                }
+                setMisc(uniqueArray);
                 if (misc.length !== 0)
                     setmiscLength(true);
                 localStorage.removeItem("explore_spot");
@@ -114,6 +114,7 @@ function OnePlaceDesc() {
                 console.log("i am in explore spot");
                 console.log(getAgencyCor);
             }
+
             GetSpotAdvantages(my_spot[0].id);
             //console.log(templist);
             //setMisc(templist);
@@ -315,31 +316,20 @@ function OnePlaceDesc() {
                     {/*<p>Some text..</p>*/}
                 </div>
             </div>
-            <div className="row">
-                <div className="column"
-                     style={{marginTop: "20px", marginBottom: "-50px", marginLeft: "-150px"}}
-                >
-                    <h2>
-                        <b>
-                            <u>{name}</u>
-                        </b>
-                    </h2>
 
-                </div>
-                <div className="col-6 center"
-                     style={{width: "100px", height: "60px", marginTop: "20px", marginLeft: "-150px"}}><Button
-                    disabled={disable} onClick={() => {
-                    Visited_btn()
-                }}>Visited</Button></div>
             <div className='parent_oneplace'>
                 <div className='child_oneplace'><h2>
                     <b>
                         <u>{name}</u>
                     </b>
                 </h2></div>
-                <div className='child_oneplace'><Button disabled={disable} onClick={() => {
-                            Visited_btn()
-                        }}>Visited</Button></div>
+                <div className='child_oneplace'>
+                    <Button disabled={disable} onClick={() => {
+                        Visited_btn()
+                    }}>
+                        Visited
+                    </Button>
+                </div>
             </div>
 
             <div>

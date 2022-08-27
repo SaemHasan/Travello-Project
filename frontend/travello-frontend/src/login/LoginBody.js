@@ -30,14 +30,15 @@ export default function LoginBody() {
     localStorage.setItem("token", JSON.stringify(token));
   }, [token]);
 
-  const handleLogin = (resp) => {
-    console.log("handleLogin");
-    console.log(resp);
+  const handleLogin = async (resp) => {
+    // console.log("handleLogin");
+    // console.log(resp);
     if (resp.token) {
       // alert("Login Successful");
       setToken(resp.token);
       localStorage.setItem("token", JSON.stringify(resp.token));
       setLoggedIn(true);
+      await APIService.updateUserLoginCount(resp.token);
       navigate("/");
     } else {
       alert("Invalid username or password");

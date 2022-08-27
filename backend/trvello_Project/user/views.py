@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta, date
+
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.decorators import action
@@ -46,3 +48,28 @@ class User_Type_ViewSet(viewsets.ModelViewSet):
 class UserLoginCountViewSet(viewsets.ModelViewSet):
     queryset = UserLogginCount.objects.all()
     serializer_class = UserLoginCountSerializer
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def updateUserLoginCount(self, request):
+        token = request.data['token']
+        user = User.objects.get(auth_token=token)
+        if user.username == 'admin':
+            return Response({"message": "You are not allowed to update this user"})
+
+        if UserLogginCount.objects.filter(user=user, date=date.today()).exists():
+            user_login_count = UserLogginCount.objects.get(user=user)
+            user_login_count.count += 1
+            user_login_count.save()
+        else:
+            user_login_count = UserLogginCount.objects.create(user=user, count=1, date=date.today())
+            user_login_count.save()
+
+        return Response(UserLoginCountSerializer(user_login_count).data)
+
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getUserLoginCountOfLastWeek(self, request):
+        user = User.objects.get(auth_token=request.data['token'])
+        user_login_count = UserLogginCount.objects.filter(user=user).filter(date__gt=datetime.now() - timedelta(days=7))
+        print(user_login_count)
+        return Response(UserLoginCountSerializer(user_login_count, many=True).data)

@@ -96,7 +96,7 @@ class SpotViewSet(viewsets.ModelViewSet):
                 foods_list.append(i.food_id.food_name)
             res.append({'name': spot.name, 'foods': foods_list})
 
-        print(res)
+        #print(res)
         return Response(res)
 
     @action(detail=False, methods=['post', 'get', 'put'])
@@ -115,7 +115,7 @@ class SpotViewSet(viewsets.ModelViewSet):
         if (sorted_visited_spot_count.__len__() > 5):
             sorted_visited_spot_count = sorted_visited_spot_count[:5]
 
-        print(sorted_visited_spot_count)
+        #print(sorted_visited_spot_count)
         return Response(sorted_visited_spot_count)
 
     @action(detail=False, methods=['post', 'get', 'put'])
@@ -285,7 +285,7 @@ class SpotViewSet(viewsets.ModelViewSet):
         if (location != ''):
             places2 = places.filter(short_description__icontains=location)
             activities = Spot_Activity.objects.all().filter(spot_id__in=places2)
-            print(activities)
+            #print(activities)
             # print(places2)
             result = activities
         # print(result)
@@ -455,6 +455,32 @@ class Spot_ActivityViewSet(viewsets.ModelViewSet):
         return Response(activity_list)
 
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getActivityIdCor(self, request):
+        spot_id = int(request.data['spot_id'])
+        activity_list = request.data['activity_list']
+        activity = Spot_Activity.objects.filter(spot_id=spot_id)
+        #print("in atb")
+        #print(activity)
+        #print(activity_list)
+        activity_dict = []
+        for i in range(len(activity_list)):
+            #print(activity_list[i])
+            for act in activity:
+                #print(act.activity_id)
+                #print(act.activity_id.activity_name)
+
+                if(act.activity_id.activity_name.lower() == activity_list[i].lower()):
+                    #print("matched")
+                    #print(activity_list[i])
+                    #print(act.activity_id.activity_id)
+                    activity_dict.append(act.activity_id.activity_id)
+        # activity = Activity.activity_name
+
+
+        return Response(activity_dict)
+
+
 class SpotRatingInfoViewSet(viewsets.ModelViewSet):
     queryset = SpotRatingInfo.objects.all()
     serializer_class = SpotRatingInfoSerializer
@@ -505,7 +531,7 @@ class SpotVisitCountViewSet(viewsets.ModelViewSet):
             visit_count = SpotVisitCount(spot_id=spot, date=date.today())
         visit_count.count += 1
         visit_count.save()
-        print(visit_count)
+        #print(visit_count)
         return Response("Success")
 
     @action(detail=False, methods=['post', 'get', 'put'])
@@ -516,14 +542,14 @@ class SpotVisitCountViewSet(viewsets.ModelViewSet):
         spot_list = []
         for spot in spots:
             spot_list.append({'name': spot.spot_id.name, 'count': spot.count})
-        print(spot_list)
+        #print(spot_list)
         return Response(spot_list)
 
     @action(detail=False, methods=['post', 'get', 'put'])
     def getTopVisitedSpotsOfWeek(self, request):
         today = date.today()
         spots = SpotVisitCount.objects.filter(date__range=[today - timedelta(days=7), today]).order_by('-count')
-        print(spots)
+        #print(spots)
         spots_name_list = []
         spot_list = []
         for spot in spots:
@@ -545,5 +571,5 @@ class SpotVisitCountViewSet(viewsets.ModelViewSet):
         visit_list = []
         for visit in visits:
             visit_list.append({'date': visit.date, 'count': visit.count})
-        print(visit_list)
+        #print(visit_list)
         return Response(visit_list)

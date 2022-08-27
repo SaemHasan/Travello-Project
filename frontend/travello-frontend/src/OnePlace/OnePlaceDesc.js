@@ -54,9 +54,8 @@ function OnePlaceDesc() {
         const api_path = "http://127.0.0.1:8000";
         const exploreSpot = JSON.parse(localStorage.getItem("explore_spot"));
         if (exploreSpot !== null) {
-            const activity_list = JSON.parse(localStorage.getItem("activity_list"));
-            console.log("i am in explore spot");
-            console.log(activity_list);
+
+
             let my_spot = [];
             {
                 exploreSpot.map((r) =>
@@ -69,6 +68,8 @@ function OnePlaceDesc() {
                 );
             }
             async function GetSpotAdvantages(spot_id) {
+
+
                 setmiscLength(false);
                 //console.log("i am in this function");
                 while (misc.length !== 0){
@@ -102,6 +103,15 @@ function OnePlaceDesc() {
                 if (misc.length !== 0)
                     setmiscLength(true);
                 localStorage.removeItem("explore_spot");
+
+
+                const activity_list = JSON.parse(localStorage.getItem("activity_list"));
+                const hotel_list_byID = await OnePlaceAPI.getHotelIDCor(spot_id);
+
+                const activity_list_byID = await OnePlaceAPI.getActivityIdCor(spot_id, activity_list[0].activity_list);
+                console.log(hotel_list_byID)
+                console.log("i am in explore spot");
+                console.log(activity_list_byID);
             }
             GetSpotAdvantages(my_spot[0].id);
             //console.log(templist);

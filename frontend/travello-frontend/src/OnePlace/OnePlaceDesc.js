@@ -109,9 +109,10 @@ function OnePlaceDesc() {
                 const hotel_list_byID = await OnePlaceAPI.getHotelIDCor(spot_id);
 
                 const activity_list_byID = await OnePlaceAPI.getActivityIdCor(spot_id, activity_list[0].activity_list);
+                const getAgencyCor = await OnePlaceAPI.getAgencyCor(activity_list_byID);
                 console.log(hotel_list_byID)
                 console.log("i am in explore spot");
-                console.log(activity_list_byID);
+                console.log(getAgencyCor);
             }
             GetSpotAdvantages(my_spot[0].id);
             //console.log(templist);

@@ -5,13 +5,13 @@ import "./OnePlaceDesc.css";
 import OnePlaceAPI from "./OnePlaceAPI";
 import {Link} from "@mui/material";
 import {ShowBarChart} from "../home/ShowBarChart";
-import ExploreAPI from "../Explore/ExploreAPI";
-import Typography from "@material-ui/core/Typography";
 import Button from "react-bootstrap/Button";
 import APIService from "../APIService";
+import RecommendationAPI from "../recommendation/RecommendationAPI";
 
 function OnePlaceDesc() {
     const [onePlace, setOnePlace] = useState([]);
+    const [userID, setUser] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [imgsrc, setImgsrc] = useState("");
@@ -48,15 +48,15 @@ function OnePlaceDesc() {
 
     const Visited_btn = async () => {
         setDisable(true);
-        // if (user) {
-        //     console.log("spot id : ", id)
-        //     console.log("user id : ", user.id)
-        //     const uploadData = new FormData();
-        //     uploadData.append("spot_id", id);
-        //     uploadData.append("user_id", user.id);
-        //     await APIService.postToDB(uploadData, "user_spots");
-        // }
-
+        if (userID !== "") {
+            // console.log("spot id : ", onePlace.spot_id)
+            // console.log("user id : ", userID)
+            const uploadData = new FormData();
+            uploadData.append("spot_id", onePlace.spot_id);
+            uploadData.append("user_id", userID);
+            const res = await APIService.postToDB(uploadData, "user_spots");
+            console.log(res)
+        }
     };
 
     useEffect(() => {
@@ -77,20 +77,20 @@ function OnePlaceDesc() {
                     })
                 );
             }
+
             async function GetSpotAdvantages(spot_id) {
 
 
                 setmiscLength(false);
                 //console.log("i am in this function");
-                while (misc.length !== 0){
-            console.log("rakin");
-                      misc.pop();
+                while (misc.length !== 0) {
+                    console.log("rakin");
+                    misc.pop();
                 }
-                for (let m =0; m < misc.length; m++)
-            {
-                //console.log("kopppp");
-              misc[m] = []
-            }
+                for (let m = 0; m < misc.length; m++) {
+                    //console.log("kopppp");
+                    misc[m] = []
+                }
                 //console.log(spot_id);
                 const response = await OnePlaceAPI.getHotelMIscofSpot(spot_id);
                 //console.log(response);
@@ -103,13 +103,13 @@ function OnePlaceDesc() {
                         templist.push(r)
                     ))
                 }
-                let uniqueArray=[]
-              for(let k=0; k < templist.length; k++){
-                  if(uniqueArray.indexOf(templist[k]) === -1) {
-                      uniqueArray.push(templist[k]);
-                  }
-              }
-              setMisc(uniqueArray);
+                let uniqueArray = []
+                for (let k = 0; k < templist.length; k++) {
+                    if (uniqueArray.indexOf(templist[k]) === -1) {
+                        uniqueArray.push(templist[k]);
+                    }
+                }
+                setMisc(uniqueArray);
                 if (misc.length !== 0)
                     setmiscLength(true);
                 localStorage.removeItem("explore_spot");
@@ -139,6 +139,7 @@ function OnePlaceDesc() {
 
 
             }
+
             GetSpotAdvantages(my_spot[0].id);
             //console.log(templist);
             //setMisc(templist);
@@ -196,17 +197,40 @@ function OnePlaceDesc() {
             } else {
                 setImgsrc(spot.image);
             }
-            async function GetSpotAdvantages(spot_id) {
-                console.log("i am in that function");
-                while (misc.length !== 0){
-            console.log("rakin");
-                      misc.pop();
+
+            async function getUserId() {
+                const token = JSON.parse(localStorage.getItem("token"))
+                if (token) {
+                    const user = await APIService.getUserObject(token)
+                    await setUser(user.id)
+                    console.log(user)
+                    const visited_spots = await RecommendationAPI.getUserVisitedSpots(token);
+                    if (visited_spots.length > 0) {
+                        for (let i = 0; i < visited_spots.length; i++) {
+                            if (visited_spots[i].spot_id === spot.spot_id) {
+                                setDisable(true);
+                            }
+                        }
+                    }
+
+                } else {
+                    setDisable(true)
                 }
-                for (let m =0; m < misc.length; m++)
-            {
-                console.log("kopppp");
-              misc[m] = []
+
+
             }
+
+
+            async function GetSpotAdvantages(spot_id) {
+                // console.log("i am in that function");
+                while (misc.length !== 0) {
+                    // console.log("rakin");
+                    misc.pop();
+                }
+                for (let m = 0; m < misc.length; m++) {
+                    // console.log("kopppp");
+                    misc[m] = []
+                }
                 const response = await OnePlaceAPI.getHotelMIscofSpot(spot_id);
                 //console.log(response);
                 let templist = [];
@@ -222,7 +246,10 @@ function OnePlaceDesc() {
                     setmiscLength(true);
                 //localStorage.removeItem("explore_spot");
             }
+
+            getUserId().then();
             GetSpotAdvantages(spot.spot_id);
+
         }
 
 
@@ -314,15 +341,20 @@ function OnePlaceDesc() {
                     {/*<p>Some text..</p>*/}
                 </div>
             </div>
+
             <div className='parent_oneplace'>
                 <div className='child_oneplace'><h2>
                     <b>
                         <u>{name}</u>
                     </b>
                 </h2></div>
-                <div className='child_oneplace'><Button disabled={disable} onClick={() => {
-                            Visited_btn()
-                        }}>Visited</Button></div>
+                <div className='child_oneplace'>
+                    <Button disabled={disable} onClick={() => {
+                        Visited_btn()
+                    }}>
+                        Visited
+                    </Button>
+                </div>
             </div>
             {/*<div className="row">*/}
             {/*    <div className="column"*/}

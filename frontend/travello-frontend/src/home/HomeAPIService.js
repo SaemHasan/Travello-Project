@@ -21,6 +21,17 @@ export default class HomeAPIService {
     }).then((resp) => resp.json());
   }
 
+  static getAllplaceSpotNames() {
+    return fetch(`http://127.0.0.1:8000/api/places/getAllplaceSpotNames/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({  }),
+    }).then((resp) => resp.json());
+  }
+
   static getTopFoods(number) {
     return fetch(`http://127.0.0.1:8000/api/foods/getTopFoods/`, {
       method: "POST",

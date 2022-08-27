@@ -19,6 +19,37 @@ class PlaceViewSet(viewsets.ModelViewSet):
     serializer_class = PlaceSerializer
 
     @action(detail=False, methods=['post', 'get', 'put'])
+    def getAllplaceSpotNames(self, request):
+        places = Place.objects.all().values('name')
+        spots = Spot.objects.all().values('name')
+        placeSpotNames = []
+        for place in places:
+            placeSpotNames.append(place)
+        for spot in spots:
+            placeSpotNames.append(spot)
+        # print(placeSpotNames)
+
+        return Response(placeSpotNames)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getPlaceSpotPercentage(self, request):
+        place_id = request.data.get('place_id')
+        user_id = request.data.get('user_id')
+        place = Place.objects.get(place_id=place_id)
+        spot_list = Spot.objects.filter(place_id=place)
+        user = User.objects.get(id=user_id)
+        user_spot_list = User_Spot.objects.filter(user_id=user)
+
+        visited_count = {"visited": 0, "not_visited": 0}
+        for spot in spot_list:
+            if user_spot_list.filter(spot_id=spot).exists():
+                visited_count["visited"] += 1
+            else:
+                visited_count["not_visited"] += 1
+        print(visited_count)
+        return Response(visited_count)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
     def getTopPlaces(self, request):
         number = int(request.data['number'])
         places = Place.objects.order_by('-rating')[:number]

@@ -356,27 +356,13 @@ function OnePlaceDesc() {
                     </Button>
                 </div>
             </div>
-            {/*<div className="row">*/}
-            {/*    <div className="column"*/}
-            {/*    style={{marginTop: "20px", marginBottom: "-50px", marginLeft: "-150px"}}*/}
-            {/*>*/}
-            {/*    <h2>*/}
-            {/*        <b>*/}
-            {/*            <u>{name}</u>*/}
-            {/*        </b>*/}
-            {/*    </h2>*/}
 
-            {/*</div>*/}
-            {/*    <div className="column"  style={{width:"100px", height:"60px", marginTop: "20px", marginLeft:"-150px"}}><Button disabled={disable} onClick={() => {*/}
-            {/*                Visited_btn()*/}
-            {/*            }}>Visited</Button></div>*/}
-            {/*</div>*/}
 
             <div>
                 <p style={{marginLeft: "10px"}}>{description}</p>
             </div>
             {miscLength === true && (
-            <div>
+            <div style={{marginBottom: "40px"}}>
                 <u><h3 style={{marginLeft: "10px"}}>From {name}</h3></u>
                 {
                       misc.map((atv,key)=>{
@@ -399,7 +385,7 @@ function OnePlaceDesc() {
 
                 //href=
               >
-                    <h3>{getAgencyCor.name}</h3>
+                    <h3 style={{ marginLeft:"20px", color:"blue"}}>{getAgencyCor.name}</h3>
                     </Link>
 
             </div>

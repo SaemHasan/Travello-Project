@@ -278,21 +278,31 @@ function OnePlaceDesc() {
                     {/*<p>Some text..</p>*/}
                 </div>
             </div>
-            <div className="row">
-                <div className="column"
-                style={{marginTop: "20px", marginBottom: "-50px", marginLeft: "-150px"}}
-            >
-                <h2>
+            <div className='parent'>
+                <div className='child'><h2>
                     <b>
                         <u>{name}</u>
                     </b>
-                </h2>
-
-            </div>
-                <div className="column"  style={{width:"100px", height:"60px", marginTop: "20px", marginLeft:"-150px"}}><Button disabled={disable} onClick={() => {
+                </h2></div>
+                <div className='child'><Button disabled={disable} onClick={() => {
                             Visited_btn()
                         }}>Visited</Button></div>
             </div>
+            {/*<div className="row">*/}
+            {/*    <div className="column"*/}
+            {/*    style={{marginTop: "20px", marginBottom: "-50px", marginLeft: "-150px"}}*/}
+            {/*>*/}
+            {/*    <h2>*/}
+            {/*        <b>*/}
+            {/*            <u>{name}</u>*/}
+            {/*        </b>*/}
+            {/*    </h2>*/}
+
+            {/*</div>*/}
+            {/*    <div className="column"  style={{width:"100px", height:"60px", marginTop: "20px", marginLeft:"-150px"}}><Button disabled={disable} onClick={() => {*/}
+            {/*                Visited_btn()*/}
+            {/*            }}>Visited</Button></div>*/}
+            {/*</div>*/}
 
             <div>
                 <p style={{marginLeft: "10px"}}>{description}</p>

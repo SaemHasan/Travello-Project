@@ -100,4 +100,25 @@ export default class OnePlaceAPI {
       body: JSON.stringify({ spot_id: spot_id }),
     }).then((resp) => resp.json());
   }
+
+    static getHotelIDCor(spot_id) {
+    return fetch(`http://127.0.0.1:8000/api/hotels/getHotelIDCor/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Authorization':`Token ${token['mytoken']}`
+      },
+      body: JSON.stringify({ spot_id: spot_id }),
+    }).then((resp) => resp.json());
+  }
+  static getActivityIdCor(spot_id, activity_list) {
+    return fetch(`http://127.0.0.1:8000/api/spot_activities/getActivityIdCor/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Authorization':`Token ${token['mytoken']}`
+      },
+      body: JSON.stringify({ spot_id: spot_id, activity_list:activity_list }),
+    }).then((resp) => resp.json());
+  }
 }

@@ -118,6 +118,8 @@ class Spot_Activity(models.Model):
         return self.spot_id.name + " " + self.activity_id.activity_name
 
 
+
+
 class Review_Place(models.Model):
     review_id = models.BigAutoField(primary_key=True)
     desc = models.CharField(max_length=1000, null=True)

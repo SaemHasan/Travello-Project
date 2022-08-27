@@ -22,7 +22,7 @@ class HotelViewSet(viewsets.ModelViewSet):
     def getOneHotel(self, request):
         hotel_id = int(request.data['hotel_id'])
         hotel = Hotel.objects.all().filter(hotel_id=hotel_id)
-        print(hotel)
+        #print(hotel)
         # print(hotel_atb)
         return Response(HotelSerializer(hotel, many=True).data)
 
@@ -90,7 +90,7 @@ class HotelViewSet(viewsets.ModelViewSet):
         hotel = Hotel.objects.all().filter(spot_id=spot_id)
 
         rand_distance = randint(1, 200)
-        print(rand_distance)
+        #print(rand_distance)
         misc_list = []
         for hotels in hotel:
             #print(hotels.hotel_id)
@@ -100,9 +100,15 @@ class HotelViewSet(viewsets.ModelViewSet):
                 #mystr = str(misc.name) + " is " + str(misc.distance) + " KM away."
                 misc_list.append({'misc_name': str(misc.name), 'distance': str(round(misc.distance*1.25,2))})
 
-        print(misc_list)
+        #print(misc_list)
         # print(hotel_atb)
         return Response(misc_list)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getHotelIDCor(self, request):
+        spot_id = int(request.data['spot_id'])
+        hotel = Hotel.objects.all().filter(spot_id=spot_id)
+        return Response(HotelSerializer(hotel, many=True).data)
 
 class Hotel_AttributeViewSet(viewsets.ModelViewSet):
     queryset = Hotel_Attribute.objects.all()
@@ -133,7 +139,7 @@ class Hotel_Attribute_TableViewSet(viewsets.ModelViewSet):
             # atb_list.append(atb.attribute_id.attribute_name)
             atb_list.append(l)
 
-        print(hotel_atb)
+        #print(hotel_atb)
         return Response(atb_list)
 
 

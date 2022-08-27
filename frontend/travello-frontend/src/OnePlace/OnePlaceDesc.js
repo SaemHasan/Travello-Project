@@ -5,6 +5,8 @@ import "./OnePlaceDesc.css";
 import OnePlaceAPI from "./OnePlaceAPI";
 import {Link} from "@mui/material";
 import {ShowBarChart} from "../home/ShowBarChart";
+import ExploreAPI from "../Explore/ExploreAPI";
+import Typography from "@material-ui/core/Typography";
 
 function OnePlaceDesc() {
     const [onePlace, setOnePlace] = useState([]);
@@ -13,6 +15,7 @@ function OnePlaceDesc() {
     const [imgsrc, setImgsrc] = useState("");
     const [datesOfVisit, setDatesOfVisit] = useState([]);
     const [count, setCount] = useState([]);
+    const [misc, setMisc] = useState([]);
 
     async function updateVisitCount(spot_id) {
         await OnePlaceAPI.updateVisitCount(spot_id);
@@ -31,9 +34,11 @@ function OnePlaceDesc() {
 
 
     useEffect(() => {
+
         const api_path = "http://127.0.0.1:8000";
         const exploreSpot = JSON.parse(localStorage.getItem("explore_spot"));
         if (exploreSpot !== null) {
+            console.log("i am in explore spot");
             let my_spot = [];
             {
                 exploreSpot.map((r) =>
@@ -45,12 +50,41 @@ function OnePlaceDesc() {
                     })
                 );
             }
+            async function GetSpotAdvantages(spot_id) {
+                console.log("i am in this function");
+                while (misc.length !== 0){
+            console.log("rakin");
+                      misc.pop();
+                }
+                for (let m =0; m < misc.length; m++)
+            {
+                console.log("kopppp");
+              misc[m] = []
+            }
+                const response = await OnePlaceAPI.getHotelMIscofSpot(spot_id);
+                //console.log(response);
+                let templist = [];
+
+                {
+                    response.map((r) => (
+                        //console.log(r.activity_id)
+                        //activity_id_list.push(r.activity_id)
+                        misc.push(r)
+                    ))
+                }
+                localStorage.removeItem("explore_spot");
+            }
+            GetSpotAdvantages(my_spot[0].id);
+            //console.log(templist);
+            //setMisc(templist);
+            //console.log(misc);
             //console.log(my_spot);
             //console.log(spot);
             setOnePlace(my_spot[0]);
             setName(my_spot[0].name);
             setDescription(my_spot[0].short_description);
             setImgsrc(api_path + String(my_spot[0].image));
+
         } else {
             console.log("explore spot null found");
         }
@@ -96,7 +130,33 @@ function OnePlaceDesc() {
             } else {
                 setImgsrc(spot.image);
             }
+            async function GetSpotAdvantages(spot_id) {
+                console.log("i am in that function");
+                while (misc.length !== 0){
+            console.log("rakin");
+                      misc.pop();
+                }
+                for (let m =0; m < misc.length; m++)
+            {
+                console.log("kopppp");
+              misc[m] = []
+            }
+                const response = await OnePlaceAPI.getHotelMIscofSpot(spot_id);
+                //console.log(response);
+                let templist = [];
+
+                {
+                    response.map((r) => (
+                        //console.log(r.activity_id)
+                        //activity_id_list.push(r.activity_id)
+                        misc.push(r)
+                    ))
+                }
+                //localStorage.removeItem("explore_spot");
+            }
+            GetSpotAdvantages(spot.spot_id);
         }
+
 
         const food = JSON.parse(localStorage.getItem("food"));
         if (food !== null) {
@@ -197,7 +257,18 @@ function OnePlaceDesc() {
             <div>
                 <p style={{marginLeft: "10px"}}>{description}</p>
             </div>
-
+            {misc.length !== 0 && (
+            <div>
+                <u><h3 style={{marginLeft: "10px"}}>From {name}</h3></u>
+                {
+                      misc.map((atv,key)=>{
+                          return(
+                                <b><p style={{color:"#000000", marginLeft: "20px", marginTop: "20px",}}>{atv.misc_name} is {atv.distance} Km away</p></b>
+                          )
+                      })
+                  }
+            </div>
+                )}
             <div className="col-6 center">
                 <ShowBarChart title={"Visits of last few days"} labels={datesOfVisit} data={count}/>
             </div>

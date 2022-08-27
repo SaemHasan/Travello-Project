@@ -347,7 +347,6 @@ const Home = () => {
               //console.log(dataList);
               templist=[];
               uniqueArray=[];
-
             }
 
 

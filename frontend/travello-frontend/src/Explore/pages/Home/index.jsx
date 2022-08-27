@@ -50,6 +50,7 @@ const Home = () => {
 
               //console.log(uniquePlace_nameAray);
 
+
 }, [JSON.stringify(list)])
 
   useEffect(() => {
@@ -258,20 +259,7 @@ const Home = () => {
               }
               templist=[];
               uniqueArray=[];
-              // for (let m =0; m < dataList.length; m++)
-              // {
-              //   if (dataList[m].id === i+1)
-              //   {
-              //     for (let n =0; n < dataList.length; n++)
-              //     {
-              //       if (dataList[m].place_id === dataList[n].place_id && dataList[n].id !== i+1)
-              //       {
-              //         dataList[n].activity = dataList[n].activity.concat(dataList[m].activity)
-              //       }
-              //     }
-              //   }
-              //
-              // }
+
             }
 
             for (let i = 0; i < allspots.length; i++) {
@@ -306,22 +294,6 @@ const Home = () => {
 
               templist=[];
               uniqueArray=[];
-              // for (let m =0; m < dataList.length; m++)
-              // {
-              //   if (dataList[m].id === i+1)
-              //   {
-              //     for (let n =0; n < dataList.length; n++)
-              //     {
-              //       if (dataList[m].place_id === dataList[n].place_id && dataList[n].id !== i+1)
-              //       {
-              //         dataList[n].place = dataList[n].place.concat(dataList[m].place)
-              //       }
-              //     }
-              //   }
-              //
-              // }
-              //console.log(dataList)
-
 
             }
 
@@ -363,9 +335,66 @@ const Home = () => {
 
 
 
-            //console.log(dataList);
+                              while (allPlaceName.length !== 0) {
+                  allPlaceName.pop();
+                }
+
+      for (let m =0; m < list.length; m++)
+            {
+              allPlaceName.push(list[m].place_name);
+            }
+            //console.log(all_place_name);
+            uniquePlace_nameAray=[]
+              for(let k=0; k < allPlaceName.length; k++){
+                  if(uniquePlace_nameAray.indexOf(allPlaceName[k]) === -1) {
+                      uniquePlace_nameAray.push(allPlaceName[k]);
+                  }
+              }
+              setAllPlaceName(uniquePlace_nameAray);
+
+              console.log("==============All place name=========================")
+                console.log(allPlaceName)
+
+            for (let m =0; m < allPlaceName.length; m++)
+            {
+                  console.log(allPlaceName[m])
+                  let newList = dataList.filter((item) => item.place_name === allPlaceName[m]);
+                  console.log(newList)
+                //   //console.log("spot lise:")
+                if(newList.length!==0)
+                {
+                    const min_distance = await ExploreAPI.getMinDistance(newList);
+                    console.log(min_distance.name)
+                    console.log("min_distance.name")
+                    for(let n=0; n<dataList.length; n++)
+                    {
+                        if(dataList[n].place_name === allPlaceName[m])
+                        {
+                            dataList[n].hotel = min_distance.name
+                        }
+                    }
+                }
+
+                //   //hotelList.push({"Sylhet":min_distance.name})
+                //   //console.log(hotelList["Sylhet"])
+
+            }
+            console.log(dataList)
+
+
+
+
+
+
+
+
+
+            console.log("dataList");
             setList(dataList);
             setResultsFound(true);
+
+
+
 
 
 
@@ -594,9 +623,9 @@ const Home = () => {
           .filter((item) => item.checked)
           .map((item) => item.label.toLowerCase());
 
-      console.log(activitiesChecked)
+      //console.log(activitiesChecked)
       let mylist = [{'activity_list': activitiesChecked}]
-      console.log(mylist)
+      //console.log(mylist)
       localStorage.setItem("activity_list", JSON.stringify(mylist));
 
 
@@ -626,8 +655,8 @@ const Home = () => {
                   ))
               }
               //console.log(templist);
-              console.log(templist[0].name);
-              updatedList[i].hotel = templist[0].name;
+              //console.log(templist[0].name);
+              //updatedList[i].hotel = templist[0].name;
               //updatedList[2].hotel = templist[0].name;
               //updatedList[3].hotel = "rakin";
               // updatedList[11].hotel = "rakin";

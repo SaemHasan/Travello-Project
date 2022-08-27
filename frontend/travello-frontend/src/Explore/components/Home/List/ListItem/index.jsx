@@ -31,6 +31,7 @@ const ListItem = ({
                           activity,
                           food_names,
                           misc,
+                          hotel,
                       },
                   }) => {
 
@@ -312,6 +313,9 @@ const ListItem = ({
                                                 )
                                             })
                                         }
+                                        <br/>
+                                        Recommended Hotel : {hotel}
+                                        <br/>
                                         Rating: 🌟{rating.toFixed(2)}
                                         {/*</Typography>*/}
                                     </CardContent>

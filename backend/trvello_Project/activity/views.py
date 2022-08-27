@@ -173,6 +173,31 @@ class Activity_AgencyViewSet(viewsets.ModelViewSet):
 
         return Response(hotel_list_byID[min_index])
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getAgencyCorExplore(self, request):
+        activity_id_list = request.data['activity_id_list']
+        hotel_list_byID = request.data['hotel_list_byID']
+        distance_list = []
+        # print(activity_id_list)
+        for h in hotel_list_byID:
+            distance = 0
+            for i in range(len(activity_id_list)):
+                agency_ids = Activity_Agency.objects.all().filter(activity_id=activity_id_list[i])
+                for ag in agency_ids:
+                    distance = distance + get_distance(h["cordinate_lattitude"], h["cordinate_longitude"],
+                                                       ag.agency_id.cordinate_lattitude,
+                                                       ag.agency_id.cordinate_longitude)
+            print(distance)
+            distance_list.append(distance)
+        min_value = min(distance_list)
+        min_index = distance_list.index(min_value)
+        distance_dict = []
+        print(hotel_list_byID[min_index])
+        my_list = {"name": hotel_list_byID[min_index]["name"],}
+        print(my_list)
+        distance_dict.append(my_list)
+        return Response(distance_dict)
+
 class ActivityPriceInfoViewSet(viewsets.ModelViewSet):
     queryset = ActivityPriceInfo.objects.all()
     serializer_class = ActivityPriceInfoSerializer

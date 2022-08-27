@@ -141,6 +141,39 @@ export default class ExploreAPI {
       body: JSON.stringify({ spot_id: spot_id }),
     }).then((resp) => resp.json());
   }
+
+  static getHotelIDCor(spot_id) {
+    return fetch(`http://127.0.0.1:8000/api/hotels/getHotelIDCor/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Authorization':`Token ${token['mytoken']}`
+      },
+      body: JSON.stringify({ spot_id: spot_id }),
+    }).then((resp) => resp.json());
+  }
+
+  static getActivityIdCor(spot_id, activity_list) {
+    return fetch(`http://127.0.0.1:8000/api/spot_activities/getActivityIdCor/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Authorization':`Token ${token['mytoken']}`
+      },
+      body: JSON.stringify({ spot_id: spot_id, activity_list:activity_list }),
+    }).then((resp) => resp.json());
+  }
+
+  static getAgencyCorExplore(activity_id_list, hotel_list_byID) {
+    return fetch(`http://127.0.0.1:8000/api/activity_agencies/getAgencyCorExplore/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Authorization':`Token ${token['mytoken']}`
+      },
+      body: JSON.stringify({ activity_id_list:activity_id_list, hotel_list_byID:hotel_list_byID }),
+    }).then((resp) => resp.json());
+  }
     // static getAllFood(spot_id) {
     // return fetch(`http://127.0.0.1:8000/api/spot_foods/getAllFood/`, {
     //   method: "POST",

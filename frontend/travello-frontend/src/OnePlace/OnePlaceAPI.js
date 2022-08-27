@@ -111,6 +111,7 @@ export default class OnePlaceAPI {
       body: JSON.stringify({ spot_id: spot_id }),
     }).then((resp) => resp.json());
   }
+
   static getActivityIdCor(spot_id, activity_list) {
     return fetch(`http://127.0.0.1:8000/api/spot_activities/getActivityIdCor/`, {
       method: "POST",
@@ -121,6 +122,7 @@ export default class OnePlaceAPI {
       body: JSON.stringify({ spot_id: spot_id, activity_list:activity_list }),
     }).then((resp) => resp.json());
   }
+
     static getAgencyCor(activity_id_list, hotel_list_byID) {
     return fetch(`http://127.0.0.1:8000/api/activity_agencies/getAgencyCor/`, {
       method: "POST",

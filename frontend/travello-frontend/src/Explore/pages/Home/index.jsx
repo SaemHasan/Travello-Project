@@ -6,6 +6,7 @@ import SearchBar from "../../components/Home/SearchBar";
 import "./styles.css";
 import ExploreAPI from "../../ExploreAPI";
 import Button from "react-bootstrap/Button";
+import OnePlaceAPI from "../../../OnePlace/OnePlaceAPI";
 
 const Home = () => {
 
@@ -17,6 +18,13 @@ const Home = () => {
   const [foods, setFoods] = useState([]);
   const [places, setPlaces] = useState([]);
   const [allPlaceName, setAllPlaceName] = useState([]);
+  const [spotLength, setspotLength] = useState(0);
+  let [getAgencyCor, setgetAgencyCor] = React.useState([]);
+  let [getAgencyCor2, setgetAgencyCor2] = React.useState([]);
+  let [getAgencyCor3, setgetAgencyCor3] = React.useState([]);
+  let recohotel = "";
+  let recohotel_2 = "";
+  let recohotel_3 = "";
 
 
   useEffect(() => {
@@ -54,6 +62,7 @@ const Home = () => {
                 //const spots = await ExploreAPI.getAllSpot(1);
                 const allspots = await ExploreAPI.getAllSpots();
                 //console.log(allspots.length);
+                setspotLength(allspots.length);
                 const my_places = await ExploreAPI.getAllPlaces(allspots.length);
                 const activity_name = await ExploreAPI.getActivitiesNames();
                 const food_filter_response = await ExploreAPI.getFoodFilters();
@@ -94,7 +103,7 @@ const Home = () => {
             {allspots.map((r) => (
 
                     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
-                    dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc, place_id : r.place_id, place_name : r.place_name, food_names: "shutki", misc: "abc"})
+                    dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc, place_id : r.place_id, place_name : r.place_name, food_names: "shutki", misc: "abc", hotel:"" })
 
                 ))};
             //console.log(dataList);
@@ -493,102 +502,130 @@ const Home = () => {
     return str
 }
 
-  const applyFilters = () => {
-    let updatedList = dataList;
-    //console.log("in filter");
-    //console.log(dataList);
-    //console.log(updatedList);
+  const applyFilters = async () => {
+      let updatedList = dataList;
+      //console.log("in filter");
+      //console.log(dataList);
+      //console.log(updatedList);
 
-    // Rating Filter
-    if (selectedRating) {
-      updatedList = updatedList.filter(
-        (item) => parseInt(item.rating) === parseInt(selectedRating)
-      );
-    }
+      // Rating Filter
+      if (selectedRating) {
+          updatedList = updatedList.filter(
+              (item) => parseInt(item.rating) === parseInt(selectedRating)
+          );
+      }
 
-    // Category Filter
-    if (selectedCategory) {
-      updatedList = updatedList.filter(
-        (item) => item.category === selectedCategory
-      );
-    }
+      // Category Filter
+      if (selectedCategory) {
+          updatedList = updatedList.filter(
+              (item) => item.category === selectedCategory
+          );
+      }
 
-    // Checkbox filter
-    //for place
-    const placesChecked = places
-      .filter((item) => item.checked)
-      .map((item) => item.label.toLowerCase());
+      // Checkbox filter
+      //for place
+      const placesChecked = places
+          .filter((item) => item.checked)
+          .map((item) => item.label.toLowerCase());
 
-    if (placesChecked.length) {
-      updatedList = updatedList.filter((item) =>
-          eval(getPlaceStr(item.place.length))
-      );
-    }
+      if (placesChecked.length) {
+          updatedList = updatedList.filter((item) =>
+              eval(getPlaceStr(item.place.length))
+          );
+      }
 
-    // if (placesChecked.length) {
-    //   updatedList = updatedList.filter((item) =>
-    //     placesChecked.includes(item.place)
-    //       eval(getActivityStr(item.activity.length))
-    //   );
-    // }
+      // if (placesChecked.length) {
+      //   updatedList = updatedList.filter((item) =>
+      //     placesChecked.includes(item.place)
+      //       eval(getActivityStr(item.activity.length))
+      //   );
+      // }
 
-    //for food
-
-
-    const foodsChecked = foods
-      .filter((item) => item.checked)
-      .map((item) => item.label.toLowerCase());
-
-    if (foodsChecked.length) {
+      //for food
 
 
-              updatedList = updatedList.filter((item) =>
-                  eval(getFoodStr(item.food.length,2))
-        );
-    // if (foodsChecked.length) {
-    //   updatedList = updatedList.filter((item) =>
-    //     foodsChecked.includes(item.food)
-    //   );
-    }
+      const foodsChecked = foods
+          .filter((item) => item.checked)
+          .map((item) => item.label.toLowerCase());
 
-    //for activity
-    const activitiesChecked = activities
-      .filter((item) => item.checked)
-      .map((item) => item.label.toLowerCase());
+      if (foodsChecked.length) {
 
-    console.log(activitiesChecked)
-      let mylist =[{'activity_list':activitiesChecked}]
+
+          updatedList = updatedList.filter((item) =>
+              eval(getFoodStr(item.food.length, 2))
+          );
+          // if (foodsChecked.length) {
+          //   updatedList = updatedList.filter((item) =>
+          //     foodsChecked.includes(item.food)
+          //   );
+      }
+
+      //for activity
+      const activitiesChecked = activities
+          .filter((item) => item.checked)
+          .map((item) => item.label.toLowerCase());
+
+      console.log(activitiesChecked)
+      let mylist = [{'activity_list': activitiesChecked}]
       console.log(mylist)
       localStorage.setItem("activity_list", JSON.stringify(mylist));
 
 
-    if (activitiesChecked.length) {
-      updatedList = updatedList.filter((item) =>
-        //activitiesChecked.includes(item.activity)
-          eval(getActivityStr(item.activity.length))
-      );
-    }
 
-    // Search Filter
-    if (searchInput) {
-      updatedList = updatedList.filter(
-        (item) =>
-          item.title.toLowerCase().search(searchInput.toLowerCase().trim()) !==
-          -1
-      );
-    }
+      if (activitiesChecked.length) {
+          updatedList = updatedList.filter((item) =>
+              //activitiesChecked.includes(item.activity)
+              eval(getActivityStr(item.activity.length))
+          );
+          //GetRecommendHotel(updatedList);
+          for (let i = 0; i<updatedList.length; i++) {
+              const hotel_list_byID_3 = await ExploreAPI.getHotelIDCor(updatedList[i].id);
+              //console.log(hotel_list_byID_3);
+              const activity_list_byID_3 = await ExploreAPI.getActivityIdCor(updatedList[i].id, activitiesChecked);
+              //console.log(activitiesChecked);
+              //console.log(activity_list_byID_3);
+              const res = await ExploreAPI.getAgencyCorExplore(activity_list_byID_3, hotel_list_byID_3);
+              //console.log(res);
+              //recohotel_3 = getAgencyCor3.name;
+              //console.log(recohotel_3);
+              let templist = [];
+              {
+                  res.map((r) => (
+                      //console.log(r.activity_id)
+                      //activity_id_list.push(r.activity_id)
+                      templist.push(r)
+                  ))
+              }
+              //console.log(templist);
+              console.log(templist[0].name);
+              updatedList[i].hotel = templist[0].name;
+              //updatedList[2].hotel = templist[0].name;
+              //updatedList[3].hotel = "rakin";
+              // updatedList[11].hotel = "rakin";
+              // updatedList[12].hotel = "rakin";
+          }
+      }
 
-    // Price Filter
-    // const minPrice = selectedPrice[0];
-    // const maxPrice = selectedPrice[1];
-    //
-    // updatedList = updatedList.filter(
-    //   (item) => item.price >= minPrice && item.price <= maxPrice
-    // );
+      // Search Filter
+      if (searchInput) {
+          updatedList = updatedList.filter(
+              (item) =>
+                  item.title.toLowerCase().search(searchInput.toLowerCase().trim()) !==
+                  -1
+          );
+      }
 
-    setList(updatedList);
+      // Price Filter
+      // const minPrice = selectedPrice[0];
+      // const maxPrice = selectedPrice[1];
+      //
+      // updatedList = updatedList.filter(
+      //   (item) => item.price >= minPrice && item.price <= maxPrice
+      // );
 
-    !updatedList.length ? setResultsFound(false) : setResultsFound(true);
+      setList(updatedList);
+
+      !updatedList.length ? setResultsFound(false) : setResultsFound(true);
   };
 
   useEffect(() => {
@@ -650,6 +687,7 @@ const Home = () => {
             >
               {placeName}
             </h1>
+                        <h2>{getAgencyCor3.name}</h2>
                         <div className="fullPlace">{resultsFound ? <List list={getplaceList(list, placeName)} /> : <EmptyView />}</div>
                     </div>
 

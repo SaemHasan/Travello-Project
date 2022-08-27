@@ -9,8 +9,7 @@ import APIService from "../APIService";
 import {Autocomplete, Stack} from "@mui/material";
 
 
-
-const keywordOptions=[
+const keywordOptions = [
     {label: 'rice'},
     {label: 'chicken'},
     {label: 'chowmein'},
@@ -46,7 +45,6 @@ const Search_bar = () => {
     };
 
 
-
     const [value, setValue] = useState(getInitialState);
     const [keyword_text, setKeyword] = useState("");
     const [location_text, setLocation] = useState("");
@@ -54,13 +52,14 @@ const Search_bar = () => {
 
     let navigate = useNavigate();
 
-    useEffect(()=>{
-        async function fetchData(){
+    useEffect(() => {
+        async function fetchData() {
             const response = await HomeAPIService.getAllplaceSpotNames();
             setLocations(response);
         }
+
         fetchData();
-    },[])
+    }, [])
 
     const handleChange_dropdown = (e) => {
         // console.log("search dropdown: ",e.target.value);
@@ -68,9 +67,9 @@ const Search_bar = () => {
     };
 
     const handleSearchBtn = async () => {
-        // console.log("search type: ", value);
-        // console.log("search keyword: ", keyword_text);
-        // console.log("search location: ", location_text);
+        console.log("search type: ", value);
+        console.log("search keyword: ", keyword_text);
+        console.log("search location: ", location_text);
 
         if (value === "") {
             alert("Please select a search type.");
@@ -169,7 +168,7 @@ const Search_bar = () => {
                         freeSolo
                         fullWidth
                         options={keywordOptions.map((option) => option.label)}
-                        onChange={(e) => setKeyword(e.target.value)}
+                        onChange={(e, values) => setKeyword(values)}
                         renderInput={(params) => <TextField {...params} label="Keyword"/>}
                     />
 
@@ -178,17 +177,17 @@ const Search_bar = () => {
                         freeSolo
                         fullWidth
                         options={locations.map((option) => option.name)}
-                        onChange={(e) => {
-                            setLocation(e.target.value);
+                        onChange={(e, values) => {
+                            setLocation(values);
                         }}
                         renderInput={(params) => <TextField {...params} label="Location"/>}
                     />
+
                     {/*<TextField*/}
                     {/*    id="keyword"*/}
                     {/*    variant="outlined"*/}
                     {/*    fullWidth*/}
                     {/*    label="Keyword"*/}
-                    {/*    options={top100Films.map((option) => option.title)}*/}
                     {/*    onChange={(e) => {*/}
                     {/*        setKeyword(e.target.value);*/}
                     {/*    }}*/}

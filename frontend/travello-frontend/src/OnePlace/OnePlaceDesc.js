@@ -16,6 +16,8 @@ function OnePlaceDesc() {
     const [datesOfVisit, setDatesOfVisit] = useState([]);
     const [count, setCount] = useState([]);
     const [misc, setMisc] = useState([]);
+    const [miscLength, setmiscLength] = useState(false);
+
 
     async function updateVisitCount(spot_id) {
         await OnePlaceAPI.updateVisitCount(spot_id);
@@ -51,6 +53,7 @@ function OnePlaceDesc() {
                 );
             }
             async function GetSpotAdvantages(spot_id) {
+                setmiscLength(false);
                 console.log("i am in this function");
                 while (misc.length !== 0){
             console.log("rakin");
@@ -61,17 +64,27 @@ function OnePlaceDesc() {
                 console.log("kopppp");
               misc[m] = []
             }
+                console.log(spot_id);
                 const response = await OnePlaceAPI.getHotelMIscofSpot(spot_id);
-                //console.log(response);
+                console.log(response);
                 let templist = [];
 
                 {
                     response.map((r) => (
                         //console.log(r.activity_id)
                         //activity_id_list.push(r.activity_id)
-                        misc.push(r)
+                        templist.push(r)
                     ))
                 }
+                let uniqueArray=[]
+              for(let k=0; k < templist.length; k++){
+                  if(uniqueArray.indexOf(templist[k]) === -1) {
+                      uniqueArray.push(templist[k]);
+                  }
+              }
+              setMisc(uniqueArray);
+                if (misc.length !== 0)
+                    setmiscLength(true);
                 localStorage.removeItem("explore_spot");
             }
             GetSpotAdvantages(my_spot[0].id);
@@ -118,6 +131,7 @@ function OnePlaceDesc() {
 
         const spot = JSON.parse(localStorage.getItem("spot"));
         if (spot !== null) {
+            setmiscLength(false);
             updateVisitCount(spot.spot_id);
             getVisitHistory(spot.spot_id);
             console.log("spot is not null");
@@ -152,6 +166,8 @@ function OnePlaceDesc() {
                         misc.push(r)
                     ))
                 }
+                if (misc.length !== 0)
+                    setmiscLength(true);
                 //localStorage.removeItem("explore_spot");
             }
             GetSpotAdvantages(spot.spot_id);
@@ -257,7 +273,7 @@ function OnePlaceDesc() {
             <div>
                 <p style={{marginLeft: "10px"}}>{description}</p>
             </div>
-            {misc.length !== 0 && (
+            {miscLength === true && (
             <div>
                 <u><h3 style={{marginLeft: "10px"}}>From {name}</h3></u>
                 {

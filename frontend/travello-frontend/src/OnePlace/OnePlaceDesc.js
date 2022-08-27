@@ -278,13 +278,13 @@ function OnePlaceDesc() {
                     {/*<p>Some text..</p>*/}
                 </div>
             </div>
-            <div className='parent'>
-                <div className='child'><h2>
+            <div className='parent_oneplace'>
+                <div className='child_oneplace'><h2>
                     <b>
                         <u>{name}</u>
                     </b>
                 </h2></div>
-                <div className='child'><Button disabled={disable} onClick={() => {
+                <div className='child_oneplace'><Button disabled={disable} onClick={() => {
                             Visited_btn()
                         }}>Visited</Button></div>
             </div>

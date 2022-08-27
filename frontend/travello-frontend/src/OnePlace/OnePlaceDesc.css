@@ -30,3 +30,20 @@
   height: 400px;
   /*object-fit: cover;*/
 }
+
+
+.parent_oneplace {
+  /*//border: 1px solid black;*/
+  /*margin: 10px;*/
+  /*padding: 2rem 2rem;*/
+  /*//text-align: center;*/
+    margin-top: 20px;
+}
+.child_oneplace {
+  display: inline-block;
+  /*border: 1px solid red;*/
+  padding: 1rem 1rem;
+  vertical-align: middle;
+    margin-right: 20px;
+    margin-left: -20px;
+}

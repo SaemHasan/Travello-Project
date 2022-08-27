@@ -93,7 +93,7 @@ const Home = () => {
             {allspots.map((r) => (
 
                     //dataList.push({id: r.id, title: r.title , category: r.category, place: 'waterfall', food: 'upojati food',activity: 'trekking',coverSrc: r.coverSrc, rating: r.rating,})
-                    dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc, place_id : r.place_id, place_name : r.place_name, food_names: "shutki"})
+                    dataList.push({id: r.id, title: r.title, desc: r.desc,  category: r.category, place: 'waterfall', food: ['upojati food','chinese'], activity: 'trekking', rating: r.rating,  coverSrc: r.coverSrc, place_id : r.place_id, place_name : r.place_name, food_names: "shutki", misc: "abc"})
 
                 ))};
             //console.log(dataList);
@@ -145,6 +145,10 @@ const Home = () => {
             for (let m =0; m < dataList.length; m++)
             {
               dataList[m].place = []
+            }
+            for (let m =0; m < dataList.length; m++)
+            {
+              dataList[m].misc = []
             }
             //console.log(allspots.length);
             for (let i = 0; i < allspots.length; i++) {
@@ -210,21 +214,6 @@ const Home = () => {
               }
               templist=[];
               uniqueArray=[];
-              // for (let m =0; m < dataList.length; m++)
-              // {
-              //   if (dataList[m].id === i+1)
-              //   {
-              //     for (let n =0; n < dataList.length; n++)
-              //     {
-              //       if (dataList[m].place_id === dataList[n].place_id)
-              //       {
-              //         dataList[n].food = dataList[n].food.concat(dataList[m].food)
-              //       }
-              //     }
-              //   }
-              //
-              // }
-
 
             }
 
@@ -325,7 +314,41 @@ const Home = () => {
 
             }
 
+            //console.log(allspots.length);
+            for (let i = 0; i < allspots.length; i++) {
+                //console.log(i+1);
+              const response = await ExploreAPI.getHotelMIscofSpot(i+1);
+              //console.log(response);
+              //console.log(response);
 
+              let templist = [];
+              {response.map((r) => (
+                //console.log(r.activity_id)
+                    //activity_id_list.push(r.activity_id)
+                    templist.push(r)
+                ))}
+              //console.log(templist)
+              let uniqueArray=[]
+              for(let k=0; k < templist.length; k++){
+                  if(uniqueArray.indexOf(templist[k]) === -1) {
+                      uniqueArray.push(templist[k]);
+                  }
+              }
+              //console.log(templist);
+              for (let j =0; j < dataList.length; j++)
+              {
+                if (dataList[j].title === allspots[i].title)
+                {
+                  dataList[j].misc = uniqueArray;
+                  //console.log("rakin");
+                  break;
+                }
+              }
+              //console.log(dataList);
+              templist=[];
+              uniqueArray=[];
+
+            }
 
 
 

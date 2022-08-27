@@ -145,3 +145,5 @@ misc.xml
 */migrations/0001_initial.py
 *.xml
 *.xml
+.idea/misc.xml
+.idea/Travello-Project.iml

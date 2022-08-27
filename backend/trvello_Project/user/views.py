@@ -82,3 +82,24 @@ class UserLoginCountViewSet(viewsets.ModelViewSet):
             date_count_list.append({"date": date, "count": count})
         print("date count \n", date_count_list)
         return Response(date_count_list)
+
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getMostLogInUsersofWeek(self, request):
+        user_login_count = UserLogginCount.objects.filter(date__gt=date.today() - timedelta(days=7))
+
+        user_login_countOfWeek = {}
+        for count in user_login_count:
+            user = count.user.username
+            if user in user_login_countOfWeek:
+                user_login_countOfWeek[user] += count.count
+            else:
+                user_login_countOfWeek[user] = count.count
+
+        sorted_user_login_countOfWeek = sorted(user_login_countOfWeek.items(), key=lambda x: x[1], reverse=True)[:5]
+        print("sorted user login count of week \n", sorted_user_login_countOfWeek)
+        user_login_countOfWeek_list = []
+        for user, count in sorted_user_login_countOfWeek:
+            user_login_countOfWeek_list.append({"user": user, "count": count})
+        print("user count \n", user_login_countOfWeek_list)
+
+        return Response(user_login_countOfWeek_list)

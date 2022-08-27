@@ -303,4 +303,14 @@ export default class AdminAPI {
     }).then((resp) => resp.json());
   }
 
+  static getMostLogInUsersofWeek() {
+    return fetch(`http://127.0.0.1:8000/api/user_login_counts/getMostLogInUsersofWeek/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ }),
+    }).then((resp) => resp.json());
+  }
 }

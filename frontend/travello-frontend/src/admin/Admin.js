@@ -2,10 +2,10 @@ import {useEffect, useState} from "react";
 import APIService from "../APIService";
 import AdminInfo from "./AdminProfile";
 import AddInfo from "./AddInfo";
-import AdminSideBar from "./ShowSideBar";
 import AdminNavBar from "./AdminNavBar";
 import AdminAPI from "./AdminAPI";
 import {ShowBarChart} from "./ShowBarChart";
+import {ShowDoughnut} from "./ShowDounut";
 
 function Admin() {
     const [user, setUser] = useState({});
@@ -19,7 +19,7 @@ function Admin() {
 
     useEffect(() => {
         async function fetchData() {
-            const res = await AdminAPI.getUserLoginCountOfLastWeek();
+            let res = await AdminAPI.getUserLoginCountOfLastWeek();
             // console.log("userLogincountOfWeek ", res);
             const labels = [];
             const data = [];
@@ -33,6 +33,19 @@ function Admin() {
             await setUserLogincountOfWeek({
                 labels: labels,
                 data: data
+            });
+
+            res = await AdminAPI.getMostLogInUsersofWeek();
+            const labels1 = [];
+            const data1 = [];
+            for (let i = 0; i < res.length; i++) {
+                // console.log(res[i]);
+                labels1.push(res[i].user);
+                data1.push(res[i].count);
+            }
+            await setMostLoginUser({
+                labels: labels1,
+                count: data1
             });
         }
 
@@ -70,16 +83,23 @@ function Admin() {
                             </div>
                         </div>
                         <div>
-
-                                {
-                                    show &&
-                                    <div>
-                                        <ShowBarChart labels={userLogincountOfWeek.labels}
-                                                      data={userLogincountOfWeek.data}
-                                                      title={"User Log in Count of Last Week"}/>
-                                    </div>
-                                }
+                            {
+                                show &&
+                                <div>
+                                    <ShowBarChart labels={userLogincountOfWeek.labels}
+                                                  data={userLogincountOfWeek.data}
+                                                  title={"User Log in Count of Last Week"}/>
+                                </div>
+                            }
                         </div>
+                        <div>
+                            {show &&
+                                <div>
+                                    <ShowDoughnut data={mostLoginUser} title={"Most Log In Users of Last Week"}/>
+                                </div>
+                            }
+                        </div>
+
                     </>
                 }
                 {

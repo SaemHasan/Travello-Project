@@ -29,7 +29,8 @@ const ListItem = ({
                           place,
                           food,
                           activity,
-                          food_names
+                          food_names,
+                          misc,
                       },
                   }) => {
 
@@ -289,6 +290,16 @@ Attractions:
                           return(
                              <Typography variant="h6" color="primary">
                                  {atv}
+                             </Typography>
+                          )
+                      })
+                  }
+                  <br/>
+                  {
+                      misc.slice(0,2).map((atv,key)=>{
+                          return(
+                             <Typography variant="h6">
+                                <p style={{color:"#000080"}}>{atv.misc_name} is {atv.distance} Km away</p>
                              </Typography>
                           )
                       })

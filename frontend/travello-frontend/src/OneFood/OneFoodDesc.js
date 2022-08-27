@@ -158,7 +158,7 @@ function OneFoodDesc() {
       <div>
         <p style={{ marginLeft: "10px" }}>{description}</p>
       </div>
-        <div> <Button style={{float:"right", }} onClick={makesortlist}> <b>Sort by price</b> </Button> </div>
+        <div style={{paddingBottom:"20px"}}> <Button style={{float:"right", }} onClick={makesortlist}> <b>Sort by price</b> </Button> </div>
 
         {sortlist && <Show_sorted />}
         {!sortlist && <Show_unsorted />}

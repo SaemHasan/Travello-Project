@@ -131,6 +131,16 @@ export default class ExploreAPI {
     }).then((resp) => resp.json());
   }
 
+    static getHotelMIscofSpot(spot_id) {
+    return fetch(`http://127.0.0.1:8000/api/hotels/getHotelMIscofSpot/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ spot_id: spot_id }),
+    }).then((resp) => resp.json());
+  }
     // static getAllFood(spot_id) {
     // return fetch(`http://127.0.0.1:8000/api/spot_foods/getAllFood/`, {
     //   method: "POST",

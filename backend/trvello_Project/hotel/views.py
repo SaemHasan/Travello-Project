@@ -7,7 +7,10 @@ from .models import Hotel, Hotel_Attribute, Hotel_Attribute_Table, \
 from .serializers import HotelSerializer, Hotel_AttributeSerializer, Hotel_Attribute_TableSerializer, \
     HotelRatingInfoSerializer, RoomSerializer, RoomPriceInfoSerializer, Room_AttributeSerializer, \
     Room_Attribute_TableSerializer, MISC_DetailSerializer
-
+# seed the pseudorandom number generator
+from random import seed
+from random import random
+from random import randint
 
 # Create your views here.
 
@@ -81,6 +84,25 @@ class HotelViewSet(viewsets.ModelViewSet):
 
         return Response(misc_list)
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getHotelMIscofSpot(self, request):
+        spot_id = int(request.data['spot_id'])
+        hotel = Hotel.objects.all().filter(spot_id=spot_id)
+
+        rand_distance = randint(1, 200)
+        print(rand_distance)
+        misc_list = []
+        for hotels in hotel:
+            #print(hotels.hotel_id)
+            hotel_misc = MISC_Detail.objects.all().filter(hotel_id=hotels.hotel_id)
+            misc_dict = []
+            for misc in hotel_misc:
+                #mystr = str(misc.name) + " is " + str(misc.distance) + " KM away."
+                misc_list.append({'misc_name': str(misc.name), 'distance': str(round(misc.distance*1.25,2))})
+
+        print(misc_list)
+        # print(hotel_atb)
+        return Response(misc_list)
 
 class Hotel_AttributeViewSet(viewsets.ModelViewSet):
     queryset = Hotel_Attribute.objects.all()

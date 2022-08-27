@@ -77,4 +77,15 @@ export default class SinglePlaceAPI {
       body: JSON.stringify({ place_id: place_id }),
     }).then((resp) => resp.json());
   }
+
+  static getPlaceSpotPercentage(place_id, user_id) {
+    return fetch(`http://127.0.0.1:8000/api/places/getPlaceSpotPercentage/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ place_id: place_id, user_id: user_id }),
+    }).then((resp) => resp.json());
+  }
 }

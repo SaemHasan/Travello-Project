@@ -5,8 +5,6 @@ import "./OnePlaceDesc.css";
 import OnePlaceAPI from "./OnePlaceAPI";
 import {Link} from "@mui/material";
 import {ShowBarChart} from "../home/ShowBarChart";
-import ExploreAPI from "../Explore/ExploreAPI";
-import Typography from "@material-ui/core/Typography";
 import Button from "react-bootstrap/Button";
 import APIService from "../APIService";
 import RecommendationAPI from "../recommendation/RecommendationAPI";
@@ -178,6 +176,7 @@ function OnePlaceDesc() {
                             }
                         }
                     }
+
                 } else {
                     setDisable(true)
                 }

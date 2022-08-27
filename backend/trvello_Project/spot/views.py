@@ -27,7 +27,7 @@ class PlaceViewSet(viewsets.ModelViewSet):
             placeSpotNames.append(place)
         for spot in spots:
             placeSpotNames.append(spot)
-        print(placeSpotNames)
+        # print(placeSpotNames)
 
         return Response(placeSpotNames)
 

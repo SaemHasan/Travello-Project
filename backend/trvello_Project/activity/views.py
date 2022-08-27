@@ -154,6 +154,17 @@ class Activity_AgencyViewSet(viewsets.ModelViewSet):
         # print(restaurants.restaurant_id.restaurant_name)
         return Response(agencies)
 
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def getAgencyCor(self, request):
+        activity_id_list = request.data['activity_id_list']
+
+        print(activity_id_list)
+        for i in range(len(activity_id_list)):
+            agency_ids = Activity_Agency.objects.all().filter(activity_id=activity_id_list[i])
+            for ag in agency_ids:
+                print(ag.agency_id.agency_name)
+        return Response(activity_id_list)
+
 class ActivityPriceInfoViewSet(viewsets.ModelViewSet):
     queryset = ActivityPriceInfo.objects.all()
     serializer_class = ActivityPriceInfoSerializer

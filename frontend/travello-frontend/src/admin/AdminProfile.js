@@ -1,10 +1,7 @@
-import {useEffect, useState} from "react";
-import UserProfileAPI from "../UserProfile/UserProfileAPI";
-import UserInterests from "../UserProfile/UserInterests";
 
 function AdminInfo(props) {
-
     return (
+        <>
         <div className="container">
             <div className="row center">
                 <div className="col-6 card" style={{width: "24rem"}}>
@@ -21,6 +18,7 @@ function AdminInfo(props) {
                 </div>
             </div>
         </div>
+        </>
     );
 }
 

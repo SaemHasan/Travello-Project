@@ -143,4 +143,15 @@ export default class APIService {
       body: JSON.stringify({ spot_id: spot_id, rating: rating }),
     }).then((resp) => resp.json());
   }
+
+  static updateUserLoginCount(token) {
+    return fetch(`http://127.0.0.1:8000/api/user_login_counts/updateUserLoginCount/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ token: token }),
+    }).then((resp) => resp.json());
+  }
 }

@@ -532,8 +532,10 @@ class SpotVisitCountViewSet(viewsets.ModelViewSet):
                 spot_list.append({'name': spot.spot_id.name, 'count': spot.count})
             else:
                 spot_list[spots_name_list.index(spot.spot_id.name)]['count'] += spot.count
-        if len(spot_list) > 5:
-            spot_list = spot_list[:5]
+
+        sorted_spot_list = sorted(spot_list, key=lambda k: k['count'], reverse=True)
+        if len(sorted_spot_list) > 5:
+            spot_list = sorted_spot_list[:5]
         return Response(spot_list)
 
     @action(detail=False, methods=['post', 'get', 'put'])

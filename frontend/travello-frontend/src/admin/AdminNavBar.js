@@ -17,7 +17,7 @@ function AdminNavBar(props) {
                 <Container>
                     <Navbar.Brand onClick={addHomeClick}>Home</Navbar.Brand>
                     <Navbar.Brand onClick={addSpotClick}>Add Data</Navbar.Brand>
-                    <Navbar.Brand>Approve</Navbar.Brand>
+                    {/*<Navbar.Brand>Approve</Navbar.Brand>*/}
                     <Navbar.Toggle/>
                     {/*<Nav className="me-auto">*/}
                     {/*<Nav.Link href="#features">Features</Nav.Link>*/}

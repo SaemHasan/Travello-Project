@@ -147,6 +147,7 @@ export default function AddSpotDetailsModal(props) {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
               <Form.Label>Select Place</Form.Label>
               <Form.Select onChange={(e) => setPlace_id(e.target.value)}>
+                <option value="">Select A Place</option>
                 {allPlaces.map((type, idx) => (
                   <option key={idx} value={type.place_id}>
                     {type.name}
@@ -161,6 +162,7 @@ export default function AddSpotDetailsModal(props) {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
               <Form.Label>Select District</Form.Label>
               <Form.Select onChange={(e) => setDistrict(e.target.value)}>
+                <option value="">Select A District</option>
                 {allDistricts.map((type, idx) => (
                   <option key={idx} value={type.name}>
                     {type.name}

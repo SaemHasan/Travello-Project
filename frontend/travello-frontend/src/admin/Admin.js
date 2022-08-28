@@ -4,8 +4,8 @@ import AdminInfo from "./AdminProfile";
 import AddInfo from "./AddInfo";
 import AdminNavBar from "./AdminNavBar";
 import AdminAPI from "./AdminAPI";
-import {ShowBarChart} from "./ShowBarChart";
 import {ShowDoughnut} from "./ShowDounut";
+import {ShowBarChart} from "./ShowBarChart";
 
 function Admin() {
     const [user, setUser] = useState({});

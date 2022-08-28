@@ -57,7 +57,7 @@ class UserLoginCountViewSet(viewsets.ModelViewSet):
             return Response({"message": "You are not allowed to update this user"})
 
         if UserLogginCount.objects.filter(user=user, date=date.today()).exists():
-            user_login_count = UserLogginCount.objects.get(user=user)
+            user_login_count = UserLogginCount.objects.get(user=user, date=date.today())
             user_login_count.count += 1
             user_login_count.save()
         else:
